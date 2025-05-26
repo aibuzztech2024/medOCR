@@ -1,7 +1,7 @@
 import 'package:avatar/core/widgets/app_button.dart';
 import 'package:avatar/core/widgets/height_box.dart';
 import 'package:avatar/core/widgets/width_box.dart';
-import 'package:avatar/viewModels/auth/register/register_controller.dart';
+import 'package:avatar/viewModels/auth/register/user/register_controller.dart';
 import 'package:avatar/views/auth/widget/app_country_picker.dart';
 import 'package:avatar/views/auth/widget/gender_selector.dart';
 import 'package:avatar/views/auth/widget/input_field.dart';
@@ -35,7 +35,7 @@ class UserProfile extends StatelessWidget {
               child: InputField(
                 hintText: 'Name',
                 controller:
-                    TextEditingController(), // Replace with persistent controller if needed
+                    registerController.nameController, // Replace with persistent controller if needed
               ),
             ),
             WidthBox(10), // Horizontal spacing
@@ -75,13 +75,13 @@ class UserProfile extends StatelessWidget {
         HeightBox(16),
 
         // Address field
-        InputField(hintText: 'Address', controller: TextEditingController()),
+        InputField(hintText: 'Address', controller: registerController.addressController),
         HeightBox(16),
 
         // City or District field
         InputField(
           hintText: 'City/Town/District',
-          controller: TextEditingController(),
+          controller: registerController.cityController,
         ),
         HeightBox(16),
 
@@ -91,7 +91,7 @@ class UserProfile extends StatelessWidget {
             Expanded(
               child: InputField(
                 hintText: 'State',
-                controller: TextEditingController(),
+                controller: registerController.stateController,
               ),
             ),
             WidthBox(10),
@@ -105,20 +105,20 @@ class UserProfile extends StatelessWidget {
         HeightBox(16),
 
         // Pincode field
-        InputField(hintText: 'Pincode', controller: TextEditingController()),
+        InputField(hintText: 'Pincode', controller: registerController.pincodeController),
         HeightBox(16),
 
         // Referral Code field
         InputField(
           hintText: 'Referral Code',
-          controller: TextEditingController(),
+          controller: registerController.referralCodeController,
         ),
         HeightBox(16),
 
         // Checkbox for accepting privacy policy
         PolicyCheckbox(
           onChange: (val) {
-            registerController.isPrivacyPolicyAccepted = val!;
+            registerController.isPrivacyPolicyAccepted = val! as bool;
           },
         ),
         HeightBox(16),

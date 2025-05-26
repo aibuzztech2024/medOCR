@@ -1,10 +1,11 @@
 import 'package:avatar/core/widgets/app_button.dart';
 import 'package:avatar/core/widgets/app_text.dart';
+import 'package:avatar/viewModels/auth/register/ngo/ngo_controller.dart';
 import 'package:avatar/views/auth/widget/app_upload_button.dart';
 import 'package:avatar/views/auth/widget/input_field.dart';
 import 'package:avatar/views/auth/widget/input_with_action.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/get_utils.dart';
+import 'package:get/get.dart';
 
 class NgoDocuments extends StatelessWidget {
   final VoidCallback onContinue;
@@ -12,55 +13,61 @@ class NgoDocuments extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Use existing or initialize controller
+    final controller =
+        Get.isRegistered<NgoController>()
+            ? Get.find<NgoController>()
+            : Get.put(NgoController());
+
     return Column(
       spacing: 25,
       children: [
         InputWithAction(
           expandedChild: InputField(
             hintText: 'NGO Registration Number & Document',
-            controller: TextEditingController(),
+            controller: controller.ngoRegController,
           ),
           trailingChild: AppUploadButton(onUpload: () {}),
         ),
         InputWithAction(
           expandedChild: InputField(
             hintText: 'GST Number & Document',
-            controller: TextEditingController(),
+            controller: controller.gstController,
           ),
           trailingChild: AppUploadButton(onUpload: () {}),
         ),
         InputWithAction(
           expandedChild: InputField(
             hintText: 'PAN Number & Document',
-            controller: TextEditingController(),
+            controller: controller.panController,
           ),
           trailingChild: AppUploadButton(onUpload: () {}),
         ),
         InputWithAction(
           expandedChild: InputField(
             hintText: 'TAN Number & Document',
-            controller: TextEditingController(),
+            controller: controller.tanController,
           ),
           trailingChild: AppUploadButton(onUpload: () {}),
         ),
         InputWithAction(
           expandedChild: InputField(
             hintText: '12A Document Number & Document',
-            controller: TextEditingController(),
+            controller: controller.doc12AController,
           ),
           trailingChild: AppUploadButton(onUpload: () {}),
         ),
         InputWithAction(
           expandedChild: InputField(
             hintText: 'Section 8 Number & Document',
-            controller: TextEditingController(),
+            controller: controller.section8Controller,
           ),
           trailingChild: AppUploadButton(onUpload: () {}),
         ),
         InputWithAction(
           expandedChild: InputField(
             hintText: 'NGO Image & Document',
-            controller: TextEditingController(),
+            controller: controller.ngoImageController,
           ),
           trailingChild: AppUploadButton(onUpload: () {}),
         ),
@@ -69,7 +76,7 @@ class NgoDocuments extends StatelessWidget {
           children: [
             InputField(
               hintText: 'NGO Description',
-              controller: TextEditingController(),
+              controller: controller.descriptionController,
             ),
             AppText.caption(
               'Description must be 8+ characters with uppercase, lowercase, number, and symbol',
@@ -83,7 +90,7 @@ class NgoDocuments extends StatelessWidget {
           width: double.infinity,
           onPressed: onContinue,
         ),
-        SizedBox(),
+        const SizedBox(),
       ],
     );
   }
