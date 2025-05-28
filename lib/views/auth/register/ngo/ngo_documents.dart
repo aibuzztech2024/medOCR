@@ -1,10 +1,11 @@
 import 'package:avatar/core/widgets/app_button.dart';
 import 'package:avatar/core/widgets/app_text.dart';
+import 'package:avatar/viewModels/auth/register/ngo/ngo_document_controller.dart';
 import 'package:avatar/views/auth/widget/app_upload_button.dart';
 import 'package:avatar/views/auth/widget/input_field.dart';
 import 'package:avatar/views/auth/widget/input_with_action.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/get_utils.dart';
+import 'package:get/get.dart';
 
 class NgoDocuments extends StatelessWidget {
   final VoidCallback onContinue;
@@ -12,64 +13,95 @@ class NgoDocuments extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final NgoDocumentController ngoDocumentController = Get.put(
+      NgoDocumentController(),
+    );
     return Column(
       spacing: 25,
       children: [
         InputWithAction(
           expandedChild: InputField(
             hintText: 'NGO Registration Number & Document',
-            controller: TextEditingController(),
+            controller: ngoDocumentController.ngoRegistrationNumberController,
           ),
-          trailingChild: AppUploadButton(onUpload: () {}),
+          trailingChild: AppUploadButton(
+            onUpload: () {
+              ngoDocumentController.uploadNgoRegistrationNumber();
+            },
+          ),
         ),
         InputWithAction(
           expandedChild: InputField(
             hintText: 'GST Number & Document',
-            controller: TextEditingController(),
+            controller: ngoDocumentController.ngoGstController,
           ),
-          trailingChild: AppUploadButton(onUpload: () {}),
+          trailingChild: AppUploadButton(
+            onUpload: () {
+              ngoDocumentController.uploadNgoGst();
+            },
+          ),
         ),
         InputWithAction(
           expandedChild: InputField(
             hintText: 'PAN Number & Document',
-            controller: TextEditingController(),
+            controller: ngoDocumentController.ngoPanController,
           ),
-          trailingChild: AppUploadButton(onUpload: () {}),
+          trailingChild: AppUploadButton(
+            onUpload: () {
+              ngoDocumentController.uploadNgoPan();
+            },
+          ),
         ),
         InputWithAction(
           expandedChild: InputField(
             hintText: 'TAN Number & Document',
-            controller: TextEditingController(),
+            controller: ngoDocumentController.ngoTanController,
           ),
-          trailingChild: AppUploadButton(onUpload: () {}),
+          trailingChild: AppUploadButton(
+            onUpload: () {
+              ngoDocumentController.uploadNgoTan();
+            },
+          ),
         ),
         InputWithAction(
           expandedChild: InputField(
             hintText: '12A Document Number & Document',
-            controller: TextEditingController(),
+            controller: ngoDocumentController.ngo12aDocumentController,
           ),
-          trailingChild: AppUploadButton(onUpload: () {}),
+          trailingChild: AppUploadButton(
+            onUpload: () {
+              ngoDocumentController.upload12ADocument();
+            },
+          ),
         ),
         InputWithAction(
           expandedChild: InputField(
             hintText: 'Section 8 Number & Document',
-            controller: TextEditingController(),
+            controller: ngoDocumentController.ngoSection8Controller,
           ),
-          trailingChild: AppUploadButton(onUpload: () {}),
+          trailingChild: AppUploadButton(
+            onUpload: () {
+              ngoDocumentController.uploadSection8Number();
+            },
+          ),
         ),
         InputWithAction(
           expandedChild: InputField(
             hintText: 'NGO Image & Document',
-            controller: TextEditingController(),
+            controller: ngoDocumentController.ngoImageController,
           ),
-          trailingChild: AppUploadButton(onUpload: () {}),
+          trailingChild: AppUploadButton(
+            onUpload: () {
+              ngoDocumentController.uploadNgoImage();
+            },
+          ),
         ),
         Wrap(
           runSpacing: 5,
           children: [
             InputField(
               hintText: 'NGO Description',
-              controller: TextEditingController(),
+              controller: ngoDocumentController.ngoDescriptionController,
             ),
             AppText.caption(
               'Description must be 8+ characters with uppercase, lowercase, number, and symbol',

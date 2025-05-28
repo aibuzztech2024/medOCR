@@ -1,9 +1,11 @@
 import 'package:avatar/core/widgets/app_button.dart';
+import 'package:avatar/viewModels/auth/register/ngo/ngo_profile_controller.dart';
 import 'package:avatar/views/auth/widget/app_country_picker.dart';
 import 'package:avatar/views/auth/widget/input_field.dart';
 import 'package:avatar/views/auth/widget/input_with_action.dart';
 import 'package:avatar/views/auth/widget/policy_checkbox.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class NgoProfile extends StatelessWidget {
   final VoidCallback onContinue;
@@ -11,35 +13,49 @@ class NgoProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final NgoProfileController ngoProfileController = Get.put(
+      NgoProfileController(),
+    );
     return Column(
       spacing: 16,
       children: [
-        InputField(hintText: 'NGO Name', controller: TextEditingController()),
+        InputField(
+          hintText: 'NGO Name',
+          controller: ngoProfileController.nameController,
+        ),
         InputField(
           hintText: 'NGO Service',
           trailingIcon: Icons.keyboard_arrow_down,
-          controller: TextEditingController(),
+          controller: ngoProfileController.serviceController,
         ),
         InputField(
           hintText: 'Website URL',
-          controller: TextEditingController(),
+          controller: ngoProfileController.websiteController,
         ),
-        InputField(hintText: 'Address', controller: TextEditingController()),
+        InputField(
+          hintText: 'Address',
+          controller: ngoProfileController.addressController,
+        ),
         InputField(
           hintText: 'City/Town/District',
-          controller: TextEditingController(),
+          controller: ngoProfileController.cityController,
         ),
         InputWithAction(
           expandedChild: InputField(
             hintText: 'State',
-            controller: TextEditingController(),
+            controller: ngoProfileController.stateController,
           ),
-          trailingChild: AppCountryPicker(onSelect: (val) {}),
+          trailingChild: AppCountryPicker(
+            onSelect: (val) {},
+          ), //TODO Country Code
         ),
-        InputField(hintText: 'Pincode', controller: TextEditingController()),
+        InputField(
+          hintText: 'Pincode',
+          controller: ngoProfileController.pincodeController,
+        ),
         InputField(
           hintText: 'Referral Code',
-          controller: TextEditingController(),
+          controller: ngoProfileController.referralController,
         ),
         PolicyCheckbox(
           onChange: (val) {},
