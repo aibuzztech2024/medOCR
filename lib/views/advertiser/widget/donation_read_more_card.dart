@@ -42,12 +42,12 @@ class DonationCardController extends GetxController {
 }
 
 // Reusable donation card widget component
-class DonationCard extends StatelessWidget {
+class DonationReadMoreCard extends StatelessWidget {
   final DonationCardModel data;
   final double? customHeight;
   final double? customWidth;
 
-  const DonationCard({
+  const DonationReadMoreCard({
     Key? key,
     required this.data,
     this.customHeight,

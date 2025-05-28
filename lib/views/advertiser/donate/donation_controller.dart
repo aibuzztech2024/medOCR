@@ -1,7 +1,8 @@
 // =============================================================================
-// VIEWMODEL LAYER - Fixed OrganizationController with Proper Read More Navigation
+// VIEWMODEL LAYER - Updated OrganizationController with Read More Navigation
 // =============================================================================
 
+import 'package:avatar/views/advertiser/donate/donation_detailed_read_more.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:avatar/views/advertiser/donate/donation_model.dart';
@@ -238,9 +239,10 @@ class OrganizationController extends GetxController {
     // For now, we'll navigate to detailed view as well
   }
 
-  /// Handle read more action - Navigate to detailed organization view
+  /// Handle read more action - Navigate to DonationCardReadMorePage with organization data
   void onReadMore(DonationModel organization) {
     print('Read more clicked for: ${organization.title}');
+    _navigateToReadMorePage(organization);
   }
 
   /// Handle donate action for organizations
@@ -274,6 +276,28 @@ class OrganizationController extends GetxController {
       Get.snackbar(
         'Navigation Error',
         'Unable to open donation details',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.withOpacity(0.8),
+        colorText: Colors.white,
+      );
+    }
+  }
+
+  /// Navigate to DonationCardReadMorePage with organization data
+  void _navigateToReadMorePage(DonationModel organization) {
+    try {
+      // Pass the organization data as arguments to the next page
+      Get.to(
+        () => const DonationCardReadMorePage(),
+        arguments: organization, // Pass the selected organization data
+        transition: Transition.rightToLeft,
+        duration: const Duration(milliseconds: 300),
+      );
+    } catch (e) {
+      print('Navigation error to DonationCardReadMorePage: $e');
+      Get.snackbar(
+        'Navigation Error',
+        'Unable to open organization details',
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.red.withOpacity(0.8),
         colorText: Colors.white,
