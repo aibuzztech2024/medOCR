@@ -20,6 +20,7 @@ dependencies:
   animate_do: ^4.2.0 # animations
   dotted_border: ^2.1.0
   flutter_native_splash: ^2.4.6
+  url_launcher: 
 
 dev_dependencies:
   flutter_test:

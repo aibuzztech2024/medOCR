@@ -60,15 +60,44 @@ class OrganizationCard extends StatelessWidget {
         screenHeight * (140 / 874); // Slightly taller for organization info
     final imageWidth = screenWidth * (100 / 402);
 
-    return Container(
-      width: cardWidth,
-      height: cardHeight,
-      decoration: _buildCardDecoration(),
-      child: Row(
-        children: [
-          _buildImageSection(imageWidth, cardHeight),
-          _buildContentSection(cardWidth, cardHeight, imageWidth),
-        ],
+    return Stack(
+      children: [
+        Container(
+          width: cardWidth,
+          height: cardHeight,
+          decoration: _buildCardDecoration(),
+          child: Row(
+            children: [
+              _buildImageSection(imageWidth, cardHeight),
+              _buildContentSection(cardWidth, cardHeight, imageWidth),
+            ],
+          ),
+        ),
+        // White semicircle at top right corner
+        _buildRightSideSemicircle(cardWidth, cardHeight),
+      ],
+    );
+  }
+
+  Widget _buildRightSideSemicircle(double cardWidth, double cardHeight) {
+    final radius = (cardHeight * 0.15).clamp(
+      25.0,
+      50.0,
+    ); // Based on height for vertical
+
+    return Positioned(
+      top: 0, // Vertically center
+      right: 0,
+      child: Container(
+        width: radius,
+        height: radius * 2, // Full diameter for vertical semicircle
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(radius),
+            bottomLeft: Radius.circular(radius),
+          ),
+        ),
       ),
     );
   }
@@ -267,6 +296,8 @@ class OrganizationCard extends StatelessWidget {
       child: Text(
         'Read More',
         style: TextStyle(
+          decoration: TextDecoration.underline,
+          decorationColor: Color(0xFFFF6B6B),
           fontSize: (cardWidth * 0.033).clamp(10.0, 14.0),
           color: const Color(0xFFFF6B6B),
           fontWeight: FontWeight.w400,
@@ -289,9 +320,7 @@ class OrganizationCard extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: const Color(0xFFFF6B6B),
-          borderRadius: BorderRadius.circular(
-            (cardWidth * 0.05).clamp(12.0, 20.0),
-          ),
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Center(
           child: Text(

@@ -137,61 +137,7 @@ class DonationHomePageView extends StatelessWidget {
 
   // Empty state for organization tab (simplified)
   Widget _buildOrganizationEmptyState(OrganizationController controller) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.search_off,
-            size: 64,
-            color: Colors.grey[400],
-          ), // Empty icon
-          SizedBox(height: Get.height * 0.02),
-          Text(
-            'No organizations found',
-            style: TextStyle(
-              fontSize: Get.textScaleFactor * 18,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey[600],
-            ),
-          ),
-          SizedBox(height: Get.height * 0.01),
-          Obx(() {
-            final hasActiveSearch = controller.orgSearchQuery.value.isNotEmpty;
-
-            return hasActiveSearch
-                ? Column(
-                  children: [
-                    Text(
-                      'Try adjusting your search terms',
-                      style: TextStyle(
-                        fontSize: Get.textScaleFactor * 14,
-                        color: Colors.grey[500],
-                      ),
-                    ),
-                    SizedBox(height: Get.height * 0.02),
-                    ElevatedButton(
-                      onPressed:
-                          controller.clearOrgSearch, // Clear search action
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFFF6B6B),
-                        foregroundColor: Colors.white,
-                      ),
-                      child: const Text('Clear Search'),
-                    ),
-                  ],
-                )
-                : Text(
-                  'No organizations available',
-                  style: TextStyle(
-                    fontSize: Get.textScaleFactor * 14,
-                    color: Colors.grey[500],
-                  ),
-                );
-          }),
-        ],
-      ),
-    );
+    return const SizedBox.shrink();
   }
 
   // Donation history tab (full functionality with filters and bookmarks)
@@ -268,16 +214,23 @@ class DonationHomePageView extends StatelessWidget {
   Widget _buildExportButton() {
     return IconButton(
       onPressed: () {
-        // TODO: Export functionality (bind to ViewModel in future)
+        // TODO: Export functionality
       },
       icon: SvgPicture.asset('assets/icons/file_export.svg'),
+      style: ButtonStyle(
+        backgroundColor: WidgetStateProperty.all(Colors.grey.shade100),
+        fixedSize: WidgetStateProperty.all(const Size(20, 20)),
+        shape: WidgetStateProperty.all(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+      ),
     );
   }
 
   Widget _buildBookmarkFilterButton(OrganizationController controller) {
     return Obx(
       () => IconButton(
-        onPressed: controller.toggleBookmarkFilter, // Toggle filter state
+        onPressed: controller.toggleBookmarkFilter,
         icon: Icon(
           controller.showBookmarkedOnly.value
               ? Icons.bookmark
@@ -286,6 +239,13 @@ class DonationHomePageView extends StatelessWidget {
               controller.showBookmarkedOnly.value
                   ? const Color(0xFFFF6B6B)
                   : Colors.black,
+        ),
+        style: ButtonStyle(
+          backgroundColor: WidgetStateProperty.all(Colors.grey.shade100),
+          fixedSize: WidgetStateProperty.all(const Size(20, 20)),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          ),
         ),
       ),
     );
@@ -338,74 +298,6 @@ class DonationHomePageView extends StatelessWidget {
   }
 
   Widget _buildEmptyState(OrganizationController controller) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.search_off,
-            size: 64,
-            color: Colors.grey[400],
-          ), // Empty icon
-          SizedBox(height: Get.height * 0.02),
-          Text(
-            'No donations found',
-            style: TextStyle(
-              fontSize: Get.textScaleFactor * 18,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey[600],
-            ),
-          ),
-          SizedBox(height: Get.height * 0.01),
-          _buildEmptyStateMessage(controller), // Filter or general message
-        ],
-      ),
-    );
-  }
-
-  Widget _buildEmptyStateMessage(OrganizationController controller) {
-    return Obx(() {
-      final hasActiveFilters =
-          controller.selectedFilter.value != 'all' ||
-          controller.searchQuery.value.isNotEmpty ||
-          controller.showBookmarkedOnly.value;
-
-      return hasActiveFilters
-          ? _buildFilteredEmptyState(controller)
-          : _buildGeneralEmptyState();
-    });
-  }
-
-  Widget _buildFilteredEmptyState(OrganizationController controller) {
-    return Column(
-      children: [
-        Text(
-          'Try adjusting your search or filters',
-          style: TextStyle(
-            fontSize: Get.textScaleFactor * 14,
-            color: Colors.grey[500],
-          ),
-        ),
-        SizedBox(height: Get.height * 0.02),
-        ElevatedButton(
-          onPressed: controller.resetFilters, // Clear all filters
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFFFF6B6B),
-            foregroundColor: Colors.white,
-          ),
-          child: const Text('Clear Filters'),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildGeneralEmptyState() {
-    return Text(
-      'No donation history available',
-      style: TextStyle(
-        fontSize: Get.textScaleFactor * 14,
-        color: Colors.grey[500],
-      ),
-    );
+    return const SizedBox.shrink();
   }
 }
