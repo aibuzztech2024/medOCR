@@ -22,7 +22,7 @@ class Claimrewards extends StatelessWidget {
             CustomSearchBar(),
             SizedBox(height: 10),
 
-            // rewards claimed cards used here 
+            // rewards claimed cards used here
             Expanded(
               child: ListView(
                 children: [
@@ -36,27 +36,27 @@ class Claimrewards extends StatelessWidget {
                       points: 3.00,
                     ),
                   ),
+                  RewardsClaimed(
+                    reward: ClaimedReward(
+                      imageUrl: ImagePaths.goodies,
+                      title: 'Wellness Forever',
+                      subtitle: 'Wellness starter kit',
+                      claimedOn: '20 Mar 2025 10:30 AM',
+                      expiredOn: '20 Mar 2025 10:30 AM',
+                      points: 3.00,
+                    ),
+                  ),
+                  RewardsClaimed(
+                    reward: ClaimedReward(
+                      imageUrl: ImagePaths.goodies,
+                      title: 'Wellness Forever',
+                      subtitle: 'Wellness starter kit',
+                      claimedOn: '20 Mar 2025 10:30 AM',
+                      expiredOn: '20 Mar 2025 10:30 AM',
+                      points: 3.00,
+                    ),
+                  ),
                 ],
-              ),
-            ),
-            RewardsClaimed(
-              reward: ClaimedReward(
-                imageUrl: ImagePaths.goodies,
-                title: 'Wellness Forever',
-                subtitle: 'Wellness starter kit',
-                claimedOn: '20 Mar 2025 10:30 AM',
-                expiredOn: '20 Mar 2025 10:30 AM',
-                points: 3.00,
-              ),
-            ),
-            RewardsClaimed(
-              reward: ClaimedReward(
-                imageUrl: ImagePaths.goodies,
-                title: 'Wellness Forever',
-                subtitle: 'Wellness starter kit',
-                claimedOn: '20 Mar 2025 10:30 AM',
-                expiredOn: '20 Mar 2025 10:30 AM',
-                points: 3.00,
               ),
             ),
           ],
