@@ -20,6 +20,11 @@ dependencies:
   animate_do: ^4.2.0 # animations
   dotted_border: ^2.1.0
   flutter_native_splash: ^2.4.6
+  geolocator: ^14.0.1
+  flutter_map: ^8.1.1
+  latlong2: ^0.9.1
+  avatar_glow: ^3.0.1
+  flutter_compass: ^0.8.1
 
 dev_dependencies:
   flutter_test:
