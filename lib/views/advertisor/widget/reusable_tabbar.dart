@@ -1,7 +1,10 @@
+import 'package:avatar/core/themes/light/light_theme_colors.dart';
+import 'package:avatar/core/themes/light/light_theme_data.dart';
 import 'package:avatar/viewModels/advertisor/tabbar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+// this is the custom reusable horizontally  scrollable tabbar to switch between pages 
 class ReusableTabbar extends StatelessWidget {
   final List<String> tabTitles;
   final List<Widget> tabContents;
@@ -22,7 +25,10 @@ class ReusableTabbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+
+        //displays tabbar
         _buildTabBar(),
+        //tabbar contents
         Expanded(child: Obx(() => tabContents[controller.activeIndex.value])),
       ],
     );
@@ -30,7 +36,7 @@ class ReusableTabbar extends StatelessWidget {
 
   Widget _buildTabBar() {
     return Container(
-      color: Colors.white,
+      color: LightThemeColors.scaffoldBackground,
       child: SingleChildScrollView(
         controller: _scrollController,
         scrollDirection: Axis.horizontal,
@@ -44,6 +50,7 @@ class ReusableTabbar extends StatelessWidget {
     );
   }
 
+  //tabbar text
   Widget _buildTabItem(String title, int index) {
     bool isActive = controller.activeIndex.value == index;
 
@@ -57,7 +64,10 @@ class ReusableTabbar extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
-              color: isActive ? Colors.red[400]! : Colors.transparent,
+              color:
+                  isActive
+                      ? LightThemeColors.advertisorColor
+                      : Colors.transparent,
               width: 2,
             ),
           ),
@@ -67,9 +77,10 @@ class ReusableTabbar extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-            color: isActive ? Colors.red[400] : Colors.grey[600],
-            fontSize: 14,
-            fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
+            color:
+                isActive ? LightThemeColors.advertisorColor : Colors.grey[600],
+            fontSize: 16,
+            fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
           ),
         ),
       ),

@@ -1,13 +1,20 @@
+import 'package:avatar/core/themes/light/light_theme_colors.dart';
+import 'package:avatar/core/widgets/app_text.dart';
 import 'package:avatar/models/advertiser/reward_model.dart';
 import 'package:avatar/views/advertisor/widget/couponcode_box.dart';
 import 'package:avatar/views/advertisor/widget/custom_progressbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+// this is the reard card widget
 class RewardCardWidget extends StatelessWidget {
   final Reward reward;
-
-  const RewardCardWidget({super.key, required this.reward});
+  final bool isPopularcoupon;
+  const RewardCardWidget({
+    super.key,
+    this.isPopularcoupon = false,
+    required this.reward,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,53 +22,57 @@ class RewardCardWidget extends StatelessWidget {
     final hasImage = reward.imageUrl != null && reward.imageUrl!.isNotEmpty;
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 18),
       child: SizedBox(
         height: 220,
         width: double.infinity,
         child: Stack(
           children: [
+
+            //card
             Card(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(12),
               ),
-              color: Colors.pink.shade50,
+              color:
+                  isPopularcoupon
+                      ? LightThemeColors.inputFill
+                      : LightThemeColors.advertisorColor15,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (hasImage) ...[
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(12),
+                        bottomLeft: Radius.circular(12),
+                      ),
                       child: Image.asset(
                         reward.imageUrl!,
-                        width: 80,
-                        height: 180,
+                        width: 100,
+                        height: double.infinity,
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const SizedBox(width: 12),
+
+                    const SizedBox(width: 2),
                   ],
+                  // for text content
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text(
+                          AppText.body(
                             reward.headerText,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
+                            fontWeight: FontWeight.bold,
                           ),
+
                           const SizedBox(height: 4),
-                          Text(
-                            reward.subheadingText,
-                            style: const TextStyle(
-                              fontSize: 13,
-                              color: Colors.black87,
-                            ),
-                          ),
+                          AppText.caption(reward.subheadingText),
+
                           const SizedBox(height: 6),
                           PointsProgressBar(
                             title: reward.lowerHeadingText,
@@ -91,6 +102,8 @@ class RewardCardWidget extends StatelessWidget {
                 ],
               ),
             ),
+
+            //side circle like design
             Positioned(
               top: 30,
               right: 0,

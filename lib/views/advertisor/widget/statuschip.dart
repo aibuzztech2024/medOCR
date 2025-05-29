@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// status chip displays whether Ongoing or not like a button
 class StatusChip extends StatelessWidget {
   final String status;
   final Color backgroundColor;
@@ -16,7 +17,7 @@ class StatusChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20),
+        margin: EdgeInsets.symmetric(horizontal: 10),
         constraints: const BoxConstraints(minWidth: 0),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
         decoration: BoxDecoration(

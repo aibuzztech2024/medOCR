@@ -1,37 +1,41 @@
+import 'package:avatar/core/themes/light/light_theme_colors.dart';
+import 'package:avatar/viewModels/advertisor/allrewards_tabbar_contoller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class AllrewardsTabbar extends StatefulWidget {
+// // Allrewards tabbar is the internal tabbar which switches to featured rewards / Popular coupons
+class AllrewardsTabbar extends StatelessWidget {
   final List<String> tabTitles;
   final List<Widget> tabContents;
   final Color? activeColor;
   final Color? inactiveColor;
   final Color? backgroundColor;
 
-  const AllrewardsTabbar({
+  final AllrewardsTabbarContoller controller;
+
+  AllrewardsTabbar({
     super.key,
     required this.tabTitles,
     required this.tabContents,
     this.activeColor,
     this.inactiveColor,
     this.backgroundColor,
+    AllrewardsTabbarContoller? controller,
   }) : assert(
-          tabTitles.length == tabContents.length,
-          'Tab titles and contents must have the same length',
-        );
-
-  @override
-  State<AllrewardsTabbar> createState() => _AllrewardsTabbarState();
-}
-
-class _AllrewardsTabbarState extends State<AllrewardsTabbar> {
-  int _activeIndex = 0;
+         tabTitles.length == tabContents.length,
+         'Tab titles and contents must have the same length',
+       ),
+       controller = controller ?? Get.put(AllrewardsTabbarContoller());
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        //internal tabbar
         _buildTabBar(),
-        Expanded(child: widget.tabContents[_activeIndex]),
+
+        //tabbar contents
+        Obx(() => Expanded(child: tabContents[controller.activeIndex.value])),
       ],
     );
   }
@@ -41,52 +45,49 @@ class _AllrewardsTabbarState extends State<AllrewardsTabbar> {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: widget.backgroundColor ?? Colors.grey[100],
+        color: backgroundColor ?? Colors.grey[100],
       ),
       child: Row(
         children: List.generate(
-          widget.tabTitles.length,
-          (index) => _buildTabItem(widget.tabTitles[index], index),
+          tabTitles.length,
+          (index) => _buildTabItem(tabTitles[index], index),
         ),
       ),
     );
   }
 
   Widget _buildTabItem(String title, int index) {
-    bool isActive = _activeIndex == index;
-
-    return Expanded(
-      child: InkWell(
-        onTap: () {
-          setState(() {
-            _activeIndex = index;
-          });
-        },
-        borderRadius: BorderRadius.circular(8),
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-          margin: const EdgeInsets.all(4),
-          decoration: BoxDecoration(
-            color: isActive 
-                ? (widget.activeColor ?? Colors.red[400]) 
-                : Colors.transparent,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Text(
-            title,
-            textAlign: TextAlign.center,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              color: isActive 
-                  ? Colors.white 
-                  : (widget.inactiveColor ?? Colors.black87),
-              fontSize: 14,
-              fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
+    return Obx(() {
+      bool isActive = controller.activeIndex.value == index;
+      return Expanded(
+        child: InkWell(
+          onTap: () => controller.changeTab(index),
+          borderRadius: BorderRadius.circular(8),
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            margin: const EdgeInsets.all(4),
+            decoration: BoxDecoration(
+              color:
+                  isActive
+                      ? (activeColor ?? LightThemeColors.advertisorColor)
+                      : LightThemeColors.inputFill,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              title,
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color:
+                    isActive ? Colors.white : (inactiveColor ?? Colors.black87),
+                fontSize: 14,
+                fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
+              ),
             ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

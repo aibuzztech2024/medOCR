@@ -43,6 +43,8 @@ final ThemeData lightThemeData = ThemeData(
     /// Medium title style (e.g. for subtitles or section titles)
     titleMedium: TextStyle(
       fontSize: 16.0,
+      fontWeight: FontWeight.bold,
+
       color: LightThemeColors.subtitleText,
     ),
 

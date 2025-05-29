@@ -26,4 +26,12 @@ class LightThemeColors {
 
   // Icon
   static const Color icon = primary;
+
+  // advertisor color
+  static const Color advertisorColor = Color(0xFFFF6F61);
+
+  // advertisor color with 15% opacity
+  static const Color advertisorColor15 = Color(0x26FF6F61);
+
+  
 }

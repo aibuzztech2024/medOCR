@@ -1,23 +1,22 @@
+import 'package:avatar/core/themes/light/light_theme_colors.dart';
 import 'package:flutter/material.dart';
 
+
+//this is the row container the a text and the coupon code
 class CouponCodeBox extends StatelessWidget {
   final String couponCode;
   final VoidCallback? onCopy;
 
-  const CouponCodeBox({
-    super.key,
-    required this.couponCode,
-    this.onCopy,
-  });
+  const CouponCodeBox({super.key, required this.couponCode, this.onCopy});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onCopy,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
-          color: Colors.redAccent,
+          color: LightThemeColors.advertisorColor,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+
+// this is the demo chart for points screen
 class LineChartPainter extends CustomPainter {
   final List<Offset>? customPoints;
   final Color? lineColor;

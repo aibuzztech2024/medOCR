@@ -1,24 +1,34 @@
+import 'package:avatar/core/constants/image_paths.dart';
+import 'package:avatar/core/themes/light/light_theme_colors.dart';
 import 'package:avatar/views/advertisor/widget/statuschip.dart';
 import 'package:avatar/views/advertisor/widget/transactionaldetailedrow_widget.dart';
 import 'package:avatar/views/advertisor/widget/transactionalimagecard_widget.dart';
 import 'package:flutter/material.dart';
 
+// this is the transaction details screen
 class TransactionDetailsScreen extends StatelessWidget {
   const TransactionDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Transaction Details')),
+      backgroundColor: LightThemeColors.scaffoldBackground,
+      appBar: AppBar(
+        title: const Text('Transaction Details'),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const TransactionImageCard(
-              imagePath: 'assets/images/avatar_logo.jpg',
-            ),
+
+            // image card
+            const TransactionImageCard(imagePath: ImagePaths.transaction),
             const SizedBox(height: 16),
+
+            // transaction detail row widget
             const TransactionDetailRow(
               label: 'File Type',
               value: Text('Upload'),

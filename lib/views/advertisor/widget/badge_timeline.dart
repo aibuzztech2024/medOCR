@@ -1,32 +1,35 @@
+import 'package:avatar/core/themes/light/light_theme_colors.dart';
+import 'package:avatar/core/widgets/app_text.dart';
 import 'package:avatar/models/advertiser/badge_level.dart';
 import 'package:flutter/material.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
+// this is the timeline package widget used in points screen
 class BadgeTimeline extends StatelessWidget {
   final List<BadgeLevel> badgeLevels;
 
-  const BadgeTimeline({
-    super.key,
-    required this.badgeLevels,
-  });
+  const BadgeTimeline({super.key, required this.badgeLevels});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
-        children: badgeLevels.asMap().entries.map((entry) {
-          final index = entry.key;
-          final badge = entry.value;
-          return _buildBadgeTile(
-            title: badge.title,
-            points: badge.points,
-            benefits: badge.benefits,
-            badgeColor: badge.color,
-            isFirst: index == 0,
-            isLast: index == badgeLevels.length - 1,
-          );
-        }).toList(),
+        children:
+            badgeLevels.asMap().entries.map((entry) {
+              final index = entry.key;
+              final badge = entry.value;
+              return _buildBadgeTile(
+                title: badge.title,
+                points: badge.points,
+                benefits: badge.benefits,
+                badgeColor: badge.color,
+                image: badge.image, // ✅ Pass image here
+
+                isFirst: index == 0,
+                isLast: index == badgeLevels.length - 1,
+              );
+            }).toList(),
       ),
     );
   }
@@ -34,6 +37,7 @@ class BadgeTimeline extends StatelessWidget {
   Widget _buildBadgeTile({
     required String title,
     required String points,
+    required String image, // ✅ Add image parameter
     required List<String> benefits,
     required Color badgeColor,
     required bool isFirst,
@@ -48,59 +52,35 @@ class BadgeTimeline extends StatelessWidget {
         height: 40,
         indicator: Container(
           decoration: BoxDecoration(color: badgeColor, shape: BoxShape.circle),
-          child: const Icon(Icons.emoji_events, color: Colors.white, size: 20),
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Image.asset(image, fit: BoxFit.contain), // ✅ Use image here
+          ),
         ),
       ),
       endChild: Container(
         margin: const EdgeInsets.only(left: 16, bottom: 20),
         padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              spreadRadius: 1,
-              blurRadius: 6,
-              offset: const Offset(0, 2),
-            ),
-          ],
-        ),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
-            ),
+            AppText.heading(title),
+
             const SizedBox(height: 8),
             ...benefits
                 .map(
                   (benefit) => Padding(
                     padding: const EdgeInsets.only(bottom: 4),
-                    child: Text(
-                      '- $benefit',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey[700],
-                        height: 1.4,
-                      ),
-                    ),
+                    child: AppText.body('- $benefit'),
                   ),
                 )
                 .toList(),
             const SizedBox(height: 12),
-            Text(
+            AppText.body(
               points,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.red[400],
-                fontWeight: FontWeight.w600,
-              ),
+              color: LightThemeColors.advertisorColor,
+              fontWeight: FontWeight.w600,
             ),
           ],
         ),
