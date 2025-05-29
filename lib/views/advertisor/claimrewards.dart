@@ -23,14 +23,20 @@ class Claimrewards extends StatelessWidget {
             SizedBox(height: 10),
 
             // rewards claimed cards used here 
-            RewardsClaimed(
-              reward: ClaimedReward(
-                imageUrl: ImagePaths.goodies,
-                title: 'Wellness Forever',
-                subtitle: 'Wellness starter kit',
-                claimedOn: '20 Mar 2025 10:30 AM',
-                expiredOn: '20 Mar 2025 10:30 AM',
-                points: 3.00,
+            Expanded(
+              child: ListView(
+                children: [
+                  RewardsClaimed(
+                    reward: ClaimedReward(
+                      imageUrl: ImagePaths.goodies,
+                      title: 'Wellness Forever',
+                      subtitle: 'Wellness starter kit',
+                      claimedOn: '20 Mar 2025 10:30 AM',
+                      expiredOn: '20 Mar 2025 10:30 AM',
+                      points: 3.00,
+                    ),
+                  ),
+                ],
               ),
             ),
             RewardsClaimed(

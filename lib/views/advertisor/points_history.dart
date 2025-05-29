@@ -23,15 +23,21 @@ class PointsHistory extends StatelessWidget {
             SizedBox(height: 10),
 
             //rewards claimed cards
-            RewardsClaimed(
-              isPointsHistory: true,
-              reward: ClaimedReward(
-                imageUrl: ImagePaths.goodiestars,
-                title: 'Upload',
-                subtitle: 'Purchase',
-                claimedOn: '20 Mar 2025 10:30 AM',
-                points: 3.00,
-                expiredOn: '',
+            Expanded(
+              child: ListView(
+                children: [
+                  RewardsClaimed(
+                    isPointsHistory: true,
+                    reward: ClaimedReward(
+                      imageUrl: ImagePaths.goodiestars,
+                      title: 'Upload',
+                      subtitle: 'Purchase',
+                      claimedOn: '20 Mar 2025 10:30 AM',
+                      points: 3.00,
+                      expiredOn: '',
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
