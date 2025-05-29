@@ -1,3 +1,4 @@
+import 'package:avatar/views/advertiser/donate/donation_detailed_read_more_controller.dart';
 import 'package:avatar/views/advertiser/widget/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -21,24 +22,6 @@ class DonationCardModel {
     required this.description,
     required this.websiteUrl,
   });
-}
-
-// GetX Controller for managing donation card state
-class DonationCardController extends GetxController {
-  // Observable for loading states
-  var isLoading = false.obs;
-
-  // Method to handle website visit
-  void visitWebsite(String url) {
-    // Implement URL launching logic here
-    print('Visiting: $url');
-  }
-
-  // Method to handle payment
-  void handlePayment() {
-    // Implement payment logic here
-    print('Processing payment...');
-  }
 }
 
 // Reusable donation card widget component
@@ -65,8 +48,8 @@ class DonationReadMoreCard extends StatelessWidget {
     final cardHeight = customHeight ?? (screenHeight * 0.866); // 757/874 ratio
     final cardWidth = customWidth ?? (screenWidth * 0.911); // 366/402 ratio
 
-    // Initialize GetX controller
-    final controller = Get.put(DonationCardController());
+    // Use the existing DonationCardReadMoreController instead of creating a new one
+    final controller = Get.find<DonationCardReadMoreController>();
 
     return Container(
       height: cardHeight,
@@ -186,66 +169,74 @@ class DonationReadMoreCard extends StatelessWidget {
 
                   SizedBox(height: cardHeight * 0.025),
 
-                  // Action buttons row
-                  Row(
-                    children: [
-                      // UPI Icon - fixed at leftmost position
-                      SvgPicture.asset('assets/icons/upi.svg'),
+                  // Action buttons row with loading states
+                  Obx(
+                    () => Row(
+                      children: [
+                        // UPI Icon - fixed at leftmost position
+                        SvgPicture.asset('assets/icons/upi.svg'),
 
-                      SizedBox(width: screenWidth * 0.001),
+                        SizedBox(width: screenWidth * 0.001),
 
-                      // Visit Website button using CustomButton - takes maximum space
-                      Expanded(
-                        flex: 1,
-                        child: CustomButton(
-                          text: 'Visit Website',
-                          onPressed:
-                              () => controller.visitWebsite(data.websiteUrl),
-                          width:
-                              null, // Let it expand to maximum available space
-                          height: cardHeight * 0.063,
-                          fontSize:
-                              screenWidth < 360
-                                  ? 10
-                                  : (screenWidth < 600 ? 12 : 14),
-                          fontWeight: FontWeight.w500,
-                          backgroundColor: const Color(0xFFFF6B6B),
-                          borderRadius: 10,
-                          isOutlined: true,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: screenWidth * 0.02,
-                            vertical: cardHeight * 0.015,
+                        // Visit Website button using CustomButton - takes maximum space
+                        Expanded(
+                          flex: 1,
+                          child: CustomButton(
+                            text:
+                                controller.isLoading.value
+                                    ? 'Loading...'
+                                    : 'Visit Website',
+                            onPressed:
+                                () => controller.visitWebsite(data.websiteUrl),
+                            width:
+                                null, // Let it expand to maximum available space
+                            height: cardHeight * 0.063,
+                            fontSize:
+                                screenWidth < 360
+                                    ? 10
+                                    : (screenWidth < 600 ? 12 : 14),
+                            fontWeight: FontWeight.w500,
+                            backgroundColor: const Color(0xFFFF6B6B),
+                            borderRadius: 10,
+                            isOutlined: true,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: screenWidth * 0.02,
+                              vertical: cardHeight * 0.015,
+                            ),
                           ),
                         ),
-                      ),
 
-                      SizedBox(width: screenWidth * 0.02),
+                        SizedBox(width: screenWidth * 0.02),
 
-                      // Pay button using CustomButton - takes maximum space
-                      Expanded(
-                        flex: 1,
-                        child: CustomButton(
-                          text: 'Pay',
-                          onPressed: () => controller.handlePayment(),
-                          width:
-                              null, // Let it expand to maximum available space
-                          height: cardHeight * 0.063,
-                          fontSize:
-                              screenWidth < 360
-                                  ? 12
-                                  : (screenWidth < 600 ? 14 : 16),
-                          fontWeight: FontWeight.w600,
-                          textColor: Colors.white,
-                          backgroundColor: const Color(0xFFFF6B6B),
-                          borderRadius: 10,
-                          isOutlined: false,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: screenWidth * 0.02,
-                            vertical: cardHeight * 0.015,
+                        // Pay button using CustomButton - takes maximum space
+                        Expanded(
+                          flex: 1,
+                          child: CustomButton(
+                            text:
+                                controller.isProcessingPayment.value
+                                    ? 'Processing...'
+                                    : 'Pay',
+                            onPressed: () => controller.handlePayment(),
+                            width:
+                                null, // Let it expand to maximum available space
+                            height: cardHeight * 0.063,
+                            fontSize:
+                                screenWidth < 360
+                                    ? 12
+                                    : (screenWidth < 600 ? 14 : 16),
+                            fontWeight: FontWeight.w600,
+                            textColor: Colors.white,
+                            backgroundColor: const Color(0xFFFF6B6B),
+                            borderRadius: 10,
+                            isOutlined: false,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: screenWidth * 0.02,
+                              vertical: cardHeight * 0.015,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),

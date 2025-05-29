@@ -1,56 +1,54 @@
 import 'package:avatar/views/advertiser/donate/donation_payment_controller.dart';
+import 'package:avatar/views/advertiser/donate/donation_detailed_read_more_controller.dart';
 import 'package:avatar/views/advertiser/widget/amount_breakdown_card.dart';
+import 'package:avatar/views/advertiser/widget/custom_button.dart';
 import 'package:avatar/views/advertiser/widget/donate_payment_card.dart';
 import 'package:avatar/views/advertiser/widget/donation_amount_input.dart';
 import 'package:avatar/views/advertiser/widget/payment_option_card.dart';
-import 'package:avatar/views/advertiser/widget/custom_button.dart'; // Add this import
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-// Import the reusable components
-
-/// Refactored donation payment screen with reusable components
+/// Main donation payment screen with data model integration
 class DonationPaymentScreen extends StatelessWidget {
   const DonationPaymentScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final sampleDonation = DonationCardModel1(
-      imageUrl:
-          'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-      title: 'Bharat Seva Mandal',
-      subtitle: 'Healthcare Organization',
-      distance: '2.5 km',
-      category: 'Healthcare',
-      description:
-          'Complete health assessment including blood work, cardiac evaluation, and nutritionist consultation',
-      websiteUrl: 'https://example.com',
-    );
-
+    // Initialize controller
     final controller = Get.put(DonationPaymentController());
+
+    // Get donation data from navigation arguments
+    final DonationCardModel1? passedDonation =
+        Get.arguments as DonationCardModel1?;
+
+    // Use passed data or fallback to sample data
+    final donation = passedDonation ?? _createFallbackDonation();
+
+    print("🔥 Payment screen received data: ${donation.title}");
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar(donation.title), // Dynamic app bar title
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            DonationCard(donation: sampleDonation),
+            // Display organization details using passed data
+            DonationPaymentCard(donation: donation),
 
-            // Donation Amount Section - Using reusable component
+            // Donation amount input section
             DonationAmountInput(
               donationAmount: controller.ngoAmount,
               amountController: controller.amountController,
             ),
             const SizedBox(height: 24),
 
-            // Payment Method Selection
+            // Payment method selection section
             _buildPaymentMethodSection(controller),
             const SizedBox(height: 24),
 
-            // Amount Breakdown - Using reusable component
+            // Amount breakdown display
             Obx(
               () => AmountBreakdownCard(
                 items: [
@@ -74,9 +72,11 @@ class DonationPaymentScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: Get.height * 0.02),
+
+            // Action buttons row
             Row(
               children: [
-                // Cancel button
+                // Cancel donation button
                 Expanded(
                   child: CustomButton(
                     text: 'Cancel',
@@ -91,7 +91,7 @@ class DonationPaymentScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 12),
-                // Pay button
+                // Process payment button
                 Expanded(
                   child: Obx(
                     () =>
@@ -134,8 +134,8 @@ class DonationPaymentScreen extends StatelessWidget {
     );
   }
 
-  /// Build app bar
-  AppBar _buildAppBar() {
+  /// Build dynamic app bar with organization name
+  AppBar _buildAppBar(String organizationTitle) {
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 0,
@@ -143,9 +143,9 @@ class DonationPaymentScreen extends StatelessWidget {
         icon: const Icon(Icons.arrow_back, color: Colors.black),
         onPressed: () => Get.back(),
       ),
-      title: const Text(
-        'Donation',
-        style: TextStyle(
+      title: Text(
+        'Donate to ${_truncateTitle(organizationTitle)}', // Dynamic title
+        style: const TextStyle(
           color: Colors.black,
           fontSize: 18,
           fontWeight: FontWeight.w600,
@@ -153,6 +153,14 @@ class DonationPaymentScreen extends StatelessWidget {
       ),
       centerTitle: true,
     );
+  }
+
+  /// Truncate long organization titles for app bar
+  String _truncateTitle(String title) {
+    if (title.length > 20) {
+      return '${title.substring(0, 17)}...';
+    }
+    return title;
   }
 
   /// Build payment method selection section
@@ -170,7 +178,7 @@ class DonationPaymentScreen extends StatelessWidget {
         ),
         const SizedBox(height: 16),
 
-        // UPI Section
+        // UPI section header
         const Text(
           'UPI',
           style: TextStyle(
@@ -181,7 +189,7 @@ class DonationPaymentScreen extends StatelessWidget {
         ),
         const SizedBox(height: 12),
 
-        // UPI Option - Using reusable component
+        // UPI payment option
         Obx(
           () => UPIPaymentOption(
             method: 'UPI',
@@ -192,7 +200,7 @@ class DonationPaymentScreen extends StatelessWidget {
 
         const SizedBox(height: 20),
 
-        // More ways to pay section
+        // Alternative payment methods section
         const Text(
           'MORE WAYS TO PAY',
           style: TextStyle(
@@ -204,7 +212,7 @@ class DonationPaymentScreen extends StatelessWidget {
         ),
         const SizedBox(height: 12),
 
-        // Other payment options - Using reusable components
+        // Other payment options container
         Obx(
           () => PaymentOptionsContainer(
             children: [
@@ -230,6 +238,21 @@ class DonationPaymentScreen extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  /// Create fallback donation data if no arguments passed
+  DonationCardModel1 _createFallbackDonation() {
+    return DonationCardModel1(
+      imageUrl:
+          'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+      title: 'Bharat Seva Mandal',
+      subtitle: 'Healthcare Organization',
+      distance: '2.5 km',
+      category: 'Healthcare',
+      description:
+          'Complete sux health assessment including blood work, cardiac evaluation, and nutritionist consultation',
+      websiteUrl: 'https://example.com',
     );
   }
 }

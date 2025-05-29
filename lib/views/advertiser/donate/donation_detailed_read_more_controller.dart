@@ -1,3 +1,4 @@
+import 'package:avatar/views/advertiser/donate/donation_payment.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:avatar/views/advertiser/widget/donation_read_more_card.dart';
@@ -103,63 +104,42 @@ class DonationCardReadMoreController extends GetxController {
     }
   }
 
-  /// Handle payment process
+  /// Handle payment process - Navigate to DonationPaymentScreen with data
   Future<void> handlePayment() async {
     try {
       isProcessingPayment.value = true;
 
-      // Show payment options dialog
-      await _showPaymentDialog();
+      // Add debug print to verify method is called
+      print("🔥 handlePayment called - Starting navigation process");
+
+      // Convert current DonationCardModel to DonationCardModel1 format
+      final paymentData = DonationCardModel1(
+        imageUrl: donationData.imageUrl,
+        title: donationData.title,
+        subtitle: donationData.subtitle,
+        distance: donationData.distance,
+        category: donationData.category,
+        description: donationData.description,
+        websiteUrl: donationData.websiteUrl,
+      );
+
+      print("🔥 Payment data created: ${paymentData.title}");
+
+      // Navigate to payment screen with donation data as arguments
+      await Get.to(
+        () => DonationPaymentScreen(),
+        arguments: paymentData,
+        transition: Transition.rightToLeft,
+        duration: const Duration(milliseconds: 300),
+      );
+
+      print("🔥 Navigation completed successfully");
     } catch (e) {
-      _showErrorSnackbar('Payment error: ${e.toString()}');
+      print("🔥 Navigation error: ${e.toString()}");
+      _showErrorSnackbar('Navigation error: ${e.toString()}');
     } finally {
       isProcessingPayment.value = false;
     }
-  }
-
-  /// Show payment options dialog
-  Future<void> _showPaymentDialog() async {
-    await Get.dialog(
-      AlertDialog(
-        title: Text('Donate to ${donationData.title}'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'Choose your preferred payment method:',
-              style: TextStyle(fontSize: 14, color: Colors.grey[600]),
-            ),
-            const SizedBox(height: 16),
-            _buildPaymentOption('UPI Payment', Icons.payment),
-            _buildPaymentOption('Credit/Debit Card', Icons.credit_card),
-            _buildPaymentOption('Net Banking', Icons.account_balance),
-          ],
-        ),
-        actions: [
-          TextButton(onPressed: () => Get.back(), child: const Text('Cancel')),
-        ],
-      ),
-    );
-  }
-
-  /// Build payment option widget
-  Widget _buildPaymentOption(String title, IconData icon) {
-    return ListTile(
-      leading: Icon(icon, color: const Color(0xFFFF6B6B)),
-      title: Text(title),
-      onTap: () {
-        Get.back();
-        _processPayment(title);
-      },
-    );
-  }
-
-  /// Process selected payment method
-  void _processPayment(String paymentMethod) {
-    // In real app, integrate with payment gateway
-    _showSuccessSnackbar(
-      'Payment initiated via $paymentMethod for ${donationData.title}',
-    );
   }
 
   // =============================================================================
@@ -204,4 +184,25 @@ class DonationCardReadMoreController extends GetxController {
 
   /// Get formatted title for app bar
   String get pageTitle => donationData.title;
+}
+
+/// Data model for DonationPaymentScreen (matches your provided model)
+class DonationCardModel1 {
+  final String imageUrl;
+  final String title;
+  final String subtitle;
+  final String distance;
+  final String category;
+  final String description;
+  final String websiteUrl;
+
+  DonationCardModel1({
+    required this.imageUrl,
+    required this.title,
+    required this.subtitle,
+    required this.distance,
+    required this.category,
+    required this.description,
+    required this.websiteUrl,
+  });
 }

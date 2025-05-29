@@ -1,30 +1,19 @@
+import 'package:avatar/views/advertiser/donate/donation_payment_controller.dart';
+import 'package:avatar/views/advertiser/donate/donation_detailed_read_more_controller.dart';
+import 'package:avatar/views/advertiser/widget/amount_breakdown_card.dart';
+import 'package:avatar/views/advertiser/widget/donate_payment_card.dart';
+import 'package:avatar/views/advertiser/widget/donation_amount_input.dart';
+import 'package:avatar/views/advertiser/widget/payment_option_card.dart';
+import 'package:avatar/views/advertiser/widget/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class DonationCardModel1 {
-  final String imageUrl;
-  final String title;
-  final String subtitle;
-  final String distance;
-  final String category;
-  final String description;
-  final String websiteUrl;
-
-  DonationCardModel1({
-    required this.imageUrl,
-    required this.title,
-    required this.subtitle,
-    required this.distance,
-    required this.category,
-    required this.description,
-    required this.websiteUrl,
-  });
-}
-
-class DonationCard extends StatelessWidget {
+/// Payment card widget that displays donation organization details
+class DonationPaymentCard extends StatelessWidget {
   final DonationCardModel1 donation;
 
-  const DonationCard({Key? key, required this.donation}) : super(key: key);
+  const DonationPaymentCard({Key? key, required this.donation})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +34,7 @@ class DonationCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Image Container
+          // Organization image container
           Container(
             width: 366,
             height: 255,
@@ -60,8 +49,7 @@ class DonationCard extends StatelessWidget {
               ),
             ),
           ),
-
-          // Content Container
+          // Organization details container
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -72,7 +60,7 @@ class DonationCard extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Title
+                      // Organization title
                       Text(
                         donation.title,
                         style: const TextStyle(
@@ -83,10 +71,8 @@ class DonationCard extends StatelessWidget {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
-
                       SizedBox(height: Get.height * 0.001),
-
-                      // Description
+                      // Organization description
                       Text(
                         donation.description,
                         style: const TextStyle(
