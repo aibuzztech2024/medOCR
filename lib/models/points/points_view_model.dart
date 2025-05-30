@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:avatar/models/advertiser/badge_level.dart';
+import 'package:avatar/models/points/badge_level.dart';
 
 // pointsview model for points screen
 class PointsViewModel {

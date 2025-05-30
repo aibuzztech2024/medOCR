@@ -1,10 +1,11 @@
 import 'package:avatar/core/themes/light/light_theme_colors.dart';
 import 'package:avatar/core/widgets/app_text.dart';
-import 'package:avatar/models/advertiser/reward_model.dart';
-import 'package:avatar/views/advertisor/widget/couponcode_box.dart';
-import 'package:avatar/views/advertisor/widget/custom_progressbar.dart';
+import 'package:avatar/models/points/reward_model.dart';
+import 'package:avatar/views/points/widget/couponcode_box.dart';
+import 'package:avatar/views/points/widget/custom_progressbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 // this is the reard card widget
 class RewardCardWidget extends StatelessWidget {
@@ -28,7 +29,6 @@ class RewardCardWidget extends StatelessWidget {
         width: double.infinity,
         child: Stack(
           children: [
-
             //card
             Card(
               shape: RoundedRectangleBorder(
@@ -88,11 +88,7 @@ class RewardCardWidget extends StatelessWidget {
                               Clipboard.setData(
                                 ClipboardData(text: reward.couponCode),
                               );
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Coupon code copied!'),
-                                ),
-                              );
+                              Get.snackbar('Success', 'Coupon code copied!');
                             },
                           ),
                         ],

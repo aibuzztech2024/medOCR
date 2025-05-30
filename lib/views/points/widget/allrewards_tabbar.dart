@@ -1,9 +1,10 @@
-import 'package:avatar/core/themes/light/light_theme_colors.dart';
-import 'package:avatar/viewModels/advertisor/allrewards_tabbar_contoller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:avatar/core/themes/light/light_theme_colors.dart';
+import 'package:avatar/viewModels/points/controller/allrewards_tabbar_controller.dart';
 
-// // Allrewards tabbar is the internal tabbar which switches to featured rewards / Popular coupons
+/// Internal tabbar widget that switches between Featured Rewards and Popular Coupons.
+/// Uses GetX controller to manage active tab state.
 class AllrewardsTabbar extends StatelessWidget {
   final List<String> tabTitles;
   final List<Widget> tabContents;
@@ -11,7 +12,8 @@ class AllrewardsTabbar extends StatelessWidget {
   final Color? inactiveColor;
   final Color? backgroundColor;
 
-  final AllrewardsTabbarContoller controller;
+  /// Tab controller (GetX)
+  final AllRewardsTabbarController controller;
 
   AllrewardsTabbar({
     super.key,
@@ -20,26 +22,34 @@ class AllrewardsTabbar extends StatelessWidget {
     this.activeColor,
     this.inactiveColor,
     this.backgroundColor,
-    AllrewardsTabbarContoller? controller,
+    AllRewardsTabbarController? controller,
   }) : assert(
          tabTitles.length == tabContents.length,
          'Tab titles and contents must have the same length',
        ),
-       controller = controller ?? Get.put(AllrewardsTabbarContoller());
+       controller = controller ?? Get.put(AllRewardsTabbarController());
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        //internal tabbar
+        // Internal tabbar buttons
         _buildTabBar(),
 
-        //tabbar contents
-        Obx(() => Expanded(child: tabContents[controller.activeIndex.value])),
+        // Tab contents that reactively change based on selected tab
+        Obx(
+          () => Expanded(
+            child: IndexedStack(
+              index: controller.activeIndex.value,
+              children: tabContents,
+            ),
+          ),
+        ),
       ],
     );
   }
 
+  /// Builds the tab bar with each tab button
   Widget _buildTabBar() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -56,9 +66,10 @@ class AllrewardsTabbar extends StatelessWidget {
     );
   }
 
+  /// Builds a single tab item (button)
   Widget _buildTabItem(String title, int index) {
     return Obx(() {
-      bool isActive = controller.activeIndex.value == index;
+      final isActive = controller.activeIndex.value == index;
       return Expanded(
         child: InkWell(
           onTap: () => controller.changeTab(index),

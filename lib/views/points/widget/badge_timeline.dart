@@ -1,6 +1,6 @@
 import 'package:avatar/core/themes/light/light_theme_colors.dart';
 import 'package:avatar/core/widgets/app_text.dart';
-import 'package:avatar/models/advertiser/badge_level.dart';
+import 'package:avatar/models/points/badge_level.dart';
 import 'package:flutter/material.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
@@ -24,7 +24,7 @@ class BadgeTimeline extends StatelessWidget {
                 points: badge.points,
                 benefits: badge.benefits,
                 badgeColor: badge.color,
-                image: badge.image, // ✅ Pass image here
+                image: badge.image, // image
 
                 isFirst: index == 0,
                 isLast: index == badgeLevels.length - 1,
@@ -37,7 +37,7 @@ class BadgeTimeline extends StatelessWidget {
   Widget _buildBadgeTile({
     required String title,
     required String points,
-    required String image, // ✅ Add image parameter
+    required String image,
     required List<String> benefits,
     required Color badgeColor,
     required bool isFirst,
@@ -54,7 +54,7 @@ class BadgeTimeline extends StatelessWidget {
           decoration: BoxDecoration(color: badgeColor, shape: BoxShape.circle),
           child: Padding(
             padding: const EdgeInsets.all(8),
-            child: Image.asset(image, fit: BoxFit.contain), // ✅ Use image here
+            child: Image.asset(image, fit: BoxFit.contain), //  image here
           ),
         ),
       ),
@@ -68,14 +68,12 @@ class BadgeTimeline extends StatelessWidget {
             AppText.heading(title),
 
             const SizedBox(height: 8),
-            ...benefits
-                .map(
-                  (benefit) => Padding(
-                    padding: const EdgeInsets.only(bottom: 4),
-                    child: AppText.body('- $benefit'),
-                  ),
-                )
-                .toList(),
+            ...benefits.map(
+              (benefit) => Padding(
+                padding: const EdgeInsets.only(bottom: 4),
+                child: AppText.body('- $benefit'),
+              ),
+            ),
             const SizedBox(height: 12),
             AppText.body(
               points,

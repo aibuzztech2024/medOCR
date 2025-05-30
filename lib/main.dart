@@ -1,6 +1,5 @@
 import 'package:avatar/core/themes/light/light_theme_data.dart';
-import 'package:avatar/views/advertisor/advertisor_tabbar_container.dart';
-import 'package:avatar/views/auth/select_role_view.dart';
+import 'package:avatar/views/points/points_tabbar_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
       // TODO: Check if user is Logged-In
       // If user is logged in, navigate to home page
       // If user is not logged in, navigate to select role page
-      home: AdvertisorTabbarContainer(),
+      home: PointsTabbarContainer(),
     );
   }
 }

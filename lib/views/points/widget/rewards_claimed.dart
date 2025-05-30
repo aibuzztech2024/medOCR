@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:avatar/core/themes/light/light_theme_colors.dart';
 import 'package:avatar/core/widgets/app_text.dart';
-import 'package:avatar/models/advertiser/claimed_reward_model.dart';
-import 'package:flutter/material.dart';
+import 'package:avatar/models/points/claimed_reward_model.dart';
 
-// this is the reward claimed widget
+/// Widget to show each claimed reward in a card format
 class RewardsClaimed extends StatelessWidget {
   final ClaimedReward reward;
   final bool isPointsHistory;
@@ -30,7 +30,7 @@ class RewardsClaimed extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Centered Image Container
+              // Image
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -51,7 +51,7 @@ class RewardsClaimed extends StatelessWidget {
 
               const SizedBox(width: 12),
 
-              // Text content
+              // Text
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,17 +69,9 @@ class RewardsClaimed extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 5),
-                    AppText.caption(
-                      'Claimed on: ${reward.claimedOn}',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                    AppText.caption('Claimed on: ${reward.claimedOn}'),
                     if (!isPointsHistory)
-                      AppText.caption(
-                        'Expired on: ${reward.expiredOn}',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                      AppText.caption('Expired on: ${reward.expiredOn}'),
                   ],
                 ),
               ),
@@ -87,18 +79,13 @@ class RewardsClaimed extends StatelessWidget {
               const SizedBox(width: 8),
 
               // Points
-              isPointsHistory
-                  ? Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Align(
-                      alignment: Alignment.topRight,
-                      child: AppText.caption(reward.points.toStringAsFixed(2)),
-                    ),
-                  )
-                  : Align(
-                    alignment: Alignment.topRight,
-                    child: AppText.caption(reward.points.toStringAsFixed(2)),
-                  ),
+              Align(
+                alignment:
+                    isPointsHistory
+                        ? Alignment.topRight
+                        : Alignment.centerRight,
+                child: AppText.caption(reward.points.toStringAsFixed(2)),
+              ),
             ],
           ),
         ),

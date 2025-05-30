@@ -1,6 +1,6 @@
 import 'package:avatar/core/themes/light/light_theme_colors.dart';
 import 'package:avatar/core/widgets/app_text.dart';
-import 'package:avatar/views/advertisor/widget/line_chart_painter.dart'
+import 'package:avatar/views/points/widget/line_chart_painter.dart'
     show LineChartPainter;
 import 'package:flutter/material.dart';
 
@@ -72,8 +72,8 @@ class PointsOverviewCard extends StatelessWidget {
     );
   }
 
-
   Widget _buildPointsBreakdown() {
+    //TODO change to viewmodel
     final totalSum = pointsBreakdown.values.fold(
       0,
       (sum, value) => sum + value,
@@ -115,8 +115,8 @@ class PointsOverviewCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: LightThemeColors.inputFill, 
-        borderRadius: BorderRadius.circular(8), 
+        color: LightThemeColors.inputFill,
+        borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
         children: [

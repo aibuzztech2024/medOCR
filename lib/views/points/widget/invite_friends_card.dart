@@ -40,8 +40,9 @@ class InviteFriendsCard extends StatelessWidget {
                   children: [
                     Expanded(child: AppText.heading(title)),
 
-                    // copy text icon 
+                    // copy text icon
                     GestureDetector(
+                      //TODO chnage this function
                       onTap: () {
                         Clipboard.setData(ClipboardData(text: referralCode));
                         ScaffoldMessenger.of(context).showSnackBar(

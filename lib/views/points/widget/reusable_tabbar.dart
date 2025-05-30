@@ -1,10 +1,10 @@
 import 'package:avatar/core/themes/light/light_theme_colors.dart';
 import 'package:avatar/core/themes/light/light_theme_data.dart';
-import 'package:avatar/viewModels/advertisor/tabbar_controller.dart';
+import 'package:avatar/viewModels/points/controller/tabbar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-// this is the custom reusable horizontally  scrollable tabbar to switch between pages 
+// this is the custom reusable horizontally  scrollable tabbar to switch between pages
 class ReusableTabbar extends StatelessWidget {
   final List<String> tabTitles;
   final List<Widget> tabContents;
@@ -25,7 +25,6 @@ class ReusableTabbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-
         //displays tabbar
         _buildTabBar(),
         //tabbar contents
