@@ -80,7 +80,7 @@ class UPIPaymentOption extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: const Color(0xFFFF6B6B).withOpacity(0.3),
+            color: const Color(0xFFFF6B6B).withValues(alpha: 0.3),
             width: 1,
           ),
         ),
@@ -92,7 +92,7 @@ class UPIPaymentOption extends StatelessWidget {
               method,
               style: const TextStyle(fontSize: 16, color: Color(0xFF2D3748)),
             ),
-            Spacer(), // pushes everything after it to the far right
+            const Spacer(), // Add const here
             SvgPicture.asset("assets/icons/upi.svg"),
           ],
         ),
@@ -117,7 +117,10 @@ class PaymentOptionsContainer extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: borderColor.withOpacity(0.3), width: 1.5),
+        border: Border.all(
+          color: borderColor.withValues(alpha: 0.3),
+          width: 1.5,
+        ),
         color: Colors.white,
       ),
       child: Column(children: children),

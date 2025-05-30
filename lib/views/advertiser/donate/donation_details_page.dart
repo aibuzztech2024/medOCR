@@ -138,6 +138,12 @@ class DonationDetailView extends StatelessWidget {
   Widget _buildStatusChip(String status) {
     Color backgroundColor;
     Color textColor;
+    String displayStatus = status;
+
+    // Convert "completed" to "successful" for display
+    if (status.toLowerCase() == 'completed') {
+      displayStatus = 'Successful';
+    }
 
     switch (status.toLowerCase()) {
       case 'completed':
@@ -161,7 +167,7 @@ class DonationDetailView extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: Text(
-        status,
+        displayStatus,
         style: TextStyle(
           fontSize: Get.textScaleFactor * 12,
           fontWeight: FontWeight.w600,

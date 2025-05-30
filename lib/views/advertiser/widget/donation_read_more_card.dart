@@ -59,7 +59,7 @@ class DonationReadMoreCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -176,7 +176,7 @@ class DonationReadMoreCard extends StatelessWidget {
                         // UPI Icon - fixed at leftmost position
                         SvgPicture.asset('assets/icons/upi.svg'),
 
-                        SizedBox(width: screenWidth * 0.001),
+                        SizedBox(width: screenWidth * 0.02),
 
                         // Visit Website button using CustomButton - takes maximum space
                         Expanded(

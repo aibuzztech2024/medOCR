@@ -6,7 +6,7 @@ import 'package:avatar/views/advertiser/donate/donation_detailed_read_more.dart'
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:avatar/views/advertiser/donate/donation_model.dart';
-import 'package:avatar/views/advertiser/donate/donation_details.dart';
+import 'package:avatar/views/advertiser/donate/donation_details_page.dart';
 import 'package:avatar/views/advertiser/widget/view_button.dart';
 
 /// [CONTROLLER] Manages both donation history and organization states

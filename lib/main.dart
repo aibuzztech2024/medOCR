@@ -1,9 +1,5 @@
 import 'package:avatar/core/themes/light/light_theme_data.dart';
-import 'package:avatar/views/advertiser/donate/donation_details.dart';
 import 'package:avatar/views/advertiser/donate/donation_home_page_view.dart';
-import 'package:avatar/views/advertiser/donate/donation_payment.dart';
-import 'package:avatar/views/advertiser/donate/donation_detailed_read_more.dart';
-import 'package:avatar/views/auth/select_role_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 

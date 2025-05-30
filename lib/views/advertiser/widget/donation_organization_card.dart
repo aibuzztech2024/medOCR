@@ -1,23 +1,17 @@
 // =============================================================================
-// VIEW LAYER - OrganizationCard Widget (Clean MVVM Implementation)
+// SIMPLE APPROACH - Pre-calculated Constants with GetX
 // =============================================================================
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:avatar/views/advertiser/donate/donation_model.dart';
 
-/// [VIEW] Organization card widget following MVVM architecture
-/// Displays organization information using the extended DonationModel
+/// [VIEW] Organization card widget with clean constant-based dimensions
 class OrganizationCard extends StatelessWidget {
-  // Data binding from ViewModel
   final DonationModel organization;
-
-  // Action callbacks to ViewModel
   final VoidCallback? onReadMore;
   final VoidCallback? onDonate;
   final VoidCallback? onBookmarkToggle;
-
-  // UI state from ViewModel
   final bool isBookmarked;
 
   const OrganizationCard({
@@ -50,15 +44,10 @@ class OrganizationCard extends StatelessWidget {
   }
 
   Widget _buildCard() {
-    // Get dynamic sizing based on screen dimensions
-    final screenWidth = Get.width;
-    final screenHeight = Get.height;
-
-    // Calculate responsive dimensions (maintaining aspect ratio from original)
-    final cardWidth = screenWidth * (366 / 402);
-    final cardHeight =
-        screenHeight * (140 / 874); // Slightly taller for organization info
-    final imageWidth = screenWidth * (100 / 402);
+    // Simple dimension calculations using clean constants
+    final cardWidth = Get.width * 0.9104;
+    final cardHeight = Get.height * 0.1601;
+    final imageWidth = Get.width * 0.2488;
 
     return Stack(
       children: [
@@ -73,24 +62,20 @@ class OrganizationCard extends StatelessWidget {
             ],
           ),
         ),
-        // White semicircle at top right corner
         _buildRightSideSemicircle(cardWidth, cardHeight),
       ],
     );
   }
 
   Widget _buildRightSideSemicircle(double cardWidth, double cardHeight) {
-    final radius = (cardHeight * 0.15).clamp(
-      25.0,
-      50.0,
-    ); // Based on height for vertical
+    final radius = (cardHeight * 0.15).clamp(25.0, 50.0);
 
     return Positioned(
-      top: 0, // Vertically center
+      top: 0,
       right: 0,
       child: Container(
         width: radius,
-        height: radius * 2, // Full diameter for vertical semicircle
+        height: radius * 2,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
@@ -108,7 +93,7 @@ class OrganizationCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
       boxShadow: [
         BoxShadow(
-          color: Colors.black.withOpacity(0.08),
+          color: Colors.black.withValues(alpha: 0.08),
           blurRadius: 8,
           offset: const Offset(0, 2),
         ),
@@ -276,7 +261,7 @@ class OrganizationCard extends StatelessWidget {
       style: TextStyle(
         fontSize: (cardWidth * 0.049).clamp(16.0, 20.0),
         color: const Color(0xFFFF6B6B),
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.bold,
       ),
     );
   }

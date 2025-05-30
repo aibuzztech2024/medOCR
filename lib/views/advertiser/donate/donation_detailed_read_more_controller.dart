@@ -37,9 +37,6 @@ class DonationCardReadMoreController extends GetxController {
     if (passedData != null) {
       // Convert DonationModel to DonationCardModel
       donationData = _convertToCardModel(passedData);
-    } else {
-      // Fallback to sample data if no arguments passed
-      _createFallbackData();
     }
   }
 
@@ -53,23 +50,6 @@ class DonationCardReadMoreController extends GetxController {
       category: donation.category ?? 'General',
       description: donation.description ?? '',
       websiteUrl: donation.websiteUrl ?? 'https://example.com/donate',
-    );
-  }
-
-  /// Create fallback sample data when no arguments are passed
-  void _createFallbackData() {
-    donationData = DonationCardModel(
-      imageUrl: _getDefaultImageUrl(),
-      title: 'Help Flood Victims',
-      subtitle: 'Urgent Aid Needed',
-      distance: '3 km away',
-      category: 'Disaster Relief',
-      description:
-          'Thousands of people have been displaced due to the recent floods. '
-          'Your donations will go towards food, shelter, and essential supplies. '
-          'Every contribution counts. We are working with local authorities to '
-          'ensure aid reaches those who need it most.',
-      websiteUrl: 'https://example.com/donate',
     );
   }
 
@@ -110,7 +90,7 @@ class DonationCardReadMoreController extends GetxController {
       isProcessingPayment.value = true;
 
       // Add debug print to verify method is called
-      print("🔥 handlePayment called - Starting navigation process");
+      print("handlePayment called - Starting navigation process");
 
       // Convert current DonationCardModel to DonationCardModel1 format
       final paymentData = DonationCardModel1(
@@ -123,7 +103,7 @@ class DonationCardReadMoreController extends GetxController {
         websiteUrl: donationData.websiteUrl,
       );
 
-      print("🔥 Payment data created: ${paymentData.title}");
+      print("Payment data created: ${paymentData.title}");
 
       // Navigate to payment screen with donation data as arguments
       await Get.to(
@@ -133,9 +113,9 @@ class DonationCardReadMoreController extends GetxController {
         duration: const Duration(milliseconds: 300),
       );
 
-      print("🔥 Navigation completed successfully");
+      print("Navigation completed successfully");
     } catch (e) {
-      print("🔥 Navigation error: ${e.toString()}");
+      print("Navigation error: ${e.toString()}");
       _showErrorSnackbar('Navigation error: ${e.toString()}');
     } finally {
       isProcessingPayment.value = false;
