@@ -1,12 +1,12 @@
 // =============================================================================
-// SIMPLE APPROACH - Pre-calculated Constants with GetX
+// FIXED APPROACH - Dynamic Layout with Proper Overflow Handling
 // =============================================================================
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:avatar/views/advertiser/donate/donation_model.dart';
 
-/// [VIEW] Organization card widget with clean constant-based dimensions
+/// [VIEW] Organization card widget with dynamic responsive design
 class OrganizationCard extends StatelessWidget {
   final DonationModel organization;
   final VoidCallback? onReadMore;
@@ -40,14 +40,25 @@ class OrganizationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _buildCard();
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return _buildCard(constraints);
+      },
+    );
   }
 
-  Widget _buildCard() {
-    // Simple dimension calculations using clean constants
-    final cardWidth = Get.width * 0.9104;
-    final cardHeight = Get.height * 0.1601;
-    final imageWidth = Get.width * 0.2488;
+  Widget _buildCard(BoxConstraints constraints) {
+    // Dynamic dimension calculations with better responsiveness
+    final screenWidth = Get.width;
+    final screenHeight = Get.height;
+
+    // More adaptive sizing based on available space
+    final cardWidth = (constraints.maxWidth > 0
+            ? constraints.maxWidth
+            : screenWidth * 0.9104)
+        .clamp(300.0, 500.0);
+    final cardHeight = (screenHeight * 0.16).clamp(120.0, 180.0);
+    final imageWidth = cardWidth * 0.27; // Adjusted ratio for better balance
 
     return Stack(
       children: [
@@ -68,7 +79,7 @@ class OrganizationCard extends StatelessWidget {
   }
 
   Widget _buildRightSideSemicircle(double cardWidth, double cardHeight) {
-    final radius = (cardHeight * 0.15).clamp(25.0, 50.0);
+    final radius = (cardHeight * 0.15).clamp(20.0, 40.0);
 
     return Positioned(
       top: 0,
@@ -91,13 +102,6 @@ class OrganizationCard extends StatelessWidget {
     return BoxDecoration(
       color: Colors.deepOrange.shade100,
       borderRadius: BorderRadius.circular(12),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.black.withValues(alpha: 0.08),
-          blurRadius: 8,
-          offset: const Offset(0, 2),
-        ),
-      ],
     );
   }
 
@@ -126,59 +130,54 @@ class OrganizationCard extends StatelessWidget {
     double cardHeight,
     double imageWidth,
   ) {
+    final contentWidth = cardWidth - imageWidth;
+
     return Expanded(
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: cardWidth * 0.035,
-          vertical: cardHeight * 0.08,
-        ),
+      child: Container(
+        padding: EdgeInsets.all(cardHeight * 0.08),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _buildTitleSection(cardWidth, cardHeight),
-            SizedBox(height: cardHeight * 0.02),
-            _buildLocationSection(cardWidth, cardHeight),
-            SizedBox(height: cardHeight * 0.02),
-            _buildActionSection(cardWidth, cardHeight),
+            _buildTitleSection(contentWidth, cardHeight),
+            _buildLocationSection(contentWidth, cardHeight),
+            _buildActionSection(contentWidth, cardHeight),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildTitleSection(double cardWidth, double cardHeight) {
-    return Expanded(
+  Widget _buildTitleSection(double contentWidth, double cardHeight) {
+    return Flexible(
       flex: 2,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Flexible(
-            child: Text(
-              organization.title,
-              style: TextStyle(
-                fontSize: (cardWidth * 0.038).clamp(12.0, 16.0),
-                fontWeight: FontWeight.w600,
-                color: const Color(0xFF2D3748),
-                height: 1.2,
-              ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
+          Text(
+            organization.title,
+            style: TextStyle(
+              fontSize: _getResponsiveFontSize(contentWidth, 16, 12, 18),
+              fontWeight: FontWeight.w600,
+              color: const Color(0xFF2D3748),
+              height: 1.2,
             ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
           if (organization.address != null) ...[
             SizedBox(height: cardHeight * 0.01),
-            Flexible(
-              child: Text(
-                organization.address!,
-                style: TextStyle(
-                  fontSize: (cardWidth * 0.033).clamp(10.0, 14.0),
-                  color: const Color(0xFF718096),
-                  fontWeight: FontWeight.w400,
-                  height: 1.1,
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+            Text(
+              organization.address!,
+              style: TextStyle(
+                fontSize: _getResponsiveFontSize(contentWidth, 14, 10, 16),
+                color: const Color(0xFF718096),
+                fontWeight: FontWeight.w400,
+                height: 1.1,
               ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ],
@@ -186,23 +185,22 @@ class OrganizationCard extends StatelessWidget {
     );
   }
 
-  Widget _buildLocationSection(double cardWidth, double cardHeight) {
-    return Container(
-      height: cardHeight * 0.15,
+  Widget _buildLocationSection(double contentWidth, double cardHeight) {
+    return Flexible(
       child: Row(
         children: [
           if (organization.distance != null) ...[
             Icon(
               Icons.location_on,
-              size: (cardWidth * 0.035).clamp(12.0, 16.0),
+              size: _getResponsiveFontSize(contentWidth, 14, 12, 16),
               color: const Color(0xFF718096),
             ),
-            SizedBox(width: cardWidth * 0.01),
+            SizedBox(width: contentWidth * 0.01),
             Flexible(
               child: Text(
                 organization.distance!,
                 style: TextStyle(
-                  fontSize: (cardWidth * 0.033).clamp(10.0, 14.0),
+                  fontSize: _getResponsiveFontSize(contentWidth, 12, 10, 14),
                   color: const Color(0xFF718096),
                   fontWeight: FontWeight.w400,
                 ),
@@ -213,7 +211,7 @@ class OrganizationCard extends StatelessWidget {
           if (organization.distance != null &&
               organization.category != null) ...[
             Container(
-              margin: EdgeInsets.symmetric(horizontal: cardWidth * 0.015),
+              margin: EdgeInsets.symmetric(horizontal: contentWidth * 0.02),
               width: 3,
               height: 3,
               decoration: const BoxDecoration(
@@ -227,7 +225,7 @@ class OrganizationCard extends StatelessWidget {
               child: Text(
                 organization.category!,
                 style: TextStyle(
-                  fontSize: (cardWidth * 0.033).clamp(10.0, 14.0),
+                  fontSize: _getResponsiveFontSize(contentWidth, 12, 10, 14),
                   color: const Color(0xFF718096),
                   fontWeight: FontWeight.w400,
                 ),
@@ -240,50 +238,56 @@ class OrganizationCard extends StatelessWidget {
     );
   }
 
-  Widget _buildActionSection(double cardWidth, double cardHeight) {
-    return Container(
-      height: cardHeight * 0.25,
-      child: Row(
-        children: [
-          _buildAmountDisplay(cardWidth),
-          _buildDivider(cardWidth, cardHeight),
-          _buildReadMoreButton(cardWidth),
-          const Spacer(),
-          _buildDonateButton(cardWidth, cardHeight),
-        ],
-      ),
+  Widget _buildActionSection(double contentWidth, double cardHeight) {
+    return Row(
+      children: [
+        // Amount and Read More section - takes available space
+        Expanded(
+          child: Row(
+            children: [
+              _buildAmountDisplay(contentWidth),
+              _buildDivider(contentWidth, cardHeight),
+              _buildReadMoreButton(contentWidth),
+            ],
+          ),
+        ),
+        // Fixed spacing
+        SizedBox(width: contentWidth * 0.02),
+        // Donate button - fixed size
+        _buildDonateButton(contentWidth, cardHeight),
+      ],
     );
   }
 
-  Widget _buildAmountDisplay(double cardWidth) {
+  Widget _buildAmountDisplay(double contentWidth) {
     return Text(
       organization.amount,
       style: TextStyle(
-        fontSize: (cardWidth * 0.049).clamp(16.0, 20.0),
+        fontSize: _getResponsiveFontSize(contentWidth, 18, 14, 20),
         color: const Color(0xFFFF6B6B),
         fontWeight: FontWeight.bold,
       ),
     );
   }
 
-  Widget _buildDivider(double cardWidth, double cardHeight) {
+  Widget _buildDivider(double contentWidth, double cardHeight) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: cardWidth * 0.02),
+      margin: EdgeInsets.symmetric(horizontal: contentWidth * 0.025),
       width: 1,
-      height: cardHeight * 0.15,
+      height: 16,
       color: const Color(0xFFFF6B6B),
     );
   }
 
-  Widget _buildReadMoreButton(double cardWidth) {
+  Widget _buildReadMoreButton(double contentWidth) {
     return GestureDetector(
       onTap: onReadMore,
       child: Text(
         'Read More',
         style: TextStyle(
           decoration: TextDecoration.underline,
-          decorationColor: Color(0xFFFF6B6B),
-          fontSize: (cardWidth * 0.033).clamp(10.0, 14.0),
+          decorationColor: const Color(0xFFFF6B6B),
+          fontSize: _getResponsiveFontSize(contentWidth, 12, 10, 14),
           color: const Color(0xFFFF6B6B),
           fontWeight: FontWeight.w400,
         ),
@@ -291,33 +295,47 @@ class OrganizationCard extends StatelessWidget {
     );
   }
 
-  Widget _buildDonateButton(double cardWidth, double cardHeight) {
+  Widget _buildDonateButton(double contentWidth, double cardHeight) {
     return GestureDetector(
       onTap: onDonate,
       child: Container(
+        // Fixed minimum size to prevent overflow
         constraints: BoxConstraints(
-          minHeight: cardHeight * 0.2,
-          maxHeight: cardHeight * 0.25,
+          minWidth: 70,
+          maxWidth: contentWidth * 0.35,
+          minHeight: 28,
+          maxHeight: 36,
         ),
-        padding: EdgeInsets.symmetric(
-          horizontal: cardWidth * 0.04,
-          vertical: cardHeight * 0.04,
-        ),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
           color: const Color(0xFFFF6B6B),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(8),
         ),
         child: Center(
-          child: Text(
-            'Donate Now',
-            style: TextStyle(
-              fontSize: (cardWidth * 0.038).clamp(12.0, 16.0),
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              'Donate Now',
+              style: TextStyle(
+                fontSize: _getResponsiveFontSize(contentWidth, 14, 11, 16),
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ),
       ),
     );
+  }
+
+  /// Helper method to calculate responsive font sizes
+  double _getResponsiveFontSize(
+    double width,
+    double baseSize,
+    double minSize,
+    double maxSize,
+  ) {
+    double scaleFactor = (width / 200).clamp(0.8, 1.4);
+    return (baseSize * scaleFactor).clamp(minSize, maxSize);
   }
 }

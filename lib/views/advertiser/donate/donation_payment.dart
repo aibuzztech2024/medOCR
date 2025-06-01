@@ -24,8 +24,6 @@ class DonationPaymentScreen extends StatelessWidget {
     // Use passed data or fallback to sample data
     final donation = passedDonation ?? _createFallbackDonation();
 
-    print("🔥 Payment screen received data: ${donation.title}");
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: _buildAppBar(donation.title), // Dynamic app bar title

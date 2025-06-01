@@ -107,7 +107,7 @@ class DonationPaymentCard extends StatelessWidget {
       // Large tablet: Fixed width but responsive
       return 400;
     } else {
-      // Desktop: Original fixed width
+      //Original fixed width
       return 366;
     }
   }
