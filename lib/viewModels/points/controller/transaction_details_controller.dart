@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import '../transaction_details_model.dart';
+import '../../../models/points/transaction_details_model.dart';
 
 class TransactionDetailsController extends GetxController {
   var transactionDetails = Rxn<TransactionDetailsModel>();
