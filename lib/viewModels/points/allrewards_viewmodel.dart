@@ -15,7 +15,8 @@ class AllRewardsViewModel {
     Reward(
       imageUrl: ImagePaths.featuredrewards,
       headerText: '25% Off Premium Supplements',
-      subheadingText: 'Free consultation included',
+      subheadingText:
+          'Complete health assessment including blood work, cardiac evaluation, and nutritionist consultation',
       lowerHeadingText: 'Redeemed',
       currentPoints: 80,
       totalPoints: 100,
@@ -24,7 +25,20 @@ class AllRewardsViewModel {
     Reward(
       imageUrl: ImagePaths.featuredrewards,
       headerText: 'Buy 1 Get 1 on Proteins',
-      subheadingText: 'Limited time offer',
+      subheadingText:
+          'Complete health assessment including blood work, cardiac evaluation, and nutritionist consultation',
+
+      lowerHeadingText: 'Redeemed',
+      currentPoints: 50,
+      totalPoints: 100,
+      couponCode: '#456abcd',
+    ),
+    Reward(
+      imageUrl: ImagePaths.featuredrewards,
+      headerText: 'Buy 1 Get 1 on Proteins',
+      subheadingText:
+          'Complete health assessment including blood work, cardiac evaluation, and nutritionist consultation',
+
       lowerHeadingText: 'Redeemed',
       currentPoints: 50,
       totalPoints: 100,
@@ -37,7 +51,9 @@ class AllRewardsViewModel {
     Reward(
       imageUrl: '',
       headerText: '₹500 Off Nutrition Products',
-      subheadingText: 'Only this weekend!',
+      subheadingText:
+          'Complete health assessment including\nblood work, cardiac evaluation, and\nnutritionist consultation',
+
       lowerHeadingText: 'Redeemed',
       currentPoints: 60,
       totalPoints: 100,
@@ -46,7 +62,20 @@ class AllRewardsViewModel {
     Reward(
       imageUrl: '',
       headerText: '15% Off Gym Membership',
-      subheadingText: 'Valid for new users',
+      subheadingText:
+          'Complete health assessment including\nblood work, cardiac evaluation, and\nnutritionist consultation',
+
+      lowerHeadingText: 'Redeemed',
+      currentPoints: 40,
+      totalPoints: 100,
+      couponCode: '#gym789',
+    ),
+    Reward(
+      imageUrl: '',
+      headerText: '15% Off Gym Membership',
+      subheadingText:
+          'Complete health assessment including\nblood work, cardiac evaluation, and\nnutritionist consultation',
+
       lowerHeadingText: 'Redeemed',
       currentPoints: 40,
       totalPoints: 100,

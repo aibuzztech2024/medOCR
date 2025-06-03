@@ -36,7 +36,6 @@ class Points extends StatelessWidget {
               //invite card widget
               InviteFriendsCard(
                 referralCode: vm.referralCode,
-                onInvitePressed: vm.onInvitePressed,
                 title: 'Invite Friends to Earn Points',
                 subtitle: 'invite & earn',
                 imagePath: ImagePaths.bestfriends,

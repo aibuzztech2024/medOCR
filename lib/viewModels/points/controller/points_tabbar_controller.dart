@@ -17,12 +17,13 @@ class PointsTabbarController extends GetxController {
       ].obs;
 
   // Tabs' content widgets
-  final List<Widget> tabContents = [
-    const Points(),
-    const Allrewards(),
-    Claimrewards(),
-    PointsHistory(),
-  ];
+  final RxList<Widget> tabContents =
+      <Widget>[
+        const Points(),
+        const Allrewards(),
+        Claimrewards(),
+        PointsHistory(),
+      ].obs;
 
   // TODO: Add reactive logic to update tab titles or contents if needed
 }

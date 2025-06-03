@@ -25,7 +25,7 @@ class RewardCardWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 18),
       child: SizedBox(
-        height: 220,
+        height: 184,
         width: double.infinity,
         child: Stack(
           children: [
@@ -54,26 +54,26 @@ class RewardCardWidget extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-
-                    const SizedBox(width: 2),
                   ],
                   // for text content
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          AppText.body(
+                          AppText.caption(
                             reward.headerText,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w700,
                           ),
 
-                          const SizedBox(height: 4),
-                          AppText.caption(reward.subheadingText),
+                          const SizedBox(height: 8),
+                          AppText.caption(
+                            reward.subheadingText,
+                            fontWeight: FontWeight.w400,
+                          ),
 
-                          const SizedBox(height: 6),
+                          const SizedBox(height: 8),
                           PointsProgressBar(
                             title: reward.lowerHeadingText,
                             currentPoints: reward.currentPoints,
@@ -88,7 +88,15 @@ class RewardCardWidget extends StatelessWidget {
                               Clipboard.setData(
                                 ClipboardData(text: reward.couponCode),
                               );
-                              Get.snackbar('Success', 'Coupon code copied!');
+                              Get.snackbar(
+                                'Success',
+                                'Code copied!',
+                                snackPosition: SnackPosition.BOTTOM, // or TOP
+                                duration: const Duration(seconds: 2),
+                                backgroundColor: Colors.black87,
+                                colorText: Colors.white,
+                                margin: const EdgeInsets.all(12),
+                              );
                             },
                           ),
                         ],

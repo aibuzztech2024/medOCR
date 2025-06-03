@@ -75,7 +75,7 @@ class AllrewardsTabbar extends StatelessWidget {
           onTap: () => controller.changeTab(index),
           borderRadius: BorderRadius.circular(8),
           child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
             margin: const EdgeInsets.all(4),
             decoration: BoxDecoration(
               color:
@@ -92,8 +92,8 @@ class AllrewardsTabbar extends StatelessWidget {
               style: TextStyle(
                 color:
                     isActive ? Colors.white : (inactiveColor ?? Colors.black87),
-                fontSize: 14,
-                fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
+                fontSize: 12,
+                fontWeight: isActive ? FontWeight.w600 : FontWeight.w600,
               ),
             ),
           ),

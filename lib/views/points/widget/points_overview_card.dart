@@ -20,8 +20,7 @@ class PointsOverviewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16),
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: LightThemeColors.scaffoldBackground,
@@ -32,8 +31,13 @@ class PointsOverviewCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              AppText.heading('Points Overview'),
-              Icon(Icons.tune, color: Colors.grey[600], size: 24),
+              AppText.heading('Points Overview', fontWeight: FontWeight.w700),
+              IconButton(
+                icon: const Icon(Icons.tune, color: Colors.black, size: 24),
+                onPressed: () {
+                  //TODO show info dialog or tooltip
+                },
+              ),
             ],
           ),
           const SizedBox(height: 20),

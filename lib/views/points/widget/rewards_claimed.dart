@@ -65,13 +65,19 @@ class RewardsClaimed extends StatelessWidget {
                     const SizedBox(height: 2),
                     AppText.body(
                       reward.subtitle,
-                      maxLines: 2,
+                      maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 5),
-                    AppText.caption('Claimed on: ${reward.claimedOn}'),
+                    FittedBox(
+                      child: AppText.caption('Claimed on: ${reward.claimedOn}'),
+                    ),
                     if (!isPointsHistory)
-                      AppText.caption('Expired on: ${reward.expiredOn}'),
+                      FittedBox(
+                        child: AppText.caption(
+                          'Expired on: ${reward.expiredOn}',
+                        ),
+                      ),
                   ],
                 ),
               ),

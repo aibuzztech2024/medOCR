@@ -1,6 +1,7 @@
 import 'package:avatar/core/constants/image_paths.dart';
 import 'package:avatar/core/themes/light/light_theme_colors.dart';
 import 'package:avatar/core/widgets/app_text.dart';
+import 'package:avatar/viewModels/points/controller/invite_friends_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -10,12 +11,10 @@ class InviteFriendsCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final String imagePath;
-  final VoidCallback? onInvitePressed;
 
   const InviteFriendsCard({
     super.key,
     required this.referralCode,
-    this.onInvitePressed,
     required this.title,
     required this.subtitle,
     required this.imagePath,
@@ -23,8 +22,9 @@ class InviteFriendsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = InviteFriendsController(context);
     return Container(
-      margin: const EdgeInsets.all(16),
+      margin: const EdgeInsets.all(18),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       decoration: BoxDecoration(
         color: LightThemeColors.inputFill,
@@ -41,14 +41,9 @@ class InviteFriendsCard extends StatelessWidget {
                     Expanded(child: AppText.heading(title)),
 
                     // copy text icon
-                    GestureDetector(
+                    InkWell(
                       //TODO chnage this function
-                      onTap: () {
-                        Clipboard.setData(ClipboardData(text: referralCode));
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Code copied!')),
-                        );
-                      },
+                      onTap: () => controller.copyReferralCode(referralCode),
                       child: Container(
                         height: 40,
                         width: 40,
@@ -75,7 +70,7 @@ class InviteFriendsCard extends StatelessWidget {
 
                 /// Invite & Earn + Image
                 GestureDetector(
-                  onTap: onInvitePressed,
+                  onTap: () => controller.shareReferral(referralCode),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

@@ -36,8 +36,8 @@ class PointsTabbarContainer extends StatelessWidget {
         // Reactively rebuild if tabTitles changes
         return ReusableTabbar(
           // Pass the controller's tab titles and contents to the ReusableTabbar
-          tabTitles: controller.tabTitles,
-          tabContents: controller.tabContents,
+          tabTitles: controller.tabTitles.toList(),
+          tabContents: controller.tabContents.toList(),
         );
       }),
     );

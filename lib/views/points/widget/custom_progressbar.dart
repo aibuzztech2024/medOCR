@@ -1,7 +1,8 @@
 import 'package:avatar/core/themes/light/light_theme_colors.dart';
+import 'package:avatar/core/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 
-// this is the progress bar which calcated the progress when used with points like 20/100 
+// this is the progress bar which calcated the progress when used with points like 20/100
 class PointsProgressBar extends StatelessWidget {
   final String title;
   final int currentPoints;
@@ -24,11 +25,14 @@ class PointsProgressBar extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(title, style: const TextStyle(fontWeight: FontWeight.w600)),
-            Text('$currentPoints/$totalPoints'),
+            AppText.body(title, fontWeight: FontWeight.w400),
+            AppText.caption(
+              '$currentPoints/$totalPoints',
+              fontWeight: FontWeight.w500,
+            ),
           ],
         ),
-        const SizedBox(height: 4),
+        const SizedBox(height: 8),
 
         // indicator
         LinearProgressIndicator(

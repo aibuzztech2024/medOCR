@@ -13,7 +13,7 @@ class BadgeTimeline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16),
+      margin: const EdgeInsets.symmetric(horizontal: 18),
       child: Column(
         children:
             badgeLevels.asMap().entries.map((entry) {
