@@ -44,13 +44,20 @@ class CustomSearchBar extends StatelessWidget {
     // Dynamic width calculation: 366/402 of screen width
     double dynamicWidth = width ?? Get.width * (366 / 402);
 
-    // Dynamic height calculation: 48/874 of screen height
+    // Dynamic height calculation: 48/874 of screen height with minimum height
     double dynamicHeight = height ?? Get.height * (48 / 874);
+    dynamicHeight = dynamicHeight.clamp(
+      44.0,
+      56.0,
+    ); // Ensure reasonable height range
+
+    // Calculate font size and icon size for better proportions
+    double fontSize = (dynamicHeight * 0.3).clamp(12.0, 16.0);
+    double iconSize = (dynamicHeight * 0.4).clamp(18.0, 24.0);
 
     return Container(
       width: dynamicWidth,
       height: dynamicHeight,
-      // Use provided padding or default to zero for external alignment control
       padding: padding ?? EdgeInsets.zero,
       child: Material(
         elevation: elevation,
@@ -64,49 +71,59 @@ class CustomSearchBar extends StatelessWidget {
               borderRadius: BorderRadius.circular(borderRadius),
             ),
             child: Row(
+              crossAxisAlignment:
+                  CrossAxisAlignment.center, // Ensure center alignment
               children: [
-                // Search Icon with consistent padding
-                Padding(
-                  padding: EdgeInsets.only(
-                    left: Get.width * 0.04,
-                    right: Get.width * 0.03,
-                  ),
-                  child: Icon(
-                    prefixIcon,
-                    color: prefixIconColor ?? const Color(0xFF757575),
-                    size: Get.textScaleFactor * 20.0,
+                // Search Icon with proper centering
+                Container(
+                  width:
+                      dynamicHeight, // Square container for perfect centering
+                  height: dynamicHeight,
+                  child: Center(
+                    child: Icon(
+                      prefixIcon,
+                      color: prefixIconColor ?? const Color(0xFF757575),
+                      size: iconSize,
+                    ),
                   ),
                 ),
 
                 // Text Field - expandable to fill remaining space
                 Expanded(
-                  child: TextField(
-                    controller: controller,
-                    onChanged: onChanged,
-                    onSubmitted: onSubmitted,
-                    readOnly: readOnly,
-                    style: TextStyle(
-                      fontSize: Get.textScaleFactor * 14.0,
-                      color: const Color(0xFF212121),
-                    ),
-                    decoration: InputDecoration(
-                      hintText: hintText,
-                      hintStyle:
-                          hintTextStyle ??
-                          TextStyle(
-                            color: hintTextColor ?? const Color(0xFF9E9E9E),
-                            fontSize: Get.textScaleFactor * 14.0,
-                            fontWeight: FontWeight.w400,
-                          ),
-                      // Remove all borders for clean appearance
-                      border: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                      focusedErrorBorder: InputBorder.none,
-                      // Vertical padding adjusted for dynamic height
-                      contentPadding: EdgeInsets.symmetric(
-                        vertical: dynamicHeight * 0.3,
+                  child: Container(
+                    height: dynamicHeight,
+                    alignment: Alignment.centerLeft,
+                    child: TextField(
+                      controller: controller,
+                      onChanged: onChanged,
+                      onSubmitted: onSubmitted,
+                      readOnly: readOnly,
+                      textAlignVertical: TextAlignVertical.center,
+                      style: TextStyle(
+                        fontSize: fontSize,
+                        color: const Color(0xFF212121),
+                        height:
+                            1.0, // Set line height to 1.0 for better alignment
+                      ),
+                      decoration: InputDecoration(
+                        hintText: hintText,
+                        hintStyle:
+                            hintTextStyle ??
+                            TextStyle(
+                              color: hintTextColor ?? const Color(0xFF9E9E9E),
+                              fontSize: fontSize,
+                              fontWeight: FontWeight.w400,
+                              height: 1.0, // Match text height
+                            ),
+                        // Remove all borders for clean appearance
+                        border: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        focusedErrorBorder: InputBorder.none,
+                        // Use isCollapsed to remove default padding
+                        isCollapsed: true,
+                        contentPadding: EdgeInsets.zero,
                       ),
                     ),
                   ),
@@ -122,18 +139,22 @@ class CustomSearchBar extends StatelessWidget {
                         return const SizedBox.shrink();
                       }
 
-                      return GestureDetector(
-                        onTap: () {
-                          // Clear text and notify listeners
-                          controller!.clear();
-                          onChanged?.call('');
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.only(right: Get.width * 0.04),
-                          child: Icon(
-                            Icons.clear,
-                            color: const Color(0xFF757575),
-                            size: Get.textScaleFactor * 18.0,
+                      return Container(
+                        width: dynamicHeight * 0.8, // Proportional width
+                        height: dynamicHeight,
+                        child: Center(
+                          child: GestureDetector(
+                            onTap: () {
+                              // Clear text and notify listeners
+                              controller!.clear();
+                              onChanged?.call('');
+                            },
+                            child: Icon(
+                              Icons.clear,
+                              color: const Color(0xFF757575),
+                              size:
+                                  iconSize * 0.9, // Slightly smaller clear icon
+                            ),
                           ),
                         ),
                       );

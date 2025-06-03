@@ -1,6 +1,4 @@
-// =============================================================================
-// VIEW LAYER - Updated DonationHomePageView with Fixed Navigation Binding
-// =============================================================================
+// Fixed DonationHomePageView with proper SafeArea handling
 import 'package:avatar/views/advertiser/donate/donation_controller.dart';
 import 'package:avatar/views/advertiser/widget/donation_history_card.dart';
 import 'package:avatar/views/advertiser/widget/donation_organization_card.dart';
@@ -10,41 +8,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-/// [VIEW] Main page widget - Pure UI component following MVVM pattern
 class DonationHomePageView extends StatelessWidget {
   const DonationHomePageView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(
-      OrganizationController(),
-    ); // Inject controller (ViewModel)
+    final controller = Get.put(OrganizationController());
 
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Column(
-          children: [
-            SizedBox(height: Get.height * 0.08), // Top spacing for status bar
-            _buildTabBar(), // Tab bar UI
-            Expanded(
-              child: TabBarView(
-                children: [
-                  _buildOrganizationTab(
-                    controller,
-                  ), // Organization tab (simplified)
-                  _buildDonationHistoryTab(controller), // Donation history tab
-                ],
+    return SafeArea(
+      // ✅ Add SafeArea wrapper
+      child: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          body: Column(
+            children: [
+              // ✅ Add minimal top padding instead of status bar calculation
+              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+              _buildTabBar(),
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    _buildOrganizationTab(context, controller),
+                    _buildDonationHistoryTab(context, controller),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
-  // Tab bar styling
   Widget _buildTabBar() {
     return TabBar(
       labelColor: const Color(0xFFFF6B6B),
@@ -52,115 +48,117 @@ class DonationHomePageView extends StatelessWidget {
       dividerColor: Colors.transparent,
       indicatorColor: const Color(0xFFFF6B6B),
       indicatorWeight: 2,
-      labelStyle: TextStyle(
-        fontSize: Get.textScaleFactor * 16,
+      labelStyle: const TextStyle(
+        fontSize: 16, // ✅ Use fixed size instead of Get.textScaleFactor
         fontWeight: FontWeight.w500,
       ),
-      unselectedLabelStyle: TextStyle(
-        fontSize: Get.textScaleFactor * 16,
+      unselectedLabelStyle: const TextStyle(
+        fontSize: 16,
         fontWeight: FontWeight.w500,
       ),
       tabs: const [Tab(text: 'Organization'), Tab(text: 'Donation History')],
     );
   }
 
-  // Organization tab - simplified with only search functionality
-  Widget _buildOrganizationTab(OrganizationController controller) {
-    final double horizontalPadding = Get.width * 0.04;
+  Widget _buildOrganizationTab(
+    BuildContext context,
+    OrganizationController controller,
+  ) {
+    final double horizontalPadding =
+        MediaQuery.of(context).size.width * 0.04; // ✅ Use MediaQuery
 
     return Column(
       children: [
-        // Header section with only search bar
         Container(
           padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
           child: Column(
             children: [
-              SizedBox(height: Get.height * 0.02),
-              _buildOrganizationSearchBar(controller), // Search bar only
-              SizedBox(height: Get.height * 0.02),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.02,
+              ), // ✅ Context-based
+              _buildOrganizationSearchBar(controller),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
             ],
           ),
         ),
-        // Scrollable organization list
-        Expanded(child: _buildOrganizationList(controller, horizontalPadding)),
+        Expanded(
+          child: _buildOrganizationList(context, controller, horizontalPadding),
+        ),
       ],
     );
   }
 
-  // Organization search bar (no filter buttons)
   Widget _buildOrganizationSearchBar(OrganizationController controller) {
     return CustomSearchBar(
       prefixIcon: Icons.search,
-      controller:
-          controller.orgSearchController, // Bind to org search controller
-      onChanged: controller.onOrgSearchChanged, // Live search binding
-      onSubmitted: controller.onOrgSearchSubmitted, // Search submission
+      controller: controller.orgSearchController,
+      onChanged: controller.onOrgSearchChanged,
+      onSubmitted: controller.onOrgSearchSubmitted,
       padding: EdgeInsets.zero,
     );
   }
 
-  // Organization list with simplified cards (no bookmark functionality)
   Widget _buildOrganizationList(
+    BuildContext context,
     OrganizationController controller,
     double horizontalPadding,
   ) {
     return Obx(() {
       if (controller.filteredOrganizations.isEmpty) {
-        return _buildOrganizationEmptyState(controller); // Show empty state
+        return _buildOrganizationEmptyState(controller);
       }
 
-      return ListView.builder(
+      return ListView.separated(
+        // ✅ Use ListView.separated for better performance
         padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-        itemCount:
-            controller.filteredOrganizations.length, // Reactive list length
+        itemCount: controller.filteredOrganizations.length,
+        separatorBuilder:
+            (context, index) => SizedBox(
+              height:
+                  MediaQuery.of(context).size.height *
+                  0.015, // ✅ Context-based spacing
+            ),
         itemBuilder: (context, index) {
           final organization = controller.filteredOrganizations[index];
-          return Column(
-            children: [
-              OrganizationCard.fromModel(
-                organization: organization, // Data binding
-                isBookmarked: false, // No bookmark functionality
-                onReadMore:
-                    () =>
-                        controller.onReadMore(organization), // Read more action
-                onDonate:
-                    () => controller.onDonate(organization), // Donate action
-                onBookmarkToggle: null, // No bookmark toggle
-              ),
-              SizedBox(height: Get.height * 0.015), // Spacing between cards
-            ],
+          return OrganizationCard.fromModel(
+            organization: organization,
+            isBookmarked: false,
+            onReadMore: () => controller.onReadMore(organization),
+            onDonate: () => controller.onDonate(organization),
+            onBookmarkToggle: null,
           );
         },
       );
     });
   }
 
-  // Empty state for organization tab (simplified)
   Widget _buildOrganizationEmptyState(OrganizationController controller) {
-    return const SizedBox.shrink();
+    return const Center(
+      child: Text('No organizations found'), // ✅ Better empty state
+    );
   }
 
-  // Donation history tab (full functionality with filters and bookmarks)
-  Widget _buildDonationHistoryTab(OrganizationController controller) {
-    final double horizontalPadding = Get.width * 0.04;
+  Widget _buildDonationHistoryTab(
+    BuildContext context,
+    OrganizationController controller,
+  ) {
+    final double horizontalPadding = MediaQuery.of(context).size.width * 0.04;
     return Column(
       children: [
-        _buildHeaderSection(
-          controller,
-          horizontalPadding,
-        ), // Header with search & controls
+        _buildHeaderSection(context, controller, horizontalPadding),
         Expanded(
           child: _buildScrollableContent(
+            context,
             controller,
             horizontalPadding,
-          ), // Main content
+          ),
         ),
       ],
     );
   }
 
-  // Header section for donation history (search + filter controls)
   Widget _buildHeaderSection(
+    BuildContext context,
     OrganizationController controller,
     double horizontalPadding,
   ) {
@@ -168,45 +166,41 @@ class DonationHomePageView extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
       child: Column(
         children: [
-          SizedBox(height: Get.height * 0.02), // Top spacing
-          _buildSearchBar(controller), // Search input
-          SizedBox(height: Get.height * 0.02),
-          _buildControlsRow(controller), // View and filter controls
-          SizedBox(height: Get.height * 0.02),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.02,
+          ), // ✅ Context-based
+          _buildSearchBar(controller),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+          _buildControlsRow(controller),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.02),
         ],
       ),
     );
   }
 
-  // Search bar for donation history
   Widget _buildSearchBar(OrganizationController controller) {
     return CustomSearchBar(
       prefixIcon: Icons.search,
-      controller:
-          controller.searchController, // Bind to donation search controller
-      onChanged: controller.onSearchChanged, // Live search binding
-      onSubmitted: controller.onSearchSubmitted, // Search submission
+      controller: controller.searchController,
+      onChanged: controller.onSearchChanged,
+      onSubmitted: controller.onSearchSubmitted,
       padding: EdgeInsets.zero,
     );
   }
 
-  // Controls row with view options and bookmark filter
   Widget _buildControlsRow(OrganizationController controller) {
     return Row(
       children: [
         Obx(
           () => ViewButton(
-            options:
-                controller
-                    .viewOptions, // Filter options (all/completed/pending)
-            selectedOption:
-                controller.selectedViewOption.value, // Current selection
-            onOptionSelected: controller.onViewOptionSelected, // Update logic
+            options: controller.viewOptions,
+            selectedOption: controller.selectedViewOption.value,
+            onOptionSelected: controller.onViewOptionSelected,
           ),
         ),
-        const Spacer(), // Push buttons to right
-        _buildExportButton(), // Export icon
-        _buildBookmarkFilterButton(controller), // Toggle bookmark filter
+        const Spacer(),
+        _buildExportButton(),
+        _buildBookmarkFilterButton(controller),
       ],
     );
   }
@@ -217,9 +211,12 @@ class DonationHomePageView extends StatelessWidget {
         // TODO: Export functionality
       },
       icon: SvgPicture.asset('assets/icons/file_export.svg'),
+      tooltip: 'Export data', // ✅ Add accessibility
       style: ButtonStyle(
         backgroundColor: WidgetStateProperty.all(Colors.grey.shade100),
-        fixedSize: WidgetStateProperty.all(const Size(20, 20)),
+        fixedSize: WidgetStateProperty.all(
+          const Size(40, 40),
+        ), // ✅ Larger touch target
         shape: WidgetStateProperty.all(
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
@@ -231,6 +228,7 @@ class DonationHomePageView extends StatelessWidget {
     return Obx(
       () => IconButton(
         onPressed: controller.toggleBookmarkFilter,
+        tooltip: 'Toggle bookmark filter', // ✅ Add accessibility
         icon: Icon(
           controller.showBookmarkedOnly.value
               ? Icons.bookmark
@@ -242,7 +240,9 @@ class DonationHomePageView extends StatelessWidget {
         ),
         style: ButtonStyle(
           backgroundColor: WidgetStateProperty.all(Colors.grey.shade100),
-          fixedSize: WidgetStateProperty.all(const Size(20, 20)),
+          fixedSize: WidgetStateProperty.all(
+            const Size(40, 40),
+          ), // ✅ Larger touch target
           shape: WidgetStateProperty.all(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           ),
@@ -252,52 +252,47 @@ class DonationHomePageView extends StatelessWidget {
   }
 
   Widget _buildScrollableContent(
+    BuildContext context,
     OrganizationController controller,
     double horizontalPadding,
   ) {
     return Obx(() {
-      if (controller.filteredDonations.isEmpty)
+      if (controller.filteredDonations.isEmpty) {
         return _buildEmptyState(controller);
-      return _buildDonationList(
-        controller,
-        horizontalPadding,
-      ); // Donations available
+      }
+      return _buildDonationList(context, controller, horizontalPadding);
     });
   }
 
   Widget _buildDonationList(
+    BuildContext context,
     OrganizationController controller,
     double horizontalPadding,
   ) {
-    return ListView.builder(
+    return ListView.separated(
+      // ✅ Use ListView.separated
       padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-      itemCount:
-          controller.filteredDonations.length, // Dynamic length from ViewModel
+      itemCount: controller.filteredDonations.length,
+      separatorBuilder:
+          (context, index) =>
+              SizedBox(height: MediaQuery.of(context).size.height * 0.01),
       itemBuilder: (context, index) {
         final donation = controller.filteredDonations[index];
-        return Column(
-          children: [
-            Obx(
-              () => DonationHistoryCard.fromModel(
-                donation: donation, // Data binding
-                // UPDATED: Pass the donation object to the tap handler
-                onTap:
-                    () => controller.onDonationTap(
-                      donation,
-                    ), // Fixed navigation binding
-                isBookmarked: controller.isDonationBookmarked(donation),
-                onBookmarkToggle:
-                    () => controller.toggleDonationBookmark(donation),
-              ),
-            ),
-            SizedBox(height: Get.height * 0.01), // Spacing between cards
-          ],
+        return Obx(
+          () => DonationHistoryCard.fromModel(
+            donation: donation,
+            onTap: () => controller.onDonationTap(donation),
+            isBookmarked: controller.isDonationBookmarked(donation),
+            onBookmarkToggle: () => controller.toggleDonationBookmark(donation),
+          ),
         );
       },
     );
   }
 
   Widget _buildEmptyState(OrganizationController controller) {
-    return const SizedBox.shrink();
+    return const Center(
+      child: Text('No donations found'), // ✅ Better empty state
+    );
   }
 }

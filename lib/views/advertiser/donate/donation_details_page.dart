@@ -1,10 +1,7 @@
-// =============================================================================
-// DONATION DETAIL PAGE - View Implementation
-// =============================================================================
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:avatar/views/advertiser/donate/donation_model.dart';
+import 'donation_detail_controller.dart';
 
 class DonationDetailView extends StatelessWidget {
   final DonationModel donation;
@@ -14,14 +11,16 @@ class DonationDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(DonationDetailController(donation: donation));
+
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: _buildAppBar(),
-      body: _buildBody(),
+      appBar: _buildAppBar(controller),
+      body: _buildBody(controller),
     );
   }
 
-  AppBar _buildAppBar() {
+  AppBar _buildAppBar(DonationDetailController controller) {
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 0,
@@ -38,10 +37,22 @@ class DonationDetailView extends StatelessWidget {
         ),
       ),
       centerTitle: true,
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.share_outlined, color: Colors.black),
+          onPressed: controller.handlePdfShare,
+        ),
+        const SizedBox(width: 8),
+        IconButton(
+          icon: const Icon(Icons.download, color: Colors.black),
+          onPressed: controller.handlePdfDownload,
+        ),
+        const SizedBox(width: 8),
+      ],
     );
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(DonationDetailController controller) {
     return Padding(
       padding: EdgeInsets.all(Get.width * 0.04),
       child: Column(
@@ -49,7 +60,7 @@ class DonationDetailView extends StatelessWidget {
         children: [
           _buildImageSection(),
           SizedBox(height: Get.height * 0.03),
-          _buildDetailsSection(),
+          _buildDetailsSection(controller),
           const Spacer(),
         ],
       ),
@@ -92,21 +103,34 @@ class DonationDetailView extends StatelessWidget {
     );
   }
 
-  Widget _buildDetailsSection() {
+  Widget _buildDetailsSection(DonationDetailController controller) {
     return Column(
       children: [
         _buildDetailRow('Post Name:', donation.title),
         SizedBox(height: Get.height * 0.025),
-        _buildDetailRow('Date & Time:', _formatDateTime(donation.dateTime)),
+        _buildDetailRow(
+          'Date & Time:',
+          controller.formatDateTime(donation.dateTime),
+        ),
         SizedBox(height: Get.height * 0.025),
         _buildDetailRow('Paid Donation:', donation.amount),
         SizedBox(height: Get.height * 0.025),
-        _buildDetailRow('Status:', donation.status, isStatus: true),
+        _buildDetailRow(
+          'Status:',
+          donation.status,
+          controller: controller,
+          isStatus: true,
+        ),
       ],
     );
   }
 
-  Widget _buildDetailRow(String label, String value, {bool isStatus = false}) {
+  Widget _buildDetailRow(
+    String label,
+    String value, {
+    DonationDetailController? controller,
+    bool isStatus = false,
+  }) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,7 +143,9 @@ class DonationDetailView extends StatelessWidget {
             color: Colors.black,
           ),
         ),
-        isStatus ? _buildStatusChip(value) : _buildValueText(value),
+        isStatus && controller != null
+            ? _buildStatusChip(value, controller)
+            : _buildValueText(value),
       ],
     );
   }
@@ -135,83 +161,23 @@ class DonationDetailView extends StatelessWidget {
     );
   }
 
-  Widget _buildStatusChip(String status) {
-    Color backgroundColor;
-    Color textColor;
-    String displayStatus = status;
-
-    // Convert "completed" to "successful" for display
-    if (status.toLowerCase() == 'completed') {
-      displayStatus = 'Successful';
-    }
-
-    switch (status.toLowerCase()) {
-      case 'completed':
-      case 'successful':
-        backgroundColor = Colors.green[100]!;
-        textColor = Colors.green[700]!;
-        break;
-      case 'pending':
-        backgroundColor = Colors.orange[100]!;
-        textColor = Colors.orange[700]!;
-        break;
-      default:
-        backgroundColor = Colors.grey[100]!;
-        textColor = Colors.grey[700]!;
-    }
+  Widget _buildStatusChip(String status, DonationDetailController controller) {
+    final statusProps = controller.getStatusProperties(status);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: backgroundColor,
+        color: statusProps['backgroundColor'],
         borderRadius: BorderRadius.circular(20),
       ),
       child: Text(
-        displayStatus,
+        statusProps['displayStatus'],
         style: TextStyle(
           fontSize: Get.textScaleFactor * 12,
           fontWeight: FontWeight.w600,
-          color: textColor,
+          color: statusProps['textColor'],
         ),
       ),
     );
-  }
-
-  String _formatDateTime(String dateTime) {
-    try {
-      // If the dateTime is already in the desired format, return as is
-      if (dateTime.contains('AM') || dateTime.contains('PM')) {
-        return dateTime;
-      }
-
-      // Otherwise, try to parse and format
-      final DateTime parsed = DateTime.parse(dateTime);
-      final String formattedDate =
-          '${parsed.day} ${_getMonthName(parsed.month)} ${parsed.year}';
-      final String formattedTime =
-          '${parsed.hour > 12 ? parsed.hour - 12 : parsed.hour}:${parsed.minute.toString().padLeft(2, '0')} ${parsed.hour >= 12 ? 'PM' : 'AM'}';
-      return '$formattedDate $formattedTime';
-    } catch (e) {
-      // If parsing fails, return the original string
-      return dateTime;
-    }
-  }
-
-  String _getMonthName(int month) {
-    const months = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ];
-    return months[month - 1];
   }
 }

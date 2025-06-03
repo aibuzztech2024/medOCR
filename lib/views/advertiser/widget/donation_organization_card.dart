@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:avatar/views/advertiser/donate/donation_model.dart';
+import 'package:avatar/core/widgets/app_button.dart';
 
 /// [VIEW] Organization card widget with dynamic responsive design
 class OrganizationCard extends StatelessWidget {
@@ -155,24 +156,27 @@ class OrganizationCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            organization.title,
-            style: TextStyle(
-              fontSize: _getResponsiveFontSize(contentWidth, 16, 12, 18),
-              fontWeight: FontWeight.w600,
-              color: const Color(0xFF2D3748),
-              height: 1.2,
+          // Use FittedBox to scale down long titles instead of wrapping
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerLeft,
+            child: Text(
+              organization.title,
+              style: Theme.of(Get.context!).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w600,
+                color: const Color(0xFF2D3748),
+                height: 1.2,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.visible,
             ),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
           ),
           if (organization.address != null) ...[
             SizedBox(height: cardHeight * 0.01),
             Text(
               organization.address!,
-              style: TextStyle(
-                fontSize: _getResponsiveFontSize(contentWidth, 14, 10, 16),
-                color: const Color(0xFF718096),
+              style: Theme.of(Get.context!).textTheme.bodySmall?.copyWith(
+                color: Colors.black,
                 fontWeight: FontWeight.w400,
                 height: 1.1,
               ),
@@ -192,15 +196,14 @@ class OrganizationCard extends StatelessWidget {
           if (organization.distance != null) ...[
             Icon(
               Icons.location_on,
-              size: _getResponsiveFontSize(contentWidth, 14, 12, 16),
+              size: Theme.of(Get.context!).textTheme.labelSmall?.fontSize ?? 10,
               color: const Color(0xFF718096),
             ),
             SizedBox(width: contentWidth * 0.01),
             Flexible(
               child: Text(
                 organization.distance!,
-                style: TextStyle(
-                  fontSize: _getResponsiveFontSize(contentWidth, 12, 10, 14),
+                style: Theme.of(Get.context!).textTheme.labelSmall?.copyWith(
                   color: const Color(0xFF718096),
                   fontWeight: FontWeight.w400,
                 ),
@@ -224,8 +227,7 @@ class OrganizationCard extends StatelessWidget {
             Flexible(
               child: Text(
                 organization.category!,
-                style: TextStyle(
-                  fontSize: _getResponsiveFontSize(contentWidth, 12, 10, 14),
+                style: Theme.of(Get.context!).textTheme.labelSmall?.copyWith(
                   color: const Color(0xFF718096),
                   fontWeight: FontWeight.w400,
                 ),
@@ -261,9 +263,8 @@ class OrganizationCard extends StatelessWidget {
 
   Widget _buildAmountDisplay(double contentWidth) {
     return Text(
-      organization.amount,
-      style: TextStyle(
-        fontSize: _getResponsiveFontSize(contentWidth, 18, 14, 20),
+      '₹${organization.amount}',
+      style: Theme.of(Get.context!).textTheme.titleLarge?.copyWith(
         color: const Color(0xFFFF6B6B),
         fontWeight: FontWeight.bold,
       ),
@@ -284,10 +285,9 @@ class OrganizationCard extends StatelessWidget {
       onTap: onReadMore,
       child: Text(
         'Read More',
-        style: TextStyle(
+        style: Theme.of(Get.context!).textTheme.bodySmall?.copyWith(
           decoration: TextDecoration.underline,
           decorationColor: const Color(0xFFFF6B6B),
-          fontSize: _getResponsiveFontSize(contentWidth, 12, 10, 14),
           color: const Color(0xFFFF6B6B),
           fontWeight: FontWeight.w400,
         ),
@@ -296,31 +296,22 @@ class OrganizationCard extends StatelessWidget {
   }
 
   Widget _buildDonateButton(double contentWidth, double cardHeight) {
-    return GestureDetector(
-      onTap: onDonate,
-      child: Container(
-        // Fixed minimum size to prevent overflow
-        constraints: BoxConstraints(
-          minWidth: 70,
-          maxWidth: contentWidth * 0.35,
-          minHeight: 28,
-          maxHeight: 36,
-        ),
+    return ConstrainedBox(
+      constraints: BoxConstraints(minWidth: 70, maxWidth: contentWidth * 0.35),
+      child: AppButton(
+        type: ButtonType.filled,
+        onPressed: onDonate,
+        color: const Color(0xFFFF6B6B),
+        height: 30,
+        borderRadius: 8,
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        decoration: BoxDecoration(
-          color: const Color(0xFFFF6B6B),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Center(
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Text(
-              'Donate Now',
-              style: TextStyle(
-                fontSize: _getResponsiveFontSize(contentWidth, 14, 11, 16),
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-              ),
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            'Donate Now',
+            style: Theme.of(Get.context!).textTheme.labelMedium?.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),

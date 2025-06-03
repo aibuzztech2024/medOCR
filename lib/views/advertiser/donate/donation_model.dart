@@ -1,8 +1,8 @@
 // =============================================================================
-// MODEL LAYER - Updated Data Models with Description Field
+// UPDATED MODEL LAYER - DonationModel with PDF Generation Fields
 // =============================================================================
 
-/// [MODEL] Represents a donation record or organization (extended with description)
+/// [MODEL] Represents a donation record with PDF generation support
 class DonationModel {
   final String? imageUrl; // Optional image URL
   final String title; // Donation/Organization title
@@ -18,6 +18,10 @@ class DonationModel {
   final String? description; // Description for donation card display
   final String? websiteUrl; // Website URL for donation card
 
+  // New fields for PDF generation
+  final String? postReferenceId; // Post reference ID for PDF
+  final String? uploadedBy; // Uploaded by username for PDF
+
   const DonationModel({
     this.imageUrl,
     required this.title,
@@ -30,6 +34,8 @@ class DonationModel {
     this.category,
     this.description,
     this.websiteUrl,
+    this.postReferenceId,
+    this.uploadedBy,
   });
 
   // JSON serialization
@@ -45,6 +51,8 @@ class DonationModel {
     category: json['category'] as String?,
     description: json['description'] as String?,
     websiteUrl: json['websiteUrl'] as String?,
+    postReferenceId: json['postReferenceId'] as String?,
+    uploadedBy: json['uploadedBy'] as String?,
   );
 
   Map<String, dynamic> toJson() => {
@@ -59,6 +67,8 @@ class DonationModel {
     'category': category,
     'description': description,
     'websiteUrl': websiteUrl,
+    'postReferenceId': postReferenceId,
+    'uploadedBy': uploadedBy,
   };
 
   // Create a new instance with updated fields
@@ -74,6 +84,8 @@ class DonationModel {
     String? category,
     String? description,
     String? websiteUrl,
+    String? postReferenceId,
+    String? uploadedBy,
   }) {
     return DonationModel(
       imageUrl: imageUrl ?? this.imageUrl,
@@ -87,21 +99,10 @@ class DonationModel {
       category: category ?? this.category,
       description: description ?? this.description,
       websiteUrl: websiteUrl ?? this.websiteUrl,
+      postReferenceId: postReferenceId ?? this.postReferenceId,
+      uploadedBy: uploadedBy ?? this.uploadedBy,
     );
   }
-
-  // // Convert to DonationCardModel for use with the donation card widget
-  // DonationCardModel toDonationCardModel() {
-  //   return DonationCardModel(
-  //     imageUrl: imageUrl ?? 'https://via.placeholder.com/400x200',
-  //     title: title,
-  //     subtitle: address ?? status,
-  //     distance: distance ?? '',
-  //     category: category ?? '',
-  //     description: description ?? 'No description available.',
-  //     websiteUrl: websiteUrl ?? '',
-  //   );
-  // }
 
   // Factory constructor for creating organization-specific instances
   factory DonationModel.organization({
@@ -113,6 +114,8 @@ class DonationModel {
     required String amount,
     required String description,
     String? websiteUrl,
+    String? postReferenceId,
+    String? uploadedBy,
     bool initialSaveState = false,
   }) => DonationModel(
     imageUrl: imageUrl,
@@ -126,6 +129,8 @@ class DonationModel {
     category: category,
     description: description,
     websiteUrl: websiteUrl,
+    postReferenceId: postReferenceId,
+    uploadedBy: uploadedBy,
   );
 
   // Factory constructor for creating donation history instances
@@ -136,6 +141,8 @@ class DonationModel {
     required String dateTime,
     required String amount,
     String? description,
+    String? postReferenceId,
+    String? uploadedBy,
     bool initialSaveState = false,
   }) => DonationModel(
     imageUrl: imageUrl,
@@ -145,11 +152,13 @@ class DonationModel {
     amount: amount,
     initialSaveState: initialSaveState,
     description: description,
+    postReferenceId: postReferenceId,
+    uploadedBy: uploadedBy,
   );
 
   @override
   String toString() =>
-      'DonationModel(imageUrl: $imageUrl, title: $title, status: $status, dateTime: $dateTime, amount: $amount, initialSaveState: $initialSaveState, address: $address, distance: $distance, category: $category, description: $description, websiteUrl: $websiteUrl)';
+      'DonationModel(imageUrl: $imageUrl, title: $title, status: $status, dateTime: $dateTime, amount: $amount, initialSaveState: $initialSaveState, address: $address, distance: $distance, category: $category, description: $description, websiteUrl: $websiteUrl, postReferenceId: $postReferenceId, uploadedBy: $uploadedBy)';
 
   @override
   bool operator ==(Object other) =>
@@ -165,7 +174,9 @@ class DonationModel {
           other.distance == distance &&
           other.category == category &&
           other.description == description &&
-          other.websiteUrl == websiteUrl);
+          other.websiteUrl == websiteUrl &&
+          other.postReferenceId == postReferenceId &&
+          other.uploadedBy == uploadedBy);
 
   @override
   int get hashCode =>
@@ -179,7 +190,9 @@ class DonationModel {
       distance.hashCode ^
       category.hashCode ^
       description.hashCode ^
-      websiteUrl.hashCode;
+      websiteUrl.hashCode ^
+      postReferenceId.hashCode ^
+      uploadedBy.hashCode;
 }
 
 // =============================================================================
@@ -195,14 +208,16 @@ class DonationData {
       title: 'Bharat Seva Mandal',
       status: 'Completed',
       dateTime: '20 Mar 2025 10:30 AM',
-      amount: '₹100',
+      amount: '100',
       initialSaveState: false,
       address: 'Behind Zenith Hospital Malad East',
       distance: '0.8 Miles away',
       category: 'Indian Poverty',
       description:
-          'Bharat Seva Mandal is dedicated to alleviating poverty in rural and urban India through sustainable development programs. We focus on providing education, healthcare, and livelihood opportunities to underprivileged communities. Our mission is to create lasting change by empowering individuals and families to break the cycle of poverty.',
+          'Bharat Seva Mandal is dedicated to alleviating poverty in rural and urban India through sustainable development programs.',
       websiteUrl: 'https://bharatsevamandal.org',
+      postReferenceId: 'AVTR203245',
+      uploadedBy: '@username123',
     ),
     const DonationModel(
       imageUrl:
@@ -210,14 +225,16 @@ class DonationData {
       title: 'Child Education Fund',
       status: 'Pending',
       dateTime: '18 Mar 2025 2:15 PM',
-      amount: '₹250',
+      amount: '250',
       initialSaveState: false,
       address: 'Andheri West, Mumbai',
       distance: '1.2 Miles away',
       category: 'Child Education',
       description:
-          'The Child Education Fund works tirelessly to ensure every child has access to quality education. We provide scholarships, learning materials, and infrastructure support to schools in underserved areas. Our programs focus on early childhood development, primary education, and skill development for adolescents.',
+          'The Child Education Fund works tirelessly to ensure every child has access to quality education.',
       websiteUrl: 'https://childeducationfund.org',
+      postReferenceId: 'AVTR203246',
+      uploadedBy: '@education_helper',
     ),
     const DonationModel(
       imageUrl:
@@ -225,14 +242,16 @@ class DonationData {
       title: 'Healthcare Initiative',
       status: 'Completed',
       dateTime: '15 Mar 2025 11:45 AM',
-      amount: '₹500',
+      amount: '500',
       initialSaveState: false,
       address: 'Bandra East, Mumbai',
       distance: '2.1 Miles away',
       category: 'Healthcare',
       description:
-          'Our Healthcare Initiative provides essential medical services to communities lacking access to quality healthcare. We operate mobile clinics, conduct health awareness programs, and support local healthcare infrastructure. Our focus areas include maternal health, child nutrition, and preventive care.',
+          'Our Healthcare Initiative provides essential medical services to communities lacking access to quality healthcare.',
       websiteUrl: 'https://healthcareinitiative.org',
+      postReferenceId: 'AVTR203247',
+      uploadedBy: '@health_support',
     ),
     const DonationModel(
       imageUrl:
@@ -240,14 +259,16 @@ class DonationData {
       title: 'Community Development',
       status: 'Completed',
       dateTime: '12 Mar 2025 9:20 AM',
-      amount: '₹150',
+      amount: '150',
       initialSaveState: false,
       address: 'Powai, Mumbai',
       distance: '3.5 Miles away',
       category: 'Community Support',
       description:
-          'Community Development programs aim to strengthen local communities through participatory development approaches. We support infrastructure projects, skill development workshops, and community organizing initiatives. Our goal is to build resilient communities that can sustain long-term growth and development.',
+          'Community Development programs aim to strengthen local communities through participatory development approaches.',
       websiteUrl: 'https://communitydev.org',
+      postReferenceId: 'AVTR203248',
+      uploadedBy: '@community_aid',
     ),
     const DonationModel(
       imageUrl:
@@ -255,14 +276,16 @@ class DonationData {
       title: 'Food Distribution Drive',
       status: 'Pending',
       dateTime: '10 Mar 2025 3:45 PM',
-      amount: '₹300',
+      amount: '300',
       initialSaveState: false,
       address: 'Kurla West, Mumbai',
       distance: '1.8 Miles away',
       category: 'Food Security',
       description:
-          'Our Food Distribution Drive addresses hunger and malnutrition in vulnerable communities. We organize regular food distribution events, support community kitchens, and promote sustainable agriculture practices. Every donation helps us provide nutritious meals to families in need.',
+          'Our Food Distribution Drive addresses hunger and malnutrition in vulnerable communities.',
       websiteUrl: 'https://foodsecurity.org',
+      postReferenceId: 'AVTR203249',
+      uploadedBy: '@food_volunteer',
     ),
     const DonationModel(
       imageUrl:
@@ -270,14 +293,16 @@ class DonationData {
       title: 'Disaster Relief Fund',
       status: 'Completed',
       dateTime: '8 Mar 2025 1:20 PM',
-      amount: '₹750',
+      amount: '750',
       initialSaveState: false,
       address: 'Chembur, Mumbai',
       distance: '4.2 Miles away',
       category: 'Emergency Relief',
       description:
-          'The Disaster Relief Fund provides immediate assistance to communities affected by natural disasters and emergencies. We supply emergency shelter, food, water, and medical aid. Our rapid response teams are trained to provide critical support during crisis situations.',
+          'The Disaster Relief Fund provides immediate assistance to communities affected by natural disasters and emergencies.',
       websiteUrl: 'https://disasterrelief.org',
+      postReferenceId: 'AVTR203250',
+      uploadedBy: '@disaster_response',
     ),
     const DonationModel(
       imageUrl:
@@ -285,14 +310,16 @@ class DonationData {
       title: 'Education Support Program',
       status: 'Pending',
       dateTime: '5 Mar 2025 4:30 PM',
-      amount: '₹200',
+      amount: '200',
       initialSaveState: false,
       address: 'Dadar West, Mumbai',
       distance: '2.7 Miles away',
       category: 'Education',
       description:
-          'The Education Support Program focuses on improving educational outcomes through comprehensive support systems. We provide teacher training, educational resources, and technology access to schools. Our programs also include mentorship and counseling services for students.',
+          'The Education Support Program focuses on improving educational outcomes through comprehensive support systems.',
       websiteUrl: 'https://educationsupport.org',
+      postReferenceId: 'AVTR203251',
+      uploadedBy: '@edu_support',
     ),
   ];
 
