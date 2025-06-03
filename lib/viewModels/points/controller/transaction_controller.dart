@@ -1,3 +1,4 @@
+import 'package:avatar/core/widgets/divider_with_text.dart';
 import 'package:avatar/models/points/transaction_model.dart';
 import 'package:get/get.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -110,11 +111,7 @@ class TransactionController extends GetxController {
               pw.Container(
                 width: double.infinity,
                 padding: const pw.EdgeInsets.only(bottom: 20),
-                decoration: const pw.BoxDecoration(
-                  border: pw.Border(
-                    bottom: pw.BorderSide(color: PdfColors.grey300, width: 1),
-                  ),
-                ),
+
                 child: pw.Text(
                   'Transaction Details',
                   style: pw.TextStyle(
@@ -146,11 +143,7 @@ class TransactionController extends GetxController {
               // Transaction Details
               pw.Container(
                 padding: const pw.EdgeInsets.all(16),
-                decoration: pw.BoxDecoration(
-                  color: PdfColors.grey50,
-                  borderRadius: pw.BorderRadius.circular(8),
-                  border: pw.Border.all(color: PdfColors.grey200),
-                ),
+                decoration: pw.BoxDecoration(color: PdfColors.white),
                 child: pw.Column(
                   children: [
                     buildPdfRow('File Type', transaction.fileType),
@@ -186,7 +179,17 @@ class TransactionController extends GetxController {
                         buildStatusChip(getStatusText(transaction.status)),
                       ],
                     ),
-
+                    pw.SizedBox(height: 12),
+                    pw.Row(
+                      children: [
+                        pw.Expanded(
+                          child: pw.Divider(
+                            color: PdfColors.grey300,
+                            thickness: 1,
+                          ),
+                        ),
+                      ],
+                    ),
                     pw.SizedBox(height: 12),
                     buildPdfRow(
                       'Post Refrence ID',
@@ -204,6 +207,16 @@ class TransactionController extends GetxController {
                     ),
 
                     pw.SizedBox(height: 12),
+                    pw.Row(
+                      children: [
+                        pw.Expanded(
+                          child: pw.Divider(
+                            color: PdfColors.grey300,
+                            thickness: 1,
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
@@ -214,11 +227,7 @@ class TransactionController extends GetxController {
               pw.Container(
                 width: double.infinity,
                 padding: const pw.EdgeInsets.only(top: 20),
-                decoration: const pw.BoxDecoration(
-                  border: pw.Border(
-                    top: pw.BorderSide(color: PdfColors.grey300, width: 1),
-                  ),
-                ),
+
                 child: pw.Text(
                   '*This is a system-generated document.*',
                   style: const pw.TextStyle(
