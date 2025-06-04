@@ -1,12 +1,14 @@
 import 'package:avatar/core/themes/light/light_theme_data.dart';
-import 'package:avatar/views/map/map_scree_view.dart';
+import 'package:avatar/viewModels/map/bottom_nav_controller.dart';
+import 'package:avatar/views/map/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get.dart';
 
 /// This is the starting point of the application
 void main() {
   // Ensure that the Flutter engine is initialized before running the app
   WidgetsFlutterBinding.ensureInitialized();
+  Get.put(BottomNavController());
   // Run the application with the MyApp widget
   runApp(const MyApp());
 }
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
       // If user is logged in, navigate to home page
       // If user is not logged in, navigate to select role page
       //home: SelectRoleView(),
-      home: MapScree(),
+      home: BottomNavBar(),
     );
   }
 }
