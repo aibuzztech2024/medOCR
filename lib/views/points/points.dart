@@ -6,6 +6,7 @@ import 'package:avatar/views/points/widget/how_to_earn_section.dart';
 import 'package:avatar/views/points/widget/invite_friends_card.dart';
 import 'package:avatar/views/points/widget/points_overview_card.dart';
 import 'package:flutter/material.dart';
+import 'package:get/utils.dart';
 
 // this is the Points screen
 class Points extends StatelessWidget {
@@ -27,7 +28,7 @@ class Points extends StatelessWidget {
         );
 
     return Scaffold(
-      backgroundColor: LightThemeColors.scaffoldBackground,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

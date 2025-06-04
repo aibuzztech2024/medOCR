@@ -1,9 +1,7 @@
-import 'package:avatar/core/constants/image_paths.dart';
 import 'package:avatar/core/themes/light/light_theme_colors.dart';
 import 'package:avatar/core/widgets/app_text.dart';
 import 'package:avatar/viewModels/points/controller/invite_friends_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 // this is the innvite friends card used in points screen
 class InviteFriendsCard extends StatelessWidget {

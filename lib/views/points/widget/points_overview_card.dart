@@ -3,6 +3,7 @@ import 'package:avatar/core/widgets/app_text.dart';
 import 'package:avatar/views/points/widget/line_chart_painter.dart'
     show LineChartPainter;
 import 'package:flutter/material.dart';
+import 'package:get/utils.dart';
 
 // this is the points calculator card in points screen below the graph
 class PointsOverviewCard extends StatelessWidget {
@@ -23,7 +24,7 @@ class PointsOverviewCard extends StatelessWidget {
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: LightThemeColors.scaffoldBackground,
+        color: context.theme.scaffoldBackgroundColor,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

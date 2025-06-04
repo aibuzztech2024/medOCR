@@ -19,7 +19,7 @@ class PointsTabbarContainer extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Points'),
         centerTitle: true,
-        backgroundColor: LightThemeColors.scaffoldBackground,
+        backgroundColor: context.theme.scaffoldBackgroundColor,
 
         // Remove this it is just for showing the transaction screen
         // If you want to navigate to the transaction screen, you can keep this
