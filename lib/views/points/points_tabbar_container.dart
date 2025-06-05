@@ -1,5 +1,6 @@
 import 'package:avatar/core/utils/methods/navigate_to.dart';
 import 'package:avatar/viewModels/points/controller/points_tabbar_controller.dart';
+import 'package:avatar/views/chart/chart_screen.dart';
 import 'package:avatar/views/earnings/earnings_screen.dart';
 import 'package:avatar/views/points/transaction_screen.dart';
 import 'package:avatar/views/points/widget/reusable_tabbar.dart';
@@ -20,9 +21,15 @@ class PointsTabbarContainer extends StatelessWidget {
         centerTitle: true,
         backgroundColor: context.theme.scaffoldBackgroundColor,
 
-        // Remove this it is just for showing the transaction screen
-        // If you want to navigate to the transaction screen, you can keep this
+        //TODO Remove this iconButtons it is just for showing the different screen
+     
         actions: [
+          IconButton(
+            icon: const Icon(Icons.bar_chart, color: Colors.green),
+            onPressed: () {
+              navigateTo(() => ChartScreen());
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.paid_outlined, color: Color(0xFFF79E1B)),
             onPressed: () {
