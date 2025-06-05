@@ -8,8 +8,9 @@ class DonationAmountInput extends StatelessWidget {
   final TextEditingController amountController;
   final String title;
   final String hintText;
-  final String minAmountText;
   final String feeText;
+  final double initialAmount;
+  final double minAmount; // Add minimum amount parameter
 
   const DonationAmountInput({
     Key? key,
@@ -17,18 +18,42 @@ class DonationAmountInput extends StatelessWidget {
     required this.amountController,
     this.title = 'Donation Amount',
     this.hintText = 'Enter Amount for Donation',
-    this.minAmountText = 'Min. ₹100',
     this.feeText = 'Platform Fee 2%',
+    this.initialAmount = 0.0,
+    this.minAmount = 100.0, // Default minimum amount
   }) : super(key: key);
+
+  // Validator function
+  String? _validateAmount(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter an amount';
+    }
+
+    final amount = double.tryParse(value);
+    if (amount == null) {
+      return 'Please enter a valid amount';
+    }
+
+    if (amount < minAmount) {
+      return 'Minimum amount is ₹${minAmount.toStringAsFixed(0)}';
+    }
+
+    return null; // No error
+  }
 
   @override
   Widget build(BuildContext context) {
+    // Initialize the amount with the organization's amount
+    if (initialAmount > 0) {
+      donationAmount.value = initialAmount;
+      amountController.text = initialAmount.toStringAsFixed(0);
+    }
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(height: Get.height * 0.02),
-
         // Title
         Text(
           title,
@@ -39,7 +64,6 @@ class DonationAmountInput extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 16),
-
         // Amount display
         Obx(
           () => Text(
@@ -52,10 +76,9 @@ class DonationAmountInput extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-
         // Min amount and fee info
         Text(
-          '$minAmountText\n$feeText',
+          'Min. ₹${donationAmount.value.toStringAsFixed(0)}\n$feeText',
           textAlign: TextAlign.center,
           style: const TextStyle(
             fontSize: 14,
@@ -64,12 +87,20 @@ class DonationAmountInput extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 16),
-
-        // Amount input field
-        TextField(
+        // Amount input field with validation
+        TextFormField(
           controller: amountController,
           keyboardType: TextInputType.number,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          validator: _validateAmount,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          onChanged: (value) {
+            // Update donation amount as user types
+            final amount = double.tryParse(value);
+            if (amount != null && amount >= minAmount) {
+              donationAmount.value = amount;
+            }
+          },
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 16),
@@ -86,6 +117,14 @@ class DonationAmountInput extends StatelessWidget {
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: const BorderSide(color: Colors.black, width: 1.5),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: const BorderSide(color: Colors.red, width: 1.5),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: const BorderSide(color: Colors.red, width: 1.5),
             ),
           ),
           style: const TextStyle(fontSize: 16, color: Color(0xFF2D3748)),

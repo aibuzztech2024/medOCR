@@ -27,6 +27,7 @@ dependencies:
   printing: ^5.14.2
   http: ^1.4.0
   permission_handler: ^11.3.0 # For handling Android permissions
+  country_code_picker: ^3.3.0
   
 
 dev_dependencies:

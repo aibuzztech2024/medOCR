@@ -39,8 +39,9 @@ class PaymentOptionCard extends StatelessWidget {
                   child: Text(
                     method,
                     style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       color: Color(0xFF2D3748),
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
@@ -50,7 +51,7 @@ class PaymentOptionCard extends StatelessWidget {
           ),
         ),
         if (showDivider)
-          Container(height: 1, color: borderColor.withOpacity(0.2)),
+          Container(height: 1, color: borderColor.withValues(alpha: 0.2)),
       ],
     );
   }
@@ -90,7 +91,11 @@ class UPIPaymentOption extends StatelessWidget {
             const SizedBox(width: 12),
             Text(
               method,
-              style: const TextStyle(fontSize: 16, color: Color(0xFF2D3748)),
+              style: const TextStyle(
+                fontSize: 14,
+                color: Color(0xFF2D3748),
+                fontWeight: FontWeight.w600,
+              ),
             ),
             const Spacer(), // Add const here
             SvgPicture.asset("assets/icons/upi.svg"),

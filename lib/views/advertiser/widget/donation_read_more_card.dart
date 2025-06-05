@@ -203,10 +203,7 @@ class DonationReadMoreCard extends StatelessWidget {
                         flex: 1,
                         child: AppButton(
                           type: ButtonType.filled,
-                          text:
-                              controller.isProcessingPayment.value
-                                  ? 'Processing...'
-                                  : 'Pay',
+                          text: 'Pay',
                           onPressed: () => controller.handlePayment(),
                           width: null,
                           height: 30,

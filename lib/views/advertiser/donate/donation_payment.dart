@@ -39,6 +39,8 @@ class DonationPaymentScreen extends StatelessWidget {
             DonationAmountInput(
               donationAmount: controller.ngoAmount,
               amountController: controller.amountController,
+              initialAmount:
+                  double.tryParse(donation.amount.replaceAll('₹', '')) ?? 0.0,
             ),
             const SizedBox(height: 24),
 
@@ -251,6 +253,7 @@ class DonationPaymentScreen extends StatelessWidget {
       description:
           'Complete sux health assessment including blood work, cardiac evaluation, and nutritionist consultation',
       websiteUrl: 'https://example.com',
+      amount: '100',
     );
   }
 }

@@ -110,7 +110,10 @@ class DonationHomePageView extends StatelessWidget {
 
       return ListView.separated(
         // ✅ Use ListView.separated for better performance
-        padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+        padding: EdgeInsets.symmetric(
+          horizontal: horizontalPadding,
+          vertical: MediaQuery.of(context).size.height * 0.02,
+        ),
         itemCount: controller.filteredOrganizations.length,
         separatorBuilder:
             (context, index) => SizedBox(
@@ -271,7 +274,10 @@ class DonationHomePageView extends StatelessWidget {
   ) {
     return ListView.separated(
       // ✅ Use ListView.separated
-      padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+      padding: EdgeInsets.symmetric(
+        horizontal: horizontalPadding,
+        vertical: MediaQuery.of(context).size.height * 0.02,
+      ),
       itemCount: controller.filteredDonations.length,
       separatorBuilder:
           (context, index) =>

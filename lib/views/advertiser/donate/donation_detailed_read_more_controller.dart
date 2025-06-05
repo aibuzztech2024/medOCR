@@ -101,6 +101,7 @@ class DonationCardReadMoreController extends GetxController {
         category: donationData.category,
         description: donationData.description,
         websiteUrl: donationData.websiteUrl,
+        amount: (Get.arguments as DonationModel).amount,
       );
 
       print("Payment data created: ${paymentData.title}");
@@ -175,6 +176,7 @@ class DonationCardModel1 {
   final String category;
   final String description;
   final String websiteUrl;
+  final String amount;
 
   DonationCardModel1({
     required this.imageUrl,
@@ -184,5 +186,6 @@ class DonationCardModel1 {
     required this.category,
     required this.description,
     required this.websiteUrl,
+    required this.amount,
   });
 }

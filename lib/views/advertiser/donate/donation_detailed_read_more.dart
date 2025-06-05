@@ -35,28 +35,7 @@ class DonationCardReadMorePage extends StatelessWidget {
             children: [
               // Main donation read more card
               DonationReadMoreCard(data: controller.currentDonation),
-
               const SizedBox(height: 20),
-
-              // Optional: Loading indicator for async operations
-              Obx(() {
-                if (controller.isAnyLoading) {
-                  return Container(
-                    margin: const EdgeInsets.only(top: 16),
-                    child: const Column(
-                      children: [
-                        CircularProgressIndicator(color: Color(0xFFFF6B6B)),
-                        SizedBox(height: 8),
-                        Text(
-                          'Processing...',
-                          style: TextStyle(color: Colors.grey, fontSize: 14),
-                        ),
-                      ],
-                    ),
-                  );
-                }
-                return const SizedBox.shrink();
-              }),
             ],
           ),
         ),
