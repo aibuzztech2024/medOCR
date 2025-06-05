@@ -77,12 +77,32 @@ class MultiLineChartWidget extends StatelessWidget {
                       showTitles: true,
                       reservedSize: 30,
                       getTitlesWidget: (value, meta) {
-                        if (value == 0) return const Text('1 Apr');
-                        if (value == 6) return const Text('30 Apr');
+                        if (value == 0) {
+                          return SizedBox(
+                            width: 50,
+                            child: const Text(
+                              '1 Apr',
+                              textAlign: TextAlign.center,
+                            ),
+                          );
+                        }
+                        if (value == 6) {
+                          return Transform.translate(
+                            offset: const Offset(-15, 0),
+                            child: SizedBox(
+                              width: 50,
+                              child: const Text(
+                                '30 Apr',
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          );
+                        }
                         return const Text('');
                       },
                     ),
                   ),
+
                   // Hide right and top axis titles
                   rightTitles: const AxisTitles(
                     sideTitles: SideTitles(showTitles: false),
