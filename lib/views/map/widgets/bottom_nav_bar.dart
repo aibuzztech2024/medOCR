@@ -4,15 +4,13 @@ import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
 import '../../../viewModels/map/bottom_nav_controller.dart';
+import 'referral_card_widget.dart';
 
 /// Main navigation with Home, Map, Post, Purchase, and Profile tabs
 
 class BottomNavBar extends StatelessWidget {
   final BottomNavController navController = Get.put(BottomNavController());
 
-  // TODO: Replace placeholder screens with actual content
-
-  // Custom SVG icon that changes color based on state
   Widget _buildSvgIcon(String assetPath, bool isSelected) {
     return SvgPicture.asset(
       assetPath,
@@ -24,6 +22,9 @@ class BottomNavBar extends StatelessWidget {
     );
   }
 
+  // TODO: Replace placeholder screens with actual content
+
+  // Custom SVG icon that changes color based on state
   // Define data for each tab
   final List<Map<String, dynamic>> _tabData = [
     {
@@ -49,22 +50,12 @@ class BottomNavBar extends StatelessWidget {
     {
       'icon': 'assets/icons/upload.svg',
       'title': "Post",
-      'screen': Center(
-        child: Text(
-          "Post",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-      ),
+      'screen': Center(child: Text("Post")),
     },
     {
       'icon': 'assets/icons/purchase.svg',
       'title': "Purchase",
-      'screen': Center(
-        child: Text(
-          "Purchase",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-      ),
+      'screen': Center(child: ReferralCard()),
     },
     {
       'icon': CircleAvatar(
