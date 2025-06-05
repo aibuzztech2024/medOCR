@@ -1,85 +1,82 @@
+import 'package:avatar/core/widgets/app_text.dart';
 import 'package:avatar/models/earnings/badge_model.dart';
 import 'package:flutter/material.dart';
 
+/// A card widget that displays a list of badges explaining
+/// how users can earn points (e.g., completing tasks, purchases).
 class BadgeCardWidget extends StatelessWidget {
   final List<BadgeModel> badges;
 
-  const BadgeCardWidget({
-    super.key,
-    required this.badges,
-  });
+  const BadgeCardWidget({super.key, required this.badges});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF8F8EE),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 8,
-            offset: const Offset(0, 2),
+            color: Colors.black.withOpacity(0.1),
+            offset: const Offset(4, 4),
+            blurRadius: 10,
+            spreadRadius: 4,
           ),
         ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          // Section Title
+          AppText.heading(
             'How to earn points',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
-            ),
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
           ),
+
           const SizedBox(height: 16),
+
+          // Generate badge rows from the list
           ...badges.map((badge) => _buildBadgeItem(badge)).toList(),
         ],
       ),
     );
   }
 
+  /// Builds individual badge info rows
   Widget _buildBadgeItem(BadgeModel badge) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Badge Title and Description
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                AppText.heading(
                   badge.name,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFFFF8C00),
-                  ),
+                  fontWeight: FontWeight.w600,
+                  color: const Color(0xFFF79E1B),
                 ),
                 const SizedBox(height: 4),
-                Text(
+                AppText.body(
                   badge.description,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.black54,
-                  ),
+                  fontWeight: FontWeight.w400,
                 ),
               ],
             ),
           ),
+
           const SizedBox(width: 16),
-          Text(
+
+          // Points range (e.g., "10-50")
+          AppText.heading(
             badge.pointsRange,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFFFF8C00),
-            ),
+            fontWeight: FontWeight.w400,
+            color: const Color(0xFFF79E1B),
           ),
         ],
       ),

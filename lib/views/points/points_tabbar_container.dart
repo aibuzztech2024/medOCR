@@ -1,7 +1,6 @@
-import 'package:avatar/core/themes/light/light_theme_colors.dart';
 import 'package:avatar/core/utils/methods/navigate_to.dart';
 import 'package:avatar/viewModels/points/controller/points_tabbar_controller.dart';
-import 'package:avatar/views/auth/select_role_view.dart';
+import 'package:avatar/views/earnings/earnings_screen.dart';
 import 'package:avatar/views/points/transaction_screen.dart';
 import 'package:avatar/views/points/widget/reusable_tabbar.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +23,12 @@ class PointsTabbarContainer extends StatelessWidget {
         // Remove this it is just for showing the transaction screen
         // If you want to navigate to the transaction screen, you can keep this
         actions: [
+          IconButton(
+            icon: const Icon(Icons.paid_outlined, color: Color(0xFFF79E1B)),
+            onPressed: () {
+              navigateTo(() => EarningsScreen());
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.receipt),
             onPressed: () {

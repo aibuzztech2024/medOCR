@@ -1,5 +1,8 @@
+import 'package:avatar/core/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 
+/// A reusable button widget for withdrawing earnings.
+/// Shows a spinner if [isLoading] is true.
 class WithdrawButtonWidget extends StatelessWidget {
   final VoidCallback onPressed;
   final bool isLoading;
@@ -13,38 +16,38 @@ class WithdrawButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      // Button container styling
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       decoration: BoxDecoration(
-        border: Border.all(color: const Color(0xFFFF8C00), width: 2),
-        borderRadius: BorderRadius.circular(25),
+        border: Border.all(color: const Color(0xFFF79E1B), width: 1),
+        borderRadius: BorderRadius.circular(6),
       ),
       child: InkWell(
+        // Disable button when loading
         onTap: isLoading ? null : onPressed,
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              Icons.access_time,
-              color: const Color(0xFFFF8C00),
-              size: 20,
-            ),
+            // Clock icon (symbolic of withdrawal time)
+            Icon(Icons.access_time, color: const Color(0xFFF79E1B), size: 16),
             const SizedBox(width: 8),
+
+            // Loading indicator or "Withdraw" text
             isLoading
                 ? const SizedBox(
                     width: 16,
                     height: 16,
                     child: CircularProgressIndicator(
                       strokeWidth: 2,
-                      valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFFF8C00)),
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        Color(0xFFFF8C00),
+                      ),
                     ),
                   )
-                : const Text(
+                : AppText.body(
                     'Withdraw',
-                    style: TextStyle(
-                      color: Color(0xFFFF8C00),
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xFFF79E1B),
                   ),
           ],
         ),

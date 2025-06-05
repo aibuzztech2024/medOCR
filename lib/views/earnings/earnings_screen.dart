@@ -1,3 +1,4 @@
+import 'package:avatar/core/widgets/app_text.dart';
 import 'package:avatar/viewModels/earnings/controllers/earnings_controller.dart';
 import 'package:avatar/views/earnings/widgets/account_dropdown_widget.dart';
 import 'package:avatar/views/earnings/widgets/badge_card_widget.dart';
@@ -6,6 +7,8 @@ import 'package:avatar/views/earnings/widgets/withdraw_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+/// Earnings screen that displays user's earnings info, transactions,
+/// and allows linking UPI accounts and initiating withdrawals.
 class EarningsScreen extends StatelessWidget {
   const EarningsScreen({super.key});
 
@@ -15,124 +18,138 @@ class EarningsScreen extends StatelessWidget {
       init: EarningsController(),
       builder: (controller) {
         return Scaffold(
-          backgroundColor: const Color(0xFFF5F5F5),
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            leading: const SizedBox(),
-            title: const Text(
-              'Earnings',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
-            ),
-            actions: [
-              Obx(() => WithdrawButtonWidget(
-                onPressed: controller.withdraw,
-                isLoading: controller.isLoading,
-              )),
-              const SizedBox(width: 16),
-            ],
-          ),
+          backgroundColor: const Color(0xFFF8F9FA),
           body: Obx(() {
-            if (controller.isLoading && controller.earningsData == null) {
-              return const Center(child: CircularProgressIndicator());
-            }
-
-            if (controller.error.isNotEmpty) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      controller.error,
-                      style: const TextStyle(color: Colors.red),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: controller.refreshData,
-                      child: const Text('Retry'),
-                    ),
-                  ],
-                ),
-              );
-            }
-
             final earningsData = controller.earningsData;
-            if (earningsData == null) return const SizedBox();
 
-            return RefreshIndicator(
-              onRefresh: controller.refreshData,
-              child: SingleChildScrollView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Manage Finances – Payments, Earnings & Revenue Insights',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black54,
+            // TODO: Handle loading and error states properly (loading spinner, error message, retry button).
+            if (earningsData == null) {
+              return Center(child: CircularProgressIndicator());
+            }
+
+            return SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              padding: const EdgeInsets.all(18),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 40),
+
+                  // Top section: Title and Withdraw button
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      AppText.heading(
+                        'Earnings',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20,
                       ),
+                      Obx(
+                        () => WithdrawButtonWidget(
+                          onPressed:
+                              controller
+                                  .withdraw, // TODO: Backend API integration for withdrawal
+                          isLoading: controller.isLoading,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 15),
+
+                  AppText.heading(
+                    'Manage Finances – Payments, Earnings & Revenue Insights',
+                    fontWeight: FontWeight.w400,
+                  ),
+
+                  const SizedBox(height: 15),
+
+                  // Tab section (Earnings / Transaction History)
+                  Row(
+                    children: [
+                      Expanded(child: _buildTab('Earnings', 0, controller)),
+                      Expanded(
+                        child: _buildTab('Transaction History', 1, controller),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 15),
+
+                  // Stats cards: Total Purchases & Reward Points
+                  Row(
+                    children: [
+                      Expanded(
+                        child: StatCardWidget(
+                          title: 'Total Purchases',
+                          value:
+                              earningsData.totalPurchases
+                                  .toString(), // TODO: Connect to backend total purchases data
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: StatCardWidget(
+                          title: 'Reward Points',
+                          value:
+                              earningsData.rewardPoints
+                                  .toString(), // TODO: Connect to backend reward points data
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 15),
+
+                  // Linked UPI Account Section
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 8.5,
                     ),
-                    const SizedBox(height: 24),
-                    
-                    // Tab Bar
-                    Row(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _buildTab('Earnings', 0, controller),
-                        const SizedBox(width: 32),
-                        _buildTab('Transaction History', 1, controller),
-                      ],
-                    ),
-                    const SizedBox(height: 24),
-                    
-                    // Stats Cards
-                    Row(
-                      children: [
-                        Expanded(
-                          child: StatCardWidget(
-                            title: 'Total Purchases',
-                            value: earningsData.totalPurchases.toString(),
+                        AppText.heading(
+                          'Linked UPI Account',
+                          fontWeight: FontWeight.w600,
+                        ),
+
+                        // Add account icon
+                        GestureDetector(
+                          onTap: () {
+                            controller
+                                .addNewAccount(); // TODO: Navigate to add new UPI account screen or dialog
+                          },
+                          child: const Icon(
+                            Icons.add,
+                            color: Color(0xFFF79E1B),
+                            size: 24,
                           ),
                         ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: StatCardWidget(
-                            title: 'Reward Points',
-                            value: earningsData.rewardPoints.toString(),
-                          ),
-                        ),
                       ],
                     ),
-                    const SizedBox(height: 24),
-                    
-                    // Linked UPI Account
-                    const Text(
-                      'Linked UPI Account',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    AccountDropdownWidget(
-                      selectedAccount: earningsData.linkedAccount,
-                      onAccountSelected: controller.selectAccount,
-                      onAddAccount: controller.addNewAccount,
-                      accounts: controller.availableAccounts,
-                    ),
-                    const SizedBox(height: 24),
-                    
-                    // How to earn points
-                    BadgeCardWidget(badges: earningsData.badges),
-                  ],
-                ),
+                  ),
+
+                  const SizedBox(height: 15),
+
+                  // Dropdown to show and select UPI accounts
+                  AccountDropdownWidget(
+                    selectedAccount: earningsData.linkedAccount,
+                    onAccountSelected:
+                        controller
+                            .selectAccount, // TODO: Update backend with selected account if needed
+                  ),
+
+                  const SizedBox(height: 15),
+
+                  // How to earn points section
+                  BadgeCardWidget(
+                    badges:
+                        earningsData
+                            .badges, // TODO: Fetch badges info from backend
+                  ),
+                ],
               ),
             );
           }),
@@ -141,13 +158,17 @@ class EarningsScreen extends StatelessWidget {
     );
   }
 
+  /// Builds a single tab widget with underline if selected.
   Widget _buildTab(String title, int index, EarningsController controller) {
     return Obx(() {
       final isSelected = index == controller.selectedTabIndex;
       return GestureDetector(
-        onTap: () => controller.setSelectedTab(index),
+        onTap:
+            () => controller.setSelectedTab(
+              index,
+            ), // TODO: Handle tab change logic
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               title,
@@ -161,7 +182,7 @@ class EarningsScreen extends StatelessWidget {
             if (isSelected)
               Container(
                 height: 2,
-                width: 40,
+                width: double.infinity,
                 color: const Color(0xFFFF8C00),
               ),
           ],

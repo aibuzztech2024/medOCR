@@ -1,75 +1,163 @@
+import 'dart:developer';
+
+import 'package:avatar/core/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 
-class AccountDropdownWidget extends StatelessWidget {
+class AccountDropdownWidget extends StatefulWidget {
   final String selectedAccount;
   final Function(String) onAccountSelected;
-  final VoidCallback onAddAccount;
-  final List<String> accounts;
 
   const AccountDropdownWidget({
     super.key,
     required this.selectedAccount,
     required this.onAccountSelected,
-    required this.onAddAccount,
-    required this.accounts,
   });
 
   @override
+  State<AccountDropdownWidget> createState() => _AccountDropdownWidgetState();
+}
+
+class _AccountDropdownWidgetState extends State<AccountDropdownWidget>
+    with SingleTickerProviderStateMixin {
+  static const _borderColor = Color(0xFFF79E1B);
+  static const _upiColor = Color(0xFFF79E1B);
+  static const _arrowSize = 24.0;
+
+  bool _isExpanded = false;
+  late final AnimationController _animationController;
+  late final Animation<double> _expandAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: this,
+    );
+    _expandAnimation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeInOut,
+    );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  void _toggleDropdown() {
+    setState(() => _isExpanded = !_isExpanded);
+    _isExpanded
+        ? _animationController.forward()
+        : _animationController.reverse();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            decoration: BoxDecoration(
-              border: Border.all(color: const Color(0xFFFF8C00), width: 1),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton<String>(
-                value: selectedAccount,
-                isExpanded: true,
-                icon: const Icon(
-                  Icons.keyboard_arrow_down,
-                  color: Color(0xFFFF8C00),
-                ),
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: _borderColor, width: 1),
+        borderRadius: BorderRadius.circular(8),
+        color: Colors.white,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _buildDropdownHeader(),
+          SizeTransition(
+            sizeFactor: _expandAnimation,
+            axisAlignment: -1,
+            child: _buildExpandedContent(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDropdownHeader() {
+    return InkWell(
+      onTap: _toggleDropdown,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                widget.selectedAccount,
                 style: const TextStyle(
-                  color: Colors.black87,
                   fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black87,
                 ),
-                onChanged: (String? newValue) {
-                  if (newValue != null) {
-                    onAccountSelected(newValue);
-                  }
-                },
-                items: accounts.map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
               ),
             ),
-          ),
-        ),
-        const SizedBox(width: 16),
-        GestureDetector(
-          onTap: onAddAccount,
-          child: Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: const Color(0xFFFF8C00),
-              borderRadius: BorderRadius.circular(8),
+            AnimatedRotation(
+              turns: _isExpanded ? 0.5 : 0,
+              duration: const Duration(milliseconds: 300),
+              child: const Icon(
+                Icons.keyboard_arrow_down,
+                size: _arrowSize,
+                color: _borderColor,
+              ),
             ),
-            child: const Icon(
-              Icons.add,
-              color: Colors.white,
-              size: 24,
-            ),
-          ),
+          ],
         ),
-      ],
+      ),
+    );
+  }
+
+  Widget _buildExpandedContent() {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          _buildUpiLogo(),
+          AppText.body('Active', fontWeight: FontWeight.w600),
+          _buildIconButton(Icons.edit, Colors.black, 'Edit', () {
+            // TODO: Implement edit functionality
+            log('Edit ${widget.selectedAccount}');
+          }),
+          _buildIconButton(Icons.delete_outline, Colors.red, 'Delete', () {
+            // TODO: Implement delete functionality
+            log('Delete ${widget.selectedAccount}');
+          }),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildUpiLogo() {
+    return Container(
+      width: 40,
+      height: 24,
+      decoration: BoxDecoration(
+        color: _upiColor,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      alignment: Alignment.center,
+      child: const Text(
+        'UPI',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 12,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildIconButton(
+    IconData icon,
+    Color color,
+    String semanticLabel,
+    VoidCallback onTap,
+  ) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(20),
+      child: Icon(icon, size: 24, color: color, semanticLabel: semanticLabel),
     );
   }
 }

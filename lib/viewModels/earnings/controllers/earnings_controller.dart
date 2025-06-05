@@ -15,13 +15,6 @@ class EarningsController extends GetxController {
   String get error => _error.value;
   int get selectedTabIndex => _selectedTabIndex.value;
 
-  // Available accounts for dropdown
-  final RxList<String> availableAccounts = <String>[
-    'Monikasingh@okicici',
-    'john.doe@example.com',
-    'jane.smith@bank.com'
-  ].obs;
-
   @override
   void onInit() {
     super.onInit();
@@ -41,7 +34,7 @@ class EarningsController extends GetxController {
     try {
       // Simulate API delay
       await Future.delayed(const Duration(milliseconds: 800));
-      
+
       // Mock data - replace with actual API call
       _earningsData.value = EarningsModel(
         totalPurchases: 1500,
@@ -50,7 +43,8 @@ class EarningsController extends GetxController {
         badges: [
           BadgeModel(
             name: 'Silver Badge',
-            description: '+ Priority delivery access, early access to campaigns',
+            description:
+                '+ Priority delivery access, early access to campaigns',
             pointsRange: '999 points',
             color: 'orange',
           ),
@@ -62,7 +56,8 @@ class EarningsController extends GetxController {
           ),
           BadgeModel(
             name: 'Diamond Badge',
-            description: '+ Lab test discounts, donation credits, exclusive offers',
+            description:
+                '+ Lab test discounts, donation credits, exclusive offers',
             pointsRange: '+150 points per refill',
             color: 'orange',
           ),
@@ -85,13 +80,13 @@ class EarningsController extends GetxController {
       );
       return;
     }
-    
+
     _isLoading.value = true;
 
     try {
       // Simulate API call
       await Future.delayed(const Duration(milliseconds: 1000));
-      
+
       Get.snackbar(
         'Success',
         'Withdrawal request submitted for ${earningsData?.rewardPoints} points',
@@ -99,10 +94,9 @@ class EarningsController extends GetxController {
         backgroundColor: Get.theme.primaryColor,
         colorText: Get.theme.colorScheme.onPrimary,
       );
-      
+
       // You can update the points after successful withdrawal
       // updateRewardPoints(0);
-      
     } catch (e) {
       _error.value = 'Withdrawal failed: $e';
       Get.snackbar(
