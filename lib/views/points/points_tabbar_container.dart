@@ -1,5 +1,6 @@
 import 'package:avatar/core/utils/methods/navigate_to.dart';
 import 'package:avatar/viewModels/points/controller/points_tabbar_controller.dart';
+import 'package:avatar/views/calender/widgets/upcoming_events_widget.dart';
 import 'package:avatar/views/chart/chart_screen.dart';
 import 'package:avatar/views/earnings/earnings_screen.dart';
 import 'package:avatar/views/points/transaction_screen.dart';
@@ -22,8 +23,16 @@ class PointsTabbarContainer extends StatelessWidget {
         backgroundColor: context.theme.scaffoldBackgroundColor,
 
         //TODO Remove this iconButtons it is just for showing the different screen
-     
         actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.calendar_month_outlined,
+              color: Colors.green,
+            ),
+            onPressed: () {
+              navigateTo(() => UpcomingEventsWidget());
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.bar_chart, color: Colors.green),
             onPressed: () {

@@ -1,6 +1,5 @@
 import 'package:avatar/models/chart/chart_data.dart';
 import 'package:avatar/viewModels/chart/controller/chart_controller.dart';
-import 'package:avatar/views/chart/widgets/chart_legend_widget.dart';
 import 'package:avatar/views/chart/widgets/multi_line_chart_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +9,7 @@ import 'package:get/get.dart';
 /// - Line chart visualization with toggleable series
 /// - Summary cards showing average and total values per series
 class ChartScreen extends StatelessWidget {
-  const ChartScreen({Key? key}) : super(key: key);
+  const ChartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
