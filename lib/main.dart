@@ -1,5 +1,6 @@
 import 'package:avatar/core/themes/light/light_theme_data.dart';
 import 'package:avatar/views/map/map_scree_view.dart';
+import 'package:avatar/views/purchase/widgets/transaction_history.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
@@ -11,7 +12,7 @@ void main() {
   runApp(const MyApp());
 }
 
-/// MyApp is the main widget of the application
+/// MyApp is the main widget of the application`
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
       // If user is logged in, navigate to home page
       // If user is not logged in, navigate to select role page
       //home: SelectRoleView(),
-      home: MapScree(),
+      home: TransactionHistory(),
     );
   }
 }

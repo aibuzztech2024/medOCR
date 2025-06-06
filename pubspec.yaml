@@ -25,6 +25,7 @@ dependencies:
   latlong2: ^0.9.1
   avatar_glow: ^3.0.1
   flutter_compass: ^0.8.1
+  font_awesome_flutter: ^10.4.0
 
 dev_dependencies:
   flutter_test:
