@@ -1,12 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../models/endCustomer/purchase/product_modal.dart';
 import '../purchase_view.dart';
+
 //TO-DO  CHANGE COLOR OF WHOLE FILE
 class ProductCard extends StatelessWidget {
   final Product product;
+  final VoidCallback? onBookmarkToggle;
 
-  const ProductCard({super.key, required this.product});
+  const ProductCard({super.key, required this.product ,     this.onBookmarkToggle,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +104,11 @@ class ProductCard extends StatelessWidget {
                   ),
                 ),
               ),
-              if (!product.inCartMode)  Icon(product.isBookmarked ?Icons.bookmark:  Icons.bookmark_border, color: Colors.orange),
+              if (!product.inCartMode)
+                IconButton(
+                  onPressed: onBookmarkToggle,
+                  icon: Icon(product.isBookmarked ? Icons.bookmark : Icons.bookmark_border, color: Colors.orange),
+                ),
             ],
           ),
         ),

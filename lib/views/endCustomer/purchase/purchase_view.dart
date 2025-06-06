@@ -1,101 +1,72 @@
-
-import 'package:avatar/views/endCustomer/purchase/widgets/product_card.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:avatar/views/endCustomer/purchase/searchTab_view.dart';
 import 'package:flutter/material.dart';
-class Product {
-  final String imageUrl;
-  final String name;
-  final String type;
-  final String dosage;
-  final double price;
-  final double mrp;
-  final String quantity;
-  final bool prescriptionReceived;
-  final bool inCartMode;
-  bool isBookmarked;
+import 'package:get/get.dart';
 
-  Product({
-    required this.imageUrl,
-    required this.name,
-    required this.type,
-    required this.dosage,
-    required this.price,
-    required this.mrp,
-    required this.quantity,
-    required this.prescriptionReceived,
-    required this.inCartMode,
-    this.isBookmarked = false,
-  });
-}
+import '../../../viewModels/endCustomer/purchase/search_controller.dart';
 
-class ProductPage extends StatelessWidget {
+
+//---- TODO  change color all----------------
+class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
 
   @override
+  State<ProductPage> createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    List<Product> dummyData = [
-      Product(
-        imageUrl: 'assets/images/tablet.png',
-        name: 'Crocin Pain Relief Tablet 15’s',
-        quantity: '60 Tablets',
-        type: 'Pain Relief',
-        dosage: '500 MG',
-        price: 220,
-        mrp: 245,
-        prescriptionReceived: true,
-        inCartMode: true,
-      ),
-      Product(
-        imageUrl: 'assets/images/tablet.png',
-        name: 'Crocin Pain Relief Tablet 15’s',
-        quantity: '60 Tablets',
-        type: 'Pain Relief',
-        dosage: '500 MG',
-        price: 220,
-        mrp: 245,
-        prescriptionReceived: false,
-        inCartMode: false,
-      ), Product(
-        imageUrl: 'assets/images/tablet.png',
-        name: 'Crocin Pain Relief Tablet 15’s',
-        quantity: '60 Tablets',
-        type: 'Pain Relief',
-        dosage: '500 MG',
-        price: 220,
-        mrp: 245,
-        prescriptionReceived: false,
-        inCartMode: true,
-      ), Product(
-        imageUrl: 'assets/images/tablet.png',
-        name: 'Crocin Pain Relief Tablet 15’s',
-        quantity: '60 Tablets',
-        type: 'Pain Relief',
-        dosage: '500 MG',
-        price: 220,
-        mrp: 245,
-        prescriptionReceived: true,
-        inCartMode: false,
-        isBookmarked: true
-      ), Product(
-        imageUrl: 'assets/images/tablet.png',
-        name: 'Crocin Pain Relief Tablet 15’s',
-        quantity: '60 Tablets',
-        type: 'Pain Relief',
-        dosage: '500 MG',
-        price: 220,
-        mrp: 245,
-        prescriptionReceived: false,
-        inCartMode: true,
-      ),
-    ];
+    final controller = Get.put(searchTabController());
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Products")),
-      body: ListView.builder(
-        itemCount: dummyData.length,
-        itemBuilder: (context, index) {
-          return ProductCard(product: dummyData[index]);
-        },
+     appBar:  AppBar(
+       backgroundColor: Colors.white,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            Text(
+              'Purchase',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              'Buy Better, Save More & Simplify Procurement',
+              style: TextStyle(fontSize: 14),
+            ),
+          ],
+        ),
+      )
+,      body: Column(
+        children: [
+          TabBar(
+            dividerHeight: 0.0,
+            controller: _tabController,
+            labelColor: Colors.orange,
+            indicatorColor: Colors.orange,
+            tabs: const [Tab(text: "Search"), Tab(text: "Submit Request"), Tab(text: "Order Discussion")],
+          ),
+
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+
+              children: [searchTab_view(), Center(child: Text("Submit Request")), Center(child: Text("Order Discussion"))],
+            ),
+          ),
+        ],
       ),
     );
   }
