@@ -17,7 +17,7 @@ class SubmitRequestPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Submit Request sub",
+          "Submit Request",
           style: TextStyle(fontSize: width * 0.05),
         ),
         elevation: 0,
@@ -33,6 +33,13 @@ class SubmitRequestPage extends StatelessWidget {
                 labelText: "Doctor’s Name",
                 labelStyle: TextStyle(fontSize: width * 0.042),
                 border: UnderlineInputBorder(),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey, width: 2),
+                ),
+                contentPadding: EdgeInsets.only(left: 0, bottom: 8),
               ),
               onChanged: (value) => doctorName.value = value,
             ),
@@ -44,9 +51,17 @@ class SubmitRequestPage extends StatelessWidget {
                 labelText: "Patient’s Name",
                 labelStyle: TextStyle(fontSize: width * 0.042),
                 border: UnderlineInputBorder(),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey, width: 2),
+                ),
+                contentPadding: EdgeInsets.only(left: 0, bottom: 8),
               ),
               onChanged: (value) => patientName.value = value,
             ),
+
             SizedBox(height: width * 0.08),
 
             // Upload Section
@@ -56,10 +71,10 @@ class SubmitRequestPage extends StatelessWidget {
               },
               child: DottedBorder(
                 color: Colors.orange,
-                strokeWidth: 2,
+                strokeWidth: 1,
                 dashPattern: [8, 4],
                 borderType: BorderType.RRect,
-                radius: Radius.circular(12),
+                radius: Radius.circular(6),
                 child: Container(
                   width: double.infinity,
                   padding: EdgeInsets.symmetric(vertical: width * 0.08),
