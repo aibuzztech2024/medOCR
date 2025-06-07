@@ -1,3 +1,4 @@
+import 'package:avatar/core/widgets/app_button.dart';
 import 'package:avatar/core/widgets/app_text.dart';
 import 'package:avatar/core/widgets/width_box.dart';
 import 'package:flutter/material.dart';
@@ -41,20 +42,24 @@ class CategoryCard extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            IconButton(
-              //TODO: handle On click of direction
+            AppButton(
+              type: ButtonType.text,
               onPressed: () {},
-              icon: Icon(Icons.directions, size: 30),
+              child: Icon(
+                Icons.directions,
+                size: 20,
+                color: Colors.grey.shade700,
+              ),
             ),
-            IconButton(
-              //TODO: handle On click of direction
+            AppButton(
+              type: ButtonType.text,
               onPressed: () {},
-              icon: Icon(Icons.call, size: 30),
+              child: Icon(Icons.call, size: 20, color: Colors.grey.shade700),
             ),
-            IconButton(
-              //TODO: handle On click of direction
+            AppButton(
+              type: ButtonType.text,
               onPressed: () {},
-              icon: Icon(Icons.share, size: 30),
+              child: Icon(Icons.share, size: 20, color: Colors.grey.shade700),
             ),
           ],
         ),

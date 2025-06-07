@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
 import '../../../viewModels/map/bottom_nav_controller.dart';
+import 'hospital_place_list.dart';
 import 'referral_card_widget.dart';
 
 /// Main navigation with Home, Map, Post, Purchase, and Profile tabs
@@ -50,7 +51,7 @@ class BottomNavBar extends StatelessWidget {
     {
       'icon': 'assets/icons/upload.svg',
       'title': "Post",
-      'screen': Center(child: Text("Post")),
+      'screen': Center(child: HospitalPlaceList()),
     },
     {
       'icon': 'assets/icons/purchase.svg',
