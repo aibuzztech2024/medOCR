@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 
-//Todo:referal card model
-class ReferCardModel {
+//Todo: card model
+// TODO: Add validation for required fields if needed
+
+class CardModel {
   final String title;
+  final String? subtitle;
+  final Color? subtitleColor;
   final String imagePath;
   final String buttonLabel;
   final List<Color> gradientColors;
-  final IconData icon;
+  final Widget icon;
   final Color titleColor;
 
-  ReferCardModel({
+  CardModel({
+    this.subtitle,
+    this.subtitleColor,
     required this.title,
     required this.imagePath,
     required this.buttonLabel,

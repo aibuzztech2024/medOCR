@@ -1,51 +1,49 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
-import '../../models/map/referral_model.dart';
-//Todo:referal card controller
+import '../../models/map/card_model.dart';
+//Todo: card controller
 
-class ReferController extends GetxController {
+// TODO: Consider adding swipe detection logic here
+class CardController extends GetxController {
+  final List<CardModel> cards;
+  final int initialIndex;
+  final Duration? autoScrollDuration;
+  late Timer _timer;
+
+  CardController({
+    required this.cards,
+    this.initialIndex = 0,
+    this.autoScrollDuration,
+  }) : assert(
+         initialIndex >= 0 && initialIndex < cards.length,
+       ); // TODO: Add better error handling
+
   final currentIndex = 0.obs;
-
-  final List<ReferCardModel> cards = [
-    ReferCardModel(
-      title: "Invite a friend to\nand earn points!",
-      imagePath: "assets/images/gradient-affiliate-marketing-illustration.png",
-      buttonLabel: "Refer Now",
-      gradientColors: [Colors.deepPurple.shade400, Colors.pink.shade100],
-      icon: Icons.share,
-      titleColor: Colors.white,
-    ),
-    ReferCardModel(
-      title: "Donate today and\n make a change!",
-      imagePath: "assets/images/gradient-affiliate-marketing-illustration4.png",
-      buttonLabel: "Donate Now",
-      gradientColors: [Color(0xFFDBEBE8), Color(0xFFDBEBE8)],
-      icon: Icons.volunteer_activism,
-      titleColor: Colors.black,
-    ),
-    ReferCardModel(
-      title: "Grab this coupon\n and save big now!",
-      imagePath: "assets/images/gradient-affiliate-marketing-illustration3.png",
-      buttonLabel: "Redeem Now",
-      gradientColors: [Color(0xFFD8DCFF), Color(0xFFD8DCFF)],
-      icon: Icons.card_giftcard,
-      titleColor: Colors.black,
-    ),
-  ];
 
   @override
   void onInit() {
-    Timer.periodic(Duration(seconds: 3), (timer) {
-      currentIndex.value = (currentIndex.value + 1) % cards.length;
-    });
     super.onInit();
+    currentIndex.value = initialIndex;
+    // TODO: Add auto-rotate functionality if needed
+    if (autoScrollDuration != null) {
+      _timer = Timer.periodic(autoScrollDuration!, (timer) {
+        currentIndex.value = (currentIndex.value + 1) % cards.length;
+      });
+    }
   }
 
-  void onButtonPressed(String label) {
-    Get.snackbar("Action", "$label button clicked!");
+  @override
+  void onClose() {
+    // Cancel the timer when the controller is disposed
+    if (autoScrollDuration != null) {
+      _timer.cancel();
+    }
+    super.onClose();
   }
+
+  CardModel get currentCard => cards[currentIndex.value];
+
+  // TODO: Add methods for manual navigation (next/previous)
 }

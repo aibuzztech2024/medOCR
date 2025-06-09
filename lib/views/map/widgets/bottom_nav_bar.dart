@@ -1,10 +1,12 @@
+import 'package:avatar/views/map/widgets/help_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
 import '../../../viewModels/map/bottom_nav_controller.dart';
-import 'hospital_place_list.dart';
+import '../../auth/login/login_view.dart';
+import 'faq_View.dart';
 import 'referral_card_widget.dart';
 
 /// Main navigation with Home, Map, Post, Purchase, and Profile tabs
@@ -31,32 +33,22 @@ class BottomNavBar extends StatelessWidget {
     {
       'icon': 'assets/icons/home.svg',
       'title': "Home",
-      'screen': Center(
-        child: Text(
-          "Home",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-      ),
+      'screen': Center(child: LoginView()),
     },
     {
       'icon': 'assets/icons/map_search.svg',
       'title': "Map",
-      'screen': Center(
-        child: Text(
-          "Map",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-      ),
+      'screen': Center(child: ReferralCardWidget()),
     },
     {
       'icon': 'assets/icons/upload.svg',
       'title': "Post",
-      'screen': Center(child: HospitalPlaceList()),
+      'screen': Center(child: FAQView()),
     },
     {
       'icon': 'assets/icons/purchase.svg',
       'title': "Purchase",
-      'screen': Center(child: ReferralCard()),
+      'screen': Center(child: HelpCardWidget()),
     },
     {
       'icon': CircleAvatar(
@@ -120,6 +112,8 @@ class BottomNavBar extends StatelessWidget {
             ),
           ),
       onTabChanged: navController.changeTab,
+      // TODO: Handle additional functionalities like notifications or settings
+      // TODO: Implement logic for deep linking or specific tab actions
     );
   }
 }

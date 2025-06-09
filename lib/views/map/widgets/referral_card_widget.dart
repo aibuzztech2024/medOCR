@@ -1,115 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import '../../../core/widgets/promotion_card_widget.dart';
+import '../../../models/map/card_model.dart';
 
-import '../../../core/themes/light/light_theme_colors.dart';
-import '../../../core/widgets/app_button.dart';
-import '../../../core/widgets/app_text.dart';
-import '../../../viewModels/map/referral_conroller.dart';
+// TODO: Ui for refferal card
 
-//Todo:referal card
+class ReferralCardWidget extends StatelessWidget {
+  final List<CardModel> cards = [
+    CardModel(
+      title: "Invite a friend to\nand earn points!",
+      imagePath: "assets/images/gradient-affiliate-marketing-illustration.png",
+      buttonLabel: "Refer Now",
+      gradientColors: [Colors.deepPurple.shade400, Colors.pink.shade100],
+      icon: SvgPicture.asset('assets/icons/material-symbols_share-outline.svg'),
+      titleColor: Colors.white,
+    ),
+    CardModel(
+      title: "Donate today and\n make a change!",
+      imagePath: "assets/images/gradient-affiliate-marketing-illustration4.png",
+      buttonLabel: "Donate Now",
+      gradientColors: [Color(0xFFDBEBE8), Color(0xFFDBEBE8)],
+      icon: SvgPicture.asset('assets/icons/upload-square-svgrepo-com (1).svg'),
+      titleColor: Colors.black,
+    ),
+    CardModel(
+      title: "Grab this coupon\n and save big now!",
+      imagePath: "assets/images/gradient-affiliate-marketing-illustration3.png",
+      buttonLabel: "Redeem Now",
+      gradientColors: [Color(0xFFD8DCFF), Color(0xFFD8DCFF)],
+      icon: SvgPicture.asset('assets/icons/streamline_discount-percent-coupon.svg'),
+      titleColor: Colors.black,
+    ),
+  ];
 
-/// referral card which shown for discount and donation it is that thing
-///
-class ReferralCard extends StatelessWidget {
-  final ReferController controller = Get.put(ReferController());
+  /// all thing which is required in the card is here
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
-      body: Center(
-        child: Obx(() {
-          final current = controller.cards[controller.currentIndex.value];
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                margin: EdgeInsets.all(17),
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  gradient: LinearGradient(
-                    colors: current.gradientColors,
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                ),
-                child: SizedBox(
-                  child: Row(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          AppText.heading(
-                            current.title,
-                            textAlign: TextAlign.center,
-                            color: current.titleColor,
-                            fontSize: 22,
-                          ),
-                          SizedBox(height: 20),
-                          AppButton(
-                            type: ButtonType.filled,
-                            onPressed:
-                                () => controller.onButtonPressed(
-                                  current.buttonLabel,
-                                ),
-                            color: LightThemeColors.scaffoldBackground,
-                            textColor: LightThemeColors.titleText,
-                            borderRadius: 30,
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 24,
-                              vertical: 12,
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  current.icon,
-                                  color: LightThemeColors.titleText,
-                                ),
-                                SizedBox(width: 8),
-                                Text(
-                                  current.buttonLabel,
-                                  style: TextStyle(
-                                    color: LightThemeColors.titleText,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(width: 20),
-                      Expanded(child: Image.asset(current.imagePath)),
-                    ],
-                  ),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  controller.cards.length,
-                  (i) => _buildDot(i == controller.currentIndex.value),
-                ),
-              ),
-            ],
+      body: ReferralCard(
+        autoScrollDuration: Duration(seconds: 3),
+        cards: cards,
+        onButtonPressed: (buttonLabel) {
+          // TODO: Implement proper button action handling
+          print('Button pressed: $buttonLabel');
+          Get.snackbar(
+            "Action",
+            "$buttonLabel button clicked!",
+            snackPosition: SnackPosition.TOP,
           );
-        }),
-      ),
-    );
-  }
-
-  Widget _buildDot(bool isActive) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 4),
-      width: isActive ? 12 : 8,
-      height: isActive ? 12 : 8,
-      decoration: BoxDecoration(
-        color:
-            isActive
-                ? const Color.fromARGB(255, 231, 111, 36)
-                : LightThemeColors.scaffoldBackground,
-        shape: BoxShape.circle,
+        },
       ),
     );
   }
