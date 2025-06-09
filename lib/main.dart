@@ -1,5 +1,8 @@
 import 'package:avatar/core/themes/light/light_theme_data.dart';
+import 'package:avatar/views/help/ticket_history_page.dart';
+import 'package:avatar/views/home/widgets/overview_page.dart';
 import 'package:avatar/views/map/map_scree_view.dart';
+import 'package:avatar/views/purchase/widgets/card_page.dart';
 import 'package:avatar/views/purchase/widgets/submit_request.dart';
 import 'package:avatar/views/purchase/widgets/transaction_history.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +33,7 @@ class MyApp extends StatelessWidget {
       // If user is logged in, navigate to home page
       // If user is not logged in, navigate to select role page
       //home: SelectRoleView(),
-      home: SubmitRequestPage(),
+      home: TicketHistoryPage(),
     );
   }
 }

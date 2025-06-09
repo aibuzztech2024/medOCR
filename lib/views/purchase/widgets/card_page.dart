@@ -1,3 +1,17 @@
+/// This is [CardPage]
+///
+/// Displays a list of cards showing:
+/// - Status (green dot) and time ago
+/// - Image with loading/error handling
+/// - Title, rating (number + stars)
+/// - Distance and ETA
+/// - Price
+/// - Buttons: View Details, Accept (disables on accept)
+///
+/// Uses GetX for reactive state management.
+/// Responsive UI based on screen size.
+
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../models/card/card_model.dart';
@@ -151,7 +165,7 @@ class ResponsiveCard extends StatelessWidget {
                       children: [
                         Text(
                           data.rating.value.toStringAsFixed(1),
-                          style: TextStyle(fontSize: Get.width * 0.035, color: Colors.black54),
+                          style: TextStyle(fontSize: Get.width * 0.035, color: Colors.black54),  //Todo update the color
                         ),
                         const SizedBox(width: 4),
                         Row(children: buildStarRating(data.rating.value)),
@@ -225,21 +239,22 @@ class ResponsiveCard extends StatelessWidget {
 
                 SizedBox(width: Get.width * 0.04),
 
-                // Accept Button (disabled if already accepted)
+                // Accept Button UI only (disabled and no click action)
                 Expanded(
-                  child: Obx(() => ElevatedButton(
-                    onPressed: data.isAccepted.value ? null : controller.accept,
+                  child: ElevatedButton(
+                    onPressed: () {}, // disables the button, no click action
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: data.isAccepted.value ? Colors.grey : Colors.green, //Todo update the color
+                      backgroundColor: Colors.green, // Disabled look
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                       padding: EdgeInsets.symmetric(vertical: Get.height * 0.010),
                     ),
                     child: Text(
-                      data.isAccepted.value ? 'Accepted' : 'Accept',
+                      'Accept',
                       style: TextStyle(color: Colors.white, fontSize: Get.width * 0.040),
                     ),
-                  )),
+                  ),
                 ),
+
               ],
             ),
           ],

@@ -1,9 +1,15 @@
+/// TransactionHistory page with paginated transaction list
+/// Sortable Date & Time column header
+/// Displays transaction date/time and type in a table
+/// Pagination with Previous, Next, and page number buttons
+/// Uses GetX for state management and reactive UI updates
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../../../viewModels/card/transaction_controller.dart';
+import '../../../viewModels/transaction/transaction_controller.dart';
 
 class TransactionHistory extends StatelessWidget {
   // Initialize TransactionController using GetX dependency injection
@@ -24,7 +30,7 @@ class TransactionHistory extends StatelessWidget {
           // Header row with sortable "Date & Time" and static "Type"
           Container(
             width: Get.width * 0.9,
-            color: Colors.deepOrange, // Header background color
+            color: const Color(0xFFF79E1B), // Updated to custom orange
             padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 60),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -61,7 +67,7 @@ class TransactionHistory extends StatelessWidget {
 
           // Table and Pagination container with fixed height
           SizedBox(
-            height: Get.height * 0.6,
+            height: Get.height * 0.5,
             child: Column(
               children: [
                 // Scrollable DataTable showing paginated transactions
@@ -122,8 +128,8 @@ class TransactionHistory extends StatelessWidget {
                             child: ElevatedButton(
                               onPressed: () => controller.goToPage(i),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: selected ? Colors.deepOrange : Colors.grey.shade300,
-                                foregroundColor: selected ? Colors.white : Colors.black,
+                                backgroundColor: selected ? const Color(0xFFF79E1B) : Colors.grey.shade300,
+                                foregroundColor: selected ? Colors.white : Colors.black,  //Todo update the color
                                 minimumSize: const Size(35, 35),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(6),

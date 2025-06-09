@@ -1,3 +1,14 @@
+/// SubmitRequestPage - form with doctor & patient name inputs
+/// Uses reactive variables (GetX) for form fields
+/// Responsive layout using screen width
+
+/// Doctor’s Name TextField - updates reactive doctorName
+/// Patient’s Name TextField - updates reactive patientName
+
+/// Upload section with dotted border and upload icon
+/// Tap gesture placeholder for upload action (TODO)
+
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -34,10 +45,10 @@ class SubmitRequestPage extends StatelessWidget {
                 labelStyle: TextStyle(fontSize: width * 0.042),
                 border: UnderlineInputBorder(),
                 enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey),
+                  borderSide: BorderSide(color: Colors.grey),  //Todo update the color
                 ),
                 focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey, width: 2),
+                  borderSide: BorderSide(color: Colors.grey, width: 2),  //Todo update the color
                 ),
                 contentPadding: EdgeInsets.only(left: 0, bottom: 8),
               ),
@@ -52,10 +63,10 @@ class SubmitRequestPage extends StatelessWidget {
                 labelStyle: TextStyle(fontSize: width * 0.042),
                 border: UnderlineInputBorder(),
                 enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey),
+                  borderSide: BorderSide(color: Colors.grey), //Todo update the color
                 ),
                 focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey, width: 2),
+                  borderSide: BorderSide(color: Colors.grey, width: 2), //Todo update the color
                 ),
                 contentPadding: EdgeInsets.only(left: 0, bottom: 8),
               ),
@@ -70,7 +81,7 @@ class SubmitRequestPage extends StatelessWidget {
                 // TODO: Add upload functionality
               },
               child: DottedBorder(
-                color: Colors.orange,
+                color: Colors.orange, //Todo update the color
                 strokeWidth: 1,
                 dashPattern: [8, 4],
                 borderType: BorderType.RRect,
@@ -82,7 +93,7 @@ class SubmitRequestPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.cloud_upload_outlined,
-                          color: Colors.orange, size: width * 0.1),
+                          color: Colors.orange, size: width * 0.1),  //Todo update the color
                       SizedBox(height: width * 0.02),
                       Text(
                         "Upload Image or record audio, & video",
