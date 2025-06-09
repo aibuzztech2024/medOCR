@@ -5,6 +5,7 @@ import 'package:avatar/views/chart/chart_screen.dart';
 import 'package:avatar/views/earnings/earnings_screen.dart';
 import 'package:avatar/views/points/transaction_screen.dart';
 import 'package:avatar/views/points/widget/reusable_tabbar.dart';
+import 'package:avatar/views/reward/rewards_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,6 +25,15 @@ class PointsTabbarContainer extends StatelessWidget {
 
         //TODO Remove this iconButtons it is just for showing the different screen
         actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.local_offer_outlined,
+              color: Color(0xFFF79E1B),
+            ),
+            onPressed: () {
+              navigateTo(() => RewardsScreen());
+            },
+          ),
           IconButton(
             icon: const Icon(
               Icons.calendar_month_outlined,
