@@ -18,6 +18,7 @@ class FeatureRewardsWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SizedBox(height: 60), //TODO remove this
         // ⏺️ Header: "Feature Rewards" title and "View All" button
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -27,25 +28,25 @@ class FeatureRewardsWidget extends StatelessWidget {
               AppText.heading('Feature Rewards', fontWeight: FontWeight.w700),
 
               // ⏺️ View All Action
-              Row(
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      // TODO: Navigate to full rewards listing page
-                      Get.snackbar('View All', 'Navigate to all rewards');
-                    },
-                    child: AppText.body(
+              InkWell(
+                onTap: () {
+                  // TODO: Navigate to full rewards listing page
+                  Get.snackbar('View All', 'Navigate to all rewards');
+                },
+                child: Row(
+                  children: [
+                    AppText.body(
                       'View All',
                       fontWeight: FontWeight.w600,
                       color: const Color(0xFFF79E1B),
                     ),
-                  ),
-                  const Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    size: 18,
-                    color: Color(0xFFF79E1B),
-                  ),
-                ],
+                    const Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 18,
+                      color: Color(0xFFF79E1B),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
