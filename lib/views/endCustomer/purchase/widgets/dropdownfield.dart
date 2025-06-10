@@ -10,7 +10,8 @@ class DropdownField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(spacing: 6,
+    return Column(
+      spacing: 6,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(label, style: TextStyle()),
@@ -26,26 +27,10 @@ class DropdownField extends StatelessWidget {
             onChanged(val ?? ''); // optional: pass empty string when null is selected
           },
           items: [
-            const DropdownMenuItem<String>(
-              value: null,
-              child: Text( 
-                'None',
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  color: Colors.grey,
-                ),
-              ),
-            ),
-            ...items.map(
-                  (e) => DropdownMenuItem(
-                value: e,
-                child: Text(
-                  e,
-                  style: const TextStyle(fontWeight: FontWeight.w500),
-                ),
-              ),
-            ),
-          ],        ),
+            const DropdownMenuItem<String>(value: null, child: Text('None', style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black))),
+            ...items.map((e) => DropdownMenuItem(value: e, child: Text(e, style: const TextStyle(fontWeight: FontWeight.w600, color: Colors.black)))),
+          ],
+        ),
       ],
     );
   }

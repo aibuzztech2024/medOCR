@@ -1,22 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../models/endCustomer/purchase/product_modal.dart';
-import '../purchase_view.dart';
 
-//TO-DO  CHANGE COLOR OF WHOLE FILE
+/// ProductCard widget displays a product in a card format.
+/// It supports:
+/// - Cart mode and normal mode
+/// - Bookmarking toggle
+/// - Prescription received status
+
+//---- TODO  change color in  all-
+
 class ProductCard extends StatelessWidget {
   final Product product;
   final VoidCallback? onBookmarkToggle;
 
-  const ProductCard({super.key, required this.product ,     this.onBookmarkToggle,
-  });
+  const ProductCard({super.key, required this.product, this.onBookmarkToggle});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 2,
-      color: Colors.white,
+      elevation: 0,
+      color: context.theme.scaffoldBackgroundColor,
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       child: Padding(
         padding: const EdgeInsets.all(12),
@@ -24,8 +30,10 @@ class ProductCard extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(flex: 1, child: Center(child: Image.asset(product.imageUrl, width: 70, height: 70, fit: BoxFit.cover))),
-              const SizedBox(width: 12),
+              // Product Image
+              Expanded(flex: 1, child: Center(child: Image.asset(product.imageUrl, width: 110, height: 110, fit: BoxFit.cover))),
+              const SizedBox(width: 52),
+              // Product Details
               Expanded(
                 flex: 2,
                 child: Padding(
@@ -34,12 +42,11 @@ class ProductCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       if (!product.inCartMode) const Text("Prescription required", style: TextStyle(color: Colors.grey, fontSize: 12)),
-                      Text(product.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      Text(product.name, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
                       Text(product.quantity, style: const TextStyle(fontSize: 12)),
                       const SizedBox(height: 6),
                       Row(children: [_tag(product.type), const SizedBox(width: 6), _tag(product.dosage)]),
                       const SizedBox(height: 6),
-
                       Row(
                         children: [
                           Column(
@@ -92,12 +99,12 @@ class ProductCard extends StatelessWidget {
                             ),
                           )
                           : Material(
-                            elevation: 2,
+                            elevation: 0,
                             borderRadius: BorderRadius.circular(8),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                               decoration: BoxDecoration(color: Colors.orange, borderRadius: BorderRadius.circular(8)),
-                              child: Text("Add to Cart", style: const TextStyle(fontSize: 18, color: Colors.white)),
+                              child: Text("Add to Cart", style: const TextStyle(fontSize: 16, color: Colors.white)),
                             ),
                           ),
                     ],

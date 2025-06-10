@@ -40,11 +40,11 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
           children: const [
             Text(
               'Purchase',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
             ),
             Text(
               'Buy Better, Save More & Simplify Procurement',
-              style: TextStyle(fontSize: 14),
+              style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400),
             ),
           ],
         ),
