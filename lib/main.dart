@@ -1,5 +1,6 @@
 import 'package:avatar/core/themes/light/light_theme_data.dart';
 import 'package:avatar/views/endCustomer/purchase/purchase_view.dart';
+import 'package:avatar/views/endCustomer/share/share_view.dart';
 import 'package:avatar/views/map/map_scree_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
       // If user is logged in, navigate to home page
       // If user is not logged in, navigate to select role page
       //home: SelectRoleView(),
-      home: ProductPage(),
+      home: share_view(),
     );
   }
 }
