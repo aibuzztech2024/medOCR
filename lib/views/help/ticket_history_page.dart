@@ -9,38 +9,39 @@ class TicketHistoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Initialize the controller using GetX
+    // Initialize the TicketController using GetX dependency injection
     final TicketController controller = Get.put(TicketController());
 
-    // Get screen dimensions using GetX (for responsiveness)
+    // Get screen dimensions for responsive UI
     double screenWidth = Get.width;
     double screenHeight = Get.height;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F8F8),
+      backgroundColor: const Color(0xFFF8F8F8), // Light background color
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: false,
-        leading: const BackButton(color: Colors.black),
+        leading: const BackButton(color: Colors.black), // Back button in app bar
         title: const Text(
-          'Ticket History',
+          'Ticket History', // Title of the page
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
         ),
       ),
       body: Padding(
+        // Padding around the content for proper spacing
         padding: EdgeInsets.symmetric(
           horizontal: screenWidth * 0.04,
           vertical: screenHeight * 0.01,
         ),
         child: Column(
           children: [
-            // Search input field
+            // Search bar widget - filters tickets dynamically
             _buildSearchBar(controller),
 
             SizedBox(height: screenHeight * 0.02),
 
-            // Header row with title and filter icon
+            // Header row containing "My Tickets" title and filter icon
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -50,7 +51,7 @@ class TicketHistoryPage extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    // TODO: Implement filter functionality
+                    // TODO: Add filter functionality here (e.g., open modal bottom sheet)
                     debugPrint('Filter icon tapped');
                   },
                   borderRadius: BorderRadius.circular(32),
@@ -69,10 +70,12 @@ class TicketHistoryPage extends StatelessWidget {
 
             SizedBox(height: screenHeight * 0.02),
 
-            // Scrollable ticket list that reacts to search/filter changes
+            // Expanded widget to fill remaining space with ticket list
             Expanded(
               child: Obx(() {
-                // Show message if no results found
+                // Reactive widget that rebuilds when filteredTickets changes
+
+                // Show message if no tickets match the search/filter
                 if (controller.filteredTickets.isEmpty) {
                   return const Center(
                     child: Text(
@@ -82,13 +85,14 @@ class TicketHistoryPage extends StatelessWidget {
                   );
                 }
 
-                // Scrollable list of tickets
+                // ListView to display all filtered tickets
                 return ListView.separated(
                   itemCount: controller.filteredTickets.length,
                   separatorBuilder: (_, __) =>
                       SizedBox(height: screenHeight * 0.015),
                   itemBuilder: (context, index) {
                     final ticket = controller.filteredTickets[index];
+                    // Build individual ticket card widget
                     return _buildTicketCard(ticket, screenWidth, screenHeight);
                   },
                 );
@@ -100,7 +104,8 @@ class TicketHistoryPage extends StatelessWidget {
     );
   }
 
-  /// Builds a styled and responsive search bar.
+  /// Builds the search input field with styling.
+  /// Calls controller.setSearchQuery on every change to filter tickets.
   Widget _buildSearchBar(TicketController controller) {
     return Container(
       height: 48,
@@ -121,11 +126,11 @@ class TicketHistoryPage extends StatelessWidget {
       ),
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: TextField(
-        onChanged: controller.setSearchQuery,
+        onChanged: controller.setSearchQuery, // Updates search query live
         style: const TextStyle(fontSize: 14, color: Colors.black87),
         decoration: const InputDecoration(
           prefixIcon: Icon(Icons.search, color: Colors.black, size: 28),
-          hintText: 'Search Help',
+          hintText: 'Search Help', // Placeholder text
           hintStyle: TextStyle(color: Colors.grey),
           border: InputBorder.none,
           focusedBorder: InputBorder.none,
@@ -137,16 +142,18 @@ class TicketHistoryPage extends StatelessWidget {
     );
   }
 
-  /// Builds a responsive ticket card UI.
+  /// Builds each ticket card displaying ticket details and status.
+  /// Provides a tap effect and responsive layout.
   Widget _buildTicketCard(TicketModel ticket, double width, double height) {
+    // Decide badge and text colors based on ticket status
     final badgeColor =
     ticket.status == "Resolved" ? Colors.green[100] : const Color(0xFFF4D2B3);
-    final textColor =
-    ticket.status == "Resolved" ? Colors.green : Colors.orange;
+    final textColor = ticket.status == "Resolved" ? Colors.green : Colors.orange;
 
     return InkWell(
       borderRadius: BorderRadius.circular(16),
       onTap: () {
+        // Handle ticket tap - e.g., navigate to details page or show more info
         debugPrint('Tapped ticket: ${ticket.ticketId}');
       },
       child: Container(
@@ -167,7 +174,7 @@ class TicketHistoryPage extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // Ticket info on the left side
+            // Left side: ticket title, ID, and date
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,7 +206,7 @@ class TicketHistoryPage extends StatelessWidget {
               ),
             ),
 
-            // Status badge and arrow icon
+            // Right side: status badge and arrow icon
             Row(
               children: [
                 Container(

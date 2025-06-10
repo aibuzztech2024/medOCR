@@ -1,46 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../viewModels/donate/campaign_view_model.dart';
+import '../home/widgets/overview_page.dart';
+import '../purchase/widgets/card_page.dart';
 import 'campaign_card_view.dart';
 
-/// Main campaign details page that includes the CampaignCardPage and other sections.
 class CampaignDetailsPage extends StatelessWidget {
+  // Initialize CampaignViewModel using GetX dependency injection
   final CampaignViewModel controller = Get.put(CampaignViewModel());
 
   @override
   Widget build(BuildContext context) {
+    // Get screen width and height for responsive sizing
     final width = Get.width;
     final height = Get.height;
 
     return Scaffold(
+      // AppBar with title, back button and basic styling
       appBar: AppBar(
         title: const Text(
           'Save a child from hunger',
-          style: TextStyle(
-            fontWeight: FontWeight.w500, // Makes the font normal weight
-          ),
+          style: TextStyle(fontWeight: FontWeight.w500),
         ),
         centerTitle: false,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => Get.back(),
+          onPressed: () => Get.back(), // Navigate back on tap
         ),
       ),
-
+      // Body wrapped in Obx to reactively rebuild when campaign changes
       body: Obx(() {
-        final campaign = controller.campaign.value;
+        final campaign = controller.campaign.value;  // Current campaign data
 
         return SingleChildScrollView(
-          padding: EdgeInsets.all(width * 0.04),
+          padding: EdgeInsets.all(width * 0.04), // Responsive padding
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              /// Campaign Card
+              // Custom widget displaying campaign card with main info
               CampaignCardView(campaign: campaign),
 
               SizedBox(height: height * 0.02),
 
-              /// Description
+              // Section header for description
               Text(
                 "Description",
                 style: TextStyle(
@@ -49,6 +51,8 @@ class CampaignDetailsPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: height * 0.01),
+
+              // Campaign description text with line height for readability
               Text(
                 campaign.description,
                 style: TextStyle(
@@ -59,10 +63,11 @@ class CampaignDetailsPage extends StatelessWidget {
 
               SizedBox(height: height * 0.04),
 
-              /// Organization Info
+              // Row containing organization logo, info, and Visit button
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Circular clipped organization logo
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: Image.asset(
@@ -72,7 +77,10 @@ class CampaignDetailsPage extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
+
                   SizedBox(width: width * 0.04),
+
+                  // Organization name and website in a column
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,7 +91,7 @@ class CampaignDetailsPage extends StatelessWidget {
                             fontWeight: FontWeight.w600,
                             fontSize: width * 0.042,
                           ),
-                          overflow: TextOverflow.ellipsis,
+                          overflow: TextOverflow.ellipsis, // Prevent overflow
                         ),
                         SizedBox(height: height * 0.005),
                         Text(
@@ -97,17 +105,21 @@ class CampaignDetailsPage extends StatelessWidget {
                       ],
                     ),
                   ),
+
+                  // Outlined button to visit organization website (add functionality)
                   OutlinedButton(
-                    onPressed: () { },
+                    onPressed: () {
+                      // TODO: Open organization website in browser
+                    },
                     style: OutlinedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8), // Smaller padding
-                      minimumSize: Size(0, 0), // Remove minimum size constraints
+                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      minimumSize: Size(0, 0),
                     ),
                     child: const Text(
                       "Visit",
                       style: TextStyle(
                         color: Colors.orange,
-                        fontSize: 14, // Smaller font size
+                        fontSize: 14,
                       ),
                     ),
                   )
@@ -116,19 +128,20 @@ class CampaignDetailsPage extends StatelessWidget {
 
               SizedBox(height: height * 0.04),
 
-              /// Bottom Buttons
+              // Buttons for "Go Back" and "Donate Now" side by side
               Wrap(
                 spacing: width * 0.04,
                 runSpacing: height * 0.02,
                 alignment: WrapAlignment.spaceBetween,
                 children: [
+                  // Go Back button - navigates back to previous screen
                   SizedBox(
-                    width: width * 0.42, // Always use percentage
+                    width: width * 0.42,
                     child: ElevatedButton(
                       onPressed: () => Get.back(),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFFFF7E6),
-                        foregroundColor: Colors.black,
+                        backgroundColor: const Color(0xFFFFF7E6), // Light orange background
+                        foregroundColor: Colors.black, // Text color
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
@@ -144,14 +157,16 @@ class CampaignDetailsPage extends StatelessWidget {
                       ),
                     ),
                   ),
+
+                  // Donate Now button - placeholder for donation logic
                   SizedBox(
-                    width: width * 0.42, // Always use percentage
+                    width: width * 0.42,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Handle donation
+                        // TODO: Implement donation functionality here
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFF99F1B),
+                        backgroundColor: const Color(0xFFF99F1B), // Orange background
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
@@ -170,7 +185,6 @@ class CampaignDetailsPage extends StatelessWidget {
                   ),
                 ],
               ),
-
               SizedBox(height: height * 0.04),
             ],
           ),

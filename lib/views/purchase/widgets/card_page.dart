@@ -1,17 +1,3 @@
-/// This is [CardPage]
-///
-/// Displays a list of cards showing:
-/// - Status (green dot) and time ago
-/// - Image with loading/error handling
-/// - Title, rating (number + stars)
-/// - Distance and ETA
-/// - Price
-/// - Buttons: View Details, Accept (disables on accept)
-///
-/// Uses GetX for reactive state management.
-/// Responsive UI based on screen size.
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../models/card/card_model.dart';
@@ -20,7 +6,7 @@ import '../../../viewModels/card/card_view_model.dart';
 class CardPage extends StatelessWidget {
   CardPage({Key? key}) : super(key: key);
 
-  // Static list of cards for display
+  // Static list of card data for demonstration
   final List<CardModel> cards = [
     CardModel(
       title: 'Pharma Chemist',
@@ -35,16 +21,16 @@ class CardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: ListView.builder(
-        itemCount: cards.length,
-        itemBuilder: (context, index) {
-          // Create and register CardViewModel with a unique tag for each card
-          final controller = Get.put(CardViewModel(cards[index]), tag: 'card_$index');
-          return ResponsiveCard(controller: controller);
-        },
-      ),
+    return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(), // Disable scrolling for inner list
+      shrinkWrap: true, // Make ListView only take needed height inside parent
+      itemCount: cards.length,
+      itemBuilder: (context, index) {
+        // Create a controller instance for each card with a unique tag
+        final controller = Get.put(CardViewModel(cards[index]), tag: 'card_$index');
+        // Build the UI card widget using the controller
+        return ResponsiveCard(controller: controller);
+      },
     );
   }
 }
@@ -54,18 +40,18 @@ class ResponsiveCard extends StatelessWidget {
 
   const ResponsiveCard({required this.controller, Key? key}) : super(key: key);
 
-  // Builds star rating icons based on the rating value
+  // Builds star rating icons based on the rating value (full, half, empty stars)
   List<Widget> buildStarRating(double rating) {
     return List<Widget>.generate(5, (index) {
       IconData icon;
       if (index < rating.floor()) {
-        icon = Icons.star;
+        icon = Icons.star; // Full star for integer rating part
       } else if (index == rating.floor() && rating - rating.floor() >= 0.5) {
-        icon = Icons.star_half;
+        icon = Icons.star_half; // Half star if decimal >= 0.5
       } else {
-        icon = Icons.star_border;
+        icon = Icons.star_border; // Empty star otherwise
       }
-      return Icon(icon, size: 16, color: Colors.amber); //Todo update the color
+      return Icon(icon, size: 16, color: Colors.amber);
     });
   }
 
@@ -83,22 +69,23 @@ class ResponsiveCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xFFFFF8F2), // Light cream background
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.grey, width: 1), //Todo update the color
+        border: Border.all(color: Colors.grey, width: 1),
       ),
       child: Obx(() {
+        // Reactive rebuild when any observable property changes in controller
         final data = controller.cardData;
 
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Status and time ago row
+            // Status dot and "time ago" label
             Row(
               children: [
                 Container(
                   width: 8,
                   height: 8,
                   decoration: const BoxDecoration(
-                    color: Colors.green, //Todo update the color
+                    color: Colors.green, // Online/active indicator
                     shape: BoxShape.circle,
                   ),
                 ),
@@ -112,7 +99,7 @@ class ResponsiveCard extends StatelessWidget {
 
             SizedBox(height: Get.height * 0.012),
 
-            // Image with loading and error handling
+            // Image with rounded corners, loading spinner, and error placeholder
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.network(
@@ -121,10 +108,10 @@ class ResponsiveCard extends StatelessWidget {
                 width: double.infinity,
                 fit: BoxFit.cover,
                 loadingBuilder: (context, child, progress) {
-                  if (progress == null) return child;
+                  if (progress == null) return child; // Image loaded
                   return Container(
                     height: imageHeight,
-                    color: Colors.grey[300], //Todo update the color
+                    color: Colors.grey[300],
                     alignment: Alignment.center,
                     child: CircularProgressIndicator(
                       value: progress.expectedTotalBytes != null
@@ -134,11 +121,12 @@ class ResponsiveCard extends StatelessWidget {
                   );
                 },
                 errorBuilder: (context, error, stackTrace) {
+                  // Show icon if image fails to load
                   return Container(
                     height: imageHeight,
                     color: Colors.grey[300],
                     alignment: Alignment.center,
-                    child: Icon(Icons.broken_image, size: Get.width * 0.2, color: Colors.grey[700]), //Todo update the color
+                    child: Icon(Icons.broken_image, size: Get.width * 0.2, color: Colors.grey[700]),
                   );
                 },
               ),
@@ -146,41 +134,37 @@ class ResponsiveCard extends StatelessWidget {
 
             SizedBox(height: Get.height * 0.015),
 
-            // Title, rating, and distance/ETA row
+            // Title, rating, distance, and estimated time of arrival (ETA)
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Left Column: Title and Rating
+                // Left side: Title and rating with stars
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       data.title.value,
-                      style: TextStyle(
-                        fontSize: Get.width * 0.045,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyle(fontSize: Get.width * 0.045, fontWeight: FontWeight.bold),
                     ),
                     Row(
                       children: [
                         Text(
-                          data.rating.value.toStringAsFixed(1),
-                          style: TextStyle(fontSize: Get.width * 0.035, color: Colors.black54),  //Todo update the color
+                          data.rating.value.toStringAsFixed(1), // e.g. 4.3
+                          style: TextStyle(fontSize: Get.width * 0.035, color: Colors.black54),
                         ),
                         const SizedBox(width: 4),
-                        Row(children: buildStarRating(data.rating.value)),
+                        Row(children: buildStarRating(data.rating.value)), // Star icons
                       ],
                     ),
                   ],
                 ),
-
-                // Right Column: Distance and ETA
+                // Right side: Distance and ETA
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
                       data.distance.value,
-                      style: TextStyle(fontSize: Get.width * 0.035, color: Colors.grey.shade700), //Todo update the color
+                      style: TextStyle(fontSize: Get.width * 0.035, color: Colors.grey.shade700),
                     ),
                     const SizedBox(height: 4),
                     Row(
@@ -189,7 +173,7 @@ class ResponsiveCard extends StatelessWidget {
                         const SizedBox(width: 4),
                         Text(
                           data.eta.value,
-                          style: TextStyle(fontSize: Get.width * 0.035, color: Colors.grey.shade800), //Todo update the color
+                          style: TextStyle(fontSize: Get.width * 0.035, color: Colors.grey.shade800),
                         ),
                       ],
                     )
@@ -200,15 +184,15 @@ class ResponsiveCard extends StatelessWidget {
 
             SizedBox(height: Get.height * 0.02),
 
-            // Price and buttons row
+            // Bottom row with price and action buttons
             Row(
               children: [
-                // Price Container
+                // Price badge with orange background
                 Expanded(
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: Get.height * 0.010),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFFFE6C8), //Todo update the color
+                      color: const Color(0xFFFFE6C8),
                       borderRadius: BorderRadius.circular(14),
                     ),
                     alignment: Alignment.center,
@@ -221,12 +205,14 @@ class ResponsiveCard extends StatelessWidget {
 
                 SizedBox(width: Get.width * 0.04),
 
-                // View Details Button
+                // "View Details" button in orange color
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      // TODO: Implement view details action
+                    },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange, //Todo update the color
+                      backgroundColor: Colors.orange,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                       padding: EdgeInsets.symmetric(vertical: Get.height * 0.010),
                     ),
@@ -239,12 +225,14 @@ class ResponsiveCard extends StatelessWidget {
 
                 SizedBox(width: Get.width * 0.04),
 
-                // Accept Button UI only (disabled and no click action)
+                // "Accept" button in green color (no action assigned here)
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {}, // disables the button, no click action
+                    onPressed: () {
+                      // TODO: Implement accept action or disable button
+                    },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green, // Disabled look
+                      backgroundColor: Colors.green,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                       padding: EdgeInsets.symmetric(vertical: Get.height * 0.010),
                     ),
@@ -254,7 +242,6 @@ class ResponsiveCard extends StatelessWidget {
                     ),
                   ),
                 ),
-
               ],
             ),
           ],
