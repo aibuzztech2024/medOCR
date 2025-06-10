@@ -1,4 +1,4 @@
-import 'package:avatar/views/enduser_phone_settings/edit_profilel.dart';
+import 'package:avatar/views/enduser_phone_settings/edit_profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -182,7 +182,7 @@ class ProfileCardWidget extends StatelessWidget {
 
   void _navigateToEditProfile() {
     Get.to(
-      () => EditProfilel(),
+      () => const EditProfilePage(),
       arguments: {
         'name': name,
         'email': email,

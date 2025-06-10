@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-class LabeledTextField extends StatelessWidget {
+class LabeledTextField extends StatefulWidget {
   final String label;
   final String? hintText;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final bool obscureText;
+  final bool isPassword; // New parameter for password functionality
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
   final void Function(String?)? onSaved;
@@ -26,6 +27,7 @@ class LabeledTextField extends StatelessWidget {
     this.controller,
     this.keyboardType,
     this.obscureText = false,
+    this.isPassword = false, // Default to false
     this.validator,
     this.onChanged,
     this.onSaved,
@@ -41,6 +43,13 @@ class LabeledTextField extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<LabeledTextField> createState() => _LabeledTextFieldState();
+}
+
+class _LabeledTextFieldState extends State<LabeledTextField> {
+  bool _isPasswordVisible = false;
+
+  @override
   Widget build(BuildContext context) {
     // Get screen width for responsive design
     final screenWidth = MediaQuery.of(context).size.width;
@@ -49,6 +58,10 @@ class LabeledTextField extends StatelessWidget {
     final horizontalPadding = screenWidth * 0.04; // 4% of screen width
     final verticalSpacing = screenWidth * 0.02; // 2% of screen width
     final fontSize = screenWidth * 0.04; // 4% of screen width, with constraints
+
+    // Determine if text should be obscured
+    bool shouldObscureText =
+        widget.isPassword ? !_isPasswordVisible : widget.obscureText;
 
     return Container(
       width: double.infinity,
@@ -62,9 +75,9 @@ class LabeledTextField extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(bottom: verticalSpacing.clamp(6.0, 12.0)),
             child: Text(
-              label,
+              widget.label,
               style:
-                  labelStyle ??
+                  widget.labelStyle ??
                   TextStyle(
                     fontSize: fontSize.clamp(14.0, 18.0),
                     fontWeight: FontWeight.w500,
@@ -72,42 +85,34 @@ class LabeledTextField extends StatelessWidget {
                   ),
             ),
           ),
-
           // Text field with container
           Container(
             decoration: BoxDecoration(
-              color: backgroundColor ?? Colors.white,
-              borderRadius: BorderRadius.circular(borderRadius ?? 6.0),
+              color: widget.backgroundColor ?? Colors.white,
+              borderRadius: BorderRadius.circular(widget.borderRadius ?? 6.0),
               border: Border.all(
-                color: borderColor ?? Colors.grey.shade300,
+                color: widget.borderColor ?? Colors.grey.shade300,
                 width: 1.0,
               ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.15),
-                  blurRadius: 4,
-                  offset: const Offset(0, 2),
-                ),
-              ],
             ),
             child: TextFormField(
-              controller: controller,
-              keyboardType: keyboardType,
-              obscureText: obscureText,
-              validator: validator,
-              onChanged: onChanged,
-              onSaved: onSaved,
-              enabled: enabled,
-              maxLines: maxLines,
-              minLines: minLines,
+              controller: widget.controller,
+              keyboardType: widget.keyboardType,
+              obscureText: shouldObscureText,
+              validator: widget.validator,
+              onChanged: widget.onChanged,
+              onSaved: widget.onSaved,
+              enabled: widget.enabled,
+              maxLines: widget.maxLines,
+              minLines: widget.minLines,
               style:
-                  textStyle ??
+                  widget.textStyle ??
                   TextStyle(
                     fontSize: fontSize.clamp(14.0, 16.0),
                     color: Colors.black87,
                   ),
               decoration: InputDecoration(
-                hintText: hintText,
+                hintText: widget.hintText,
                 hintStyle: TextStyle(
                   color: Colors.black87,
                   fontSize: fontSize.clamp(14.0, 16.0),
@@ -118,11 +123,30 @@ class LabeledTextField extends StatelessWidget {
                 errorBorder: InputBorder.none,
                 focusedErrorBorder: InputBorder.none,
                 contentPadding:
-                    contentPadding ??
+                    widget.contentPadding ??
                     EdgeInsets.symmetric(
                       horizontal: horizontalPadding.clamp(12.0, 16.0),
                       vertical: verticalSpacing.clamp(12.0, 16.0),
                     ),
+                // Add suffix icon for password toggle
+                suffixIcon:
+                    widget.isPassword
+                        ? IconButton(
+                          icon: Icon(
+                            _isPasswordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Colors.grey.shade600,
+                            size: fontSize.clamp(16.0, 20.0),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _isPasswordVisible = !_isPasswordVisible;
+                            });
+                          },
+                          splashRadius: 20,
+                        )
+                        : null,
               ),
             ),
           ),

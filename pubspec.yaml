@@ -28,7 +28,7 @@ dependencies:
   http: ^1.4.0
   permission_handler: ^11.3.0 # For handling Android permissions
   country_code_picker: ^3.3.0
-  
+  flutter_switch: ^0.3.2
 
 dev_dependencies:
   flutter_test:

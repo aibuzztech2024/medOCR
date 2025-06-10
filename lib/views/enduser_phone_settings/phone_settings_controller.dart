@@ -1,3 +1,6 @@
+import 'package:avatar/views/enduser_phone_settings/change_password_view.dart';
+import 'package:avatar/views/enduser_phone_settings/edit_account_information_view.dart';
+import 'package:avatar/views/enduser_phone_settings/notification_settings_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'menu_item_model.dart';
@@ -134,36 +137,17 @@ class ProfileSettingsController extends GetxController {
 
   /// Handle account information navigation
   void _handleAccountInformation() {
-    // Navigate to account information screen
-    Get.snackbar(
-      'Account Information',
-      'Navigating to account information screen',
-      snackPosition: SnackPosition.BOTTOM,
-    );
-    // TODO: Add navigation logic here
-    // Get.to(() => AccountInformationScreen());
+    Get.to(() => const EditAccountInformationView());
   }
 
   /// Handle change password navigation
   void _handleChangePassword() {
-    Get.snackbar(
-      'Change Password',
-      'Navigating to change password screen',
-      snackPosition: SnackPosition.BOTTOM,
-    );
-    // TODO: Add navigation logic here
-    // Get.to(() => ChangePasswordScreen());
+    Get.to(() => const ChangePasswordView());
   }
 
   /// Handle notification settings navigation
   void _handleNotificationSettings() {
-    Get.snackbar(
-      'Notification Settings',
-      'Navigating to notification settings screen',
-      snackPosition: SnackPosition.BOTTOM,
-    );
-    // TODO: Add navigation logic here
-    // Get.to(() => NotificationSettingsScreen());
+    Get.to(() => const NotificationSettingsView());
   }
 
   /// Handle clear search history action
