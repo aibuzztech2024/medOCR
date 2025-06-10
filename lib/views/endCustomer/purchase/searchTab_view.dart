@@ -1,4 +1,3 @@
-
 import 'package:avatar/views/endCustomer/purchase/widgets/dropdownfield.dart';
 import 'package:avatar/views/endCustomer/purchase/widgets/product_card.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +6,7 @@ import 'package:get/get.dart';
 import '../../../models/endCustomer/purchase/product_modal.dart';
 import '../../../viewModels/endCustomer/purchase/search_controller.dart';
 
-
-//---- TODO  change color all-
+/// To DO CHANGE COLOR IN SCREEN
 
 class searchTab_view extends StatelessWidget {
   const searchTab_view();
@@ -21,8 +19,10 @@ class searchTab_view extends StatelessWidget {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(12),
       child: Column(
+        spacing: 12,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          /// search field and bookmark sort
           Row(
             spacing: 12,
             children: [
@@ -34,7 +34,7 @@ class searchTab_view extends StatelessWidget {
                       isCollapsed: true,
 
                       hintText: 'Search by medicine name or categories',
-                      hintStyle: TextStyle(fontSize: 14),
+                      hintStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: Color.fromRGBO(146, 146, 146, 1)),
                       prefixIcon: Icon(Icons.search),
                       border: InputBorder.none,
                       enabledBorder: InputBorder.none,
@@ -54,23 +54,24 @@ class searchTab_view extends StatelessWidget {
                   ),
                 ),
               ),
-              Obx(() => IconButton(
-                icon: Icon(
-                  controller.sortByBookmark.value ? Icons.bookmark : Icons.bookmark_border,
-                  color:Colors.orange ,
+              Obx(
+                () => IconButton(
+                  icon: Icon(controller.sortByBookmark.value ? Icons.bookmark : Icons.bookmark_border, color: Colors.orange),
+                  onPressed: () {
+                    controller.sortByBookmark.toggle();
+                    controller.search(); // Re-run search with updated sort
+                  },
                 ),
-                onPressed: () {
-                  controller.sortByBookmark.toggle();
-                  controller.search(); // Re-run search with updated sort
-                },
-              )),
+              ),
+
+              ///---- TODO -- add a tap function of this icon-
               Icon(Icons.av_timer_rounded, color: Colors.orange),
             ],
           ),
-          const SizedBox(height: 12),
-          // ─── Brand Dropdown ───
+
+          /// ─── Brand Dropdown ───
           Obx(
-                () => DropdownField(
+            () => DropdownField(
               label: 'Select Brand',
               items: controller.brands,
               value: controller.selectedBrand.value,
@@ -81,11 +82,9 @@ class searchTab_view extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 12),
-
-          // ─── Manufacturer Dropdown ───
+          /// ─── Manufacturer Dropdown ───
           Obx(
-                () => DropdownField(
+            () => DropdownField(
               label: 'Select Manufacturer',
               items: controller.manufacturers,
               value: controller.selectedManu.value,
@@ -96,11 +95,9 @@ class searchTab_view extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 12),
-
-          // ─── Category Dropdown ───
+          /// ─── Category Dropdown ───
           Obx(
-                () => DropdownField(
+            () => DropdownField(
               label: 'Select Category',
               items: controller.categories,
               value: controller.selectedCategory.value,
@@ -111,12 +108,10 @@ class searchTab_view extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 12),
-
-          // ─── Search Button OR "X Products found" ───
+          /// ─── Search Button OR "X Products found" ───
           Obx(() {
             if (controller.products.isEmpty) {
-              // Show the button if no results yet
+              /// Show the button if no results yet
               return Center(
                 child: ElevatedButton(
                   onPressed: controller.search,
@@ -125,7 +120,7 @@ class searchTab_view extends StatelessWidget {
                 ),
               );
             } else {
-              // Once search is done, display how many found
+              /// Once search is done, display how many found
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: Text(
@@ -136,8 +131,9 @@ class searchTab_view extends StatelessWidget {
             }
           }),
 
-          const SizedBox(height: 20),
-          // ─── Product List ───
+          const SizedBox(height: 8),
+
+          /// ─── Product List ───
           Obx(() {
             if (controller.hasSearched.value && controller.products.isEmpty) {
               return Center(child: Text("No products found."));
@@ -164,8 +160,7 @@ class searchTab_view extends StatelessWidget {
             );
           }),
 
-          // ─── Pagination Bar (Only if more than 1 page) ───
-          const SizedBox(height: 12),
+          /// ─── Pagination Bar (Only if more than 1 page) ───
           Obx(() {
             final totalPages = controller.totalPages;
             final current = controller.currentPage.value;
@@ -199,7 +194,10 @@ class searchTab_view extends StatelessWidget {
                   onTap: () => controller.prevPage(),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text("Previous", style: TextStyle(color: current > 1 ? Colors.black : Colors.grey, fontSize: 14)),
+                    child: Text(
+                      "Previous",
+                      style: TextStyle(color: current > 1 ? Colors.black : Colors.grey, fontSize: 14, fontWeight: FontWeight.w400),
+                    ),
                   ),
                 ),
 
@@ -211,7 +209,10 @@ class searchTab_view extends StatelessWidget {
                   onTap: () => controller.nextPage(),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text("Next", style: TextStyle(color: current < totalPages ? Colors.black : Colors.grey, fontSize: 14)),
+                    child: Text(
+                      "Next",
+                      style: TextStyle(color: current < totalPages ? Colors.black : Colors.grey, fontSize: 14, fontWeight: FontWeight.w400),
+                    ),
                   ),
                 ),
               ],

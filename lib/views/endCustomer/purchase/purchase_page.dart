@@ -4,8 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../viewModels/endCustomer/purchase/search_controller.dart';
 
-
-//---- TODO  change color all----------------
+///---- TO DO  change color all----------------
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
 
@@ -33,23 +32,17 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
     final controller = Get.put(searchTabController());
 
     return Scaffold(
-     appBar:  AppBar(
-       backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
-            Text(
-              'Purchase',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              'Buy Better, Save More & Simplify Procurement',
-              style: TextStyle(fontSize: 14),
-            ),
+            Text('Purchase', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+            Text('Buy Better, Save More & Simplify Procurement', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
           ],
         ),
-      )
-,      body: Column(
+      ),
+      body: Column(
         children: [
           TabBar(
             dividerHeight: 0.0,
