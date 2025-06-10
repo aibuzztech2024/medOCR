@@ -1,14 +1,3 @@
-/// SubmitRequestPage - form with doctor & patient name inputs
-/// Uses reactive variables (GetX) for form fields
-/// Responsive layout using screen width
-
-/// Doctor’s Name TextField - updates reactive doctorName
-/// Patient’s Name TextField - updates reactive patientName
-
-/// Upload section with dotted border and upload icon
-/// Tap gesture placeholder for upload action (TODO)
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dotted_border/dotted_border.dart';

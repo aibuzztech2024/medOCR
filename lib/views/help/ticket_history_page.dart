@@ -140,7 +140,7 @@ class TicketHistoryPage extends StatelessWidget {
   /// Builds a responsive ticket card UI.
   Widget _buildTicketCard(TicketModel ticket, double width, double height) {
     final badgeColor =
-    ticket.status == "Resolved" ? Colors.green[100] : Colors.orange[100];
+    ticket.status == "Resolved" ? Colors.green[100] : const Color(0xFFF4D2B3);
     final textColor =
     ticket.status == "Resolved" ? Colors.green : Colors.orange;
 

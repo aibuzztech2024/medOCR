@@ -22,7 +22,7 @@ class TicketController extends GetxController {
 
   // Fetch tickets - currently generates static list of tickets
   void fetchTickets() {
-    tickets.value = List.generate(20, (index) {
+    tickets.value = List.generate(12, (index) {
       return TicketModel(
         title: 'Payment Issue',
         ticketId: '#342314232',
