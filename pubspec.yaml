@@ -43,6 +43,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/images/share/
 
 # Splash Screen
 flutter_native_splash:
