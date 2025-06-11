@@ -1,6 +1,6 @@
-import 'package:avatar/models/chart/chart_data.dart';
-import 'package:avatar/viewModels/chart/controller/chart_controller.dart';
-import 'package:avatar/views/chart/widgets/chart_legend_widget.dart';
+import 'package:avatar/models/endcustomerhome/chart_data.dart';
+import 'package:avatar/viewModels/endcustomerhome/controller/chart_controller.dart';
+import 'package:avatar/views/endcustomerhome/widget/chart_legend_widget.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

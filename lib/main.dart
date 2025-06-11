@@ -1,5 +1,4 @@
 import 'package:avatar/core/themes/light/light_theme_data.dart';
-import 'package:avatar/views/calender/widgets/upcoming_events_widget.dart';
 import 'package:avatar/views/earnings/earnings_screen.dart';
 import 'package:avatar/views/points/points_tabbar_container.dart';
 import 'package:avatar/views/points/transaction_screen.dart';

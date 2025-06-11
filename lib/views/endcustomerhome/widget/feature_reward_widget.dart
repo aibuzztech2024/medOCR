@@ -1,6 +1,6 @@
 import 'package:avatar/core/widgets/app_text.dart';
-import 'package:avatar/viewModels/rewards/controller/rewards_contoller.dart';
-import 'package:avatar/views/reward/widget/reward_card_widget.dart';
+import 'package:avatar/viewModels/endcustomerhome/controller/rewards_contoller.dart';
+import 'package:avatar/views/endcustomerhome/widget/reward_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +18,6 @@ class FeatureRewardsWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 60), //TODO remove this
         // ⏺️ Header: "Feature Rewards" title and "View All" button
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),

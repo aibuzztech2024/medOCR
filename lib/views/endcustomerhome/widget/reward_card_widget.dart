@@ -1,5 +1,5 @@
 import 'package:avatar/core/widgets/app_text.dart';
-import 'package:avatar/models/rewards/rewards_model.dart';
+import 'package:avatar/models/endcustomerhome/rewards_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

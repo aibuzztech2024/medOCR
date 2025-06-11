@@ -1,4 +1,4 @@
-import 'package:avatar/models/rewards/rewards_model.dart';
+import 'package:avatar/models/endcustomerhome/rewards_model.dart';
 import 'package:get/get.dart';
 
 class FeatureRewardsController extends GetxController {

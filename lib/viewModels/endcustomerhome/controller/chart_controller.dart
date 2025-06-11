@@ -1,4 +1,4 @@
-import 'package:avatar/models/chart/chart_data.dart';
+import 'package:avatar/models/endcustomerhome/chart_data.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 

@@ -1,11 +1,11 @@
 import 'package:avatar/core/utils/methods/navigate_to.dart';
 import 'package:avatar/viewModels/points/controller/points_tabbar_controller.dart';
-import 'package:avatar/views/calender/widgets/upcoming_events_widget.dart';
-import 'package:avatar/views/chart/chart_screen.dart';
+import 'package:avatar/views/endcustomerhome/widget/upcoming_events_widget.dart';
+import 'package:avatar/views/endcustomerhome/chart_screen.dart';
 import 'package:avatar/views/earnings/earnings_screen.dart';
 import 'package:avatar/views/points/transaction_screen.dart';
 import 'package:avatar/views/points/widget/reusable_tabbar.dart';
-import 'package:avatar/views/reward/rewards_screen.dart';
+import 'package:avatar/views/endcustomerhome/rewards_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
