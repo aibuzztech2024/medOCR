@@ -2,27 +2,10 @@ import 'package:get/get.dart';
 
 import '../../../models/endCustomer/purchase/product_modal.dart';
 
-// class searchTabController extends GetxController {
-//   var searchText = ''.obs;
-//   var selectedBrand = ''.obs;
-//   var selectedManufacturer = ''.obs;
-//   var selectedCategory = ''.obs;
-//
-//   var products = <Product>[].obs;
-//
-//   final brands = ['Cipla', 'Sun Pharma', 'Alkem'];
-//   final manufacturers = ['ABC Pharmaceuticals', 'XYZ Meds', 'Bharat Bio'];
-//   final categories = ['Antibiotics', 'Pain Killers', 'Vitamins'];
-//
-//   void search() {
-//     products.value = dummyData;
-//   }
-// }
-
 class searchTabController extends GetxController {
 
   // ──────────────── Observable Lists ────────────────
-  // All dummy products (hard-coded)
+  /// All dummy products (hard-coded)
   final List<Product> allProducts = <Product>[
     Product(
       imageUrl: 'assets/images/tablet.png',
@@ -299,7 +282,7 @@ class searchTabController extends GetxController {
   ];
 
 
-  // ──────────────── Filter / Search Inputs ────────────────
+  /// ──────────────── Filter / Search Inputs ────────────────
   var searchText = ''.obs;
   var selectedBrand = ''.obs;
   var selectedManu = ''.obs;
@@ -309,10 +292,10 @@ class searchTabController extends GetxController {
   var sortByBookmark = false.obs;
 
 
-  // The filtered subset that the UI will show
+  /// The filtered subset that the UI will show
   var products = <Product>[].obs;
 
-  // ──────────────── Pagination State ────────────────
+  /// ──────────────── Pagination State ────────────────
   final int itemsPerPage = 5;
   var currentPage = 1.obs;
 
@@ -328,13 +311,13 @@ class searchTabController extends GetxController {
     if (end > products.length) end = products.length;
     return products.sublist(start, end);
   }
-  // ──────────────── Dropdown Options ────────────────
+  /// ──────────────── Dropdown Options ────────────────
   final List<String> brands = ['Cipla', 'Sun Pharma', 'Alkem'];
   final List<String> manufacturers = ['ABC Pharmaceuticals', 'XYZ Meds', 'Bharat Bio'];
   final List<String> categories = ['Pain Relief', 'Antibiotics', 'Vitamins'];
 
 
-  // ──────────────── Clear Results Helper ────────────────
+  /// ──────────────── Clear Results Helper ────────────────
   // Call this whenever any filter changes, so the UI goes back to showing the Search button.
   void clearResults() {
     products.clear();
@@ -342,7 +325,7 @@ class searchTabController extends GetxController {
     hasSearched.value = false;
 
   }
-  // ──────────────── Filter / Search Logic ────────────────
+  /// ──────────────── Filter / Search Logic ────────────────
   void search() {
     final txt = searchText.value.trim().toLowerCase();
     final brandFilter = selectedBrand.value;
@@ -363,7 +346,7 @@ class searchTabController extends GetxController {
           return matchesName && matchesBrand && matchesManu && matchesCat;
         }).toList();
 
-    // 🔽 Sort by bookmark if enabled
+    /// 🔽 Sort by bookmark if enabled
     if (sortByBookmark.value) {
       temp.sort((a, b) {
         if (a.isBookmarked == b.isBookmarked) return 0;
@@ -376,7 +359,7 @@ class searchTabController extends GetxController {
 
   }
 
-  // ──────────────── Pagination Controls ────────────────
+  /// ──────────────── Pagination Controls ────────────────
   void goToPage(int page) {
     if (page >= 1 && page <= totalPages) {
       currentPage.value = page;

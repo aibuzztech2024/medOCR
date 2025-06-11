@@ -18,7 +18,7 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 7, vsync: this);
   }
 
   @override
@@ -43,20 +43,40 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
         ),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TabBar(
             dividerHeight: 0.0,
+            isScrollable: true,
             controller: _tabController,
             labelColor: Colors.orange,
             indicatorColor: Colors.orange,
-            tabs: const [Tab(text: "Search"), Tab(text: "Submit Request"), Tab(text: "Order Discussion")],
+
+            tabAlignment: TabAlignment.start,
+            tabs: const [
+              Tab(text: "Search"),
+              Tab(text: "Submit Request"),
+              Tab(text: "Order Discussion"),
+              Tab(text: "Submit Request"),
+              Tab(text: "Order Discussion"),
+              Tab(text: "Submit Request"),
+              Tab(text: "Order Discussion"),
+            ],
           ),
 
           Expanded(
             child: TabBarView(
               controller: _tabController,
 
-              children: [searchTab_view(), Center(child: Text("Submit Request")), Center(child: Text("Order Discussion"))],
+              children: [
+                searchTab_view(),
+                Center(child: Text("Submit Request")),
+                Center(child: Text("Order Discussion")),
+                Center(child: Text("Submit Request")),
+                Center(child: Text("Order Discussion")),
+                Center(child: Text("Submit Request")),
+                Center(child: Text("Order Discussion")),
+              ],
             ),
           ),
         ],

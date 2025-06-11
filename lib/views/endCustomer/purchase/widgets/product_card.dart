@@ -105,10 +105,15 @@ class ProductCard extends StatelessWidget {
                           : Material(
                             elevation: 0,
                             borderRadius: BorderRadius.circular(8),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                              decoration: BoxDecoration(color: Colors.orange, borderRadius: BorderRadius.circular(8)),
-                              child: Text("Add to Cart", style: const TextStyle(fontSize: 16, color: Colors.white)),
+                            child: InkWell(
+                              onTap: (){
+                                Get.snackbar("Success", "Product added to Cart" ,snackPosition: SnackPosition.BOTTOM ,);
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                                decoration: BoxDecoration(color: Colors.orange, borderRadius: BorderRadius.circular(8)),
+                                child: Text("Add to Cart", style: const TextStyle(fontSize: 16, color: Colors.white)),
+                              ),
                             ),
                           ),
                     ],

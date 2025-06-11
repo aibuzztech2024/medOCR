@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DropdownField extends StatelessWidget {
   final String label;
@@ -21,14 +22,19 @@ class DropdownField extends StatelessWidget {
           isExpanded: true,
           isDense: true,
           alignment: Alignment.bottomCenter,
+          dropdownColor: context.theme.scaffoldBackgroundColor,
           // hint: Text(label),
           value: value.isEmpty ? null : value,
           onChanged: (val) {
-            onChanged(val ?? ''); // optional: pass empty string when null is selected
+            onChanged(val ?? ''); /// optional: pass empty string when null is selected
           },
           items: [
             const DropdownMenuItem<String>(value: null, child: Text('None', style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black))),
-            ...items.map((e) => DropdownMenuItem(value: e, child: Text(e, style: const TextStyle(fontWeight: FontWeight.w600, color: Colors.black)))),
+
+            ...items.map((e) => DropdownMenuItem(value: e, child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
+              child: Text(e, style: const TextStyle(fontWeight: FontWeight.w600, color: Colors.black)),
+            ))),
           ],
         ),
       ],

@@ -131,7 +131,7 @@ class searchTab_view extends StatelessWidget {
             }
           }),
 
-          const SizedBox(height: 8),
+          // const SizedBox(height: 8),
 
           /// ─── Product List ───
           Obx(() {
@@ -189,7 +189,7 @@ class searchTab_view extends StatelessWidget {
             return Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Previous Button
+                /// Previous Button
                 GestureDetector(
                   onTap: () => controller.prevPage(),
                   child: Padding(
@@ -201,10 +201,10 @@ class searchTab_view extends StatelessWidget {
                   ),
                 ),
 
-                // Page Number Buttons
+                /// Page Number Buttons
                 ...pageButtons,
 
-                // Next Button
+                /// Next Button
                 GestureDetector(
                   onTap: () => controller.nextPage(),
                   child: Padding(

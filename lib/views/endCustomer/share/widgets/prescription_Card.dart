@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../models/endCustomer/share/prescription_Modal.dart';
 
+
+/// TO-DO  change icons acc to figma designs
 class PrescriptionCard extends StatelessWidget {
   final PrescriptionDetail detail;
   final VoidCallback? onEdit;
