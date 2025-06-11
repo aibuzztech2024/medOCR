@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../viewModels/donate/campaign_view_model.dart';
-import '../home/widgets/overview_page.dart';
-import '../purchase/widgets/card_page.dart';
-import 'campaign_card_view.dart';
+import '../../../viewModels/donate/campaign_view_model.dart';
+import '../../home/widgets/overview_page.dart';
+import '../../purchase/widgets/card_page.dart';
+import '../widgets/campaign_card_view.dart';
 
 class CampaignDetailsPage extends StatelessWidget {
   // Initialize CampaignViewModel using GetX dependency injection

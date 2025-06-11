@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../models/donate/campaign_model.dart';
-import '../../viewModels/donate/campaign_view_model.dart';
+import '../../../models/donate/campaign_model.dart';
+import '../../../viewModels/donate/campaign_view_model.dart';
 
 class CampaignCardView extends StatefulWidget {
   final CampaignModel campaign;
