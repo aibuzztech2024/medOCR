@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LabeledTextField extends StatefulWidget {
-  final String label;
+  final String? label;
   final String? hintText;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
@@ -15,6 +15,7 @@ class LabeledTextField extends StatefulWidget {
   final int? minLines;
   final TextStyle? labelStyle;
   final TextStyle? textStyle;
+  final TextStyle? hintStyle;
   final Color? backgroundColor;
   final Color? borderColor;
   final double? borderRadius;
@@ -22,7 +23,7 @@ class LabeledTextField extends StatefulWidget {
 
   const LabeledTextField({
     Key? key,
-    required this.label,
+    this.label,
     this.hintText,
     this.controller,
     this.keyboardType,
@@ -36,6 +37,7 @@ class LabeledTextField extends StatefulWidget {
     this.minLines,
     this.labelStyle,
     this.textStyle,
+    this.hintStyle,
     this.backgroundColor,
     this.borderColor,
     this.borderRadius = 6.0,
@@ -65,26 +67,26 @@ class _LabeledTextFieldState extends State<LabeledTextField> {
 
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(
-        horizontal: horizontalPadding.clamp(12.0, 24.0),
-      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Label text
-          Padding(
-            padding: EdgeInsets.only(bottom: verticalSpacing.clamp(6.0, 12.0)),
-            child: Text(
-              widget.label,
-              style:
-                  widget.labelStyle ??
-                  TextStyle(
-                    fontSize: fontSize.clamp(14.0, 18.0),
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black87,
-                  ),
+          if (widget.label != null)
+            Padding(
+              padding: EdgeInsets.only(
+                bottom: verticalSpacing.clamp(6.0, 12.0),
+              ),
+              child: Text(
+                widget.label!,
+                style:
+                    widget.labelStyle ??
+                    TextStyle(
+                      fontSize: fontSize.clamp(14.0, 18.0),
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black87,
+                    ),
+              ),
             ),
-          ),
           // Text field with container
           Container(
             decoration: BoxDecoration(
@@ -113,10 +115,12 @@ class _LabeledTextFieldState extends State<LabeledTextField> {
                   ),
               decoration: InputDecoration(
                 hintText: widget.hintText,
-                hintStyle: TextStyle(
-                  color: Colors.black87,
-                  fontSize: fontSize.clamp(14.0, 16.0),
-                ),
+                hintStyle:
+                    widget.hintStyle ??
+                    TextStyle(
+                      color: Colors.black87,
+                      fontSize: fontSize.clamp(14.0, 16.0),
+                    ),
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,

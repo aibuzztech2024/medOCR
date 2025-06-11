@@ -52,9 +52,7 @@ class StyledCountryPicker extends StatelessWidget {
             4.0);
 
     // Default margin with left padding to match other form fields
-    final defaultMargin = EdgeInsets.only(
-      left: horizontalPadding.clamp(12.0, 16.0),
-    );
+    final defaultMargin = EdgeInsets.zero;
 
     return Container(
       margin: margin ?? defaultMargin,

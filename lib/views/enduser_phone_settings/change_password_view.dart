@@ -64,51 +64,53 @@ class ChangePasswordView extends StatelessWidget {
   Widget _buildBody(ChangePasswordController controller) {
     return GetBuilder<ChangePasswordController>(
       builder: (controller) {
-        return Column(
-          children: [
-            // Current password display (read-only)
-            LabeledTextDisplay(
-              label: 'Current Password',
-              value: controller.currentPasswordDisplay,
-              backgroundColor: Colors.grey.shade50,
-            ),
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+          child: Column(
+            children: [
+              // Current password display (read-only)
+              LabeledTextDisplay(
+                label: 'Current Password',
+                value: controller.currentPasswordDisplay,
+              ),
 
-            // Responsive vertical spacing between fields
-            SizedBox(height: _getVerticalSpacing(Get.context!)),
+              // Responsive vertical spacing between fields
+              SizedBox(height: _getVerticalSpacing(Get.context!)),
 
-            // New password input field
-            LabeledTextField(
-              label: 'New Password',
-              controller: controller.newPasswordController,
-              isPassword: true, // Hide password input for security
-            ),
+              // New password input field
+              LabeledTextField(
+                label: 'New Password',
+                controller: controller.newPasswordController,
+                isPassword: true, // Hide password input for security
+              ),
 
-            // Responsive vertical spacing between fields
-            SizedBox(height: _getVerticalSpacing(Get.context!)),
+              // Responsive vertical spacing between fields
+              SizedBox(height: _getVerticalSpacing(Get.context!)),
 
-            // Retype password input field for confirmation
-            LabeledTextField(
-              label: 'Retype Password',
-              controller: controller.retypePasswordController,
-              isPassword: true, // Hide password input for security
-            ),
+              // Retype password input field for confirmation
+              LabeledTextField(
+                label: 'Retype Password',
+                controller: controller.retypePasswordController,
+                isPassword: true, // Hide password input for security
+              ),
 
-            // Add some spacing before potential action buttons
-            SizedBox(height: _getVerticalSpacing(Get.context!) * 2),
+              // Add some spacing before potential action buttons
+              SizedBox(height: _getVerticalSpacing(Get.context!) * 2),
 
-            // Optional: Add a submit button with loading state
-            // Uncomment the following lines if you want to add a submit button
-            /*
-            Obx(() => ElevatedButton(
-              onPressed: controller.isLoading.value 
-                ? null 
-                : () => controller.changePassword(),
-              child: controller.isLoading.value
-                ? const CircularProgressIndicator()
-                : const Text('Change Password'),
-            )),
-            */
-          ],
+              // Optional: Add a submit button with loading state
+              // Uncomment the following lines if you want to add a submit button
+              /*
+              Obx(() => ElevatedButton(
+                onPressed: controller.isLoading.value 
+                  ? null 
+                  : () => controller.changePassword(),
+                child: controller.isLoading.value
+                  ? const CircularProgressIndicator()
+                  : const Text('Change Password'),
+              )),
+              */
+            ],
+          ),
         );
       },
     );

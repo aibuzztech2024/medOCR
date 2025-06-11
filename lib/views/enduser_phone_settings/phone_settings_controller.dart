@@ -1,6 +1,10 @@
+import 'package:avatar/core/widgets/app_button.dart';
+import 'package:avatar/core/widgets/app_text.dart';
 import 'package:avatar/views/enduser_phone_settings/change_password_view.dart';
 import 'package:avatar/views/enduser_phone_settings/edit_account_information_view.dart';
 import 'package:avatar/views/enduser_phone_settings/notification_settings_view.dart';
+import 'package:avatar/views/enduser_phone_settings/widgets/custom_popup.dart';
+import 'package:avatar/views/enduser_phone_settings/widgets/labeled_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'menu_item_model.dart';
@@ -155,25 +159,42 @@ class ProfileSettingsController extends GetxController {
     // Show confirmation dialog before clearing
     Get.dialog(
       AlertDialog(
-        title: const Text('Clear Search History'),
-        content: const Text(
-          'Are you sure you want to clear your search history?',
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            AppText(
+              'Do you want clear your recent history',
+              style: TextStyle(fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AppButton(
+                  padding: EdgeInsets.zero,
+                  height: 36,
+                  width: 89,
+                  type: ButtonType.outlined,
+                  text: 'No',
+                  onPressed: () => Get.back(),
+                ),
+                const SizedBox(width: 10),
+                AppButton(
+                  padding: EdgeInsets.zero,
+                  height: 36,
+                  width: 89,
+                  color: Color(0xFFB0020A),
+                  type: ButtonType.filled,
+                  text: 'Yes',
+                  onPressed:
+                      () => Get.back(), // TODO: Add clear search history logic
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            AppText('Your Saved data is cleared.✅'),
+          ],
         ),
-        actions: [
-          TextButton(onPressed: () => Get.back(), child: const Text('Cancel')),
-          TextButton(
-            onPressed: () {
-              // Perform clear search history logic
-              Get.back();
-              Get.snackbar(
-                'Success',
-                'Search history cleared successfully',
-                snackPosition: SnackPosition.BOTTOM,
-              );
-            },
-            child: const Text('Clear'),
-          ),
-        ],
       ),
     );
   }
@@ -182,82 +203,335 @@ class ProfileSettingsController extends GetxController {
   void _handleClearSavedData() {
     Get.dialog(
       AlertDialog(
-        title: const Text('Clear Saved Data'),
-        content: const Text('Are you sure you want to clear all saved data?'),
-        actions: [
-          TextButton(onPressed: () => Get.back(), child: const Text('Cancel')),
-          TextButton(
-            onPressed: () {
-              // Perform clear saved data logic
-              Get.back();
-              Get.snackbar(
-                'Success',
-                'Saved data cleared successfully',
-                snackPosition: SnackPosition.BOTTOM,
-              );
-            },
-            child: const Text('Clear'),
-          ),
-        ],
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            AppText(
+              'Do you want clear your Saved Data',
+              style: TextStyle(fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AppButton(
+                  padding: EdgeInsets.zero,
+                  height: 36,
+                  width: 89,
+                  type: ButtonType.outlined,
+                  text: 'No',
+                  onPressed: () => Get.back(),
+                ),
+                const SizedBox(width: 10),
+                AppButton(
+                  padding: EdgeInsets.zero,
+                  height: 36,
+                  width: 89,
+                  color: Color(0xFFB0020A),
+                  type: ButtonType.filled,
+                  text: 'Yes',
+                  onPressed:
+                      () => Get.back(), // TODO: Add clear search history logic
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            AppText('Your Saved data is cleared.✅'),
+          ],
+        ),
       ),
     );
   }
 
   /// Handle delete account action
   void _handleDeleteAccount() {
+    String? selectedReason;
+    TextEditingController otherReasonController = TextEditingController();
+
+    final List<String> reasons = [
+      'I found a better alternative',
+      'The app is hard to use',
+      'Not getting enough value',
+      'Just taking a break',
+      'Other (please specify)',
+    ];
+
     Get.dialog(
-      AlertDialog(
-        title: const Text('Delete Account'),
-        content: const Text(
-          'Are you sure you want to delete your account? This action cannot be undone.',
-        ),
-        actions: [
-          TextButton(onPressed: () => Get.back(), child: const Text('Cancel')),
-          TextButton(
-            onPressed: () {
-              // Perform delete account logic
-              Get.back();
-              Get.snackbar(
-                'Account Deletion',
-                'Account deletion process initiated',
-                snackPosition: SnackPosition.BOTTOM,
-                backgroundColor: Colors.red,
-                colorText: Colors.white,
+      Dialog(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        child: Container(
+          width: Get.width * 0.95, // Set dialog width to 90% of screen width
+          constraints: BoxConstraints(
+            maxWidth: 400, // Maximum width for larger screens
+            maxHeight: Get.height * 0.8, // Maximum height
+          ),
+          padding: EdgeInsets.all(24),
+          child: StatefulBuilder(
+            builder: (context, setState) {
+              return SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Title
+                    AppText(
+                      'Do you want to delete your profile ?',
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                      textAlign: TextAlign.center,
+                    ),
+
+                    const SizedBox(height: 16),
+
+                    // Action buttons
+                    Row(
+                      children: [
+                        Expanded(
+                          child: AppButton(
+                            color: Colors.black,
+                            padding: EdgeInsets.zero,
+                            height: 36,
+                            type: ButtonType.outlined,
+                            text: 'No',
+                            onPressed: () => Get.back(),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: AppButton(
+                            padding: EdgeInsets.zero,
+                            height: 36,
+                            color: Color(0xFFB0020A),
+                            type: ButtonType.filled,
+                            text: 'Yes',
+                            onPressed: () => Get.back(),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 24),
+
+                    // Sorry message
+                    AppText(
+                      'We are sorry you are going, Please select your reason',
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
+
+                    const SizedBox(height: 10), // Reduced from 24
+                    // Radio button options with reduced gaps
+                    ...reasons.map((reason) {
+                      return Container(
+                        // Reduced from default spacing
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              selectedReason = reason;
+                            });
+                          },
+                          borderRadius: BorderRadius.circular(8),
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical:
+                                  8, // Slightly increased for better touch target
+                              horizontal: 4,
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: AppText(
+                                    reason,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                                Radio<String>(
+                                  value: reason,
+                                  groupValue: selectedReason,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      selectedReason = value;
+                                    });
+                                  },
+                                  activeColor: Color(0xFFFF9800),
+                                  materialTapTargetSize:
+                                      MaterialTapTargetSize
+                                          .shrinkWrap, // Reduces radio button size
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    }).toList(),
+
+                    const SizedBox(height: 12), // Reduced from 16
+                    // Text field for "Other" reason
+                    LabeledTextField(
+                      hintText: 'Specify your reason (10 words)',
+                      borderColor: Colors.grey,
+                      controller: otherReasonController,
+                      hintStyle: TextStyle(color: Colors.black, fontSize: 13),
+                    ),
+
+                    const SizedBox(height: 20), // Reduced from 24
+                    // Submit button
+                    Center(
+                      child: AppButton(
+                        padding: EdgeInsets.zero,
+                        height: 40,
+                        width: 79,
+                        color:
+                            selectedReason != null
+                                ? Color(0xFFFF9800)
+                                : Colors.grey.shade300,
+                        type: ButtonType.filled,
+                        text: 'Submit',
+                        onPressed: //TODO: Add account deletion logic
+                            selectedReason != null
+                                ? () {
+                                  // Handle submit
+                                  String reason = selectedReason!;
+                                  String otherText = otherReasonController.text;
+
+                                  // Log the selected reason
+                                  print('Selected reason: $reason');
+                                  if (reason == 'Other (please specify)' &&
+                                      otherText.isNotEmpty) {
+                                    print('Other reason: $otherText');
+                                  }
+
+                                  Get.back();
+
+                                  // Show confirmation
+                                  Get.snackbar(
+                                    'Account Deletion',
+                                    'Account deletion request submitted',
+                                    snackPosition: SnackPosition.BOTTOM,
+                                    backgroundColor: Colors.green,
+                                    colorText: Colors.white,
+                                  );
+
+                                  // TODO: Add actual account deletion API call here
+                                  // _performAccountDeletion(reason, otherText);
+                                }
+                                : null,
+                      ),
+                    ),
+                  ],
+                ),
               );
             },
-            child: const Text('Delete', style: TextStyle(color: Colors.red)),
           ),
-        ],
+        ),
       ),
     );
   }
 
-  /// Handle terms of usage navigation
   void _handleTermsOfUsage() {
-    Get.snackbar(
-      'Terms of Usage',
-      'Opening terms of usage',
-      snackPosition: SnackPosition.BOTTOM,
+    ReusablePopupDialog.show(
+      context: Get.context!,
+      title: 'Terms of Usage',
+      sections: [
+        const DialogSection(
+          title: '1. Introduction',
+          content:
+              'Welcome to Avatar ("Company", "we", "our", "us")! '
+              'These Terms of Service ("Terms", "Terms of Service") govern your '
+              'use of our mobile application and services (together or individually "Service") '
+              'operated by Avatar. Our Privacy Policy also governs your use of our Service '
+              'and explains how we collect, safeguard and disclose information that results from your use of our services. '
+              'Your agreement with these Terms includes these Terms and our Privacy Policy ("Agreements"). '
+              'By visiting our application you acknowledge that you have read and understood Agreements, '
+              'and agree to be bound by them.',
+        ),
+        const DialogSection(
+          title: '2. Communications',
+          content:
+              'By using our Service, you agree to subscribe to newsletters, '
+              'marketing or promotional materials and other information we may send. '
+              'However, you may opt out of receiving any, or all, of these communications from us '
+              'by following the unsubscribe link or by contacting us through the app settings. '
+              'If you do not agree with (or cannot comply with) these Terms, you may not use the Service. '
+              'However, please let us know by emailing our support team, so we can try to find a solution. ',
+        ),
+      ],
+      barrierDismissible: true,
+      sectionBackgroundColor: Colors.orange.shade50,
+      sectionSpacing: 16,
     );
-    // TODO: Add navigation or web view logic here
   }
 
   /// Handle privacy policy navigation
   void _handlePrivacyPolicy() {
-    Get.snackbar(
-      'Privacy Policy',
-      'Opening privacy policy',
-      snackPosition: SnackPosition.BOTTOM,
+    ReusablePopupDialog.show(
+      context: Get.context!,
+      title: 'Privacy Policy',
+      sections: [
+        const DialogSection(
+          title: '1. Introduction',
+          content:
+              'Welcome to Avatar ("Company", "we", "our", "us")! '
+              'These Terms of Service ("Terms", "Terms of Service") govern your '
+              'use of our mobile application and services (together or individually "Service") '
+              'operated by Avatar. Our Privacy Policy also governs your use of our Service '
+              'and explains how we collect, safeguard and disclose information that results from your use of our services. '
+              'Your agreement with these Terms includes these Terms and our Privacy Policy ("Agreements"). '
+              'By visiting our application you acknowledge that you have read and understood Agreements, '
+              'and agree to be bound by them.',
+        ),
+        const DialogSection(
+          title: '2. Communications',
+          content:
+              'By using our Service, you agree to subscribe to newsletters, '
+              'marketing or promotional materials and other information we may send. '
+              'However, you may opt out of receiving any, or all, of these communications from us '
+              'by following the unsubscribe link or by contacting us through the app settings. '
+              'If you do not agree with (or cannot comply with) these Terms, you may not use the Service. '
+              'However, please let us know by emailing our support team, so we can try to find a solution. ',
+        ),
+      ],
+      barrierDismissible: true,
+      sectionBackgroundColor: Colors.orange.shade50,
+      sectionSpacing: 16,
     );
     // TODO: Add navigation or web view logic here
   }
 
   /// Handle disclaimer navigation
   void _handleDisclaimer() {
-    Get.snackbar(
-      'Disclaimer',
-      'Opening disclaimer',
-      snackPosition: SnackPosition.BOTTOM,
+    ReusablePopupDialog.show(
+      context: Get.context!,
+      title: 'Disclaimer',
+      sections: [
+        const DialogSection(
+          title: '1. Introduction',
+          content:
+              'Welcome to Avatar ("Company", "we", "our", "us")! '
+              'These Terms of Service ("Terms", "Terms of Service") govern your '
+              'use of our mobile application and services (together or individually "Service") '
+              'operated by Avatar. Our Privacy Policy also governs your use of our Service '
+              'and explains how we collect, safeguard and disclose information that results from your use of our services. '
+              'Your agreement with these Terms includes these Terms and our Privacy Policy ("Agreements"). '
+              'By visiting our application you acknowledge that you have read and understood Agreements, '
+              'and agree to be bound by them.',
+        ),
+        const DialogSection(
+          title: '2. Communications',
+          content:
+              'By using our Service, you agree to subscribe to newsletters, '
+              'marketing or promotional materials and other information we may send. '
+              'However, you may opt out of receiving any, or all, of these communications from us '
+              'by following the unsubscribe link or by contacting us through the app settings. '
+              'If you do not agree with (or cannot comply with) these Terms, you may not use the Service. '
+              'However, please let us know by emailing our support team, so we can try to find a solution. ',
+        ),
+      ],
+      barrierDismissible: true,
+      sectionBackgroundColor: Colors.orange.shade50,
+      sectionSpacing: 16,
     );
     // TODO: Add navigation or web view logic here
   }

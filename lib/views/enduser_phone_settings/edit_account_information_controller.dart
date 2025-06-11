@@ -56,7 +56,6 @@ class EditAccountInformationController extends GetxController {
     super.onInit();
     _initializeControllers();
     _setupTextControllerListeners();
-    _loadInitialData();
   }
 
   @override
@@ -88,17 +87,6 @@ class EditAccountInformationController extends GetxController {
     dobController.addListener(_updateUserDetailsFromControllers);
     addressController.addListener(_updateUserDetailsFromControllers);
     pincodeController.addListener(_updateUserDetailsFromControllers);
-  }
-
-  /// Load initial data into controllers (placeholder values from original code)
-  void _loadInitialData() {
-    // Setting initial placeholder data as per original implementation
-    nameController.text = 'Guarav';
-    emailController.text = 'guarav@gmail.com';
-    pincodeController.text = '22317';
-
-    // Update the reactive model with initial data
-    _updateUserDetailsFromControllers();
   }
 
   /// Dispose text editing controllers to prevent memory leaks

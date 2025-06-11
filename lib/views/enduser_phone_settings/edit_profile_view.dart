@@ -62,7 +62,11 @@ class EditProfilePage extends StatelessWidget {
         child: Container(
           width: _getContentWidth(),
           // Add bottom padding to account for the navigation bar
-          padding: EdgeInsets.only(bottom: _getVerticalSpacing()),
+          padding: EdgeInsets.only(
+            bottom: _getVerticalSpacing(),
+            left: 16.0,
+            right: 16.0,
+          ),
           child: Column(
             children: [
               SizedBox(height: _getTopSpacing()),
@@ -81,16 +85,14 @@ class EditProfilePage extends StatelessWidget {
   /// Build profile image section
   Widget _buildProfileSection() {
     final args = Get.arguments;
-    return ProfileImageWidget(
-      imageUrl: args?['profileImageUrl'],
-      onEditPressed: () {
-        // TODO: Implement image editing functionality
-        Get.snackbar(
-          'Edit Profile Image',
-          'Image editing functionality coming soon',
-          snackPosition: SnackPosition.BOTTOM,
-        );
-      },
+    final viewModel = Get.find<EditProfileViewModel>();
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: ProfileImageWidget(
+        showEditButton: true,
+        imageUrl: args?['profileImageUrl'],
+        onEditPressed: viewModel.navigateToEditAvatar,
+      ),
     );
   }
 
@@ -128,6 +130,8 @@ class EditProfilePage extends StatelessWidget {
       children: [
         // Country code picker
         StyledCountryPicker(onSelect: viewModel.onCountrySelected),
+
+        SizedBox(width: _getVerticalSpacing() * 0.5),
 
         // Phone number input field
         Expanded(

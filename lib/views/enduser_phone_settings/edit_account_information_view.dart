@@ -75,9 +75,10 @@ class EditAccountInformationView extends StatelessWidget {
       child: Center(
         child: Container(
           width: controller.getContentWidth(context),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
           child: Column(
             children: [
-              SizedBox(height: controller.getTopSpacing(context)),
+              SizedBox(height: controller.getTopSpacing(context) * 0.3),
               _buildFormSection(context, controller),
             ],
           ),
@@ -102,7 +103,7 @@ class EditAccountInformationView extends StatelessWidget {
         SizedBox(height: controller.getVerticalSpacing(context)),
 
         // Phone number section with country picker
-        _buildPhoneSection(controller),
+        _buildPhoneSection(context, controller),
         SizedBox(height: controller.getVerticalSpacing(context)),
 
         // Date of Birth input field
@@ -139,7 +140,7 @@ class EditAccountInformationView extends StatelessWidget {
     return LabeledTextField(
       label: 'Name',
       controller: controller.nameController,
-      hintText: 'Guarav',
+      hintText: 'Gaurav',
     );
   }
 
@@ -153,7 +154,10 @@ class EditAccountInformationView extends StatelessWidget {
   }
 
   /// Build phone section with country code picker and phone input
-  Widget _buildPhoneSection(EditAccountInformationController controller) {
+  Widget _buildPhoneSection(
+    BuildContext context,
+    EditAccountInformationController controller,
+  ) {
     return Row(
       children: [
         // Country code picker widget - handles its own state
@@ -162,6 +166,9 @@ class EditAccountInformationView extends StatelessWidget {
             controller.onCountryCodeSelected(value);
           },
         ),
+
+        // Spacing between country code and phone number
+        SizedBox(width: controller.getVerticalSpacing(context) * 0.5),
 
         // Phone number input field
         Expanded(
@@ -239,7 +246,7 @@ class EditAccountInformationView extends StatelessWidget {
         Expanded(child: _buildStateDropdown(controller)),
 
         // Small spacing between the two dropdowns
-        SizedBox(width: controller.getVerticalSpacing(context) * 0.001),
+        SizedBox(width: controller.getVerticalSpacing(context) * 0.5),
 
         // City dropdown - takes half the width
         Expanded(child: _buildCityDropdown(controller)),

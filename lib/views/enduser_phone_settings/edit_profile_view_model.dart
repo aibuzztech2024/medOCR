@@ -1,6 +1,7 @@
 // ============================================================================
 // VIEW MODEL: Business logic and state management
 // ============================================================================
+import 'package:avatar/views/enduser_phone_settings/edit_avatar_view.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -47,5 +48,10 @@ class EditProfileViewModel extends GetxController {
   /// Handle country selection
   void onCountrySelected(Country country) {
     selectedCountry.value = country;
+  }
+
+  /// Navigate to edit avatar selection page
+  void navigateToEditAvatar() {
+    Get.to(() => AvatarSelectionPage());
   }
 }
