@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../../models/hospital/hospital_place_model.dart';
-import '../../../viewModels/map/hospital_place_controller.dart';
+import '../../models/hospital/hospital_place_model.dart';
 import 'package:avatar/core/widgets/app_button.dart';
 import 'package:avatar/core/widgets/app_text.dart';
 
@@ -76,7 +74,7 @@ class HospitalCard extends StatelessWidget {
                     Row(
                       children: List.generate(
                         5,
-                        (index) =>
+                            (index) =>
                             Icon(Icons.star, size: 14, color: Colors.amber),
                       ),
                     ),
@@ -132,31 +130,5 @@ class HospitalCard extends StatelessWidget {
         ],
       ),
     );
-  }
-}
-
-class HospitalPlaceList extends StatelessWidget {
-  final controller = Get.put(HospitalPlaceController());
-
-  @override
-  Widget build(BuildContext context) {
-    return Obx(() {
-      if (controller.isLoading.value) {
-        return Center(child: CircularProgressIndicator());
-      }
-      return GridView.builder(
-        padding: EdgeInsets.all(8),
-        itemCount: controller.hospitalList.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 12,
-          mainAxisSpacing: 12,
-          childAspectRatio: 0.7,
-        ),
-        itemBuilder: (context, index) {
-          return HospitalCard(hospital: controller.hospitalList[index]);
-        },
-      );
-    });
   }
 }

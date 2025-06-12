@@ -2,6 +2,7 @@ import 'package:avatar/core/widgets/app_text.dart';
 import 'package:avatar/core/widgets/height_box.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../core/themes/light/light_theme_colors.dart';
 
 /// A custom button widget that represents a selectable option,
 /// such as a role, filter, or choice in a form or selection screen.
@@ -74,7 +75,10 @@ class SelectableButton extends StatelessWidget {
               AppText.heading(
                 title,
                 fontSize: 16,
-                color: isSelected ? Colors.white : context.theme.primaryColor,
+                color:
+                    isSelected
+                        ? LightThemeColors.buttonText
+                        : context.theme.primaryColor,
               ),
               HeightBox(2),
               // Display the subtitle or description text
@@ -84,7 +88,10 @@ class SelectableButton extends StatelessWidget {
                 fontWeight: FontWeight.w400,
                 overflow:
                     TextOverflow.ellipsis, // Handle overflow with ellipsis
-                color: isSelected ? Colors.white70 : context.theme.primaryColor,
+                color:
+                    isSelected
+                        ? LightThemeColors.buttonText.withOpacity(0.7)
+                        : context.theme.primaryColor,
               ),
             ],
           ),

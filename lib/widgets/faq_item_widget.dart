@@ -1,6 +1,6 @@
 // lib/widgets/faq_item_widget.dart
 import 'package:flutter/material.dart';
-
+import '../core/widgets/app_text.dart';
 import '../models/map/faq_model.dart';
 
 class FAQItemWidget extends StatelessWidget {
@@ -15,14 +15,12 @@ class FAQItemWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Q: ${item.question}',
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          ),
+          AppText.heading('Q: ${item.question}', fontSize: 16),
           const SizedBox(height: 8),
-          Text(
+          AppText.body(
             'A: ${item.answer}',
-            style: TextStyle(color: Colors.grey[700], fontSize: 14),
+            fontSize: 14,
+            color: Colors.grey[700],
           ),
         ],
       ),

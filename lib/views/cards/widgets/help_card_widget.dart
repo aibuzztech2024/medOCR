@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../../core/constants/icons_paths.dart';
+import '../../../core/constants/image_paths.dart';
 import '../../../core/widgets/promotion_card_widget.dart';
-import '../../../models/map/card_model.dart';
+import '../../../models/cards/card_model.dart';
 
 // TODO: Ui for refferal card
 
@@ -12,42 +14,39 @@ class HelpCardWidget extends StatelessWidget {
     CardModel(
       title: "Need Help?",
       subtitle: "Contact to our team for help",
-      imagePath:
-          "assets/images/gradient-affiliate-marketing-illustrationhelp1.png",
+      imagePath: ImagePaths.helpCard1,
       buttonLabel: "Chat Now",
       gradientColors: [
         Color(0xFFFAF6EC), // #FAF6EC (4.97%)
         Color(0xFFF6BF59),
       ],
       subtitleColor: Colors.black38,
-      icon: SvgPicture.asset('assets/icons/bx_chat.svg'),
+      icon: SvgPicture.asset(IconsPaths.bxChat),
       titleColor: Colors.black54,
     ),
     CardModel(
       title: "Need Help?",
       subtitle: "Contact to our team for help",
-      imagePath:
-          "assets/images/gradient-affiliate-marketing-illustrationhelp2.png",
+      imagePath: ImagePaths.helpCard2,
       buttonLabel: "Mail Now",
       gradientColors: [
         Color(0xFFCAD4FF), // #CAD4FF
         Color(0xFF1443C1), // #1443C1
       ],
-      icon: SvgPicture.asset('assets/icons/mail.svg'),
+      icon: SvgPicture.asset(IconsPaths.mail),
       titleColor: Colors.black54,
       subtitleColor: Colors.black38,
     ),
     CardModel(
       title: "Need Help?",
       subtitle: "Contact to our team for help",
-      imagePath:
-          "assets/images/gradient-affiliate-marketing-illustrationhelp3.png",
+      imagePath: ImagePaths.helpCard3,
       buttonLabel: "Report Now",
       gradientColors: [
         Color(0xFFFFE1E2), // #FFE1E2
         Color(0xFFC2595B), // #C2595B
       ],
-      icon: SvgPicture.asset('assets/icons/solar_danger-broken.svg'),
+      icon: SvgPicture.asset(IconsPaths.solarDangerBroken),
       titleColor: Colors.black54,
       subtitleColor: Colors.black38,
     ),
@@ -57,8 +56,9 @@ class HelpCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ReferralCard(
+    return SizedBox(
+      height: 200, // Fixed height for the help cards
+      child: ReferralCard(
         autoScrollDuration: Duration(seconds: 3),
         cards: helpcards,
         onButtonPressed: (buttonLabel) {

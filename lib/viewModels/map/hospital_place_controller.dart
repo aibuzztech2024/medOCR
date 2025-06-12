@@ -1,7 +1,8 @@
 // controllers/hospital_controller.dart
 import 'package:get/get.dart';
 
-import '../../models/map/hospital_place_model.dart';
+import '../../core/constants/image_paths.dart';
+import '../../models/hospital/hospital_place_model.dart';
 
 class HospitalPlaceController extends GetxController {
   var hospitalList = <HospitalPlaceModel>[].obs;
@@ -24,7 +25,7 @@ class HospitalPlaceController extends GetxController {
         "address": "Flat no.7, 11th floor, Chembur, Mumbai.",
         "rating": 4.3,
         "reviews": 3723,
-        "imageUrl": "assets/images/hostiple.png",
+        "imageUrl": ImagePaths.hospitalImage,
       },
     );
 

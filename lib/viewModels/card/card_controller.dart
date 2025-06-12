@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 
-import '../../models/map/card_model.dart';
+import '../../models/cards/card_model.dart';
 //Todo: card controller
 
 // TODO: Consider adding swipe detection logic here

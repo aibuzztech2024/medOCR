@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 
 class WidthBox extends StatelessWidget {
   final double width;
+  final double? height;
 
   /// It takes [width] as parameter and adds equivalent blank space
-  const WidthBox(this.width, {super.key});
+  /// Optional [height] parameter can be provided to set both dimensions
+  const WidthBox(this.width, {this.height, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(width: width);
+    return SizedBox(width: width, height: height);
   }
 }
