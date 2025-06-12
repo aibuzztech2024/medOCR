@@ -43,12 +43,13 @@ class EditProfilePage extends StatelessWidget {
       ),
       bottomNavigationBar: CustomNavBar(
         cancelText: 'Cancel',
-        submitText: 'Save Changes',
+        submitText: 'Submit',
         onCancel: () {
           // Handle cancel action
           Navigator.pop(context);
         },
         onSubmit: () {
+          //TODO: Handle submit action
           // Handle save changes action
         },
       ),
@@ -90,7 +91,7 @@ class EditProfilePage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: ProfileImageWidget(
         showEditButton: true,
-        imageUrl: args?['profileImageUrl'],
+        imageUrl: 'assets/images/character_1.png',
         onEditPressed: viewModel.navigateToEditAvatar,
       ),
     );

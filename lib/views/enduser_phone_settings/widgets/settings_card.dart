@@ -1,9 +1,11 @@
 import 'package:avatar/views/enduser_phone_settings/menu_item_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 /// Reusable Settings Menu Widget
 /// A customizable widget that displays a list of menu items in a card-like container
 /// with consistent styling and interaction handling
+/// Supports both IconData and SVG assets for icons
 class SettingsMenuWidget extends StatelessWidget {
   // List of menu items to display
   final List<MenuItemModel> menuItems;
@@ -64,7 +66,7 @@ class SettingsMenuWidget extends StatelessWidget {
   }
 
   /// Build individual menu item widget
-  /// Creates a tappable row with icon, title, and arrow indicator
+  /// Creates a tappable row with icon (IconData or SVG), title, and arrow indicator
   /// [item] - The menu item model containing the data to display
   Widget _buildMenuItem(MenuItemModel item) {
     return InkWell(
@@ -75,14 +77,9 @@ class SettingsMenuWidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
         child: Row(
           children: [
-            // Leading icon for the menu item
-            Icon(
-              item.icon,
-              size: iconSize ?? 15.0,
-              color: item.iconColor ?? iconColor ?? Colors.black,
-            ),
+            // Leading icon for the menu item (supports both IconData and SVG)
+            _buildIcon(item),
             const SizedBox(width: 16.0),
-
             // Expandable title text
             Expanded(
               child: Text(
@@ -96,16 +93,36 @@ class SettingsMenuWidget extends StatelessWidget {
                     ),
               ),
             ),
-
             // Trailing arrow indicator
-            Icon(
-              Icons.chevron_right,
-              size: 20.0,
-              color: arrowColor ?? Colors.black87,
-            ),
+            if (item.showArrow)
+              Icon(
+                Icons.chevron_right,
+                size: 20.0,
+                color: arrowColor ?? Colors.black87,
+              ),
           ],
         ),
       ),
     );
+  }
+
+  /// Build the appropriate icon widget based on the menu item type
+  /// Returns either an Icon widget for IconData or SvgPicture for SVG assets
+  Widget _buildIcon(MenuItemModel item) {
+    final size = iconSize ?? 18.0;
+    final color = item.iconColor ?? iconColor ?? Colors.black;
+
+    if (item.isSvg) {
+      return SvgPicture.asset(
+        item.svgAsset!,
+        width: size,
+        height: size,
+        colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+        placeholderBuilder:
+            (context) => Icon(Icons.error_outline, size: size, color: color),
+      );
+    } else {
+      return Icon(item.icon!, size: size, color: color);
+    }
   }
 }

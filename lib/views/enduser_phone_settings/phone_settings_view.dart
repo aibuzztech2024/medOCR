@@ -61,7 +61,7 @@ class ProfileSettingsView extends StatelessWidget {
       return ProfileCardWidget(
         name: userProfile.name,
         email: userProfile.email,
-        profileImageUrl: userProfile.profileImageUrl,
+        profileImageAsset: userProfile.profileImageAsset,
       );
     });
   }

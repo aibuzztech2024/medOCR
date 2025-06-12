@@ -59,13 +59,15 @@ class NotificationSettingsViewModel extends GetxController {
   /// Get checkbox menu items for reactive UI
   List<CheckboxMenuItemModel> get checkboxMenuItems => [
     CheckboxMenuItemModel(
-      icon: Icons.import_contacts,
+      svgAsset:
+          'assets/icons/settings_section/notification_page/regulatory_alert_icon.svg',
       title: 'Regulatory Alerts',
       isChecked: _regulatoryAlerts.value,
       onChanged: toggleRegulatoryAlerts,
     ),
     CheckboxMenuItemModel(
-      icon: Icons.import_contacts,
+      svgAsset:
+          'assets/icons/settings_section/notification_page/promotion_and_offers_icon.svg',
       title: 'Promotions & Offers',
       isChecked: _promotionsOffers.value,
       onChanged: togglePromotionsOffers,

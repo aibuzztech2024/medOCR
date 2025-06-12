@@ -20,6 +20,9 @@ class LabeledTextField extends StatefulWidget {
   final Color? borderColor;
   final double? borderRadius;
   final EdgeInsetsGeometry? contentPadding;
+  final Widget? suffixIcon; // New parameter for custom suffix icon
+  final bool readOnly; // New parameter for read-only state
+  final VoidCallback? onTap; // New parameter for tap callback
 
   const LabeledTextField({
     Key? key,
@@ -42,6 +45,9 @@ class LabeledTextField extends StatefulWidget {
     this.borderColor,
     this.borderRadius = 6.0,
     this.contentPadding,
+    this.suffixIcon,
+    this.readOnly = false, // Default to false
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -107,6 +113,8 @@ class _LabeledTextFieldState extends State<LabeledTextField> {
               enabled: widget.enabled,
               maxLines: widget.maxLines,
               minLines: widget.minLines,
+              readOnly: widget.readOnly,
+              onTap: widget.onTap,
               style:
                   widget.textStyle ??
                   TextStyle(
@@ -150,7 +158,8 @@ class _LabeledTextFieldState extends State<LabeledTextField> {
                           },
                           splashRadius: 20,
                         )
-                        : null,
+                        : widget
+                            .suffixIcon, // Use the custom suffix icon if provided
               ),
             ),
           ),

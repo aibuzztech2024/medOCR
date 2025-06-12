@@ -1,26 +1,71 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 /// Model class for checkbox menu items
 class CheckboxMenuItemModel {
-  final IconData icon;
+  final IconData? icon;
+  final String? svgAsset;
   final String title;
   final RxBool isChecked;
   final VoidCallback? onChanged;
   final Color? iconColor;
 
   CheckboxMenuItemModel({
-    required this.icon,
+    this.icon,
+    this.svgAsset,
     required this.title,
     required bool isChecked,
     this.onChanged,
     this.iconColor,
-  }) : isChecked = isChecked.obs;
+  }) : isChecked = isChecked.obs,
+       assert(
+         icon != null || svgAsset != null,
+         'Either icon or svgAsset must be provided',
+       ),
+       assert(
+         !(icon != null && svgAsset != null),
+         'Cannot provide both icon and svgAsset',
+       );
+
+  /// Factory constructor for regular icons
+  factory CheckboxMenuItemModel.withIcon({
+    required IconData icon,
+    required String title,
+    required bool isChecked,
+    VoidCallback? onChanged,
+    Color? iconColor,
+  }) {
+    return CheckboxMenuItemModel(
+      icon: icon,
+      title: title,
+      isChecked: isChecked,
+      onChanged: onChanged,
+      iconColor: iconColor,
+    );
+  }
+
+  /// Factory constructor for SVG assets
+  factory CheckboxMenuItemModel.withSvg({
+    required String svgAsset,
+    required String title,
+    required bool isChecked,
+    VoidCallback? onChanged,
+    Color? iconColor,
+  }) {
+    return CheckboxMenuItemModel(
+      svgAsset: svgAsset,
+      title: title,
+      isChecked: isChecked,
+      onChanged: onChanged,
+      iconColor: iconColor,
+    );
+  }
 }
 
 /// Reusable Checkbox Settings Menu Widget
 /// A customizable widget that displays a list of checkbox menu items in a card-like container
-/// with consistent styling and interaction handling
+/// with consistent styling and interaction handling. Supports both regular icons and SVG assets
 class CheckboxSettingsWidget extends StatelessWidget {
   // List of checkbox menu items to display
   final List<CheckboxMenuItemModel> menuItems;
@@ -101,12 +146,8 @@ class CheckboxSettingsWidget extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 4.0),
             child: Row(
               children: [
-                // Leading icon for the menu item
-                Icon(
-                  item.icon,
-                  size: iconSize ?? 20.0,
-                  color: item.iconColor ?? iconColor ?? Colors.grey[600],
-                ),
+                // Leading icon for the menu item (supports both regular icons and SVG)
+                _buildIcon(item),
                 const SizedBox(width: 16.0),
 
                 // Expandable title text
@@ -137,6 +178,23 @@ class CheckboxSettingsWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  /// Build icon widget - supports both regular icons and SVG assets
+  Widget _buildIcon(CheckboxMenuItemModel item) {
+    final double size = iconSize ?? 16.0;
+    final Color color = item.iconColor ?? iconColor ?? Colors.black!;
+
+    if (item.svgAsset != null) {
+      return SvgPicture.asset(
+        item.svgAsset!,
+        width: size,
+        height: size,
+        colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+      );
+    } else {
+      return Icon(item.icon!, size: size, color: color);
+    }
   }
 
   /// Toggle checkbox state and trigger callback

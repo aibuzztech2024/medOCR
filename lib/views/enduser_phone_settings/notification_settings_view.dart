@@ -36,8 +36,9 @@ class NotificationSettingsView extends StatelessWidget {
 
             // In-App Notifications Toggle - Reactive UI
             Obx(
-              () => ToggleSettingCard(
-                icon: Icons.import_contacts,
+              () => ToggleSettingCard.withSvg(
+                svgAsset:
+                    'assets/icons/settings_section/notification_page/in_app_notification_icon.svg',
                 title: 'In-App Notifications',
                 initialValue: viewModel.inAppNotifications,
                 onChanged: viewModel.toggleInAppNotifications,
@@ -46,8 +47,9 @@ class NotificationSettingsView extends StatelessWidget {
 
             // Email Notifications Toggle - Reactive UI
             Obx(
-              () => ToggleSettingCard(
-                icon: Icons.import_contacts,
+              () => ToggleSettingCard.withSvg(
+                svgAsset:
+                    'assets/icons/settings_section/notification_page/email_notification_icon.svg',
                 title: 'Email Notification',
                 initialValue: viewModel.emailNotifications,
                 onChanged: viewModel.toggleEmailNotifications,
@@ -56,8 +58,9 @@ class NotificationSettingsView extends StatelessWidget {
 
             // Push Notifications Toggle - Reactive UI
             Obx(
-              () => ToggleSettingCard(
-                icon: Icons.import_contacts,
+              () => ToggleSettingCard.withSvg(
+                svgAsset:
+                    'assets/icons/settings_section/notification_page/push_notification_icon.svg',
                 title: 'Push Notification',
                 initialValue: viewModel.pushNotifications,
                 onChanged: viewModel.togglePushNotifications,

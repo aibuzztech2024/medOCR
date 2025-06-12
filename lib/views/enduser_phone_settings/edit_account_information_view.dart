@@ -190,6 +190,36 @@ class EditAccountInformationView extends StatelessWidget {
       controller: controller.dobController,
       hintText: 'DD/MM/YYYY',
       keyboardType: TextInputType.datetime,
+      suffixIcon: IconButton(
+        onPressed: () async {
+          final DateTime? picked = await showDatePicker(
+            initialEntryMode: DatePickerEntryMode.calendar,
+            initialDatePickerMode: DatePickerMode.year,
+            context: Get.context!,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(1900),
+            lastDate: DateTime.now(),
+            builder: (context, child) {
+              return Theme(
+                data: Theme.of(context).copyWith(
+                  colorScheme: ColorScheme.light(
+                    primary: Theme.of(context).primaryColor,
+                    onPrimary: Colors.white,
+                    surface: Colors.white,
+                    onSurface: Colors.black,
+                  ),
+                ),
+                child: child!,
+              );
+            },
+          );
+          if (picked != null) {
+            controller.dobController.text =
+                '${picked.day}/${picked.month}/${picked.year}';
+          }
+        },
+        icon: Icon(Icons.calendar_month_outlined),
+      ),
     );
   }
 
@@ -316,7 +346,7 @@ class EditAccountInformationView extends StatelessWidget {
     return Obx(
       () => CustomNavBar(
         cancelText: 'Cancel',
-        submitText: controller.isLoading ? 'Saving...' : 'Save Changes',
+        submitText: controller.isLoading ? 'Saving...' : 'Save Change',
         // Disable buttons during loading to prevent multiple submissions
         onCancel:
             controller.isLoading

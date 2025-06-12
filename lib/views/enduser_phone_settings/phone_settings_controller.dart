@@ -18,8 +18,7 @@ class ProfileSettingsController extends GetxController {
       UserProfileModel(
         name: 'Guarav Yadav',
         email: 'guarav12@gmail.com',
-        profileImageUrl:
-            'https://img.freepik.com/free-photo/portrait-smiling-cute-little-girl_23-2147851843.jpg',
+        profileImageAsset: 'assets/images/character_1.png',
       ).obs;
 
   // Observable list of settings sections
@@ -53,18 +52,21 @@ class ProfileSettingsController extends GetxController {
       SettingsSection(
         title: 'Account Settings',
         menuItems: [
-          MenuItemModel(
-            icon: Icons.person_outline_sharp,
+          MenuItemModel.withSvg(
+            svgAsset:
+                'assets/icons/settings_section/home_page/account_information_icon.svg',
             title: 'Account Information',
             onTap: () => _handleAccountInformation(),
           ),
-          MenuItemModel(
-            icon: Icons.lock_outline,
+          MenuItemModel.withSvg(
+            svgAsset:
+                'assets/icons/settings_section/home_page/change_password_2.svg',
             title: 'Change Password',
             onTap: () => _handleChangePassword(),
           ),
-          MenuItemModel(
-            icon: Icons.notifications_none_outlined,
+          MenuItemModel.withSvg(
+            svgAsset:
+                'assets/icons/settings_section/home_page/notification_icon.svg',
             title: 'Notification',
             onTap: () => _handleNotificationSettings(),
           ),
@@ -75,18 +77,21 @@ class ProfileSettingsController extends GetxController {
       SettingsSection(
         title: 'Privacy Settings',
         menuItems: [
-          MenuItemModel(
-            icon: Icons.history_outlined,
+          MenuItemModel.withSvg(
+            svgAsset:
+                'assets/icons/settings_section/home_page/clear_search_icon.svg',
             title: 'Clear Search History',
             onTap: () => _handleClearSearchHistory(),
           ),
-          MenuItemModel(
-            icon: Icons.paste_outlined,
+          MenuItemModel.withSvg(
+            svgAsset:
+                'assets/icons/settings_section/home_page/clear_saved_data_icon.svg',
             title: 'Clear Saved Data',
             onTap: () => _handleClearSavedData(),
           ),
-          MenuItemModel(
-            icon: Icons.delete_forever_outlined,
+          MenuItemModel.withSvg(
+            svgAsset:
+                'assets/icons/settings_section/home_page/delete_account_icon.svg',
             title: 'Delete Account',
             onTap: () => _handleDeleteAccount(),
           ),
@@ -97,20 +102,26 @@ class ProfileSettingsController extends GetxController {
       SettingsSection(
         title: 'Terms and Conditions',
         menuItems: [
-          MenuItemModel(
-            icon: Icons.file_present_outlined,
+          MenuItemModel.withSvg(
+            svgAsset:
+                'assets/icons/settings_section/home_page/terms_of_usage_icon.svg',
             title: 'Terms of Usage',
             onTap: () => _handleTermsOfUsage(),
+            showArrow: false,
           ),
-          MenuItemModel(
-            icon: Icons.privacy_tip_outlined,
+          MenuItemModel.withSvg(
+            svgAsset:
+                'assets/icons/settings_section/home_page/privacy_policy_icon.svg',
             title: 'Privacy Policy',
             onTap: () => _handlePrivacyPolicy(),
+            showArrow: false,
           ),
-          MenuItemModel(
-            icon: Icons.warning_amber_outlined,
+          MenuItemModel.withSvg(
+            svgAsset:
+                'assets/icons/settings_section/home_page/disclaimer_icon.svg',
             title: 'Disclaimer',
             onTap: () => _handleDisclaimer(),
+            showArrow: false,
           ),
         ],
       ),
@@ -119,10 +130,11 @@ class ProfileSettingsController extends GetxController {
       SettingsSection(
         title: 'Exit & Session',
         menuItems: [
-          MenuItemModel(
-            icon: Icons.logout_outlined,
-            title: 'Logout',
+          MenuItemModel.withSvg(
+            svgAsset:
+                'assets/icons/settings_section/home_page/logout_2_icon.svg',
             iconColor: Colors.red,
+            title: 'Logout',
             onTap: () => _handleLogout(),
           ),
         ],
@@ -159,6 +171,8 @@ class ProfileSettingsController extends GetxController {
     // Show confirmation dialog before clearing
     Get.dialog(
       AlertDialog(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -203,6 +217,8 @@ class ProfileSettingsController extends GetxController {
   void _handleClearSavedData() {
     Get.dialog(
       AlertDialog(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

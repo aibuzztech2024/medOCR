@@ -58,7 +58,8 @@ class CustomNavBar extends StatelessWidget {
                 ),
               ),
               onPressed: onCancel,
-              color: Colors.yellow.shade100,
+              color: Color(0xFFFFF8E9),
+
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               borderRadius: 8,
               height: 41,
@@ -76,7 +77,8 @@ class CustomNavBar extends StatelessWidget {
                 ),
               ),
               onPressed: onSubmit,
-              color: submitBackgroundColor ?? const Color(0xFFFF8C42),
+              color: Color(0xFFF79E1B),
+
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               borderRadius: 8,
               height: 41,

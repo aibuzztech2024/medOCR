@@ -184,7 +184,7 @@ class AvatarSelectionPage extends StatelessWidget {
       ),
       bottomNavigationBar: CustomNavBar(
         cancelText: 'Cancel',
-        submitText: 'Save Changes',
+        submitText: 'Change',
         onCancel: controller.cancelChanges,
         onSubmit: controller.saveChanges,
       ),

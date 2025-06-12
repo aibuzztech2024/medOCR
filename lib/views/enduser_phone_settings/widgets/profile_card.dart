@@ -5,14 +5,14 @@ import 'package:get/get.dart';
 class ProfileCardWidget extends StatelessWidget {
   final String name;
   final String email;
-  final String? profileImageUrl;
+  final String? profileImageAsset;
   final VoidCallback? onEditPressed;
 
   const ProfileCardWidget({
     Key? key,
     required this.name,
     required this.email,
-    this.profileImageUrl,
+    this.profileImageAsset,
     this.onEditPressed,
   }) : super(key: key);
 
@@ -97,11 +97,11 @@ class ProfileCardWidget extends StatelessWidget {
         color: Colors.grey[200],
       ),
       child:
-          profileImageUrl != null
+          profileImageAsset != null
               ? ClipRRect(
                 borderRadius: BorderRadius.circular(size / 2),
-                child: Image.network(
-                  profileImageUrl!,
+                child: Image.asset(
+                  profileImageAsset!,
                   width: size,
                   height: size,
                   fit: BoxFit.cover,
@@ -186,7 +186,7 @@ class ProfileCardWidget extends StatelessWidget {
       arguments: {
         'name': name,
         'email': email,
-        'profileImageUrl': profileImageUrl,
+        'profileImageAsset': profileImageAsset,
       },
     );
   }
