@@ -1,4 +1,4 @@
-import 'dart:ui'; // For blur filter
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:avatar/views/donate/widgets/donate_campaign_card.dart';
@@ -222,7 +222,7 @@ class DonatePage extends StatelessWidget {
   }
 }
 
-// Simple header without animation
+// Simple header
 class _SimpleHeader extends StatelessWidget {
   final String text;
   final String buttonText;

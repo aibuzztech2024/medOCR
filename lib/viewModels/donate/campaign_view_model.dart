@@ -15,7 +15,7 @@ class CampaignViewModel extends GetxController {
     "Support underprivileged children by providing them with the opportunities they deserve — access to quality education, nutritious daily meals, and a nurturing environment. Millions of children from marginalized communities face daily hardships: empty stomachs, lack of school supplies, and a future filled with uncertainty. With your help, we can fund books, uniforms, transportation, hygiene essentials, and ensure no child is held back due to poverty. Every donation brings us closer to a world where every child can dream, learn, and thrive with dignity.",
     organizationName: "Bharat Seva Mandal",
     organizationWebsite: "www.bharatsevamandal.com",
-    imageUrl: "assets/images/food_donate.jpg",
+    imageUrl: "assets/images/campaign.jpg",
     organizationLogoUrl: "assets/images/bsm.jpg",
   ).obs;
 

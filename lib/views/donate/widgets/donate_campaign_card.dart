@@ -85,7 +85,8 @@ class DonateCampaignCard extends StatelessWidget {
                       SizedBox(height: screenHeight * 0.006),
                       Row(
                         children: [
-                          Icon(Icons.location_on, size: screenWidth * 0.04, color: Colors.grey),
+                          Icon(Icons.location_on,
+                              size: screenWidth * 0.04, color: Colors.grey),
                           SizedBox(width: screenWidth * 0.01),
                           Flexible(
                             child: Text(
@@ -104,7 +105,8 @@ class DonateCampaignCard extends StatelessWidget {
                         TextSpan(
                           children: [
                             TextSpan(
-                              text: '₹${campaign.amountCollected.toStringAsFixed(0)} ',
+                              text:
+                              '₹${campaign.amountCollected.toStringAsFixed(0)} ',
                               style: TextStyle(
                                 color: Colors.orange,
                                 fontSize: screenWidth * 0.037,
@@ -112,7 +114,8 @@ class DonateCampaignCard extends StatelessWidget {
                               ),
                             ),
                             TextSpan(
-                              text: 'Collected | ${campaign.daysLeft} Days Left',
+                              text:
+                              'Collected | ${campaign.daysLeft} Days Left',
                               style: TextStyle(
                                 fontSize: screenWidth * 0.035,
                                 color: Colors.grey.shade800,
@@ -173,12 +176,13 @@ class DonateCampaignCard extends StatelessWidget {
                 Expanded(
                   child: OutlinedButton(
                     onPressed: () {
-                      // TODO: Handle Read More
+                      // TODO: Handle Read More tap
                     },
                     style: OutlinedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: screenHeight * 0.015),
-                      backgroundColor: const Color(0xFFFFF8E9), // Optional: add background if needed
-                      side: const BorderSide(color: Color(0xFFFF8E9)), // Border color
+                      padding:
+                      EdgeInsets.symmetric(vertical: screenHeight * 0.015),
+                      backgroundColor: const Color(0xFFFFF8E9),
+                      side: const BorderSide(color: Color(0xFFFF8E9)),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(screenWidth * 0.02),
                       ),
@@ -187,7 +191,7 @@ class DonateCampaignCard extends StatelessWidget {
                       'Read More >>',
                       style: TextStyle(
                         fontSize: screenWidth * 0.035,
-                        color: Colors.black87, // Keeps the text color vibrant
+                        color: Colors.black87,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -200,11 +204,12 @@ class DonateCampaignCard extends StatelessWidget {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                      // TODO: Handle Donate Now
+                      // TODO: Handle Donate Now tap
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.orange,
-                      padding: EdgeInsets.symmetric(vertical: screenHeight * 0.015),
+                      padding:
+                      EdgeInsets.symmetric(vertical: screenHeight * 0.015),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(screenWidth * 0.02),
                       ),

@@ -2,7 +2,7 @@
 class CampaignModel {
   final String title;
   final String location;
-  final double amountCollected;
+  final int amountCollected;
   final int daysLeft;
   final double distanceKm;
   final int progressPercent;
