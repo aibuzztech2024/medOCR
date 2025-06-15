@@ -30,6 +30,12 @@ class LightThemeColors {
   static const Color icon = primary;
   static const Color orangeicon = Colors.orange;
 
+  // Prescription View specific colors
+  static const Color prescriptionBorder = Color(
+    0xFFE0E0E0,
+  ); // Light grey for borders
+  static const Color prescriptionBackground = Colors.white; // White background
+
   // Shadow
   static const Color shadowColor = Color(0x1F000000);
 }

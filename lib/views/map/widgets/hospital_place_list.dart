@@ -4,6 +4,8 @@ import '../../../models/hospital/hospital_place_model.dart';
 import '../../../viewModels/map/hospital_place_controller.dart';
 import 'package:avatar/core/widgets/app_button.dart';
 import 'package:avatar/core/widgets/app_text.dart';
+import 'package:avatar/core/widgets/height_box.dart';
+import 'package:avatar/core/widgets/width_box.dart';
 
 class HospitalCard extends StatelessWidget {
   final HospitalPlaceModel hospital;
@@ -61,18 +63,18 @@ class HospitalCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppText.heading(hospital.name, fontSize: 16),
-                SizedBox(height: 4),
+                HeightBox(4),
                 AppText.caption(
                   hospital.address,
                   color: Colors.grey[600],
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                SizedBox(height: 6),
+                HeightBox(6),
                 Row(
                   children: [
                     AppText.caption("${hospital.rating}"),
-                    SizedBox(width: 4),
+                    WidthBox(4),
                     Row(
                       children: List.generate(
                         5,
@@ -80,7 +82,7 @@ class HospitalCard extends StatelessWidget {
                             Icon(Icons.star, size: 14, color: Colors.amber),
                       ),
                     ),
-                    SizedBox(width: 4),
+                    WidthBox(4),
                     AppText.caption(
                       "(${hospital.reviews})",
                       color: Colors.grey[600],
@@ -144,18 +146,23 @@ class HospitalPlaceList extends StatelessWidget {
       if (controller.isLoading.value) {
         return Center(child: CircularProgressIndicator());
       }
-      return GridView.builder(
-        padding: EdgeInsets.all(8),
-        itemCount: controller.hospitalList.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 12,
-          mainAxisSpacing: 12,
-          childAspectRatio: 0.7,
+      return Container(
+        height:
+            MediaQuery.of(context).size.height -
+            200, // Adjust this value as needed
+        child: GridView.builder(
+          padding: EdgeInsets.all(8),
+          itemCount: controller.hospitalList.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 12,
+            mainAxisSpacing: 12,
+            childAspectRatio: 0.7,
+          ),
+          itemBuilder: (context, index) {
+            return HospitalCard(hospital: controller.hospitalList[index]);
+          },
         ),
-        itemBuilder: (context, index) {
-          return HospitalCard(hospital: controller.hospitalList[index]);
-        },
       );
     });
   }

@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../models/navigation/segment_tab_model.dart';
 import '../../../viewModels/navigation/segment_controller.dart';
+import 'package:avatar/core/widgets/width_box.dart';
+import 'package:avatar/core/widgets/height_box.dart';
 
 class PerfectSegmentToggleWidget extends StatelessWidget {
   final List<SegmentTabModel> tabs;
@@ -79,7 +81,7 @@ class PerfectSegmentToggleWidget extends StatelessWidget {
                               width: 24,
                               height: 24,
                             ),
-                          const SizedBox(width: 8),
+                          const WidthBox(8),
                           Text(
                             tab.label,
                             style: TextStyle(
@@ -98,7 +100,7 @@ class PerfectSegmentToggleWidget extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 10),
+          const HeightBox(10),
           tabs[controller.selectedIndex.value].child,
         ],
       ),

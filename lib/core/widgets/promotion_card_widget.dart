@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'app_text.dart';
+import 'package:avatar/core/widgets/height_box.dart';
+import 'package:avatar/core/widgets/width_box.dart';
 
 import '../../models/cards/card_model.dart';
 import '../../viewModels/card/card_controller.dart';
@@ -75,7 +77,7 @@ class ReferralCard extends StatelessWidget {
                           color: current.titleColor,
                         ),
                         if (current.subtitle != null) ...[
-                          const SizedBox(height: 8),
+                          const HeightBox(8),
                           AppText.body(
                             current.subtitle!,
                             fontSize: 14,
@@ -84,7 +86,7 @@ class ReferralCard extends StatelessWidget {
                                 current.titleColor.withOpacity(0.8),
                           ),
                         ],
-                        SizedBox(height: 10),
+                        HeightBox(10),
 
                         // TODO: Make button style customizable
                         ElevatedButton(
@@ -104,21 +106,21 @@ class ReferralCard extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               current.icon,
-                              const SizedBox(width: 8),
+                              const WidthBox(8),
                               AppText.body(current.buttonLabel),
                             ],
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(width: 20),
+                    const WidthBox(20),
                     // TODO: Add error handling for missing image
                     Expanded(child: Image.asset(current.imagePath)),
                   ],
                 ),
               ),
             ),
-            const SizedBox(height: 8),
+            const HeightBox(8),
             // TODO: Make dots navigation interactive
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

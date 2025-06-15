@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import '../core/widgets/app_text.dart';
 import '../models/map/faq_model.dart';
+import 'package:avatar/core/widgets/height_box.dart';
 
 class FAQItemWidget extends StatelessWidget {
   final FAQItem item;
@@ -16,7 +17,7 @@ class FAQItemWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppText.heading('Q: ${item.question}', fontSize: 16),
-          const SizedBox(height: 8),
+          const HeightBox(8),
           AppText.body(
             'A: ${item.answer}',
             fontSize: 14,

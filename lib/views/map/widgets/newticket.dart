@@ -4,6 +4,8 @@ import '../../../core/widgets/app_text.dart';
 import '../../../core/widgets/app_button.dart';
 import '../../../core/themes/light/light_theme_colors.dart';
 import '../../../views/auth/widget/input_field.dart';
+import 'package:avatar/core/widgets/height_box.dart';
+import 'package:avatar/core/widgets/width_box.dart';
 
 class NewTicketPage extends StatefulWidget {
   const NewTicketPage({Key? key}) : super(key: key);
@@ -38,227 +40,222 @@ class _NewTicketPageState extends State<NewTicketPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AppText.heading('Issue Type', fontSize: 15),
-                  SizedBox(height: 8),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: LightThemeColors.scaffoldBackground,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: LightThemeColors.subtitleText.withOpacity(0.1),
-                          offset: Offset(2, 3),
-                          blurRadius: 8,
-                          spreadRadius: 0,
-                        ),
-                      ],
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AppText.heading('Issue Type', fontSize: 15),
+              HeightBox(8),
+              Container(
+                decoration: BoxDecoration(
+                  color: LightThemeColors.scaffoldBackground,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: LightThemeColors.subtitleText.withOpacity(0.1),
+                      offset: Offset(2, 3),
+                      blurRadius: 8,
+                      spreadRadius: 0,
                     ),
-                    child: DropdownButtonFormField<String>(
-                      value: _selectedType,
-                      hint: AppText.body('Select a type'),
-                      items:
-                          _issueTypes
-                              .map(
-                                (type) => DropdownMenuItem(
-                                  value: type,
-                                  child: AppText.body(type),
-                                ),
-                              )
-                              .toList(),
-                      onChanged: (val) => setState(() => _selectedType = val),
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 14,
-                        ),
-                        border: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        filled: true,
-                        fillColor: LightThemeColors.scaffoldBackground,
-                      ),
+                  ],
+                ),
+                child: DropdownButtonFormField<String>(
+                  value: _selectedType,
+                  hint: AppText.body('Select a type'),
+                  items:
+                      _issueTypes
+                          .map(
+                            (type) => DropdownMenuItem(
+                              value: type,
+                              child: AppText.body(type),
+                            ),
+                          )
+                          .toList(),
+                  onChanged: (val) => setState(() => _selectedType = val),
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 14,
                     ),
+                    border: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    filled: true,
+                    fillColor: LightThemeColors.scaffoldBackground,
                   ),
-                  SizedBox(height: 18),
-                  AppText.heading('Select Issue', fontSize: 15),
-                  SizedBox(height: 8),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: LightThemeColors.scaffoldBackground,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: LightThemeColors.subtitleText.withOpacity(0.1),
-                          offset: Offset(2, 3),
-                          blurRadius: 8,
-                          spreadRadius: 0,
-                        ),
-                      ],
+                ),
+              ),
+              HeightBox(18),
+              AppText.heading('Select Issue', fontSize: 15),
+              HeightBox(8),
+              Container(
+                decoration: BoxDecoration(
+                  color: LightThemeColors.scaffoldBackground,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: LightThemeColors.subtitleText.withOpacity(0.1),
+                      offset: Offset(2, 3),
+                      blurRadius: 8,
+                      spreadRadius: 0,
                     ),
-                    child: DropdownButtonFormField<String>(
-                      value: _selectedIssue,
-                      hint: AppText.body('Select a issue'),
-                      items:
-                          _issues
-                              .map(
-                                (issue) => DropdownMenuItem(
-                                  value: issue,
-                                  child: AppText.body(issue),
-                                ),
-                              )
-                              .toList(),
-                      onChanged: (val) => setState(() => _selectedIssue = val),
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 14,
-                        ),
-                        border: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        filled: true,
-                        fillColor: LightThemeColors.scaffoldBackground,
-                      ),
+                  ],
+                ),
+                child: DropdownButtonFormField<String>(
+                  value: _selectedIssue,
+                  hint: AppText.body('Select a issue'),
+                  items:
+                      _issues
+                          .map(
+                            (issue) => DropdownMenuItem(
+                              value: issue,
+                              child: AppText.body(issue),
+                            ),
+                          )
+                          .toList(),
+                  onChanged: (val) => setState(() => _selectedIssue = val),
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 14,
                     ),
+                    border: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    filled: true,
+                    fillColor: LightThemeColors.scaffoldBackground,
                   ),
-                  SizedBox(height: 18),
-                  AppText.heading('Describe your Issue', fontSize: 15),
-                  SizedBox(height: 8),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: LightThemeColors.scaffoldBackground,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: LightThemeColors.subtitleText.withOpacity(0.1),
-                          offset: Offset(2, 3),
-                          blurRadius: 8,
-                          spreadRadius: 0,
-                        ),
-                      ],
+                ),
+              ),
+              HeightBox(18),
+              AppText.heading('Describe your Issue', fontSize: 15),
+              HeightBox(8),
+              Container(
+                decoration: BoxDecoration(
+                  color: LightThemeColors.scaffoldBackground,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: LightThemeColors.subtitleText.withOpacity(0.1),
+                      offset: Offset(2, 3),
+                      blurRadius: 8,
+                      spreadRadius: 0,
                     ),
-                    child: InputField(
-                      hintText: 'Please Provide as much details as possible',
-                      controller: _descController,
-                    ),
-                  ),
-                  SizedBox(height: 18),
-                  AppText.heading('Upload File', fontSize: 15),
-                  SizedBox(height: 8),
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    elevation: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                  ],
+                ),
+                child: InputField(
+                  hintText: 'Please Provide as much details as possible',
+                  controller: _descController,
+                ),
+              ),
+              HeightBox(18),
+              AppText.heading('Upload File', fontSize: 15),
+              HeightBox(8),
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                elevation: 1,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
                         children: [
-                          Row(
-                            children: [
-                              InkWell(
-                                onTap: _pickFile,
-                                borderRadius: BorderRadius.circular(8),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Colors.grey.shade300,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  padding: EdgeInsets.all(8),
-                                  child: Icon(
-                                    Icons.add,
-                                    color: LightThemeColors.orangeicon,
-                                    size: 28,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 12),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  AppText.body(
-                                    '+ Upload Issue Image',
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                  SizedBox(height: 2),
-                                  AppText.caption(
-                                    'Accepts: JPG, PNG, PDF ( Max 15MB )',
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          if (_uploadedFileName != null) ...[
-                            SizedBox(height: 16),
-                            Container(
-                              padding: EdgeInsets.all(12),
+                          InkWell(
+                            onTap: _pickFile,
+                            borderRadius: BorderRadius.circular(8),
+                            child: Container(
                               decoration: BoxDecoration(
-                                color: LightThemeColors.inputFill,
+                                border: Border.all(color: Colors.grey.shade300),
                                 borderRadius: BorderRadius.circular(8),
                               ),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.check_circle,
-                                    color: LightThemeColors.orangeicon,
-                                    size: 20,
-                                  ),
-                                  SizedBox(width: 6),
-                                  AppText.body(_uploadedFileName!),
-                                ],
+                              padding: EdgeInsets.all(8),
+                              child: Icon(
+                                Icons.add,
+                                color: LightThemeColors.orangeicon,
+                                size: 28,
                               ),
                             ),
-                          ],
-                          SizedBox(height: 8),
-                          Row(
+                          ),
+                          WidthBox(12),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              AppText.caption('Virus scan'),
-                              SizedBox(width: 4),
-                              Icon(
-                                _virusScanned
-                                    ? Icons.check_box
-                                    : Icons.check_box_outline_blank,
-                                color: Colors.green,
-                                size: 18,
+                              AppText.body(
+                                '+ Upload Issue Image',
+                                fontWeight: FontWeight.w600,
+                              ),
+                              HeightBox(2),
+                              AppText.caption(
+                                'Accepts: JPG, PNG, PDF ( Max 15MB )',
                               ),
                             ],
                           ),
                         ],
                       ),
-                    ),
+                      if (_uploadedFileName != null) ...[
+                        HeightBox(16),
+                        Container(
+                          padding: EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: LightThemeColors.inputFill,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.check_circle,
+                                color: LightThemeColors.orangeicon,
+                                size: 20,
+                              ),
+                              WidthBox(6),
+                              AppText.body(_uploadedFileName!),
+                            ],
+                          ),
+                        ),
+                      ],
+                      HeightBox(8),
+                      Row(
+                        children: [
+                          AppText.caption('Virus scan'),
+                          WidthBox(4),
+                          Icon(
+                            _virusScanned
+                                ? Icons.check_box
+                                : Icons.check_box_outline_blank,
+                            color: Colors.green,
+                            size: 18,
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 30),
-                  Center(
-                    child: AppButton(
-                      type: ButtonType.filled,
-                      width: double.infinity,
-                      color: Colors.orange,
-                      text: 'Submit Ticket',
-                      onPressed: () {
-                        // TODO: Implement submit logic
-                        if (_formKey.currentState!.validate()) {
-                          // Submit ticket
-                        }
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                ],
+                ),
               ),
-            ),
+              HeightBox(30),
+              Center(
+                child: AppButton(
+                  type: ButtonType.filled,
+                  width: double.infinity,
+                  color: Colors.orange,
+                  text: 'Submit Ticket',
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      // Submit ticket
+                    }
+                  },
+                ),
+              ),
+              HeightBox(20),
+            ],
           ),
         ),
       ),

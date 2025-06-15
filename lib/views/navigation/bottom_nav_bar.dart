@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
+import 'package:avatar/core/widgets/width_box.dart';
 
 import '../../core/themes/light/light_theme_colors.dart';
 import '../../models/navigation/bottom_nav_item_model.dart';
@@ -61,7 +62,7 @@ class BottomNavBar extends StatelessWidget {
               item.child != null
                   ? Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [baseIconWidget, SizedBox(width: 8), item.child!],
+                    children: [baseIconWidget, WidthBox(8), item.child!],
                   )
                   : baseIconWidget,
           title: item.child != null ? null : item.title,

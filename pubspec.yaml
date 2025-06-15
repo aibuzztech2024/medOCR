@@ -26,6 +26,7 @@ dependencies:
   flutter_compass: ^0.8.1
   persistent_bottom_nav_bar_v2:
   toggle_switch:
+  image_picker:
 
 dev_dependencies:
   flutter_test:

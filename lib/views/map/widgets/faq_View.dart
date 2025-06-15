@@ -7,6 +7,8 @@ import '../../../viewModels/map/faq_controller.dart';
 import '../../../widgets/faq_category_tile.dart';
 import '../../../widgets/cards/help_card_widget.dart';
 import '../../../core/themes/light/light_theme_colors.dart';
+import '../../../core/widgets/height_box.dart';
+import '../../../core/widgets/width_box.dart';
 
 class FAQView extends StatelessWidget {
   final FAQController controller = Get.put(FAQController());
@@ -33,7 +35,7 @@ class FAQView extends StatelessWidget {
                         label: 'Report an issue',
                         onPressed: () {},
                       ),
-                      SizedBox(width: 12),
+                      WidthBox(12),
                       SupportShadowButton(
                         icon: Icons.receipt_long,
                         label: 'Ticket History',
@@ -41,7 +43,7 @@ class FAQView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 12),
+                  HeightBox(12),
                   Row(
                     children: [
                       SupportShadowButton(
@@ -49,7 +51,7 @@ class FAQView extends StatelessWidget {
                         label: 'Email Support',
                         onPressed: () {},
                       ),
-                      SizedBox(width: 12),
+                      WidthBox(12),
                       SupportShadowButton(
                         icon: Icons.chat_bubble_outline,
                         label: 'Chat Support',
@@ -143,7 +145,7 @@ class SupportShadowButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(icon, color: LightThemeColors.orangeicon),
-              SizedBox(width: 8),
+              WidthBox(8),
               AppText(
                 label,
                 style: TextStyle(
