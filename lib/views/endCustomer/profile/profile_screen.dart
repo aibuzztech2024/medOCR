@@ -1,7 +1,7 @@
 // lib/screens/profile_screen.dart
 import 'package:avatar/core/constants/icons_paths.dart';
 import 'package:avatar/core/constants/image_paths.dart';
-import 'package:avatar/views/endCustomer/home/widgets/profile_widgets.dart';
+import 'package:avatar/views/endcustomer/profile/widgets/profile_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
