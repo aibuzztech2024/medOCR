@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:avatar/models/endcustomerhome/event_model.dart';
+import 'package:avatar/models/endcustomer/event_model.dart';
 
 class CalendarController extends GetxController {
   /// Currently selected date in the calendar

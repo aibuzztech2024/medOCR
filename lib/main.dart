@@ -5,7 +5,7 @@ import 'package:avatar/core/widgets/app_text.dart';
 import 'package:avatar/models/navigation/segment_tab_model.dart';
 import 'package:avatar/viewModels/navigation/bottom_nav_controller.dart';
 import 'package:avatar/views/auth/login/login_view.dart';
-import 'package:avatar/views/endcustomerhome/end_customer_homescreen.dart';
+import 'package:avatar/views/endcustomer/end_customer_homescreen.dart';
 import 'package:avatar/views/hospital/prescription_view.dart';
 import 'package:avatar/views/map/widgets/faq_View.dart';
 import 'package:avatar/views/map/widgets/hospital_place_list.dart';

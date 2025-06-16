@@ -1,6 +1,6 @@
 import 'package:avatar/core/widgets/app_text.dart';
-import 'package:avatar/viewModels/endcustomerhome/controller/rewards_contoller.dart';
-import 'package:avatar/views/endcustomerhome/widget/reward_card_widget.dart';
+import 'package:avatar/viewModels/endcustomer/controller/rewards_contoller.dart';
+import 'package:avatar/views/endcustomer/widget/reward_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

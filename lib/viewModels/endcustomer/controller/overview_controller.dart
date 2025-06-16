@@ -1,4 +1,4 @@
-import 'package:avatar/models/endcustomerhome/overview_model.dart';
+import 'package:avatar/models/endcustomer/overview_model.dart';
 import 'package:get/get.dart';
 
 /// Controller to manage and update Overview data reactively.

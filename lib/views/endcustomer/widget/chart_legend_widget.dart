@@ -1,5 +1,5 @@
 import 'package:avatar/core/widgets/app_text.dart';
-import 'package:avatar/models/endcustomerhome/chart_data.dart';
+import 'package:avatar/models/endcustomer/chart_data.dart';
 import 'package:flutter/material.dart';
 
 /// A widget that displays a row of toggleable legend items for a chart.

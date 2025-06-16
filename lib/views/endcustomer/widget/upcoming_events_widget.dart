@@ -1,8 +1,8 @@
 import 'package:avatar/core/widgets/app_text.dart';
-import 'package:avatar/viewModels/endcustomerhome/controller/calendar_controller.dart';
-import 'package:avatar/views/endcustomerhome/widget/calendar_days_row.dart';
-import 'package:avatar/views/endcustomerhome/widget/calendar_header.dart';
-import 'package:avatar/views/endcustomerhome/widget/events_list.dart';
+import 'package:avatar/viewModels/endcustomer/controller/calendar_controller.dart';
+import 'package:avatar/views/endcustomer/widget/calendar_days_row.dart';
+import 'package:avatar/views/endcustomer/widget/calendar_header.dart';
+import 'package:avatar/views/endcustomer/widget/events_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
