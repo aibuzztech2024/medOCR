@@ -16,7 +16,7 @@ class EndcustomerAppbar extends StatelessWidget implements PreferredSizeWidget {
     return SafeArea(
       bottom: false, // avoid padding below for compact layout
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [Expanded(child: _buildUserInfo()), _buildActions()],

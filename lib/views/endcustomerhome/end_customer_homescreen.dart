@@ -3,7 +3,9 @@ import 'package:avatar/viewModels/endcustomerhome/controller/end_customer_appbar
 import 'package:avatar/core/widgets/endcustomer_appbar.dart';
 import 'package:avatar/views/endcustomerhome/widget/feature_reward_widget.dart';
 import 'package:avatar/views/endcustomerhome/widget/multi_line_chart_widget.dart';
+import 'package:avatar/views/endcustomerhome/widget/overview_widget.dart';
 import 'package:avatar/views/endcustomerhome/widget/upcoming_events_widget.dart';
+import 'package:avatar/widgets/cards/referral_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -28,6 +30,8 @@ class EndCustomerHomescreen extends StatelessWidget {
           child: Column(
             children: [
               EndcustomerAppbar(),
+              ReferralCardWidget(),
+              OverviewWidget(),
               const SizedBox(height: 20),
               MultiLineChartWidget(series: controller.chartSeries),
               const SizedBox(height: 20),
