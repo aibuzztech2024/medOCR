@@ -45,6 +45,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/images/share/
+    - assets/images/map/
 
 # Splash Screen
 flutter_native_splash:

@@ -1,10 +1,13 @@
 import 'package:avatar/core/themes/light/light_theme_data.dart';
 import 'package:avatar/views/map/map_scree_view.dart';
-import 'package:avatar/views/map/widgets/route_bottom_sheet.dart';
+import 'package:avatar/views/map/widgets/route_dragabble.dart';
 import 'package:avatar/views/share/calender.dart';
 import 'package:avatar/views/share/home.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+
+import 'viewModels/map/route_dragabble.dart';
 
 /// This is the starting point of the application
 void main() {
@@ -20,6 +23,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(RouteDraggableController());
     // Use GetMaterialApp to enable GetX features
     return GetMaterialApp(
       // Hides the debugBanner in Debug Mode
@@ -32,7 +36,7 @@ class MyApp extends StatelessWidget {
       // If user is logged in, navigate to home page
       // If user is not logged in, navigate to select role page
       //home: SelectRoleView(),
-      home: Home(),
+      home: RouteDraggable(),
     );
   }
 }
