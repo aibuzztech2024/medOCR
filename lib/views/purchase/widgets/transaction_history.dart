@@ -138,6 +138,7 @@ class TransactionHistory extends StatelessWidget {
                     onPressed: controller.currentPage.value == controller.totalPages ? null : controller.nextPage,
                     child: const Text('Next', style: TextStyle(color: Colors.black54)),
                   )),
+
                 ],
               ),
             ],
