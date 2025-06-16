@@ -1,5 +1,5 @@
 import 'package:avatar/core/widgets/app_button.dart';
-import 'package:avatar/viewModels/auth/register/ngo/ngo_controller.dart';
+import 'package:avatar/viewModels/auth/register/ngo/ngo_security_controller.dart';
 import 'package:avatar/views/auth/widget/input_field.dart';
 import 'package:avatar/views/auth/widget/password_field.dart';
 import 'package:flutter/material.dart';
@@ -11,31 +11,21 @@ class NgoSecurity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Register or retrieve existing controller
-        final controller =
-        Get.isRegistered<NgoController>()
-            ? Get.find<NgoController>()
-            : Get.put(NgoController());
-
+    final NgoSecurityController ngoSecurityController = Get.put(
+      NgoSecurityController(),
+    );
     return Column(
       spacing: 16,
       children: [
-        // Email input field
         InputField(
           hintText: 'Defaultemail@gmail.com',
-          controller: controller.emailController,
+          controller: ngoSecurityController.emailController,
         ),
-
-        // Password field
-        PasswordField(controller: controller.passwordController),
-
-        // Confirm password field
+        PasswordField(controller: ngoSecurityController.passwordController),
         PasswordField(
           hintText: 'Confirm Password',
-          controller: controller.confirmPasswordController,
+          controller: ngoSecurityController.confirmPasswordController,
         ),
-
-        // Register button
         AppButton(
           type: ButtonType.filled,
           text: 'Register',

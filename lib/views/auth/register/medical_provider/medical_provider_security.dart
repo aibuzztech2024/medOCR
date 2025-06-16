@@ -1,7 +1,9 @@
 import 'package:avatar/core/widgets/app_button.dart';
+import 'package:avatar/viewModels/auth/register/medical_provider/medical_provider_security_controller.dart';
 import 'package:avatar/views/auth/widget/input_field.dart';
 import 'package:avatar/views/auth/widget/password_field.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MedicalProviderSecurity extends StatelessWidget {
   final VoidCallback onRegister;
@@ -9,17 +11,23 @@ class MedicalProviderSecurity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final MedicalSecurityController medicalSecurityController = Get.put(
+      MedicalSecurityController(),
+    );
     return Column(
       spacing: 16,
       children: [
-        InputField(hintText: 'Username', controller: TextEditingController()),
+        InputField(
+          hintText: 'Username',
+          controller: medicalSecurityController.usernameController,
+        ),
         PasswordField(
           hintText: 'Password',
-          controller: TextEditingController(),
+          controller: medicalSecurityController.passwordController,
         ),
         PasswordField(
           hintText: 'Confirm Password',
-          controller: TextEditingController(),
+          controller: medicalSecurityController.confirmPasswordController,
         ),
         AppButton(
           type: ButtonType.filled,

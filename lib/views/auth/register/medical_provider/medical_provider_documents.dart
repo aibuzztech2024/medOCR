@@ -1,10 +1,11 @@
 import 'package:avatar/core/widgets/app_button.dart';
 import 'package:avatar/core/widgets/app_text.dart';
+import 'package:avatar/viewModels/auth/register/medical_provider/medical_provider_document_controller.dart';
 import 'package:avatar/views/auth/widget/app_upload_button.dart';
 import 'package:avatar/views/auth/widget/input_field.dart';
 import 'package:avatar/views/auth/widget/input_with_action.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/get_utils.dart';
+import 'package:get/get.dart';
 
 class MedicalProviderDocuments extends StatelessWidget {
   final VoidCallback onContinue;
@@ -12,55 +13,83 @@ class MedicalProviderDocuments extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final MedicalDocumentController medicalDocumentController = Get.put(
+      MedicalDocumentController(),
+    );
     return Column(
       spacing: 25,
       children: [
         InputWithAction(
           expandedChild: InputField(
             hintText: 'Incorporation Number & Document',
-            controller: TextEditingController(),
+            controller: medicalDocumentController.incorporationController,
           ),
-          trailingChild: AppUploadButton(onUpload: () {}),
+          trailingChild: AppUploadButton(
+            onUpload: () {
+              medicalDocumentController.uploadMedicalIncorporationNumber();
+            },
+          ),
         ),
 
         InputWithAction(
           expandedChild: InputField(
             hintText: 'GST Number & Document',
-            controller: TextEditingController(),
+            controller: medicalDocumentController.gstController,
           ),
-          trailingChild: AppUploadButton(onUpload: () {}),
+          trailingChild: AppUploadButton(
+            onUpload: () {
+              medicalDocumentController.uploadMedicalGst();
+            },
+          ),
         ),
 
         InputWithAction(
           expandedChild: InputField(
             hintText: 'PAN Number & Document',
-            controller: TextEditingController(),
+            controller: medicalDocumentController.panController,
           ),
-          trailingChild: AppUploadButton(onUpload: () {}),
+          trailingChild: AppUploadButton(
+            onUpload: () {
+              medicalDocumentController.uploadMedicalPan();
+            },
+          ),
         ),
 
         InputWithAction(
           expandedChild: InputField(
             hintText: 'TAN Number & Document',
-            controller: TextEditingController(),
+            controller: medicalDocumentController.tanController,
           ),
-          trailingChild: AppUploadButton(onUpload: () {}),
+          trailingChild: AppUploadButton(
+            onUpload: () {
+              medicalDocumentController.uploadMedicalTan();
+            },
+          ),
         ),
 
         InputWithAction(
           expandedChild: InputField(
             hintText: 'Medical License Number & Document',
-            controller: TextEditingController(),
+            controller:
+                medicalDocumentController.medicalLicenseNumberController,
           ),
-          trailingChild: AppUploadButton(onUpload: () {}),
+          trailingChild: AppUploadButton(
+            onUpload: () {
+              medicalDocumentController.uploadMedicalLicenseNumber();
+            },
+          ),
         ),
 
         InputWithAction(
           expandedChild: InputField(
             hintText: 'Bank Account Number & Document',
-            controller: TextEditingController(),
+            controller: medicalDocumentController.bankAccountNumberController,
           ),
-          trailingChild: AppUploadButton(onUpload: () {}),
+          trailingChild: AppUploadButton(
+            onUpload: () {
+              medicalDocumentController.uploadMedicalAccountNumber();
+            },
+          ),
         ),
 
         SizedBox(
@@ -73,7 +102,11 @@ class MedicalProviderDocuments extends StatelessWidget {
                 left: 0,
                 child: SizedBox(
                   height: 50,
-                  child: AppUploadButton(onUpload: () {}),
+                  child: AppUploadButton(
+                    onUpload: () {
+                      medicalDocumentController.uploadStoreFrontImage();
+                    },
+                  ),
                 ),
               ),
               Positioned(
