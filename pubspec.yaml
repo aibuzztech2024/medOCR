@@ -34,6 +34,8 @@ dependencies:
   persistent_bottom_nav_bar_v2:
   toggle_switch:
   image_picker:
+  font_awesome_flutter: ^10.4.0
+  file_picker: ^10.2.0
 
 dev_dependencies:
   flutter_test:
