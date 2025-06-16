@@ -14,137 +14,139 @@ class OverviewPage extends StatelessWidget {
     // Calculate item width dynamically with minimum 100 width
     final itemWidth = (screenWidth - 40) / 3;
 
-    return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 40),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Title bar with heading and settings icon
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                const Text(
-                  'Overview',
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    // Handle the tap
-                    print('Tune icon tapped');
-                  },
-                  borderRadius: BorderRadius.circular(32), // Optional for ripple shape
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 6),
-                    child: Icon(
-                      Icons.tune,
-                      color: Colors.grey[800], //Todo update color
+    return Scaffold(
+      body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 40),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Title bar with heading and settings icon
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  const Text(
+                    'Overview',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
                     ),
                   ),
-                ),
-              ],
-            ),
-
-            const SizedBox(height: 16),
-
-            // Wrap the Row in a SingleChildScrollView to avoid overflow on small devices
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Obx(() {
-                // Build list of children with spacing
-                List<Widget> children = [];
-                final items = controller.items;
-
-                for (int i = 0; i < items.length; i++) {
-                  final item = items[i];
-
-                  children.add(
-                    SizedBox(
-                      width: itemWidth < 100 ? 100 : itemWidth,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // Item Label
-                          Text(
-                            item.label,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-
-                          // Icon and Values Row
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              // Icon inside a circular background
-                              CircleAvatar(
-                                radius: 18,
-                                backgroundColor: const Color(0xFFFFF1D9), //Todo update color
-                                child: Padding(
-                                  padding: const EdgeInsets.all(4),
-                                  child: Image.asset(
-                                    item.iconPath,
-                                    width: 30,
-                                    height: 30,
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 6),
-
-                              // Value and subtitle
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      item.value.toString(),
-                                      style: const TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Text(
-                                      item.subtitle,
-                                      style: const TextStyle(
-                                        fontSize: 11,
-                                        color: Colors.black87,
-                                      ),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          )
-                        ],
+                  InkWell(
+                    onTap: () {
+                      // Handle the tap
+                      print('Tune icon tapped');
+                    },
+                    borderRadius: BorderRadius.circular(32), // Optional for ripple shape
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 6),
+                      child: Icon(
+                        Icons.tune,
+                        color: Colors.grey[800], //Todo update color
                       ),
                     ),
-                  );
-
-                  // Add horizontal spacing between items except last
-                  if (i != items.length - 1) {
-                    children.add(const SizedBox(width: 16));
+                  ),
+                ],
+              ),
+      
+              const SizedBox(height: 16),
+      
+              // Wrap the Row in a SingleChildScrollView to avoid overflow on small devices
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Obx(() {
+                  // Build list of children with spacing
+                  List<Widget> children = [];
+                  final items = controller.items;
+      
+                  for (int i = 0; i < items.length; i++) {
+                    final item = items[i];
+      
+                    children.add(
+                      SizedBox(
+                        width: itemWidth < 100 ? 100 : itemWidth,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Item Label
+                            Text(
+                              item.label,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+      
+                            // Icon and Values Row
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Icon inside a circular background
+                                CircleAvatar(
+                                  radius: 18,
+                                  backgroundColor: const Color(0xFFFFF1D9), //Todo update color
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(4),
+                                    child: Image.asset(
+                                      item.iconPath,
+                                      width: 30,
+                                      height: 30,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 6),
+      
+                                // Value and subtitle
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        item.value.toString(),
+                                        style: const TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        item.subtitle,
+                                        style: const TextStyle(
+                                          fontSize: 11,
+                                          color: Colors.black87,
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+      
+                    // Add horizontal spacing between items except last
+                    if (i != items.length - 1) {
+                      children.add(const SizedBox(width: 16));
+                    }
                   }
-                }
-
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: children,
-                );
-              }),
-            ),
-          ],
-
-    )
+      
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: children,
+                  );
+                }),
+              ),
+            ],
+      
+      )
+      ),
     );
   }
 }
