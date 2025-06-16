@@ -1,6 +1,7 @@
 import 'package:avatar/core/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
+import '../themes/light/light_theme_colors.dart';
 
 /// Button style types: [filled] for solid background, [outlined] for bordered style, and [text] for text button style.
 enum ButtonType { filled, outlined, text }
@@ -92,7 +93,7 @@ class AppButton extends StatelessWidget {
                       textColor ??
                       (type == ButtonType.text
                           ? (color ?? context.theme.primaryColor)
-                          : Colors.white),
+                          : LightThemeColors.buttonText),
                 ),
               );
     } else {
@@ -109,7 +110,7 @@ class AppButton extends StatelessWidget {
             onPressed: onPressed,
             style: ElevatedButton.styleFrom(
               backgroundColor: color ?? Theme.of(context).primaryColor,
-              foregroundColor: textColor ?? Colors.white,
+              foregroundColor: textColor ?? LightThemeColors.buttonText,
               padding: buttonPadding,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(borderRadiusValue),
