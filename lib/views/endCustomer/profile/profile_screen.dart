@@ -1,8 +1,8 @@
 // lib/screens/profile_screen.dart
+import 'package:avatar/core/constants/icons_paths.dart';
 import 'package:avatar/core/constants/image_paths.dart';
 import 'package:avatar/views/endCustomer/home/widgets/profile_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -45,13 +45,13 @@ class ProfileScreen extends StatelessWidget {
                           title: 'Referral',
                           onPressed: () => Get.snackbar("","referral tapped", snackPosition: SnackPosition.BOTTOM),
                         ),
-                        MenuItem(svgPath: AppIcons.donate, title: 'Donate', onPressed: ()=> Get.snackbar("","Donate tapped", snackPosition: SnackPosition.BOTTOM),
+                        MenuItem(svgPath: IconsPaths.donate, title: 'Donate', onPressed: ()=> Get.snackbar("","Donate tapped", snackPosition: SnackPosition.BOTTOM),
                         ),
-                        MenuItem(svgPath: AppIcons.setting, title: 'Settings', onPressed: () => Get.snackbar("","Setting tapped", snackPosition: SnackPosition.BOTTOM),
+                        MenuItem(svgPath: IconsPaths.setting, title: 'Settings', onPressed: () => Get.snackbar("","Setting tapped", snackPosition: SnackPosition.BOTTOM),
                         ),
-                        MenuItem(svgPath: AppIcons.support, title: 'Support', onPressed: () => Get.snackbar("","Support tapped", snackPosition: SnackPosition.BOTTOM),
+                        MenuItem(svgPath: IconsPaths.support, title: 'Support', onPressed: () => Get.snackbar("","Support tapped", snackPosition: SnackPosition.BOTTOM),
                         ),
-                        MenuItem(svgPath: AppIcons.logout, title: 'Logout', onPressed: ()=> Get.snackbar("","referral tapped", snackPosition: SnackPosition.BOTTOM),
+                        MenuItem(svgPath: IconsPaths.logout, title: 'Logout', onPressed: ()=> Get.snackbar("","referral tapped", snackPosition: SnackPosition.BOTTOM),
                         ),
                       ],
                     ),

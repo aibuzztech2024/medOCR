@@ -24,4 +24,11 @@ class IconsPaths {
       'assets/icons/Step_Icon_Personal_info.svg';
   static const String stepIconSocialAccounts =
       'assets/icons/Step_Icon_Social_accounts.svg';
+
+  static const setting = "assets/icons/settings_icon.svg";
+  static const logout = "assets/icons/logout_icon.svg";
+  static const donate = "assets/icons/donate_icon.svg";
+  static const share = "assets/icons/share_icon.svg";
+  static const support = "assets/icons/support_icon.svg";
+  static const referral = " ";
 }
