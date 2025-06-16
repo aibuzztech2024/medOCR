@@ -1,11 +1,10 @@
 import 'package:avatar/core/utils/methods/navigate_to.dart';
 import 'package:avatar/viewModels/points/controller/points_tabbar_controller.dart';
 import 'package:avatar/views/endcustomerhome/widget/upcoming_events_widget.dart';
-import 'package:avatar/views/endcustomerhome/chart_screen.dart';
 import 'package:avatar/views/earnings/earnings_screen.dart';
 import 'package:avatar/views/points/transaction_screen.dart';
 import 'package:avatar/views/points/widget/reusable_tabbar.dart';
-import 'package:avatar/views/endcustomerhome/rewards_screen.dart';
+import 'package:avatar/views/endcustomerhome/end_customer_homescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,7 +30,7 @@ class PointsTabbarContainer extends StatelessWidget {
               color: Color(0xFFF79E1B),
             ),
             onPressed: () {
-              navigateTo(() => RewardsScreen());
+              navigateTo(() => EndCustomerHomescreen());
             },
           ),
           IconButton(
@@ -43,12 +42,7 @@ class PointsTabbarContainer extends StatelessWidget {
               navigateTo(() => UpcomingEventsWidget());
             },
           ),
-          IconButton(
-            icon: const Icon(Icons.bar_chart, color: Colors.green),
-            onPressed: () {
-              navigateTo(() => ChartScreen());
-            },
-          ),
+         
           IconButton(
             icon: const Icon(Icons.paid_outlined, color: Color(0xFFF79E1B)),
             onPressed: () {

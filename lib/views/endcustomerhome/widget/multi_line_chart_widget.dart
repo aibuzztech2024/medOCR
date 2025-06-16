@@ -30,104 +30,108 @@ class MultiLineChartWidget extends StatelessWidget {
     // Initialize controller using GetX
     final ChartController controller = Get.put(ChartController());
 
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        // Light yellow-orange background with semi-transparency
-        color: const Color(0x0DF79E1B), // #F79E1B with ~5% opacity
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: const Color(0x40CB7E40),
-        ), // 25% opacity border
-      ),
-      child: Column(
-        children: [
-          // Line Chart Area
-          SizedBox(
-            height: height,
-            child: LineChart(
-              LineChartData(
-                gridData: FlGridData(
-                  show: true,
-                  drawVerticalLine: false,
-                  horizontalInterval: 50,
-                  getDrawingHorizontalLine:
-                      (value) => FlLine(color: Colors.black12, strokeWidth: 1),
-                ),
-                titlesData: FlTitlesData(
-                  leftTitles: AxisTitles(
-                    sideTitles: SideTitles(
-                      showTitles: true,
-                      reservedSize: 40,
-                      interval: 50,
-                      getTitlesWidget: (value, meta) {
-                        return Text(
-                          value.toInt().toString(),
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 10,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        );
-                      },
-                    ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          // Light yellow-orange background with semi-transparency
+          color: const Color(0x0DF79E1B), // #F79E1B with ~5% opacity
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: const Color(0x40CB7E40),
+          ), // 25% opacity border
+        ),
+        child: Column(
+          children: [
+            // Line Chart Area
+            SizedBox(
+              height: height,
+              child: LineChart(
+                LineChartData(
+                  gridData: FlGridData(
+                    show: true,
+                    drawVerticalLine: false,
+                    horizontalInterval: 50,
+                    getDrawingHorizontalLine:
+                        (value) =>
+                            FlLine(color: Colors.black12, strokeWidth: 1),
                   ),
-                  bottomTitles: AxisTitles(
-                    sideTitles: SideTitles(
-                      showTitles: true,
-                      reservedSize: 30,
-                      getTitlesWidget: (value, meta) {
-                        if (value == 0) {
-                          return SizedBox(
-                            width: 50,
-                            child: const Text(
-                              '1 Apr',
-                              textAlign: TextAlign.center,
+                  titlesData: FlTitlesData(
+                    leftTitles: AxisTitles(
+                      sideTitles: SideTitles(
+                        showTitles: true,
+                        reservedSize: 40,
+                        interval: 50,
+                        getTitlesWidget: (value, meta) {
+                          return Text(
+                            value.toInt().toString(),
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
                             ),
                           );
-                        }
-                        if (value == 6) {
-                          return Transform.translate(
-                            offset: const Offset(-15, 0),
-                            child: SizedBox(
+                        },
+                      ),
+                    ),
+                    bottomTitles: AxisTitles(
+                      sideTitles: SideTitles(
+                        showTitles: true,
+                        reservedSize: 30,
+                        getTitlesWidget: (value, meta) {
+                          if (value == 0) {
+                            return SizedBox(
                               width: 50,
                               child: const Text(
-                                '30 Apr',
+                                '1 Apr',
                                 textAlign: TextAlign.center,
                               ),
-                            ),
-                          );
-                        }
-                        return const Text('');
-                      },
+                            );
+                          }
+                          if (value == 6) {
+                            return Transform.translate(
+                              offset: const Offset(-15, 0),
+                              child: SizedBox(
+                                width: 50,
+                                child: const Text(
+                                  '30 Apr',
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            );
+                          }
+                          return const Text('');
+                        },
+                      ),
+                    ),
+
+                    // Hide right and top axis titles
+                    rightTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: false),
+                    ),
+                    topTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: false),
                     ),
                   ),
-
-                  // Hide right and top axis titles
-                  rightTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
-                  topTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
+                  borderData: FlBorderData(show: false),
+                  lineBarsData: _buildLineBarsData(),
+                  minX: 0,
+                  maxX: 6,
+                  minY: 0,
+                  maxY: 150,
                 ),
-                borderData: FlBorderData(show: false),
-                lineBarsData: _buildLineBarsData(),
-                minX: 0,
-                maxX: 6,
-                minY: 0,
-                maxY: 150,
               ),
             ),
-          ),
-          const SizedBox(height: 12),
+            const SizedBox(height: 12),
 
-          // Interactive legend to toggle chart series
-          ChartLegendWidget(
-            series: controller.chartSeries,
-            onToggle: controller.toggleSeriesVisibility,
-          ),
-        ],
+            // Interactive legend to toggle chart series
+            ChartLegendWidget(
+              series: controller.chartSeries,
+              onToggle: controller.toggleSeriesVisibility,
+            ),
+          ],
+        ),
       ),
     );
   }

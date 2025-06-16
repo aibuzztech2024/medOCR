@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 
 /// A custom app bar that shows user greeting, location, weather, notifications, cart, and profile info.
 /// This widget relies on `EndCustomerAppbarController` for reactive state management using GetX.
-class EndcustomerAppbar extends StatelessWidget
-    implements PreferredSizeWidget {
-  final EndCustomerAppbarController controller = Get.find<EndCustomerAppbarController>();
+class EndcustomerAppbar extends StatelessWidget implements PreferredSizeWidget {
+  final EndCustomerAppbarController controller =
+      Get.find<EndCustomerAppbarController>();
 
   EndcustomerAppbar({super.key});
 

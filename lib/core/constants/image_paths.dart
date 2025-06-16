@@ -21,7 +21,7 @@ class ImagePaths {
 
   // [Advisor/Transaction screen] transaction image card widget image
   static const String transaction = 'assets/images/transaction.png';
-}
+
 
   /// [Profile] user profile image
   static const String profileImage = 'assets/images/profile.png';
