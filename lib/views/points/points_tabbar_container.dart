@@ -2,6 +2,7 @@ import 'package:avatar/core/utils/methods/navigate_to.dart';
 import 'package:avatar/viewModels/points/controller/points_tabbar_controller.dart';
 import 'package:avatar/views/endcustomer/widget/upcoming_events_widget.dart';
 import 'package:avatar/views/earnings/earnings_screen.dart';
+import 'package:avatar/views/map/widgets/trip_completion_dialog.dart';
 import 'package:avatar/views/points/transaction_screen.dart';
 import 'package:avatar/views/points/widget/reusable_tabbar.dart';
 import 'package:avatar/views/endcustomer/end_customer_homescreen.dart';
@@ -30,7 +31,7 @@ class PointsTabbarContainer extends StatelessWidget {
               color: Color(0xFFF79E1B),
             ),
             onPressed: () {
-              navigateTo(() => EndCustomerHomescreen());
+              navigateTo(() => TripCompletionDialog());
             },
           ),
           IconButton(
@@ -42,7 +43,7 @@ class PointsTabbarContainer extends StatelessWidget {
               navigateTo(() => UpcomingEventsWidget());
             },
           ),
-         
+
           IconButton(
             icon: const Icon(Icons.paid_outlined, color: Color(0xFFF79E1B)),
             onPressed: () {
