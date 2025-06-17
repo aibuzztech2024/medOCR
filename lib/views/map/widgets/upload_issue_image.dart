@@ -1,40 +1,66 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../core/themes/light/light_theme_colors.dart';
 import '../../../core/widgets/app_text.dart';
 import '../../../core/widgets/height_box.dart';
 import '../../../core/widgets/width_box.dart';
-import '../../../viewModels/hospital/image_prescription_controller.dart';
+import '../../../viewModels/hospital/upload_issue_image_controller.dart';
 
-class UploadIssueImage extends StatelessWidget {
-  final PrescriptionController controller;
+class UploadIssueImageWidget extends StatelessWidget {
+  final UploadIssueImage controller;
   final String addLabel;
-  final bool showPdfSupport;
 
-  const UploadIssueImage({
+  const UploadIssueImageWidget({
     super.key,
     required this.controller,
     this.addLabel = "+ Upload Issue Image",
-    this.showPdfSupport = true,
   });
-
-  bool _isPdf(String path) => path.toLowerCase().endsWith('.pdf');
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      final items = controller.prescriptions;
+      final items = controller.files;
 
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Upload Box
+          // Upload Button
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               GestureDetector(
-                onTap: controller.pickImageFromGallery,
+                onTap: () async {
+                  // Open dialog to choose between PDF or image
+                  Get.bottomSheet(
+                    Container(
+                      color: Colors.white,
+                      padding: const EdgeInsets.all(16),
+                      child: Wrap(
+                        children: [
+                          ListTile(
+                            leading: const Icon(Icons.image),
+                            title: const Text('Upload Image'),
+                            onTap: () {
+                              controller.pickImageFromGallery();
+                              Get.back();
+                            },
+                          ),
+                          ListTile(
+                            leading: const Icon(Icons.picture_as_pdf),
+                            title: const Text('Upload PDF'),
+                            onTap: () {
+                              controller.pickPdfFromFilePicker();
+                              Get.back();
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey.shade300),
@@ -52,10 +78,7 @@ class UploadIssueImage extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AppText.body(
-                    addLabel,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  AppText.body(addLabel, fontWeight: FontWeight.w600),
                   HeightBox(2),
                   AppText.caption(
                     'Accepts: JPG, PNG, PDF ( Max 1MB )',
@@ -68,10 +91,10 @@ class UploadIssueImage extends StatelessWidget {
 
           HeightBox(16),
 
-          // Uploaded Files List
+          // Uploaded File List
           ...items.map((item) {
-            final isPdf = _isPdf(item.imagePath);
-            final fileName = item.imagePath.split('/').last;
+            final isPdf = controller.isPdf(item.filePath);
+            final fileName = item.filePath.split('/').last;
 
             return Container(
               margin: const EdgeInsets.only(bottom: 12),
@@ -83,61 +106,60 @@ class UploadIssueImage extends StatelessWidget {
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.15),
                     blurRadius: 6,
-                    offset: Offset(0, 2),
-                  )
+                    offset: const Offset(0, 2),
+                  ),
                 ],
               ),
               child: Row(
                 children: [
-                  // File preview
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child: isPdf
-                        ? Container(
-                      width: 48,
-                      height: 48,
-                      color: LightThemeColors.prescriptionBackground,
-                      child: Icon(Icons.picture_as_pdf,
-                          size: 30, color: Colors.red),
-                    )
-                        : Image.file(
-                      File(item.imagePath),
-                      width: 48,
-                      height: 48,
-                      fit: BoxFit.cover,
-                    ),
+                    child:
+                        isPdf
+                            ? Container(
+                              width: 48,
+                              height: 48,
+                              color: LightThemeColors.prescriptionBackground,
+                              child: const Icon(
+                                Icons.picture_as_pdf,
+                                size: 30,
+                                color: Colors.red,
+                              ),
+                            )
+                            : Image.file(
+                              File(item.filePath),
+                              width: 48,
+                              height: 48,
+                              fit: BoxFit.cover,
+                            ),
                   ),
                   WidthBox(12),
-
-                  // Texts
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        AppText.body(
-                          fileName,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        AppText.body(fileName, fontWeight: FontWeight.w600),
                         HeightBox(4),
                         Row(
-                          children: [
-                            AppText.caption('Virus scan',
-                                color: Colors.green),
+                          children: const [
+                            Icon(
+                              Icons.check_box,
+                              size: 18,
+                              color: Colors.green,
+                            ),
                             WidthBox(4),
-                            Icon(Icons.check_box,
-                                size: 18, color: Colors.green),
+                            Text(
+                              "Virus scan",
+                              style: TextStyle(color: Colors.green),
+                            ),
                           ],
                         ),
                       ],
                     ),
                   ),
-
-                  // Remove icon
                   IconButton(
-                    onPressed: () => controller.removePrescription(
-                      items.indexOf(item),
-                    ),
-                    icon: Icon(Icons.close, color: Colors.black54),
+                    onPressed: () => controller.removeFile(items.indexOf(item)),
+                    icon: const Icon(Icons.close, color: Colors.black54),
                     splashRadius: 20,
                   ),
                 ],

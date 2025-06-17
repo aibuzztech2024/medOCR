@@ -7,7 +7,7 @@ import '../../../views/auth/widget/input_field.dart';
 import 'package:avatar/core/widgets/height_box.dart';
 import 'package:avatar/core/widgets/width_box.dart';
 import 'upload_issue_image.dart';
-import '../../../viewModels/hospital/image_prescription_controller.dart';
+import '../../../viewModels/hospital/upload_issue_image_controller.dart';
 
 class NewTicketPage extends StatefulWidget {
   const NewTicketPage({super.key});
@@ -32,9 +32,7 @@ class _NewTicketPageState extends State<NewTicketPage> {
     'Other',
   ];
 
-  final PrescriptionController _uploadController = Get.put(
-    PrescriptionController(),
-  );
+  final UploadIssueImage _uploadController = Get.put(UploadIssueImage());
 
   void _pickFile() async {
     // TODO: Implement file picker
@@ -162,9 +160,9 @@ class _NewTicketPageState extends State<NewTicketPage> {
               HeightBox(18),
               AppText.heading('Upload File', fontSize: 15),
               HeightBox(8),
-              UploadIssueImage(
-                controller: _uploadController,
+              UploadIssueImageWidget(
                 addLabel: '+ Upload Issue Image',
+                controller: _uploadController,
               ),
               HeightBox(30),
               Center(
