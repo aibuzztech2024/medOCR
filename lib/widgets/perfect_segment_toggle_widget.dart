@@ -1,7 +1,7 @@
+import 'package:avatar/core/widgets/width_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:avatar/core/widgets/width_box.dart';
 
 import '../../models/navigation/segment_tab_model.dart';
 import '../../viewModels/navigation/segment_controller.dart';

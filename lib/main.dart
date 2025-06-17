@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         label: 'Prescription',
         iconSvgPath: "assets/icons/medical-prescription_svgrepo.com.svg",
         activeColor: Colors.orange,
-        child: Center(child: Text('Prescription View')),
+        child: NewTicketPage(),
       ),
       SegmentTabModel(
         label: 'Bills',
