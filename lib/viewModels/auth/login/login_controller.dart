@@ -1,3 +1,5 @@
+import 'package:avatar/core/utils/methods/navigate_to.dart';
+import 'package:avatar/widgets/bottom_navbar_end_customer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
@@ -22,6 +24,7 @@ class LoginController extends GetxController {
   void login() {
     Get.printInfo(info: usernameController.text);
     Get.printInfo(info: passwordController.text);
+    navigateTo(() => const BottomNavbarEndCustomer());
   }
 
   // WARN: Currently only prints info.

@@ -1,4 +1,5 @@
 import 'package:avatar/core/utils/methods/navigate_to.dart';
+import 'package:avatar/core/widgets/app_text.dart';
 import 'package:avatar/viewModels/points/controller/points_tabbar_controller.dart';
 import 'package:avatar/views/endcustomer/widget/upcoming_events_widget.dart';
 import 'package:avatar/views/earnings/earnings_screen.dart';
@@ -19,44 +20,47 @@ class PointsTabbarContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Points'),
-        centerTitle: true,
+        title: AppText.heading(
+          'Points',
+          fontSize: 24,
+          fontWeight: FontWeight.w600,
+        ),
         backgroundColor: context.theme.scaffoldBackgroundColor,
 
         //TODO Remove this iconButtons it is just for showing the different screen
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.local_offer_outlined,
-              color: Color(0xFFF79E1B),
-            ),
-            onPressed: () {
-              navigateTo(() => TripCompletionDialog());
-            },
-          ),
-          IconButton(
-            icon: const Icon(
-              Icons.calendar_month_outlined,
-              color: Colors.green,
-            ),
-            onPressed: () {
-              navigateTo(() => UpcomingEventsWidget());
-            },
-          ),
+        // actions: [
+        //   IconButton(
+        //     icon: const Icon(
+        //       Icons.local_offer_outlined,
+        //       color: Color(0xFFF79E1B),
+        //     ),
+        //     onPressed: () {
+        //       navigateTo(() => TripCompletionDialog());
+        //     },
+        //   ),
+        //   IconButton(
+        //     icon: const Icon(
+        //       Icons.calendar_month_outlined,
+        //       color: Colors.green,
+        //     ),
+        //     onPressed: () {
+        //       navigateTo(() => UpcomingEventsWidget());
+        //     },
+        //   ),
 
-          IconButton(
-            icon: const Icon(Icons.paid_outlined, color: Color(0xFFF79E1B)),
-            onPressed: () {
-              navigateTo(() => EarningsScreen());
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.receipt),
-            onPressed: () {
-              navigateTo(() => TransactionScreen());
-            },
-          ),
-        ],
+        //   IconButton(
+        //     icon: const Icon(Icons.paid_outlined, color: Color(0xFFF79E1B)),
+        //     onPressed: () {
+        //       navigateTo(() => EarningsScreen());
+        //     },
+        //   ),
+        //   IconButton(
+        //     icon: const Icon(Icons.receipt),
+        //     onPressed: () {
+        //       navigateTo(() => TransactionScreen());
+        //     },
+        //   ),
+        // ],
       ),
       body: Obx(() {
         // Reactively rebuild if tabTitles changes

@@ -1,3 +1,5 @@
+import 'package:avatar/core/utils/methods/navigate_to.dart';
+import 'package:avatar/views/endcustomer/profile/profile_screen.dart';
 import 'package:get/get.dart';
 
 /// Controller for managing the state of the custom app bar.
@@ -86,6 +88,8 @@ class EndCustomerAppbarController extends GetxController {
   /// Triggered when profile avatar is tapped
   void onProfileTapped() {
     // ✅ TODO: Navigate to Profile screen or show bottom sheet
+    // Navigate to the SelectRoleView
+    navigateTo(() => const ProfileScreen());
     print('Profile tapped');
   }
 
