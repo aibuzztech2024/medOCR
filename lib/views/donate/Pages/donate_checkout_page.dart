@@ -6,11 +6,12 @@ import 'package:get/get.dart';
 import '../../../models/donate/campaign_model.dart';
 import '../../../viewModels/donate/donate_checkout_view_model.dart';
 import '../../../viewModels/donate/campaign_view_model.dart';
+import '../../purchase/widgets/donate_campaign_card_second.dart';
 import '../widgets/campaign_card_view.dart';
 import 'package:file_picker/file_picker.dart';
 
 class DonateCheckoutPage extends StatefulWidget {
-  final CampaignModel? campaign; // Optional campaign to donate to
+  final CampaignModel? campaign;
   const DonateCheckoutPage({Key? key, this.campaign}) : super(key: key);
 
   @override
@@ -18,13 +19,12 @@ class DonateCheckoutPage extends StatefulWidget {
 }
 
 class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
-  final DonateCheckoutViewModel vm = Get.put(DonateCheckoutViewModel()); // Donation logic & state
-  final CampaignViewModel campaignVm = Get.find<CampaignViewModel>(); // Campaign state from elsewhere
+  final DonateCheckoutViewModel vm = Get.put(DonateCheckoutViewModel());
+  final CampaignViewModel campaignVm = Get.find<CampaignViewModel>();
 
   @override
   void initState() {
     super.initState();
-    // Get the campaign passed or from the campaign view model
     final campaign = widget.campaign ?? campaignVm.campaign.value;
   }
 
@@ -40,15 +40,15 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
         centerTitle: false,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => Get.back(), // Navigate back on press
+          onPressed: () => Get.back(),
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(screenWidth * 0.05), // Screen padding
+        padding: EdgeInsets.all(screenWidth * 0.05),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CampaignCardView(campaign: campaign), // Show campaign summary card
+            DonateCampaignCardSecond(campaign: campaign),
             SizedBox(height: screenHeight * 0.01),
 
             Center(
@@ -62,56 +62,51 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
             ),
             SizedBox(height: screenHeight * 0.01),
 
-          Obx(() {
-            final text = vm.inputText.value.isEmpty ? '0' : vm.inputText.value;
+            Obx(() {
+              final text = vm.inputText.value.isEmpty ? '0' : vm.inputText.value;
 
-            return Center(
-              child: GestureDetector(
-                onTap: () {
-                  FocusScope.of(context).requestFocus(vm.amountFocusNode);
-                },
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    // Visible formatted text
-                    Text(
-                      '₹$text',
-                      style: TextStyle(
-                        fontSize: screenWidth * 0.08,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.orange,
-                      ),
-                    ),
-                    // Invisible TextField for input
-                    SizedBox(
-                      width: screenWidth * 0.6,
-                      child: EditableText(
-                        controller: vm.amountController,
-                        focusNode: vm.amountFocusNode,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                        style: const TextStyle(
-                          color: Colors.transparent, // Hide typed text
-                          fontSize: 0.1, // Prevent layout shift
+              return Center(
+                child: GestureDetector(
+                  onTap: () {
+                    FocusScope.of(context).requestFocus(vm.amountFocusNode);
+                  },
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Text(
+                        '₹$text',
+                        style: TextStyle(
+                          fontSize: screenWidth * 0.08,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.orange,
                         ),
-                        cursorColor: Colors.orange,
-                        backgroundCursorColor: Colors.orange,
-                        textAlign: TextAlign.center, // Keep the blinking cursor centered
-                        onChanged: (value) {
-                          vm.updateAmount(int.tryParse(value) ?? 0);
-                        },
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        width: screenWidth * 0.6,
+                        child: EditableText(
+                          controller: vm.amountController,
+                          focusNode: vm.amountFocusNode,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                          style: const TextStyle(
+                            color: Colors.transparent,
+                            fontSize: 0.1,
+                          ),
+                          cursorColor: Colors.orange,
+                          backgroundCursorColor: Colors.orange,
+                          textAlign: TextAlign.center,
+                          onChanged: (value) {
+                            vm.updateAmount(int.tryParse(value) ?? 0);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          }),
+              );
+            }),
 
-
-
-          SizedBox(height: 6),
-
+            SizedBox(height: 6),
             Center(
               child: Text(
                 "Min: ₹100\n(Platform Fee: 2%)",
@@ -135,11 +130,12 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
 
             Obx(() => Column(
               children: [
-                _buildPaymentTile("UPI Payment", 'assets/icons/upi.svg', 1), // Payment option 1
+                _buildPaymentTile("UPI Payment", 'assets/icons/upi.svg', 1),
                 SizedBox(height: 10),
-                _buildPaymentTile("Credit or Debit Card", 'assets/icons/credit_card.svg', 2), // Payment option 2
+                _buildPaymentTile("Credit or Debit Card", 'assets/icons/credit_card.svg', 2),
               ],
             )),
+
             SizedBox(height: screenHeight * 0.03),
 
             Text(
@@ -156,38 +152,27 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
                 Expanded(
                   flex: 3,
                   child: TextField(
-                    onChanged: vm.updatePan, // Update PAN number in ViewModel
+                    onChanged: vm.updatePan,
                     style: TextStyle(
                       fontSize: screenWidth * 0.035,
-                      color: Colors.black, // Text color (you can change if needed)
+                      color: Colors.black,
                     ),
                     decoration: InputDecoration(
                       hintText: "PAN Number",
-                      hintStyle: TextStyle(
-                        color: Colors.grey, // Grey color for hint text
-                      ),
-                      fillColor: Colors.grey.shade200, // Light grey background color
-                      filled: true, // Enable background fill
+                      hintStyle: TextStyle(color: Colors.grey),
+                      fillColor: Colors.grey.shade200,
+                      filled: true,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.grey, // Grey border color
-                          width: 1.5,
-                        ),
+                        borderSide: BorderSide(color: Colors.grey, width: 1.5),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.grey, // Grey border when enabled but not focused
-                          width: 1.5,
-                        ),
+                        borderSide: BorderSide(color: Colors.grey, width: 1.5),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.grey, // Grey border when focused
-                          width: 2,
-                        ),
+                        borderSide: BorderSide(color: Colors.grey, width: 2),
                       ),
                       contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
                     ),
@@ -198,17 +183,18 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
                   flex: 1,
                   child: Obx(() => ElevatedButton(
                     onPressed: () async {
-                      // Pick file for PAN document
                       FilePickerResult? result = await FilePicker.platform.pickFiles(
                         type: FileType.custom,
                         allowedExtensions: ['pdf', 'jpg', 'jpeg', 'png'],
                       );
                       if (result != null) {
-                        vm.updatePanDocument(File(result.files.single.path!)); // Update doc in VM
+                        vm.updatePanDocument(File(result.files.single.path!));
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: vm.panDocument.value == null ? Colors.grey.shade200 : Colors.orange,
+                      backgroundColor: vm.panDocument.value == null
+                          ? Colors.grey.shade200
+                          : Colors.orange,
                       padding: const EdgeInsets.symmetric(vertical: 12),
                     ),
                     child: SvgPicture.asset(
@@ -220,17 +206,18 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
                 ),
               ],
             ),
+
             SizedBox(height: screenHeight * 0.04),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildBottomButton("Cancel", onPressed: () => Get.back()), // Cancel button
+                _buildBottomButton("Cancel", onPressed: () => Get.back()),
                 Obx(() => _buildBottomButton(
                   "Pay",
                   isPrimary: true,
-                  enabled: vm.isFormValid, // Enable only if form valid
-                  onPressed: vm.isFormValid ? vm.submitDonation : null, // Submit donation on press
+                  enabled: vm.isFormValid,
+                  onPressed: vm.isFormValid ? _showConfirmBottomSheet : null,
                 )),
               ],
             ),
@@ -240,16 +227,16 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
     );
   }
 
-  // Widget to build a payment method option tile
+  // Payment method tile
   Widget _buildPaymentTile(String title, String icon, int method) {
-    final selected = vm.selectedPaymentMethod.value == method; // Check if selected
+    final selected = vm.selectedPaymentMethod.value == method;
     return GestureDetector(
-      onTap: () => vm.selectPaymentMethod(method), // Select payment method on tap
+      onTap: () => vm.selectPaymentMethod(method),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         decoration: BoxDecoration(
           border: Border.all(
-            color: selected ? Colors.orange : Colors.grey.shade300,
+            color: selected ? Colors.orange : Colors.black87,
             width: 1.5,
           ),
           color: selected ? Colors.orange.withOpacity(0.1) : Colors.transparent,
@@ -257,9 +244,9 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
         ),
         child: Row(
           children: [
-            SvgPicture.asset(icon, height: 24), // Payment icon
+            SvgPicture.asset(icon, height: 24),
             const SizedBox(width: 12),
-            Text(title, style: TextStyle(fontSize: Get.width * 0.04)), // Payment method title
+            Text(title, style: TextStyle(fontSize: Get.width * 0.04)),
             const Spacer(),
             Container(
               width: Get.width * 0.05,
@@ -267,7 +254,7 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: selected ? Colors.orange : Colors.grey,
+                  color: selected ? Colors.orange : Colors.black87,
                   width: 2,
                 ),
               ),
@@ -282,7 +269,7 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
                   ),
                 ),
               )
-                  : null, // Inner dot if selected
+                  : null,
             ),
           ],
         ),
@@ -290,34 +277,118 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
     );
   }
 
-  // Widget for bottom action buttons (Cancel, Pay)
-  Widget _buildBottomButton(String label, {
-    VoidCallback? onPressed,
-    bool isPrimary = false,
-    bool enabled = true,
-  }) {
+  // Cancel/Pay button
+  Widget _buildBottomButton(
+      String label, {
+        VoidCallback? onPressed,
+        bool isPrimary = false,
+        bool enabled = true,
+      }) {
     return SizedBox(
-      width: Get.width * 0.42,
+      width: Get.width * 0.20,
       child: ElevatedButton(
-        onPressed: enabled ? onPressed : null, // Enable/disable button
+        onPressed: enabled ? onPressed : null,
         style: ElevatedButton.styleFrom(
           backgroundColor: isPrimary
-              ? (enabled ? Colors.orange : Colors.grey.shade400) // Primary button color
-              : Colors.orange, // Secondary button color
-          foregroundColor: Colors.white,
+              ? (enabled ? Colors.orange : const Color(0xFFFFF8E9)) // Pay button colors
+              : const Color(0xFFFFF8E9), // Cancel button background
+          foregroundColor: isPrimary
+              ? (enabled ? Colors.white : Colors.black54) // Pay: white if active, grey if not
+              : Colors.black54, // Cancel button text/icon
           padding: EdgeInsets.symmetric(vertical: Get.height * 0.012),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          elevation: 0, // Optional: remove shadow for flat look
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(label, style: TextStyle(fontSize: Get.width * 0.035)),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: Get.width * 0.035,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
             if (isPrimary) ...[
-              SizedBox(width: 6),
-              Icon(Icons.arrow_forward, size: Get.width * 0.04), // Arrow icon for primary button
+              const SizedBox(width: 6),
+              Icon(
+                Icons.arrow_forward,
+                size: Get.width * 0.04,
+              ),
             ],
           ],
         ),
+      ),
+    );
+  }
+
+  // Bottom Sheet shown on Pay
+  void _showConfirmBottomSheet() {
+    final int amount = int.tryParse(vm.inputText.value) ?? 0;
+    final double platformFee = amount * 0.02;
+    final double gst = platformFee * 0.18;
+    final double toNgo = amount - platformFee - gst;
+
+    showModalBottomSheet(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(22)),
+      ),
+      context: context,
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 22),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildBreakdownRow("Amount to NGO", toNgo),
+              _buildBreakdownRow("Platform Fee (2%)", platformFee),
+              _buildBreakdownRow("GST on Platform Fee (18%)", gst),
+              const SizedBox(height: 16),
+              const SizedBox(height: 8),
+              _buildBreakdownRow("Total Amount Donor Pays", amount.toDouble(), isTotal: true),
+              const SizedBox(height: 24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildBottomButton("Cancel", onPressed: () => Get.back()),
+                  _buildBottomButton("Pay", isPrimary: true, onPressed: () {
+                    Get.back(); // Close sheet
+                    vm.submitDonation(); // Trigger donation
+                  }),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildBreakdownRow(String label, double value, {bool isTotal = false}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: Get.width * 0.038,
+              fontWeight: isTotal ? FontWeight.w600 : FontWeight.normal,
+              color: isTotal ? Colors.black : Colors.grey.shade700,
+            ),
+          ),
+          Text(
+            "₹${value.toStringAsFixed(2)}",
+            style: TextStyle(
+              fontSize: Get.width * 0.04,
+              fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
+              color: isTotal ? Colors.black : Colors.grey.shade800,
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -105,8 +105,7 @@ class DonateCampaignCard extends StatelessWidget {
                         TextSpan(
                           children: [
                             TextSpan(
-                              text:
-                              '₹${campaign.amountCollected.toStringAsFixed(0)} ',
+                              text: '₹${campaign.amountCollected.toStringAsFixed(0)} ',
                               style: TextStyle(
                                 color: Colors.orange,
                                 fontSize: screenWidth * 0.037,
@@ -114,8 +113,7 @@ class DonateCampaignCard extends StatelessWidget {
                               ),
                             ),
                             TextSpan(
-                              text:
-                              'Collected | ${campaign.daysLeft} Days Left',
+                              text: 'Collected | ${campaign.daysLeft} Days Left',
                               style: TextStyle(
                                 fontSize: screenWidth * 0.035,
                                 color: Colors.grey.shade800,
@@ -179,8 +177,7 @@ class DonateCampaignCard extends StatelessWidget {
                       // TODO: Handle Read More tap
                     },
                     style: OutlinedButton.styleFrom(
-                      padding:
-                      EdgeInsets.symmetric(vertical: screenHeight * 0.015),
+                      padding: EdgeInsets.symmetric(vertical: screenHeight * 0.015),
                       backgroundColor: const Color(0xFFFFF8E9),
                       side: const BorderSide(color: Color(0xFFFF8E9)),
                       shape: RoundedRectangleBorder(
@@ -208,8 +205,7 @@ class DonateCampaignCard extends StatelessWidget {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.orange,
-                      padding:
-                      EdgeInsets.symmetric(vertical: screenHeight * 0.015),
+                      padding: EdgeInsets.symmetric(vertical: screenHeight * 0.015),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(screenWidth * 0.02),
                       ),

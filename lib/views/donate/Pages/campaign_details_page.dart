@@ -4,11 +4,10 @@ import '../../../viewModels/donate/campaign_view_model.dart';
 import '../widgets/campaign_card_view.dart';
 import '../widgets/organization_info.dart';
 
-
 class CampaignDetailsPage extends StatelessWidget {
-  final CampaignViewModel controller = Get.put(CampaignViewModel());
-
   CampaignDetailsPage({Key? key}) : super(key: key);
+
+  final CampaignViewModel controller = Get.find<CampaignViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +34,9 @@ class CampaignDetailsPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CampaignCardView(campaign: campaign),
+              CampaignCardView(), // ✅ Updated (no need to pass campaign)
               SizedBox(height: height * 0.02),
+
               Text(
                 "Description",
                 style: TextStyle(
@@ -45,6 +45,7 @@ class CampaignDetailsPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: height * 0.01),
+
               Text(
                 campaign.description,
                 style: TextStyle(
@@ -52,6 +53,7 @@ class CampaignDetailsPage extends StatelessWidget {
                   height: 1.5,
                 ),
               ),
+
               SizedBox(height: height * 0.04),
 
               OrganizationInfoRow(
@@ -61,13 +63,12 @@ class CampaignDetailsPage extends StatelessWidget {
               ),
 
               SizedBox(height: height * 0.04),
-              Wrap(
-                spacing: width * 0.04,
-                runSpacing: height * 0.02,
-                alignment: WrapAlignment.spaceBetween,
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    width: width * 0.42,
+                    width: width * 0.4,
                     child: ElevatedButton(
                       onPressed: () => Get.back(),
                       style: ElevatedButton.styleFrom(
@@ -75,38 +76,38 @@ class CampaignDetailsPage extends StatelessWidget {
                         foregroundColor: Colors.black,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
+                          borderRadius: BorderRadius.circular(8),
                         ),
                         elevation: 0,
                       ),
                       child: const Text(
                         "Go Back",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    width: width * 0.42,
+                    width: width * 0.4,
                     child: ElevatedButton(
                       onPressed: () {
-                        // TODO: Implement donation functionality here
+                        // TODO: Implement donation functionality
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFF99F1B),
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
+                          borderRadius: BorderRadius.circular(8),
                         ),
                         elevation: 0,
                       ),
                       child: const Text(
                         "Donate Now",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -114,6 +115,7 @@ class CampaignDetailsPage extends StatelessWidget {
                   ),
                 ],
               ),
+
               SizedBox(height: height * 0.04),
             ],
           ),
