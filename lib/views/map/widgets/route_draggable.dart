@@ -1,5 +1,5 @@
-import 'package:avatar/models/map/route_dragabble.dart';
-import 'package:avatar/viewModels/map/route_dragabble.dart';
+import 'package:avatar/models/map/route_draggable.dart';
+import 'package:avatar/viewModels/map/route_draggable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -51,13 +51,6 @@ class DraggableContent extends StatelessWidget {
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(16),
                 ),
-                // this image is not showing on the ui screen. so i use png instead of svg.
-                // child: SvgPicture.asset(
-                //   'assets/images/map/hotel.svg',
-                //   width: double.infinity,
-                //   height: 150,
-                //   fit: BoxFit.cover,
-                // ),
                 child: Padding(
                   padding: const EdgeInsets.only(top: 15, right: 14, left: 14),
                   child: Image.asset(
@@ -156,52 +149,89 @@ class DraggableContent extends StatelessWidget {
             children: [
               Expanded(
                 flex: 2,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: '12 min ',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.amber,
-                            ),
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (controller.selectedIndex.value >= 0 &&
+                          controller.selectedIndex.value <
+                              controller.options.length)
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text:
+                                    '${controller.options[controller.selectedIndex.value].duration} ',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.amber,
+                                ),
+                              ),
+                              TextSpan(
+                                text:
+                                    '(${controller.options[controller.selectedIndex.value].distance})',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
                           ),
-                          TextSpan(
-                            text: '(6.7 km)',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black, // Default color
-                            ),
-                          ),
-                        ],
+                        ),
+                      Text(
+                        controller
+                            .options[controller.selectedIndex.value]
+                            .description,
+                        style: const TextStyle(fontSize: 12),
                       ),
-                    ),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.amber.shade50,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Row(
+                    children: [
+                      RichText(
+                        text: TextSpan(
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Colors.black,
+                          ),
+                          children: [
+                            const TextSpan(text: 'Earn '),
+                            TextSpan(
+                              text:
+                                  '${controller.options[controller.selectedIndex.value].creditpoint} ',
+                              style: const TextStyle(
+                                color: Colors.amber,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const TextSpan(
+                              text: 'Credit points on \nthis ride completion.',
+                            ),
+                          ],
+                        ),
+                      ),
 
-                    SizedBox(height: 4),
-                    Text(
-                      'Fastest route',
-                      style: TextStyle(fontSize: 14, color: Colors.black54),
-                    ),
-                  ],
+                      const SizedBox(width: 8),
+                      Image.asset(
+                        'assets/images/map/dollar.png',
+                        width: 18,
+                        height: 18,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const Expanded(
-                flex: 2,
-                child: Text(
-                  'Earn 2.8 Credit points on \nthis ride completion.',
-                  style: TextStyle(fontSize: 13),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Image.asset(
-                'assets/images/map/dollar.png',
-                width: 20,
-                height: 20,
               ),
             ],
           ),
@@ -214,7 +244,7 @@ class DraggableContent extends StatelessWidget {
             return Container(
               margin: const EdgeInsets.only(bottom: 8),
               decoration: BoxDecoration(
-                color: isSelected ? Colors.amber.shade50 : Colors.grey.shade100,
+                color: isSelected ? Colors.amber.shade50 : Color(0xFFF7F8FC),
                 borderRadius: const BorderRadius.only(
                   topRight: Radius.circular(8),
                   bottomRight: Radius.circular(8),
@@ -262,7 +292,7 @@ class DraggableContent extends StatelessWidget {
                             color: Colors.amber,
                           ),
                         ),
-                        SizedBox(width: 4),
+                        const SizedBox(width: 4),
                         Text(
                           item.distance,
                           style: const TextStyle(
@@ -278,41 +308,50 @@ class DraggableContent extends StatelessWidget {
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.share_outlined),
+                    CircleAvatar(
+                      backgroundColor: Colors.white,
+                      child: const Icon(Icons.share_outlined),
+                    ),
                     const SizedBox(width: 8),
                     Container(
                       decoration: BoxDecoration(
                         gradient: const LinearGradient(
-                          colors: [Colors.amber, Colors.amberAccent],
+                          colors: [Color(0xFFFCCF8C), Colors.amber],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
-                        borderRadius: BorderRadius.circular(6),
+                        borderRadius: BorderRadius.circular(10),
                       ),
+                      constraints: const BoxConstraints(
+                        minWidth: 80,
+                      ), //  increase min width
                       child: InkWell(
                         onTap: () {
                           // Handle GO action
                         },
-                        borderRadius: BorderRadius.circular(6),
+                        // borderRadius: BorderRadius.circular(6),
                         child: const Padding(
                           padding: EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 4,
+                            horizontal:
+                                12, // slightly more horizontal padding if needed
+                            vertical: 6,
                           ),
                           child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'GO',
+                                'Go',
                                 style: TextStyle(
-                                  fontSize: 12,
+                                  fontSize: 14,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              SizedBox(width: 4),
+                              SizedBox(width: 6),
                               Icon(
                                 Icons.arrow_forward,
-                                size: 14,
+                                size: 18,
                                 color: Colors.white,
                               ),
                             ],
@@ -320,25 +359,10 @@ class DraggableContent extends StatelessWidget {
                         ),
                       ),
                     ),
-                    // ElevatedButton(
-                    //   onPressed: () {
-                    //     // Handle GO action
-                    //   },
-                    //   style: ElevatedButton.styleFrom(
-                    //     padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    //   ),
-                    //   child: Row(
-                    //     children: [
-                    //       Text('GO'),
-                    //       Icon(Icons.arrow_forward, size: 16, color: Colors.white),
-                    //     ],
-                    //   ),
-                    // ),
                   ],
                 ),
                 onTap: () {
                   controller.selectIndex(index);
-                  print('Container selected: ${item.title}');
                 },
               ),
             );

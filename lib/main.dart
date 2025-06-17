@@ -1,13 +1,12 @@
 import 'package:avatar/core/themes/light/light_theme_data.dart';
 import 'package:avatar/views/map/map_scree_view.dart';
-import 'package:avatar/views/map/widgets/route_dragabble.dart';
+import 'package:avatar/views/map/widgets/route_draggable.dart';
 import 'package:avatar/views/share/calender.dart';
 import 'package:avatar/views/share/home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 
-import 'viewModels/map/route_dragabble.dart';
+import 'viewModels/map/route_draggable.dart';
 
 /// This is the starting point of the application
 void main() {
