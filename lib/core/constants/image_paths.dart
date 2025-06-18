@@ -12,5 +12,8 @@ class AppIcons {
   static const donate = "assets/icons/donate_icon.svg";
   static const share = "assets/icons/share_icon.svg";
   static const support = "assets/icons/support_icon.svg";
-  static const referral = " ";
+  static const close = "assets/icons/close_icon.svg";
+  static const bookmark = "assets/icons/bookmark.svg";
+  static const direction = "assets/icons/direction.svg";
+  // static const referral = " ";
 }
