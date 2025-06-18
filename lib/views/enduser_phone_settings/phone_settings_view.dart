@@ -1,6 +1,6 @@
 import 'package:avatar/core/widgets/app_text.dart';
 import 'package:avatar/views/enduser_phone_settings/menu_item_model.dart';
-import 'package:avatar/views/enduser_phone_settings/phone_settings_controller.dart';
+import 'package:avatar/views/enduser_phone_settings/phone_settings_view_model.dart';
 import 'package:avatar/views/enduser_phone_settings/widgets/profile_card.dart';
 import 'package:avatar/views/enduser_phone_settings/widgets/settings_card.dart';
 import 'package:flutter/material.dart';

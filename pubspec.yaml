@@ -50,6 +50,7 @@ flutter:
     - assets/icons/settings_section/
     - assets/icons/settings_section/home_page/
     - assets/icons/settings_section/notification_page/
+    - assets/icons/maps/
 
 # Splash Screen
 flutter_native_splash:
