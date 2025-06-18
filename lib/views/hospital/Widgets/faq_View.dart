@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../core/widgets/app_button.dart';
 import '../../../core/widgets/app_text.dart';
-import '../../../viewModels/map/faq_controller.dart';
+import '../../../viewModels/hospital/faq_controller.dart';
 import '../../../widgets/faq_category_tile.dart';
 import '../../../widgets/cards/help_card_widget.dart';
 import '../../../core/themes/light/light_theme_colors.dart';

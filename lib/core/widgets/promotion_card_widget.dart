@@ -7,8 +7,6 @@ import 'package:avatar/core/widgets/width_box.dart';
 import '../../models/cards/card_model.dart';
 import '../../viewModels/card/card_controller.dart';
 
-// TODO: It is promotion card or refferal card
-
 class ReferralCard extends StatelessWidget {
   final List<CardModel> cards;
   final Function(String) onButtonPressed;
@@ -37,7 +35,6 @@ class ReferralCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Add error handling for empty cards list
     final controller = Get.put(
       CardController(
         cards: cards,
@@ -46,116 +43,150 @@ class ReferralCard extends StatelessWidget {
       ),
     );
 
-    return Container(
-      child: Obx(() {
-        final current = controller.currentCard;
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width * 0.9,
-              height: MediaQuery.of(context).size.height * 0.17,
-              margin: margin ?? const EdgeInsets.all(17),
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(borderRadius),
-                gradient: LinearGradient(
-                  colors: current.gradientColors,
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-              ),
-              child: SizedBox(
-                child: Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        AppText.heading(
-                          current.title,
-                          fontSize: 22,
-                          color: current.titleColor,
-                        ),
-                        if (current.subtitle != null) ...[
-                          const HeightBox(8),
-                          AppText.body(
-                            current.subtitle!,
-                            fontSize: 14,
-                            color:
-                                current.subtitleColor ??
-                                current.titleColor.withOpacity(0.8),
-                          ),
-                        ],
-                        HeightBox(10),
-
-                        // TODO: Make button style customizable
-                        ElevatedButton(
-                          onPressed: () => onButtonPressed(current.buttonLabel),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            foregroundColor: Colors.black,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 24,
-                              vertical: 12,
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              current.icon,
-                              const WidthBox(8),
-                              AppText.body(current.buttonLabel),
-                            ],
-                          ),
-                        ),
-                      ],
+    return Obx(() {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            width: MediaQuery.of(context).size.width * .96,
+            height: MediaQuery.of(context).size.height * 0.19,
+            child: PageView.builder(
+              controller: controller.pageController,
+              itemCount: cards.length,
+              onPageChanged: (index) {
+                controller.currentIndex.value = index;
+                controller.resetAutoScrollTimer();
+              },
+                itemBuilder: (context, index) {
+                  final card = cards[index];
+                  return Container(
+                    margin: margin ?? const EdgeInsets.all(17),
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(borderRadius),
+                      gradient: LinearGradient(
+                        colors: card.gradientColors,
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
                     ),
-                    const WidthBox(20),
-                    // TODO: Add error handling for missing image
-                    Expanded(child: Image.asset(current.imagePath)),
-                  ],
-                ),
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        return Row(
+                          children: [
+                            /// Left Text & Button Column
+                            Expanded(
+                              flex: 3,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  AppText.heading(
+                                    card.title,
+                                    fontSize: constraints.maxHeight * 0.20,
+                                    color: card.titleColor,
+                                  ),
+                                  const HeightBox(8),
+                                  if (card.subtitle != null)
+                                    AppText.body(
+                                      card.subtitle!,
+                                      fontSize: constraints.maxHeight * 0.14,
+                                      color: card.subtitleColor ??
+                                          card.titleColor.withOpacity(0.8),
+                                    ),
+                                  const Spacer(),
+                                  SizedBox(
+                                    height: constraints.maxHeight * 0.28,
+                                    child: ElevatedButton(
+                                      onPressed: () =>
+                                          onButtonPressed(card.buttonLabel),
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.white,
+                                        foregroundColor: Colors.black,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(30),
+                                        ),
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 20,
+                                        ),
+                                      ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          card.icon,
+                                          const WidthBox(8),
+                                          AppText.body(
+                                            card.buttonLabel,
+                                            fontSize: constraints.maxHeight * 0.14,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            const WidthBox(10),
+
+                            /// Right Image
+                            Expanded(
+                              flex: 2,
+                              child: AspectRatio(
+                                aspectRatio: 1,
+                                child: Image.asset(
+                                  card.imagePath,
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  );
+                }
+
+            ),
+          ),
+          const HeightBox(12),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(
+              cards.length,
+                  (i) => _buildDot(
+                isActive: i == controller.currentIndex.value,
+                onTap: () => controller.goToCard(i),
+                activeSize: activeDotSize,
+                inactiveSize: inactiveDotSize,
+                activeColor: activeDotColor,
+                inactiveColor: inactiveDotColor,
               ),
             ),
-            const HeightBox(8),
-            // TODO: Make dots navigation interactive
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                cards.length,
-                (i) => _buildDot(
-                  i == controller.currentIndex.value,
-                  activeSize: activeDotSize,
-                  inactiveSize: inactiveDotSize,
-                  activeColor: activeDotColor,
-                  inactiveColor: inactiveDotColor,
-                ),
-              ),
-            ),
-          ],
-        );
-      }),
-    );
+          ),
+        ],
+      );
+    });
   }
 
-  Widget _buildDot(
-    bool isActive, {
+  Widget _buildDot({
+    required bool isActive,
+    required VoidCallback onTap,
     required double activeSize,
     required double inactiveSize,
     required Color activeColor,
     required Color inactiveColor,
   }) {
-    // TODO: Add tap handler for dot navigation
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 4),
-      width: isActive ? activeSize : inactiveSize,
-      height: isActive ? activeSize : inactiveSize,
-      decoration: BoxDecoration(
-        color: isActive ? activeColor : inactiveColor,
-        shape: BoxShape.circle,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 4),
+        width: isActive ? activeSize : inactiveSize,
+        height: isActive ? activeSize : inactiveSize,
+        decoration: BoxDecoration(
+          color: isActive ? activeColor : inactiveColor,
+          shape: BoxShape.circle,
+        ),
       ),
     );
   }

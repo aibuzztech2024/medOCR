@@ -42,7 +42,7 @@ class UploadIssueImageWidget extends StatelessWidget {
                         children: [
                           ListTile(
                             leading: const Icon(Icons.image),
-                            title: const Text('Upload Image'),
+                            title: AppText.body('Upload Image'),
                             onTap: () {
                               controller.pickImageFromGallery();
                               Get.back();

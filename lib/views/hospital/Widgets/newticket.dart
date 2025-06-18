@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import '../../../core/widgets/app_text.dart';
 import '../../../core/widgets/app_button.dart';
 import '../../../core/themes/light/light_theme_colors.dart';
-import '../../../views/auth/widget/input_field.dart';
+import '../../auth/widget/input_field.dart';
 import 'package:avatar/core/widgets/height_box.dart';
 import 'package:avatar/core/widgets/width_box.dart';
 import 'upload_issue_image.dart';

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../../viewModels/hospital/image_prescription_controller.dart';
+import '../../../viewModels/hospital/image_prescription_controller.dart';
 
 class PrescriptionView extends StatelessWidget {
   final PrescriptionController controller = Get.put(PrescriptionController());
