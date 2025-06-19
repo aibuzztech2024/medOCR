@@ -1,8 +1,12 @@
+import 'package:avatar/core/widgets/snackbar.dart';
 import 'package:country_picker/country_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class RegisterController extends GetxController {
+  var isLoading = false.obs;
+
   // Email input controller
   var emailController = TextEditingController();
 
@@ -25,16 +29,66 @@ class RegisterController extends GetxController {
   var isPrivacyPolicyAccepted = false.obs;
 
   // Method to simulate sending OTP
-  sendOtp() {
-    Get.log(
-      'Send otp to ${country.value.phoneCode + phoneNumberController.text}',
-    );
+  Future<void> sendOtp() async {
+    if (!validateEmailAndPhone()) return;
+
+    isLoading.value = true;
+    try {
+      Get.log(
+        'Sending OTP to ${country.value.phoneCode + phoneNumberController.text}',
+      );
+
+      // Simulate API delay
+      await Future.delayed(Duration(seconds: 2));
+
+      Get.snackbar("OTP Sent", "OTP has been sent to your number.");
+    } catch (e) {
+      Get.snackbar("Error", "Failed to send OTP");
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   // Method to simulate resending OTP
-  resendOtp() {
-    Get.log(
-      'Resend otp to ${country.value.phoneCode + phoneNumberController.text}',
-    );
+  Future<void> resendOtp() async {
+    if (!validateEmailAndPhone()) return;
+
+    isLoading.value = true;
+    try {
+      Get.log(
+        'Resending OTP to ${country.value.phoneCode + phoneNumberController.text}',
+      );
+
+      // Simulate API delay
+      await Future.delayed(Duration(seconds: 2));
+
+      Get.snackbar("OTP Resent", "OTP has been resent to your number.");
+    } catch (e) {
+      Get.snackbar("Error", "Failed to resend OTP");
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  bool validateEmailAndPhone() {
+    if (emailController.text.isEmpty ||
+        !GetUtils.isEmail(emailController.text)) {
+      AppSnackbar.showError(
+        "Invalid Email",
+        "Please enter a valid email address",
+      );
+      return false;
+    }
+
+    if (phoneNumberController.text.isEmpty ||
+        phoneNumberController.text.length < 10) {
+      AppSnackbar.showError(
+        "Invalid Phone",
+        "Please enter a valid phone number",
+      );
+      return false;
+    }
+
+    return true;
   }
 }

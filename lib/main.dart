@@ -1,4 +1,5 @@
 import 'package:avatar/core/themes/light/light_theme_data.dart';
+import 'package:avatar/views/auth/select_role_view.dart';
 import 'package:avatar/views/map/map_scree_view.dart';
 import 'package:avatar/views/map/route_draggable/route_draggable.dart';
 import 'package:avatar/views/share/calender.dart';
@@ -34,8 +35,8 @@ class MyApp extends StatelessWidget {
       // TODO: Check if user is Logged-In
       // If user is logged in, navigate to home page
       // If user is not logged in, navigate to select role page
-      //home: SelectRoleView(),
-      home: RouteDraggable(),
+      home: SelectRoleView(),
+      // home: RouteDraggable(),
     );
   }
 }

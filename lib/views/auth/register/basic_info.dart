@@ -49,7 +49,12 @@ class BasicInfo extends StatelessWidget {
           width: double.infinity,
           type: ButtonType.filled,
           text: 'Send OTP',
-          onPressed: registerController.sendOtp,
+          onPressed: () {
+            final isValid = registerController.validateEmailAndPhone();
+            if (isValid) {
+              registerController.sendOtp();
+            }
+          },
         ),
         // Resend otp
         Row(
