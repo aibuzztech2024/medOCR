@@ -27,6 +27,15 @@ dependencies:
   share_plus: ^11.0.0
   fl_chart: ^1.0.0
   intl: ^0.20.2
+  url_launcher:
+  provider: ^6.1.5
+  pdf: ^3.11.3
+  path_provider: ^2.1.5
+  printing: ^5.14.2
+  http: ^1.4.0
+  permission_handler: ^11.3.0 # For handling Android permissions
+  country_code_picker: ^3.3.0
+  flutter_switch: ^0.3.2
 
 dev_dependencies:
   flutter_test:
@@ -45,6 +54,10 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/icons/settings_section/
+    - assets/icons/settings_section/home_page/
+    - assets/icons/settings_section/notification_page/
+    - assets/icons/maps/
 
 # Splash Screen
 flutter_native_splash:
