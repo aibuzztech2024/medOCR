@@ -9,7 +9,10 @@ import 'package:avatar/views/donate/widgets/donate_campaign_card.dart';
 import 'package:avatar/views/donate/widgets/recent_donation_card.dart';
 import 'package:avatar/views/help/ticket_history_page.dart';
 import 'package:avatar/views/help/ticket_submit_page.dart';
+import 'package:avatar/views/home/widgets/home_buttons.dart';
+import 'package:avatar/views/home/widgets/notification_title.dart';
 import 'package:avatar/views/home/widgets/overview_page.dart';
+import 'package:avatar/views/home/widgets/search_page.dart';
 import 'package:avatar/views/map/map_scree_view.dart';
 import 'package:avatar/views/map/widgets/botton_widget_row.dart';
 import 'package:avatar/views/purchase/widgets/card_page.dart';
@@ -46,7 +49,7 @@ class MyApp extends StatelessWidget {
       // If user is logged in, navigate to home page
       // If user is not logged in, navigate to select role page
       //home: SelectRoleView(),
-      home: DonationSuccessPage()
+      home: SearchPage()
     );
   }
 }
