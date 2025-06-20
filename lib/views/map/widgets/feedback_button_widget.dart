@@ -22,8 +22,8 @@ class FeedbackButtonsWidget extends StatelessWidget {
         GestureDetector(
           onTap: onLikePressed,
           child: Icon(
-            Icons.thumb_up,
-            color: isLiked ? Colors.green : Colors.grey,
+            Icons.thumb_up_alt_outlined,
+            color: isLiked ? Colors.green : Colors.black45,
             size: 24,
           ),
         ),
@@ -31,8 +31,8 @@ class FeedbackButtonsWidget extends StatelessWidget {
         GestureDetector(
           onTap: onDislikePressed,
           child: Icon(
-            Icons.thumb_down,
-            color: isDisliked ? Colors.red : Colors.grey,
+            Icons.thumb_down_alt_outlined,
+            color: isDisliked ? Colors.red : Colors.black45,
             size: 24,
           ),
         ),

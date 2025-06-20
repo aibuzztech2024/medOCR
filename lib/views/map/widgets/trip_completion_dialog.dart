@@ -1,5 +1,5 @@
 import 'package:avatar/core/widgets/app_text.dart';
-import 'package:avatar/viewModels/map/trip_completion_model.dart';
+import 'package:avatar/viewModels/map/trip_completion_controller.dart';
 import 'package:avatar/views/map/widgets/feedback_button_widget.dart';
 import 'package:avatar/views/map/widgets/star_rating_widget.dart';
 import 'package:flutter/material.dart';
@@ -35,99 +35,61 @@ class TripCompletionDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            // Image at the top
+            ClipRRect(
+              child:Image.asset(controller.tripImagePath),
+            ),
+
+            const SizedBox(height: 20),
             // Header
             AppText.heading(
               'You have arrived at your location',
-              fontSize: 28,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w700,
               textAlign: TextAlign.center,
-              color: Color(0xFFF79E1B),
             ),
+
             const SizedBox(height: 16),
-            // Credit Points
-            Obx(
-              () => RichText(
-                text: TextSpan(
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  children: [
-                    const TextSpan(text: 'Congratulations! '),
-                    TextSpan(
-                      text: '${controller.tripData.creditPoints}',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFFF79E1B),
-                      ),
-                    ),
-                    const TextSpan(text: ' Credit points have been credited'),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
             // Trip Details
             Obx(
-              () => Column(
+              () => Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
                     children: [
-                      AppText.heading(
+                      AppText.body(
                         'Trip Duration: ',
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w500,
                         color: Color(0xFFF79E1B),
                       ),
-                      AppText.heading(
+                      AppText.body(
                         '${controller.tripData.tripDuration} min',
-                        fontSize: 18,
                         fontWeight: FontWeight.w600,
-                        color: Colors.black87,
                       ),
                     ],
                   ),
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      AppText.heading(
+                      AppText.body(
                         'Distance: ',
-                        fontSize: 18,
                         fontWeight: FontWeight.w500,
                         color: Color(0xFFF79E1B),
                       ),
-                      AppText.heading(
+                      AppText.body(
                         '${controller.tripData.distance} km',
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black87,
+                        fontWeight: FontWeight.w600,
                       ),
                     ],
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 24),
-            // Rating Section
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                AppText.heading('Rate your route', fontWeight: FontWeight.w400),
-                Obx(
-                  () => StarRatingWidget(
-                    rating: controller.selectedRating,
-                    onRatingChanged: controller.setRating,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 20),
             // Experience Feedback
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppText.heading(
+                AppText.caption(
                   'How was your experience?',
                   fontWeight: FontWeight.w400,
                 ),
@@ -141,6 +103,47 @@ class TripCompletionDialog extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(height: 4),
+
+            // Rating Section
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AppText.caption('Rate your route', fontWeight: FontWeight.w400),
+                Obx(
+                  () => StarRatingWidget(
+                    rating: controller.selectedRating,
+                    onRatingChanged: controller.setRating,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            // Credit Points
+            Obx(
+              () => RichText(
+                text: TextSpan(
+                  style: const TextStyle(
+                    fontSize: 10,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  children: [
+                    const TextSpan(text: 'Congratulations! '),
+                    TextSpan(
+                      text: '${controller.tripData.creditPoints}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                        color: Color(0xFFF79E1B),
+                      ),
+                    ),
+                    const TextSpan(text: ' Credit points have been credited'),
+                  ],
+                ),
+              ),
+            ),
+
             const SizedBox(height: 24),
             // Done Button
             SizedBox(

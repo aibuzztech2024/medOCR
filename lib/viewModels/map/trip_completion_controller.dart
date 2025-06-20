@@ -30,6 +30,9 @@ class TripCompletionController extends GetxController {
   /// Whether the trip was disliked by the user
   bool get isDisliked => _isDisliked.value;
 
+  /// Path to trip completion image
+  final String tripImagePath = 'assets/images/trip_completion.png';
+
   /// Sets the trip rating
   void setRating(int rating) {
     _selectedRating.value = rating;
