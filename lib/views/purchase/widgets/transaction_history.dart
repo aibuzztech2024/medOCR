@@ -18,7 +18,7 @@ class TransactionHistory extends StatelessWidget {
         // Header row with sortable "Date & Time" and static "Type"
         Container(
           width: Get.width * 0.9,
-          color: const Color(0xFFF79E1B), // Custom orange color
+          color: const Color(0xFFFF6F61), // Custom orange color
           padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 60),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -116,7 +116,7 @@ class TransactionHistory extends StatelessWidget {
                           child: ElevatedButton(
                             onPressed: () => controller.goToPage(i),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: selected ? const Color(0xFFF79E1B) : Colors.grey.shade300,
+                              backgroundColor: selected ? const Color(0xFFFF6F61) : Colors.grey.shade300,
                               foregroundColor: selected ? Colors.white : Colors.black,
                               minimumSize: const Size(35, 35),
                               shape: RoundedRectangleBorder(

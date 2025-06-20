@@ -192,7 +192,7 @@ class ResponsiveCard extends StatelessWidget {
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: Get.height * 0.010),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFFFE6C8),
+                      color: const Color(0xFFFFEDED),
                       borderRadius: BorderRadius.circular(14),
                     ),
                     alignment: Alignment.center,
@@ -212,7 +212,7 @@ class ResponsiveCard extends StatelessWidget {
                       // TODO: Implement view details action
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange,
+                      backgroundColor: const Color(0xFFFF6F61),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                       padding: EdgeInsets.symmetric(vertical: Get.height * 0.010),
                     ),

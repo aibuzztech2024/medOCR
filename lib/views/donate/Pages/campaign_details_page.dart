@@ -68,11 +68,11 @@ class CampaignDetailsPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    width: width * 0.4,
+                    width: width * 0.3,
                     child: ElevatedButton(
                       onPressed: () => Get.back(),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFFFF7E6),
+                        backgroundColor: const Color(0xFFFFEDED),
                         foregroundColor: Colors.black,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
@@ -90,13 +90,13 @@ class CampaignDetailsPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: width * 0.4,
+                    width: width * 0.3,
                     child: ElevatedButton(
                       onPressed: () {
                         // TODO: Implement donation functionality
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFF99F1B),
+                        backgroundColor: const Color(0xFFFF6F61),
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(

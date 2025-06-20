@@ -9,6 +9,8 @@ import '../../../viewModels/donate/campaign_view_model.dart';
 import '../../purchase/widgets/donate_campaign_card_second.dart';
 import '../widgets/campaign_card_view.dart';
 import 'package:file_picker/file_picker.dart';
+import 'donation_failed.dart';
+import 'overlay_loader.dart';  // Import your loader widget here
 
 class DonateCheckoutPage extends StatefulWidget {
   final CampaignModel? campaign;
@@ -78,7 +80,7 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
                         style: TextStyle(
                           fontSize: screenWidth * 0.08,
                           fontWeight: FontWeight.bold,
-                          color: Colors.orange,
+                          color: const Color(0xFFFF6F61),
                         ),
                       ),
                       SizedBox(
@@ -92,8 +94,8 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
                             color: Colors.transparent,
                             fontSize: 0.1,
                           ),
-                          cursorColor: Colors.orange,
-                          backgroundCursorColor: Colors.orange,
+                          cursorColor: const Color(0xFFFF6F61),
+                          backgroundCursorColor: const Color(0xFFFF6F61),
                           textAlign: TextAlign.center,
                           onChanged: (value) {
                             vm.updateAmount(int.tryParse(value) ?? 0);
@@ -194,7 +196,7 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: vm.panDocument.value == null
                           ? Colors.grey.shade200
-                          : Colors.orange,
+                          : const Color(0xFFFF6F61),
                       padding: const EdgeInsets.symmetric(vertical: 12),
                     ),
                     child: SvgPicture.asset(
@@ -227,7 +229,6 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
     );
   }
 
-  // Payment method tile
   Widget _buildPaymentTile(String title, String icon, int method) {
     final selected = vm.selectedPaymentMethod.value == method;
     return GestureDetector(
@@ -236,10 +237,10 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         decoration: BoxDecoration(
           border: Border.all(
-            color: selected ? Colors.orange : Colors.black87,
+            color: selected ? const Color(0xFFFF6F61) : Colors.black87,
             width: 1.5,
           ),
-          color: selected ? Colors.orange.withOpacity(0.1) : Colors.transparent,
+          color: selected ? const Color(0xFFFF6F61).withOpacity(0.1) : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
@@ -254,7 +255,7 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: selected ? Colors.orange : Colors.black87,
+                  color: selected ? const Color(0xFFFF6F61) : Colors.black87,
                   width: 2,
                 ),
               ),
@@ -265,7 +266,7 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
                   height: Get.width * 0.025,
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.orange,
+                    color: Color(0xFFFF6F61),
                   ),
                 ),
               )
@@ -277,7 +278,6 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
     );
   }
 
-  // Cancel/Pay button
   Widget _buildBottomButton(
       String label, {
         VoidCallback? onPressed,
@@ -290,16 +290,17 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
         onPressed: enabled ? onPressed : null,
         style: ElevatedButton.styleFrom(
           backgroundColor: isPrimary
-              ? (enabled ? Colors.orange : const Color(0xFFFFF8E9)) // Pay button colors
-              : const Color(0xFFFFF8E9), // Cancel button background
-          foregroundColor: isPrimary
-              ? (enabled ? Colors.white : Colors.black54) // Pay: white if active, grey if not
-              : Colors.black54, // Cancel button text/icon
+              ? (enabled ? const Color(0xFFFF6F61) : const Color(0xFFFFF8E9))
+              : const Color(0xFFFFEDED),
+
+            foregroundColor: isPrimary
+              ? (enabled ? Colors.white : Colors.black54)
+              : Colors.black54,
           padding: EdgeInsets.symmetric(vertical: Get.height * 0.012),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
-          elevation: 0, // Optional: remove shadow for flat look
+          elevation: 0,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -324,7 +325,6 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
     );
   }
 
-  // Bottom Sheet shown on Pay
   void _showConfirmBottomSheet() {
     final int amount = int.tryParse(vm.inputText.value) ?? 0;
     final double platformFee = amount * 0.02;
@@ -346,17 +346,28 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
               _buildBreakdownRow("Platform Fee (2%)", platformFee),
               _buildBreakdownRow("GST on Platform Fee (18%)", gst),
               const SizedBox(height: 16),
-              const SizedBox(height: 8),
               _buildBreakdownRow("Total Amount Donor Pays", amount.toDouble(), isTotal: true),
               const SizedBox(height: 24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _buildBottomButton("Cancel", onPressed: () => Get.back()),
-                  _buildBottomButton("Pay", isPrimary: true, onPressed: () {
-                    Get.back(); // Close sheet
-                    vm.submitDonation(); // Trigger donation
-                  }),
+                  _buildBottomButton(
+                    "Pay",
+                    isPrimary: true,
+                    onPressed: () {
+                      Get.back(); // Close bottom sheet
+
+                      // Show loader overlay
+                      Get.generalDialog(
+                        barrierDismissible: false,
+                        barrierColor: Colors.transparent,
+                        transitionDuration: Duration.zero,
+                        pageBuilder: (_, __, ___) => const DonationFailed(),
+                      );
+
+                    },
+                  ),
                 ],
               ),
             ],

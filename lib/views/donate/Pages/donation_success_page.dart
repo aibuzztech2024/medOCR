@@ -78,7 +78,7 @@ class DonationSuccessPage extends StatelessWidget {
                         TextSpan(
                           text: '${pointsEarned.toStringAsFixed(1)}',
                           style: const TextStyle(
-                            color: Color(0xFFFF9900),
+                            color: const Color(0xFFFF6F61),
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -102,7 +102,7 @@ class DonationSuccessPage extends StatelessWidget {
                           // TODO: Add action
                         },
                         style: OutlinedButton.styleFrom(
-                          backgroundColor: const Color(0xFFFDF4DC),
+                          backgroundColor: const Color(0xFFFFEDED),
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
@@ -125,7 +125,7 @@ class DonationSuccessPage extends StatelessWidget {
                           // TODO: Navigate home
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFFF9900),
+                          backgroundColor: const Color(0xFFFF6F61),
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),

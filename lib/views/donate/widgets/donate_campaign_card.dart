@@ -107,7 +107,7 @@ class DonateCampaignCard extends StatelessWidget {
                             TextSpan(
                               text: '₹${campaign.amountCollected.toStringAsFixed(0)} ',
                               style: TextStyle(
-                                color: Colors.orange,
+                                color: const Color(0xFFFF6F61),
                                 fontSize: screenWidth * 0.037,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -140,7 +140,7 @@ class DonateCampaignCard extends StatelessWidget {
                           CircularProgressIndicator(
                             value: campaign.progressPercent / 100,
                             backgroundColor: Colors.grey.shade300,
-                            color: Colors.orange,
+                            color: const Color(0xFFFF6F61),
                             strokeWidth: screenWidth * 0.015,
                           ),
                           Center(
@@ -178,7 +178,7 @@ class DonateCampaignCard extends StatelessWidget {
                     },
                     style: OutlinedButton.styleFrom(
                       padding: EdgeInsets.symmetric(vertical: screenHeight * 0.015),
-                      backgroundColor: const Color(0xFFFFF8E9),
+                      backgroundColor: const Color(0xFFFFEDED),
                       side: const BorderSide(color: Color(0xFFFF8E9)),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(screenWidth * 0.02),
@@ -204,7 +204,7 @@ class DonateCampaignCard extends StatelessWidget {
                       // TODO: Handle Donate Now tap
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange,
+                      backgroundColor: const Color(0xFFFF6F61),
                       padding: EdgeInsets.symmetric(vertical: screenHeight * 0.015),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(screenWidth * 0.02),

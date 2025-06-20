@@ -18,15 +18,16 @@ dependencies:
   country_picker: ^2.0.27 # country picker
   flutter_svg: ^2.1.0 # svg icons
   animate_do: ^4.2.0 # animations
-  dotted_border: ^2.1.0
-  flutter_native_splash: ^2.4.6
-  geolocator: ^14.0.1
-  flutter_map: ^8.1.1
-  latlong2: ^0.9.1
-  avatar_glow: ^3.0.1
-  flutter_compass: ^0.8.1
-  font_awesome_flutter: ^10.4.0
-  file_picker: ^10.2.0
+  dotted_border: ^2.1.0 # Dotted border around widgets
+  flutter_native_splash: ^2.4.6 # Native splash screen setup
+  geolocator: ^14.0.1 # Get user location (GPS)
+  flutter_map: ^8.1.1 # OpenStreetMap-based map widget
+  latlong2: ^0.9.1 # Latitude and longitude support for maps
+  avatar_glow: ^3.0.1 # Glowing avatar animation
+  flutter_compass: ^0.8.1 # Compass sensor data
+  font_awesome_flutter: ^10.4.0 # Font Awesome icons
+  file_picker: ^10.2.0 # Pick files from device storage
+
 
 dev_dependencies:
   flutter_test:

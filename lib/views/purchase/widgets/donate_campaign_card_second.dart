@@ -114,7 +114,7 @@ class _CampaignCardViewState extends State<DonateCampaignCardSecond> {
                               style: TextStyle(
                                 fontSize: screenWidth * 0.035,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.orange,
+                                color: const Color(0xFFFF6F61),
                               ),
                             ),
                             TextSpan(
@@ -147,7 +147,7 @@ class _CampaignCardViewState extends State<DonateCampaignCardSecond> {
                           CircularProgressIndicator(
                             value: campaign.progressPercent / 100, // Value between 0 and 1
                             backgroundColor: Colors.grey.shade300,
-                            color: Colors.orange,
+                            color: const Color(0xFFFF6F61),
                             strokeWidth: screenWidth * 0.0125,
                           ),
                           Center(

@@ -38,10 +38,6 @@ class CampaignCardView extends StatelessWidget {
                 top: screenHeight * 0.015,
                 right: screenWidth * 0.03,
                 child: Container(
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.black45,
-                  ),
                   child: Padding(
                     padding: EdgeInsets.all(screenWidth * 0.015),
                     child: Icon(
@@ -113,7 +109,8 @@ class CampaignCardView extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: screenWidth * 0.035,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.orange,
+                                  color: const Color(0xFFFF6F61),
+
                                 ),
                               ),
                               TextSpan(
@@ -145,7 +142,7 @@ class CampaignCardView extends StatelessWidget {
                             CircularProgressIndicator(
                               value: campaign.progressPercent / 100,
                               backgroundColor: Colors.grey.shade300,
-                              color: Colors.orange,
+                              color: const Color(0xFFFF6F61),
                               strokeWidth: screenWidth * 0.0125,
                             ),
                             Center(

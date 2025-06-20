@@ -259,7 +259,7 @@ class _SimpleHeader extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: width * 0.038,
-              color: Colors.orange,
+              color: const Color(0xFFFF6F61),
             ),
           ),
         ),
