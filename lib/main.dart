@@ -1,4 +1,5 @@
 import 'package:avatar/core/themes/light/light_theme_data.dart';
+import 'package:avatar/viewModels/auth/register/ngo/ngo_register_controller.dart';
 import 'package:avatar/views/auth/select_role_view.dart';
 import 'package:avatar/views/map/map_scree_view.dart';
 import 'package:avatar/views/map/route_draggable/route_draggable.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(RouteDraggableController());
+    Get.put(NgoRegisterController());
     // Use GetMaterialApp to enable GetX features
     return GetMaterialApp(
       // Hides the debugBanner in Debug Mode

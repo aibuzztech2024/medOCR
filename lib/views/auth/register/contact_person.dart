@@ -1,5 +1,6 @@
 import 'package:avatar/core/widgets/app_button.dart';
 import 'package:avatar/core/widgets/app_text.dart';
+import 'package:avatar/viewModels/auth/register/ngo/ngo_register_controller.dart';
 import 'package:avatar/views/auth/widget/app_country_picker.dart';
 import 'package:avatar/views/auth/widget/input_field.dart';
 import 'package:avatar/views/auth/widget/input_with_action.dart';
@@ -12,21 +13,22 @@ class ContactPerson extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     final registerController = Get.find<NgoRegisterController>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        InputField(hintText: 'Name', controller: TextEditingController()),
+        InputField(hintText: 'Name', controller: registerController.contactNameController),
         const SizedBox(height: 16),
         InputField(
           hintText: 'Designation',
-          controller: TextEditingController(),
+          controller: registerController.contactRoleController,
         ),
         const SizedBox(height: 16),
         InputWithAction(
           expandedFirst: false,
           expandedChild: InputField(
             hintText: 'Enter Phone No',
-            controller: TextEditingController(),
+            controller: registerController.phoneNumber2Controller,
           ),
           trailingChild: AppCountryPicker(onSelect: (val) {}),
         ),
@@ -53,7 +55,7 @@ class ContactPerson extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 16),
-        InputField(hintText: 'Enter OTP', controller: TextEditingController()),
+        InputField(hintText: 'Enter OTP', controller: registerController.contactotpController),
         Opacity(
           opacity: .7,
           child: AppText.caption(

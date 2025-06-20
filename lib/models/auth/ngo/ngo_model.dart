@@ -82,4 +82,35 @@ class NgoProfileModel {
       referral: json['referral'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+  return {
+    'email': email,
+    'phone-number1': phoneNumber1,
+    'ngo-name': ngoName,
+    'website-url': websiteUrl,
+    'ngo-services': ngoServices,
+    'address': address,
+    'dist': dist,
+    'state': state,
+    'pincode': pincode,
+    'country': country,
+    'latitude': latitude,
+    'longitude': longitude,
+    'ngo-registration-doc': ngoRegistrationDoc,
+    'gst-number': gstNumber,
+    'pan-number': panNumber,
+    'tan-number': tanNumber,
+    '12A-doc': doc12A,
+    'section8-doc': section8Doc,
+    'brand-img': brandImg,
+    'brand-desc': brandDesc,
+    'password': password,
+    'contact-name': contactName,
+    'contact-role': contactRole,
+    'phone-number2': phoneNumber2,
+    'referral': referral,
+  };
+}
+
 }
