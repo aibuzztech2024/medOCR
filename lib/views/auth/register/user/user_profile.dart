@@ -3,8 +3,10 @@ import 'package:avatar/core/widgets/height_box.dart';
 import 'package:avatar/core/widgets/width_box.dart';
 import 'package:avatar/viewModels/auth/register/user/register_controller.dart';
 import 'package:avatar/views/auth/widget/app_country_picker.dart';
+import 'package:avatar/views/auth/widget/app_upload_button.dart';
 import 'package:avatar/views/auth/widget/gender_selector.dart';
 import 'package:avatar/views/auth/widget/input_field.dart';
+import 'package:avatar/views/auth/widget/input_with_action.dart';
 import 'package:avatar/views/auth/widget/policy_checkbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,54 +30,89 @@ class UserProfile extends StatelessWidget {
     return Column(
       children: [
         // Row for Name input and Gender selection
+        InputField(
+          hintText: 'Name',
+          controller:
+              registerController
+                  .nameController, // Replace with persistent controller if needed
+        ),
+        HeightBox(16),
+
         Row(
           children: [
             Expanded(
               flex: 1,
               child: InputField(
-                hintText: 'Name',
-                controller:
-                    registerController.nameController, // Replace with persistent controller if needed
+                hintText: 'DOB',
+                controller: registerController.dobController,
+                trailingIcon: Icons.calendar_month,
+                onTrailingIconTap: () async {
+                  DateTime? pickedDate = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(1900),
+                    lastDate: DateTime.now(),
+                  );
+
+                  if (pickedDate != null) {
+                    // Format the date as per your need
+                    final formattedDate =
+                        "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+                    registerController.dobController.text = formattedDate;
+                  }
+                },
               ),
             ),
-            WidthBox(10), // Horizontal spacing
-            SizedBox(
-              width: 75,
-              height: 50,
+
+            WidthBox(10), // spacing between the two halves
+            Expanded(
+              flex: 1,
               child: AppButton(
                 type: ButtonType.outlined,
                 onPressed: () async {
-                  // Show gender selector and update the value in controller
+                  // Show selector and update value
                   registerController.gender.value = await showGenderSelector(
                     context,
                   );
                 },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Obx(
-                      () => Icon(
-                        // Icon changes based on selected gender
-                        registerController.gender.value == 'M'
-                            ? Icons.male
-                            : registerController.gender.value == 'F'
-                            ? Icons.female
-                            : Icons.transgender,
-                        size: 26,
-                      ),
-                    ),
-                    WidthBox(3),
-                    Icon(Icons.keyboard_arrow_down, size: 24),
-                  ],
-                ),
+                child: Obx(() {
+                  // Map values to display text
+                  String genderText;
+                  switch (registerController.gender.value) {
+                    case 'M':
+                      genderText = 'Male';
+                      break;
+                    case 'F':
+                      genderText = 'Female';
+                      break;
+                    case 'O':
+                      genderText = 'Other';
+                      break;
+                    default:
+                      genderText = 'Gender'; // Default label
+                  }
+
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(genderText, style: const TextStyle(fontSize: 16)),
+                      const SizedBox(width: 4),
+                      const Icon(Icons.keyboard_arrow_down, size: 20),
+                    ],
+                  );
+                }),
               ),
             ),
           ],
         ),
+
         HeightBox(16),
 
         // Address field
-        InputField(hintText: 'Address', controller: registerController.addressController),
+        InputField(
+          hintText: 'Address',
+          controller: registerController.addressController,
+        ),
         HeightBox(16),
 
         // City or District field
@@ -105,13 +142,30 @@ class UserProfile extends StatelessWidget {
         HeightBox(16),
 
         // Pincode field
-        InputField(hintText: 'Pincode', controller: registerController.pincodeController),
+        InputField(
+          hintText: 'Pincode',
+          controller: registerController.pincodeController,
+        ),
         HeightBox(16),
 
         // Referral Code field
         InputField(
           hintText: 'Referral Code',
           controller: registerController.referralCodeController,
+        ),
+        HeightBox(16),
+
+        // Selfie Upload Section
+        InputWithAction(
+          expandedChild: InputField(
+            hintText: 'Selfie saptured successfully',
+            controller: registerController.selfieController,
+          ),
+          trailingChild: AppUploadButton(
+            onUpload: () {
+              registerController.selfieController;
+            },
+          ),
         ),
         HeightBox(16),
 
