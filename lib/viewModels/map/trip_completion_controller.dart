@@ -1,3 +1,4 @@
+import 'package:avatar/core/constants/image_paths.dart';
 import 'package:avatar/models/map/trip_completion_model.dart';
 import 'package:get/get.dart';
 
@@ -31,7 +32,7 @@ class TripCompletionController extends GetxController {
   bool get isDisliked => _isDisliked.value;
 
   /// Path to trip completion image
-  final String tripImagePath = 'assets/images/trip_completion.png';
+  final String tripImagePath = ImagePaths.tripcompletion;
 
   /// Sets the trip rating
   void setRating(int rating) {

@@ -1,3 +1,5 @@
+import 'package:avatar/core/utils/methods/navigate_to.dart';
+import 'package:avatar/views/help/ticket_history_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -39,7 +41,7 @@ class FAQView extends StatelessWidget {
                       SupportShadowButton(
                         icon: Icons.receipt_long,
                         label: 'Ticket History',
-                        onPressed: () {},
+                        onPressed: () => navigateTo(() => TicketHistoryPage()),
                       ),
                     ],
                   ),

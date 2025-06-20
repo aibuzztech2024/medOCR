@@ -44,7 +44,8 @@ class ImagePaths {
   static const String referralCard3 =
       'assets/images/gradient-affiliate-marketing-illustration3.png';
 
+  static const String tripcompletion = 'assets/images/trip_completion.png';
+
   static const userProfile = "assets/images/user_profile.png";
   static const diamond_Badge = "assets/images/Diamond_Badge.png";
 }
-

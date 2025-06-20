@@ -6,6 +6,7 @@ import 'package:avatar/views/auth/select_role_view.dart';
 import 'package:avatar/views/donate/Pages/donate_page.dart';
 import 'package:avatar/views/endcustomer/profile/widgets/profile_widgets.dart';
 import 'package:avatar/views/enduser_phone_settings/phone_settings_view.dart';
+import 'package:avatar/views/map/widgets/faq_View.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -85,12 +86,7 @@ class ProfileScreen extends StatelessWidget {
                         MenuItem(
                           svgPath: IconsPaths.support,
                           title: 'Support',
-                          onPressed:
-                              () => Get.snackbar(
-                                "",
-                                "Support tapped",
-                                snackPosition: SnackPosition.BOTTOM,
-                              ),
+                          onPressed: () => navigateTo(() => FAQView()),
                         ),
                         MenuItem(
                           svgPath: IconsPaths.logout,
