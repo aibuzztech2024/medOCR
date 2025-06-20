@@ -1,6 +1,6 @@
 import 'package:avatar/core/widgets/app_button.dart';
 import 'package:avatar/core/widgets/app_text.dart';
-import 'package:avatar/viewModels/auth/register/advertiser/advertiser_document_controller.dart';
+import 'package:avatar/viewModels/auth/register/advertiser/advertiser_profile_controller.dart';
 import 'package:avatar/views/auth/widget/app_upload_button.dart';
 import 'package:avatar/views/auth/widget/input_field.dart';
 import 'package:avatar/views/auth/widget/input_with_action.dart';
@@ -13,8 +13,8 @@ class AdvertiserDocument extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AdvertiserDocumentController advertiserDocumentController = Get.put(
-      AdvertiserDocumentController(),
+    final AdvertiserController advertiserDocumentController = Get.put(
+      AdvertiserController(),
     );
     return Column(
       spacing: 25,

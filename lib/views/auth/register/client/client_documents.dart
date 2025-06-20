@@ -1,8 +1,10 @@
 import 'package:avatar/core/widgets/app_button.dart';
+import 'package:avatar/viewModels/auth/register/client/client_profile_controller.dart';
 import 'package:avatar/views/auth/widget/app_upload_button.dart';
 import 'package:avatar/views/auth/widget/input_field.dart';
 import 'package:avatar/views/auth/widget/input_with_action.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ClientDocuments extends StatelessWidget {
   final VoidCallback onContinue;
@@ -10,36 +12,54 @@ class ClientDocuments extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ClientController clientDocumentController =
+        Get.find<ClientController>();
     return Column(
       spacing: 25,
       children: [
         InputWithAction(
           expandedChild: InputField(
             hintText: 'Incorporation Number & Document',
-            controller: TextEditingController(),
+            controller: clientDocumentController.incorporationController,
           ),
-          trailingChild: AppUploadButton(onUpload: () {}),
+          trailingChild: AppUploadButton(
+            onUpload: () {
+              clientDocumentController.uploadClientIncorporationNumber();
+            },
+          ),
         ),
         InputWithAction(
           expandedChild: InputField(
             hintText: 'GST Number & Document',
-            controller: TextEditingController(),
+            controller: clientDocumentController.gstController,
           ),
-          trailingChild: AppUploadButton(onUpload: () {}),
+          trailingChild: AppUploadButton(
+            onUpload: () {
+              clientDocumentController.uploadClientGst();
+            },
+          ),
         ),
         InputWithAction(
           expandedChild: InputField(
             hintText: 'PAN Number & Document',
-            controller: TextEditingController(),
+            controller: clientDocumentController.panController,
           ),
-          trailingChild: AppUploadButton(onUpload: () {}),
+          trailingChild: AppUploadButton(
+            onUpload: () {
+              clientDocumentController.uploadClientPan();
+            },
+          ),
         ),
         InputWithAction(
           expandedChild: InputField(
             hintText: 'TAN Number & Document',
-            controller: TextEditingController(),
+            controller: clientDocumentController.tanController,
           ),
-          trailingChild: AppUploadButton(onUpload: () {}),
+          trailingChild: AppUploadButton(
+            onUpload: () {
+              clientDocumentController.uploadClientTan();
+            },
+          ),
         ),
         AppButton(
           type: ButtonType.filled,

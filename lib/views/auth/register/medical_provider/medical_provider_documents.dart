@@ -1,6 +1,6 @@
 import 'package:avatar/core/widgets/app_button.dart';
 import 'package:avatar/core/widgets/app_text.dart';
-import 'package:avatar/viewModels/auth/register/medical_provider/medical_provider_document_controller.dart';
+import 'package:avatar/viewModels/auth/register/medical_provider/medical_provider_controller.dart';
 import 'package:avatar/views/auth/widget/app_upload_button.dart';
 import 'package:avatar/views/auth/widget/input_field.dart';
 import 'package:avatar/views/auth/widget/input_with_action.dart';
@@ -13,8 +13,8 @@ class MedicalProviderDocuments extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MedicalDocumentController medicalDocumentController = Get.put(
-      MedicalDocumentController(),
+    final MedicalProviderController medicalDocumentController = Get.put(
+      MedicalProviderController(),
     );
     return Column(
       spacing: 25,

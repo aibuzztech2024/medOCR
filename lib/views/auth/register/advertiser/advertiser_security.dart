@@ -1,5 +1,5 @@
 import 'package:avatar/core/widgets/app_button.dart';
-import 'package:avatar/viewModels/auth/register/advertiser/advertiser_security_controller.dart';
+import 'package:avatar/viewModels/auth/register/advertiser/advertiser_profile_controller.dart';
 import 'package:avatar/views/auth/widget/input_field.dart';
 import 'package:avatar/views/auth/widget/password_field.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +12,8 @@ class AdvertiserSecurity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AdvertiserSecurityController advertiserSecurityController = Get.put(
-      AdvertiserSecurityController(),
+    final AdvertiserController advertiserSecurityController = Get.put(
+      AdvertiserController(),
     );
     return Column(
       spacing: 16,

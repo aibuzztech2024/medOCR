@@ -1,7 +1,9 @@
 import 'package:avatar/core/widgets/app_button.dart';
+import 'package:avatar/viewModels/auth/register/client/client_profile_controller.dart';
 import 'package:avatar/views/auth/widget/input_field.dart';
 import 'package:avatar/views/auth/widget/password_field.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ClientSecurity extends StatelessWidget {
   final VoidCallback onRegister;
@@ -9,17 +11,19 @@ class ClientSecurity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ClientController clientSecurityController =
+        Get.find<ClientController>();
     return Column(
       spacing: 16,
       children: [
         InputField(
           hintText: 'Defaultemail@Gmail.com',
-          controller: TextEditingController(),
+          controller: clientSecurityController.emailController,
         ),
-        PasswordField(controller: TextEditingController()),
+        PasswordField(controller: clientSecurityController.passwordController),
         PasswordField(
           hintText: 'Confirm Password',
-          controller: TextEditingController(),
+          controller: clientSecurityController.confirmPasswordController,
         ),
         AppButton(
           type: ButtonType.filled,

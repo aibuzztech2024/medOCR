@@ -1,6 +1,6 @@
 import 'package:avatar/core/widgets/app_button.dart';
 import 'package:avatar/core/widgets/width_box.dart';
-import 'package:avatar/viewModels/auth/register/medical_provider/medical_provider_profile_controller.dart';
+import 'package:avatar/viewModels/auth/register/medical_provider/medical_provider_controller.dart';
 import 'package:avatar/views/auth/widget/app_country_picker.dart';
 import 'package:avatar/views/auth/widget/input_field.dart';
 import 'package:avatar/views/auth/widget/policy_checkbox.dart';
@@ -13,8 +13,8 @@ class MedicalProviderProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MedicalProfileController medicalProfileController = Get.put(
-      MedicalProfileController(),
+    final MedicalProviderController medicalProfileController = Get.put(
+      MedicalProviderController(),
     );
     return Column(
       spacing: 16,

@@ -15,8 +15,8 @@ class AdvertiserProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AdvertiserProfileController advertiserProfileController = Get.put(
-      AdvertiserProfileController(),
+    final AdvertiserController advertiserProfileController = Get.put(
+      AdvertiserController(),
     );
     return Column(
       spacing: 16,
@@ -72,12 +72,7 @@ class AdvertiserProfile extends StatelessWidget {
           width: double.infinity,
           onPressed: onContinue,
         ),
-        AppButton(
-          type: ButtonType.filled,
-          text: 'Continue',
-          width: double.infinity,
-          onPressed: () => Get.to(DonationHomePageView()),
-        ),
+
         SizedBox(),
       ],
     );
