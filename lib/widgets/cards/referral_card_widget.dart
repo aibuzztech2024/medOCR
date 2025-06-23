@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+
 import '../../core/constants/icons_paths.dart';
 import '../../core/constants/image_paths.dart';
 import '../../core/widgets/promotion_card_widget.dart';
@@ -41,9 +42,9 @@ class ReferralCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200, // Fixed height for the referral cards
+      // Fixed height for the referral cards
       child: ReferralCard(
-        autoScrollDuration: Duration(seconds: 3),
+        autoScrollDuration: Duration(seconds: 5),
         cards: cards,
         onButtonPressed: (buttonLabel) {
           // TODO: Implement proper button action handling

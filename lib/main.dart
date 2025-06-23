@@ -6,18 +6,21 @@ import 'package:avatar/models/navigation/segment_tab_model.dart';
 import 'package:avatar/viewModels/hospital/order_history_controller.dart';
 import 'package:avatar/viewModels/navigation/bottom_nav_controller.dart';
 import 'package:avatar/views/auth/login/login_view.dart';
+import 'package:avatar/views/hospital/Widgets/donut_chart.dart';
 import 'package:avatar/views/hospital/Widgets/order_history_view.dart';
 import 'package:avatar/views/hospital/Widgets/prescription_view.dart';
 import 'package:avatar/views/hospital/Widgets/faq_View.dart';
 import 'package:avatar/views/hospital/Widgets/hospital_place_list.dart';
 import 'package:avatar/views/hospital/Widgets/newticket.dart';
 import 'package:avatar/views/navigation/bottom_nav_bar.dart';
+import 'package:avatar/widgets/cards/order_history_card.dart';
 import 'package:avatar/widgets/perfect_segment_toggle_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import 'models/navigation/bottom_nav_item_model.dart';
+import 'viewModels/hospital/donut_chart_controller.dart';
 
 /// This is the starting point of the application
 void main() {
@@ -32,8 +35,7 @@ void main() {
 
 /// MyApp is the main widget of the application
 class MyApp extends StatelessWidget {
-
-   MyApp({super.key});
+  MyApp({super.key});
   final OrderHistoryController f = Get.put(OrderHistoryController());
 
   @override
@@ -82,7 +84,7 @@ class MyApp extends StatelessWidget {
       BottomNavItemModel(
         icon: IconsPaths.purchase,
         title: "Purchase",
-        screen: Center(child: NewTicketPage()),
+        screen: Center(child: DonutChartWidget()),
       ),
       BottomNavItemModel(
         icon: IconsPaths.home,

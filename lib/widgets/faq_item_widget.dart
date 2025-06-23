@@ -1,8 +1,5 @@
-// lib/widgets/faq_item_widget.dart
 import 'package:flutter/material.dart';
-import '../core/widgets/app_text.dart';
 import '../models/map/faq_model.dart';
-import 'package:avatar/core/widgets/height_box.dart';
 
 class FAQItemWidget extends StatelessWidget {
   final FAQItem item;
@@ -12,16 +9,25 @@ class FAQItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppText.heading('Q: ${item.question}', fontSize: 16),
-          const HeightBox(8),
-          AppText.body(
+          Text(
+            'Q: ${item.question}',
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
             'A: ${item.answer}',
-            fontSize: 14,
-            color: Colors.grey[700],
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.grey[800],
+            ),
           ),
         ],
       ),

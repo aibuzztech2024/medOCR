@@ -57,9 +57,9 @@ class HelpCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200, // Fixed height for the help cards
+     // Fixed height for the help cards
       child: ReferralCard(
-        autoScrollDuration: Duration(seconds: 3),
+        autoScrollDuration: Duration(seconds: 5),
         cards: helpcards,
         onButtonPressed: (buttonLabel) {
           // TODO: Implement proper button action handling
