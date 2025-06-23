@@ -6,11 +6,9 @@ import 'package:get/get.dart';
 import '../../../models/donate/campaign_model.dart';
 import '../../../viewModels/donate/donate_checkout_view_model.dart';
 import '../../../viewModels/donate/campaign_view_model.dart';
-import '../../purchase/widgets/donate_campaign_card_second.dart';
-import '../widgets/campaign_card_view.dart';
+import '../widgets/donate_campaign_card.dart';
 import 'package:file_picker/file_picker.dart';
 import 'donation_failed.dart';
-import 'overlay_loader.dart';  // Import your loader widget here
 
 class DonateCheckoutPage extends StatefulWidget {
   final CampaignModel? campaign;
@@ -50,7 +48,7 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            DonateCampaignCardSecond(campaign: campaign),
+            DonateCampaignCard(campaign: campaign, showBookmark: false),
             SizedBox(height: screenHeight * 0.01),
 
             Center(
@@ -94,8 +92,8 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
                             color: Colors.transparent,
                             fontSize: 0.1,
                           ),
-                          cursorColor: const Color(0xFFFF6F61),
-                          backgroundCursorColor: const Color(0xFFFF6F61),
+                          cursorColor: Colors.transparent,
+                          backgroundCursorColor: Colors.transparent,
                           textAlign: TextAlign.center,
                           onChanged: (value) {
                             vm.updateAmount(int.tryParse(value) ?? 0);
