@@ -19,6 +19,8 @@ import 'package:avatar/views/map/map_scree_view.dart';
 import 'package:avatar/views/map/widgets/botton_widget_row.dart';
 import 'package:avatar/views/ngo/widgets/ngo_donation_card_view.dart';
 import 'package:avatar/views/ngo/widgets/post_performance_overview_card.dart';
+import 'package:avatar/views/pharmacy%20/widgets/order_card.dart';
+import 'package:avatar/views/pharmacy%20/widgets/profile_tile.dart';
 import 'package:avatar/views/purchase/widgets/card_page.dart';
 import 'package:avatar/views/purchase/widgets/submit_request.dart';
 import 'package:avatar/views/purchase/widgets/transaction_history.dart';
@@ -53,7 +55,7 @@ class MyApp extends StatelessWidget {
       // If user is logged in, navigate to home page
       // If user is not logged in, navigate to select role page
       //home: SelectRoleView(),
-      home: DonationCardView()
+      home: OrderCardScreen()
     );
   }
 }
