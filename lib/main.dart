@@ -8,6 +8,7 @@ import 'package:avatar/views/enduser_phone_settings/edit_profile_view.dart';
 import 'package:avatar/views/enduser_phone_settings/phone_settings_view.dart';
 import 'package:avatar/views/maps/location_selection_view.dart';
 import 'package:avatar/views/order_payment/order_payment_view.dart';
+import 'package:avatar/views/register_as_ngo/calendar_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
       // TODO: Check if user is Logged-In
       // If user is logged in, navigate to home page
       // If user is not logged in, navigate to select role page
-      home: SelectRoleView(),
+      home: CalendarPage(),
     );
   }
 }

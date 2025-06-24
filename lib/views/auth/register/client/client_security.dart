@@ -11,8 +11,9 @@ class ClientSecurity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ClientController clientSecurityController =
-        Get.find<ClientController>();
+    final ClientController clientSecurityController = Get.put(
+      ClientController(),
+    );
     return Column(
       spacing: 16,
       children: [
@@ -29,7 +30,9 @@ class ClientSecurity extends StatelessWidget {
           type: ButtonType.filled,
           text: 'Register',
           width: double.infinity,
-          onPressed: onRegister,
+          onPressed: () {
+            clientSecurityController.registerClient(onSuccess: onRegister);
+          },
         ),
       ],
     );

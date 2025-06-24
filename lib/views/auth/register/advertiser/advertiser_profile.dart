@@ -37,7 +37,7 @@ class AdvertiserProfile extends StatelessWidget {
         ),
         InputField(
           hintText: 'Website URL',
-          controller: TextEditingController(),
+          controller: advertiserProfileController.websiteUrlController,
         ),
         InputField(
           hintText: 'Address',
@@ -50,7 +50,7 @@ class AdvertiserProfile extends StatelessWidget {
         InputWithAction(
           expandedChild: InputField(
             hintText: 'State',
-            controller: TextEditingController(),
+            controller: advertiserProfileController.stateController,
           ),
           trailingChild: AppCountryPicker(
             onSelect: (val) {},

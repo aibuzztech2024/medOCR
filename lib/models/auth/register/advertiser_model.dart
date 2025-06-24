@@ -1,8 +1,9 @@
-class ClientRequestModel {
+class AdvertiserModel {
   String? email;
   String? phoneNumber1;
   String? companyName;
-  String? servicesIntrested;
+  String? advertiserType;
+  String? adServiceRequired;
   String? websiteUrl;
   String? address;
   String? dist;
@@ -15,17 +16,20 @@ class ClientRequestModel {
   String? gstNumber;
   String? panNumber;
   String? tanNumber;
+  String? brandImg;
+  String? brandDesc;
   String? password;
   String? contactName;
   String? contactRole;
   String? phoneNumber2;
-  String? referralCode;
+  String? referral;
 
-  ClientRequestModel({
+  AdvertiserModel({
     required this.email,
     required this.phoneNumber1,
     required this.companyName,
-    required this.servicesIntrested,
+    required this.advertiserType,
+    required this.adServiceRequired,
     required this.websiteUrl,
     required this.address,
     required this.dist,
@@ -38,11 +42,13 @@ class ClientRequestModel {
     required this.gstNumber,
     required this.panNumber,
     required this.tanNumber,
+    required this.brandImg,
+    required this.brandDesc,
     required this.password,
     required this.contactName,
     required this.contactRole,
     required this.phoneNumber2,
-    required this.referralCode,
+    required this.referral,
   });
 
   Map<String, dynamic> toJson() {
@@ -50,7 +56,8 @@ class ClientRequestModel {
       'email': email,
       'phone-number1': phoneNumber1,
       'company-name': companyName,
-      'services-intrested': servicesIntrested,
+      'advertiser-type': advertiserType,
+      'ad-service-required': adServiceRequired,
       'website-url': websiteUrl,
       'address': address,
       'dist': dist,
@@ -63,11 +70,13 @@ class ClientRequestModel {
       'gst-number': gstNumber,
       'pan-number': panNumber,
       'tan-number': tanNumber,
+      'brand-img': brandImg,
+      'brand-desc': brandDesc,
       'password': password,
       'contact-name': contactName,
       'contact-role': contactRole,
       'phone-number2': phoneNumber2,
-      'referral-code': referralCode,
+      'referral': referral,
     };
   }
 }

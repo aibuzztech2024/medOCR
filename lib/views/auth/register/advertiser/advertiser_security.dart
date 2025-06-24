@@ -33,7 +33,13 @@ class AdvertiserSecurity extends StatelessWidget {
           type: ButtonType.filled,
           text: 'Register',
           width: double.infinity,
-          onPressed: onRegister,
+          onPressed: () {
+            advertiserSecurityController.registerAdvertiser(
+              onSuccess: () {
+                onRegister();
+              },
+            );
+          },
         ),
       ],
     );

@@ -12,8 +12,9 @@ class ClientDocuments extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ClientController clientDocumentController =
-        Get.find<ClientController>();
+    final ClientController clientDocumentController = Get.put(
+      ClientController(),
+    );
     return Column(
       spacing: 25,
       children: [

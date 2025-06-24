@@ -1,5 +1,6 @@
 import 'package:avatar/core/widgets/app_button.dart';
 import 'package:avatar/core/widgets/app_text.dart';
+import 'package:avatar/viewModels/auth/register/contact_controller.dart';
 import 'package:avatar/views/auth/widget/app_country_picker.dart';
 import 'package:avatar/views/auth/widget/input_field.dart';
 import 'package:avatar/views/auth/widget/input_with_action.dart';
@@ -12,23 +13,28 @@ class ContactPerson extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ContactController());
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        InputField(hintText: 'Name', controller: TextEditingController()),
+        InputField(hintText: 'Name', controller: controller.nameController),
         const SizedBox(height: 16),
         InputField(
           hintText: 'Designation',
-          controller: TextEditingController(),
+          controller: controller.designationController,
         ),
         const SizedBox(height: 16),
         InputWithAction(
           expandedFirst: false,
           expandedChild: InputField(
             hintText: 'Enter Phone No',
-            controller: TextEditingController(),
+            controller: controller.phoneController,
           ),
-          trailingChild: AppCountryPicker(onSelect: (val) {}),
+          trailingChild: AppCountryPicker(
+            onSelect: (val) {
+              controller.selectedCountryCode.value = val as String;
+            },
+          ),
         ),
 
         const SizedBox(height: 16),
@@ -53,7 +59,7 @@ class ContactPerson extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 16),
-        InputField(hintText: 'Enter OTP', controller: TextEditingController()),
+        InputField(hintText: 'Enter OTP', controller: controller.otpController),
         Opacity(
           opacity: .7,
           child: AppText.caption(
