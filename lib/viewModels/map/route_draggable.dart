@@ -1,8 +1,8 @@
-import 'package:avatar/models/map/route_dragabble.dart';
+import 'package:avatar/models/map/route_draggable.dart';
 import 'package:get/get.dart';
 
 class RouteDraggableController extends GetxController {
-  var selectedIndex = (-1).obs;
+  var selectedIndex = 0.obs;
 
   final options =
       <RouteOption>[
@@ -11,18 +11,21 @@ class RouteDraggableController extends GetxController {
           description: 'Fastest route, the usual traffic',
           duration: '12 min',
           distance: '6.7 km',
+          creditpoint: '2.8',
         ),
         RouteOption(
           title: 'Via Street Rd',
-          description: 'Fastest route, the usual traffic',
-          duration: '12 min',
-          distance: '6.7 km',
+          description: 'Fastest routes, the usual traffic',
+          duration: '14 min',
+          distance: '6.8 km',
+          creditpoint: '2.5',
         ),
         RouteOption(
-          title: 'Via String Rd',
-          description: 'Fastest route, the usual traffic',
-          duration: '12 min',
-          distance: '6.7 km',
+          title: 'Via Stream Rd',
+          description: 'Fastest route, usual traffic',
+          duration: '16 min',
+          distance: '6.9 km',
+          creditpoint: '2.1',
         ),
       ].obs;
 
