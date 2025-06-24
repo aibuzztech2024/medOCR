@@ -1,6 +1,6 @@
 import 'package:avatar/core/widgets/app_button.dart';
 import 'package:avatar/core/widgets/app_text.dart';
-import 'package:avatar/viewModels/auth/register/medical_provider/medical_provider_document_controller.dart';
+import 'package:avatar/viewModels/auth/register/medical_provider/medical_provider_controller.dart';
 import 'package:avatar/views/auth/widget/app_upload_button.dart';
 import 'package:avatar/views/auth/widget/input_field.dart';
 import 'package:avatar/views/auth/widget/input_with_action.dart';
@@ -13,8 +13,8 @@ class MedicalProviderDocuments extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MedicalDocumentController medicalDocumentController = Get.put(
-      MedicalDocumentController(),
+    final MedicalProviderController medicalController = Get.put(
+      MedicalProviderController(),
     );
     return Column(
       spacing: 25,
@@ -22,11 +22,11 @@ class MedicalProviderDocuments extends StatelessWidget {
         InputWithAction(
           expandedChild: InputField(
             hintText: 'Incorporation Number & Document',
-            controller: medicalDocumentController.incorporationController,
+            controller: medicalController.incorporationController,
           ),
           trailingChild: AppUploadButton(
             onUpload: () {
-              medicalDocumentController.uploadMedicalIncorporationNumber();
+              medicalController.uploadMedicalIncorporationNumber();
             },
           ),
         ),
@@ -34,11 +34,11 @@ class MedicalProviderDocuments extends StatelessWidget {
         InputWithAction(
           expandedChild: InputField(
             hintText: 'GST Number & Document',
-            controller: medicalDocumentController.gstController,
+            controller: medicalController.gstController,
           ),
           trailingChild: AppUploadButton(
             onUpload: () {
-              medicalDocumentController.uploadMedicalGst();
+              medicalController.uploadMedicalGst();
             },
           ),
         ),
@@ -46,11 +46,11 @@ class MedicalProviderDocuments extends StatelessWidget {
         InputWithAction(
           expandedChild: InputField(
             hintText: 'PAN Number & Document',
-            controller: medicalDocumentController.panController,
+            controller: medicalController.panController,
           ),
           trailingChild: AppUploadButton(
             onUpload: () {
-              medicalDocumentController.uploadMedicalPan();
+              medicalController.uploadMedicalPan();
             },
           ),
         ),
@@ -58,11 +58,11 @@ class MedicalProviderDocuments extends StatelessWidget {
         InputWithAction(
           expandedChild: InputField(
             hintText: 'TAN Number & Document',
-            controller: medicalDocumentController.tanController,
+            controller: medicalController.tanController,
           ),
           trailingChild: AppUploadButton(
             onUpload: () {
-              medicalDocumentController.uploadMedicalTan();
+              medicalController.uploadMedicalTan();
             },
           ),
         ),
@@ -70,12 +70,11 @@ class MedicalProviderDocuments extends StatelessWidget {
         InputWithAction(
           expandedChild: InputField(
             hintText: 'Medical License Number & Document',
-            controller:
-                medicalDocumentController.medicalLicenseNumberController,
+            controller: medicalController.medicalLicenseNumberController,
           ),
           trailingChild: AppUploadButton(
             onUpload: () {
-              medicalDocumentController.uploadMedicalLicenseNumber();
+              medicalController.uploadMedicalLicenseNumber();
             },
           ),
         ),
@@ -83,11 +82,11 @@ class MedicalProviderDocuments extends StatelessWidget {
         InputWithAction(
           expandedChild: InputField(
             hintText: 'Bank Account Number & Document',
-            controller: medicalDocumentController.bankAccountNumberController,
+            controller: medicalController.bankAccountNumberController,
           ),
           trailingChild: AppUploadButton(
             onUpload: () {
-              medicalDocumentController.uploadMedicalAccountNumber();
+              medicalController.uploadMedicalAccountNumber();
             },
           ),
         ),
@@ -104,7 +103,7 @@ class MedicalProviderDocuments extends StatelessWidget {
                   height: 50,
                   child: AppUploadButton(
                     onUpload: () {
-                      medicalDocumentController.uploadStoreFrontImage();
+                      medicalController.uploadStoreFrontImage();
                     },
                   ),
                 ),

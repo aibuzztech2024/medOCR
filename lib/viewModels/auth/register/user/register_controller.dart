@@ -24,6 +24,8 @@ class RegisterController extends GetxController {
   // name, address, city, state, pincode, and referral code controllers
   final nameController = TextEditingController();
 
+  final dobController = TextEditingController();
+
   final addressController = TextEditingController();
 
   final cityController = TextEditingController();
@@ -33,6 +35,8 @@ class RegisterController extends GetxController {
   final pincodeController = TextEditingController();
 
   final referralCodeController = TextEditingController();
+
+  final selfieController = TextEditingController();
 
   var isPrivacyPolicyAccepted = false;
 

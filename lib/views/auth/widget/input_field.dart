@@ -11,6 +11,8 @@ class InputField extends StatelessWidget {
   final TextEditingController controller;
   final String? Function(String?)? validator;
   final IconData? trailingIcon;
+  final VoidCallback? onTrailingIconTap;
+
   final String? labelText;
 
   const InputField({
@@ -20,6 +22,8 @@ class InputField extends StatelessWidget {
     this.validator,
     this.errorMessage,
     this.trailingIcon,
+    this.onTrailingIconTap,
+
     this.labelText,
   });
 
@@ -39,6 +43,8 @@ class InputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      readOnly: onTrailingIconTap != null,
+
       validator: validator,
       keyboardType: _getKeyboardType(),
       decoration: InputDecoration(
@@ -47,7 +53,10 @@ class InputField extends StatelessWidget {
         errorText: errorMessage,
         suffixIcon:
             trailingIcon != null
-                ? Icon(trailingIcon, color: context.theme.primaryColor)
+                ? GestureDetector(
+                  onTap: onTrailingIconTap,
+                  child: Icon(trailingIcon, color: context.theme.primaryColor),
+                )
                 : null,
       ),
     );

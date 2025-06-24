@@ -1,5 +1,5 @@
 import 'package:avatar/core/widgets/app_button.dart';
-import 'package:avatar/viewModels/auth/register/medical_provider/medical_provider_security_controller.dart';
+import 'package:avatar/viewModels/auth/register/medical_provider/medical_provider_controller.dart';
 import 'package:avatar/views/auth/widget/input_field.dart';
 import 'package:avatar/views/auth/widget/password_field.dart';
 import 'package:flutter/material.dart';
@@ -11,29 +11,31 @@ class MedicalProviderSecurity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MedicalSecurityController medicalSecurityController = Get.put(
-      MedicalSecurityController(),
+    final MedicalProviderController medicalController = Get.put(
+      MedicalProviderController(),
     );
     return Column(
       spacing: 16,
       children: [
         InputField(
           hintText: 'Username',
-          controller: medicalSecurityController.usernameController,
+          controller: medicalController.usernameController,
         ),
         PasswordField(
           hintText: 'Password',
-          controller: medicalSecurityController.passwordController,
+          controller: medicalController.passwordController,
         ),
         PasswordField(
           hintText: 'Confirm Password',
-          controller: medicalSecurityController.confirmPasswordController,
+          controller: medicalController.confirmPasswordController,
         ),
         AppButton(
           type: ButtonType.filled,
           text: 'Register',
           width: double.infinity,
-          onPressed: onRegister,
+          onPressed: () {
+  medicalController.registerMedicalProvider(onSuccess: onRegister);
+          },
         ),
       ],
     );
