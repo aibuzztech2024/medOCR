@@ -44,7 +44,7 @@ class _DonationLoaderState extends State<DonationLoader>
     ));
 
     return Scaffold(
-        backgroundColor: const Color(0xFFFF6F61).withOpacity(0.9), // faint orange full screen
+        backgroundColor: const Color(0xFF3AAFA9).withOpacity(0.9), // faint orange full screen
       body: SafeArea(
         child: Center(
           child: Column(

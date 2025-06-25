@@ -20,6 +20,7 @@ class CampaignModel {
     required this.daysLeft,
     required this.distanceKm,
     required this.progressPercent,
+
     required this.description,
     required this.organizationName,
     required this.organizationWebsite,

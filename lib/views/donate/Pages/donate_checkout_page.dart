@@ -78,7 +78,7 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
                         style: TextStyle(
                           fontSize: screenWidth * 0.08,
                           fontWeight: FontWeight.bold,
-                          color: const Color(0xFFFF6F61),
+                          color: const Color(0xFF3AAFA9),
                         ),
                       ),
                       SizedBox(
@@ -194,7 +194,7 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: vm.panDocument.value == null
                           ? Colors.grey.shade200
-                          : const Color(0xFFFF6F61),
+                          : const Color(0xFF3AAFA9),
                       padding: const EdgeInsets.symmetric(vertical: 12),
                     ),
                     child: SvgPicture.asset(
@@ -235,10 +235,10 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         decoration: BoxDecoration(
           border: Border.all(
-            color: selected ? const Color(0xFFFF6F61) : Colors.black87,
+            color: selected ? const Color(0xFF3AAFA9) : Colors.black87,
             width: 1.5,
           ),
-          color: selected ? const Color(0xFFFF6F61).withOpacity(0.1) : Colors.transparent,
+          color: selected ? const Color(0xFF3AAFA9).withOpacity(0.1) : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
@@ -253,7 +253,7 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: selected ? const Color(0xFFFF6F61) : Colors.black87,
+                  color: selected ? const Color(0xFF3AAFA9) : Colors.black87,
                   width: 2,
                 ),
               ),
@@ -264,7 +264,7 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
                   height: Get.width * 0.025,
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Color(0xFFFF6F61),
+                    color: Color(0xFF3AAFA9),
                   ),
                 ),
               )
@@ -288,8 +288,8 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
         onPressed: enabled ? onPressed : null,
         style: ElevatedButton.styleFrom(
           backgroundColor: isPrimary
-              ? (enabled ? const Color(0xFFFF6F61) : const Color(0xFFFFF8E9))
-              : const Color(0xFFFFEDED),
+              ? (enabled ? const Color(0xFF3AAFA9) : const Color(0xFFFFF8E9))
+              : const Color(0xFFD2F3F2),
 
             foregroundColor: isPrimary
               ? (enabled ? Colors.white : Colors.black54)

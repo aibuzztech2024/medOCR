@@ -78,7 +78,7 @@ class DonationSuccessPage extends StatelessWidget {
                         TextSpan(
                           text: '${pointsEarned.toStringAsFixed(1)}',
                           style: const TextStyle(
-                            color: const Color(0xFFFF6F61),
+                            color: const Color(0xFF3AAFA9),
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -102,12 +102,12 @@ class DonationSuccessPage extends StatelessWidget {
                           // TODO: Add action
                         },
                         style: OutlinedButton.styleFrom(
-                          backgroundColor: const Color(0xFFFFEDED),
+                          backgroundColor: const Color(0xFFD2F3F2),
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          side: const BorderSide(color: Color(0xFFFDF4DC)),
+                          side: const BorderSide(color: Color(0xFFD2F3F2)),
                         ),
                         child: const Text(
                           'Donate More',
@@ -125,7 +125,7 @@ class DonationSuccessPage extends StatelessWidget {
                           // TODO: Navigate home
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFFF6F61),
+                          backgroundColor: const Color(0xFF3AAFA9),
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),

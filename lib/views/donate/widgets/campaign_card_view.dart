@@ -109,7 +109,7 @@ class CampaignCardView extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: screenWidth * 0.035,
                                   fontWeight: FontWeight.bold,
-                                  color: const Color(0xFFFF6F61),
+                                  color: const Color(0xFF3AAFA9),
 
                                 ),
                               ),
@@ -142,7 +142,7 @@ class CampaignCardView extends StatelessWidget {
                             CircularProgressIndicator(
                               value: campaign.progressPercent / 100,
                               backgroundColor: Colors.grey.shade300,
-                              color: const Color(0xFFFF6F61),
+                              color: const Color(0xFF3AAFA9),
                               strokeWidth: screenWidth * 0.0125,
                             ),
                             Center(

@@ -30,7 +30,7 @@ class CampaignDetailsPage extends StatelessWidget {
         final campaign = controller.campaign.value;
 
         return SingleChildScrollView(
-          padding: EdgeInsets.all(width * 0.04),
+          padding: EdgeInsets.all(width * 0.06),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -72,7 +72,7 @@ class CampaignDetailsPage extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () => Get.back(),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFFFEDED),
+                        backgroundColor: const Color(0xFFD2F3F2),
                         foregroundColor: Colors.black,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
@@ -96,7 +96,7 @@ class CampaignDetailsPage extends StatelessWidget {
                         // TODO: Implement donation functionality
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFFF6F61),
+                        backgroundColor: const Color(0xFF3AAFA9),
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(

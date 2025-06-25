@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../models/donate/campaign_model.dart';
@@ -111,7 +110,7 @@ class DonateCampaignCard extends StatelessWidget {
                               text:
                               '₹${campaign.amountCollected.toStringAsFixed(0)} ',
                               style: TextStyle(
-                                color: const Color(0xFFFF6F61),
+                                color: const Color(0xFF3AAFA9),
                                 fontSize: screenWidth * 0.037,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -142,7 +141,7 @@ class DonateCampaignCard extends StatelessWidget {
                           CircularProgressIndicator(
                             value: campaign.progressPercent / 100,
                             backgroundColor: Colors.grey.shade300,
-                            color: const Color(0xFFFF6F61),
+                            color: const Color(0xFF3AAFA9),
                             strokeWidth: screenWidth * 0.015,
                           ),
                           Center(
@@ -176,7 +175,7 @@ class DonateCampaignCard extends StatelessWidget {
                     style: OutlinedButton.styleFrom(
                       padding:
                       EdgeInsets.symmetric(vertical: screenHeight * 0.015),
-                      backgroundColor: const Color(0xFFFFEDED),
+                      backgroundColor: const Color(0xFFD2F3F2),
                       side: const BorderSide(color: Color(0xFFFF8E9)),
                       shape: RoundedRectangleBorder(
                         borderRadius:
@@ -198,7 +197,7 @@ class DonateCampaignCard extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFFF6F61),
+                      backgroundColor: const Color(0xFF3AAFA9),
                       padding:
                       EdgeInsets.symmetric(vertical: screenHeight * 0.015),
                       shape: RoundedRectangleBorder(

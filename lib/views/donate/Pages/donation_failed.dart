@@ -19,7 +19,7 @@ class DonationFailed extends StatelessWidget {
     ));
 
     return Scaffold(
-        backgroundColor: const Color(0xFFFF6F61).withOpacity(0.9), // full faint orange
+        backgroundColor: const Color(0xFF3AAFA9).withOpacity(0.9), // full faint orange
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
