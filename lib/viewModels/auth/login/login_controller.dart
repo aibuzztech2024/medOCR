@@ -1,11 +1,12 @@
 // lib/controllers/login_controller.dart
 import 'dart:convert';
 import 'package:avatar/core/constants/api_constants.dart';
+import 'package:avatar/core/utils/methods/navigate_to.dart';
 import 'package:avatar/models/auth/login/user_model.dart';
+import 'package:avatar/widgets/bottom_navbar_end_customer.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-
 
 /// A controller that manages login and password reset logic for a login screen.
 ///
@@ -55,7 +56,8 @@ class LoginController extends GetxController {
         if (data['success'] == true) {
           final user = UserModel.fromJson(data['user']);
           Get.printInfo(info: 'Login successful: ${user.name}');
-          // navigateTo(() => const BottomNavbarEndCustomer());
+          Get.snackbar('Login successful', 'Welcome, ${user.name}!');
+          navigateTo(() => const BottomNavbarEndCustomer());
           // TODO: Navigate to next screen or store user
         } else {
           Get.snackbar(

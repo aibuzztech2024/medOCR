@@ -17,34 +17,40 @@ class EndCustomerHomescreen extends StatelessWidget {
     Get.put(EndCustomerAppbarController());
     final ChartController controller = Get.put(ChartController());
 
-    return Scaffold(
-      backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
+    return WillPopScope(
+      onWillPop: () async {
+        // Handle back button press
+        return false;
+      },
+      child: Scaffold(
+        backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
 
-      ///TODO change accoring to req
-      body: Obx(() {
-        if (controller.isLoading) {
-          // Show loading indicator while data is being fetched
-          return const Center(child: CircularProgressIndicator());
-        }
-        return SingleChildScrollView(
-          child: Column(
-            children: [
-              EndcustomerAppbar(),
-              ReferralCardWidget(),
-              OverviewWidget(),
-              const SizedBox(height: 20),
-              MultiLineChartWidget(series: controller.chartSeries),
-              const SizedBox(height: 20),
-              UpcomingEventsWidget(),
-              const SizedBox(height: 20),
+        ///TODO change accoring to req
+        body: Obx(() {
+          if (controller.isLoading) {
+            // Show loading indicator while data is being fetched
+            return const Center(child: CircularProgressIndicator());
+          }
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                EndcustomerAppbar(),
+                ReferralCardWidget(),
+                OverviewWidget(),
+                const SizedBox(height: 20),
+                MultiLineChartWidget(series: controller.chartSeries),
+                const SizedBox(height: 20),
+                UpcomingEventsWidget(),
+                const SizedBox(height: 20),
 
-              // widget for scrollable coupons list for homepage
-              const FeatureRewardsWidget(),
-              const SizedBox(height: 20),
-            ],
-          ),
-        );
-      }),
+                // widget for scrollable coupons list for homepage
+                const FeatureRewardsWidget(),
+                const SizedBox(height: 20),
+              ],
+            ),
+          );
+        }),
+      ),
     );
   }
 }
