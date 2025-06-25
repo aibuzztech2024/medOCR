@@ -1,7 +1,9 @@
-import 'package:avatar/models/map/location_overview_model.dart';
 import 'package:flutter/material.dart';
 
-import '../map/location_overview_bottomsheet.dart';
+import '../../models/endCustomer/purchase/product_modal.dart';
+import '../endCustomer/purchase/widgets/myCart_productCard.dart';
+import '../pharmacy_app/purchase/widgets/select_delivery_address_widget.dart';
+import '../pharmacy_app/settings/widgets/delete_profile_dailog.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -10,38 +12,48 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: LocationReviewWidget(
-          location: LocationOverviewModel(
-            title: 'Central Command',
-            subtitle: 'General Hospital',
-            review: ReviewModel(
-              averageRating: 4.4,
-              totalReviews: 157,
-              starCounts: {5: 100, 4: 25, 3: 15, 2: 10, 1: 7},
+        child: Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: SingleChildScrollView(
+            child: Column(
+              spacing: 18,
+              children: [
+                AddressSelector(),
+                ElevatedButton(onPressed: () => showDeleteProfileDialog(context), child: Text("Delete Profile")),
 
-              comments: [
-                ReviewComment(
-                  name: 'Monika Singh',
-                  avatarUrl: 'https://i.pravatar.cc/100?img=1',
-                  rating: 5,
-                  comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscem ipsum dolor sit amet, consectetur adipiscem ipsum dolor sit amet, consectetur adipiscem ipsum dolor sit amet, consectetur adipiscem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elit',
-                  date: DateTime.now().subtract(const Duration(days: 14)),
+                MyCart_ProductCard(
+                  product: Product(
+                    imageUrl: 'assets/images/tablet.png',
+                    name: 'Crocin Pain Relief Tablet',
+                    price: 220,
+                    mrp: 245,
+                    quantity: '60 Tablets',
+                    manufacturer: 'ABC Pharmaceuticals',
+                    prescriptionReceived: false,
+                    isBookmarked: false,
+                    packaging: 'Bottle',
+                    saltComposition: 'Paracetamol (650mg), Caffeine (50mg)',
+                    isRecommendation: true,
+                  ),
                 ),
-                ReviewComment(
-                  name: 'dipesh Singh',
-                  avatarUrl: 'https://i.pravatar.cc/100?img=1',
-                  rating: 3,
-                  comment: 'Could be better. Facilities are  okay.',
-                  date: DateTime.now().subtract(const Duration(days: 23)),
+                MyCart_ProductCard(
+                  product: Product(
+                    imageUrl: 'assets/images/tablet.png',
+                    name: 'Crocin ',
+                    price: 120,
+                    mrp: 345,
+                    quantity: '60 Tablets',
+                    manufacturer: 'ABC Pharmaceuticals',
+                    prescriptionReceived: false,
+                    isBookmarked: false,
+                    packaging: 'Bottle',
+                    saltComposition: 'Paracetamol (650mg), Caffeine (50mg)',
+                    isRecommendation: true,
+                  ),
                 ),
               ],
             ),
           ),
-
-          onNavigate: () => print('Navigate tapped'),
-          onBookmark: () => print('Bookmark tapped'),
-          onShare: () => print('Share tapped'),
-          onClose: () => print('Close tapped'),
         ),
       ),
     );

@@ -1,10 +1,13 @@
-import 'package:avatar/views/endCustomer/help/chat/widgets/chat_input_field.dart';
-import 'package:avatar/views/endCustomer/help/chat/widgets/messages_bubble.dart';
+import 'package:avatar/views/pharmacy_app/support/chat/widgets/chat_input_field.dart';
+import 'package:avatar/views/pharmacy_app/support/chat/widgets/messages_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'package:avatar/viewModels/pharmacy_app/purchase/search_controller.dart';
+import 'package:avatar/viewModels/pharmacy_app/chat/chat_controller.dart';
+
+import '../../../../core/constants/appColors.dart';
 import '../../../../models/chat/message_model.dart';
-import '../../../../viewModels/endCustomer/chat/chat_controller.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -93,7 +96,7 @@ class ChatIntroHeader extends StatelessWidget {
           Container(
             height: screenHeight*0.18,
             width: double.infinity,
-            decoration: BoxDecoration(color: Colors.orange, borderRadius: BorderRadius.circular(16)),
+            decoration: BoxDecoration(color: AppColors.pharmacy_PrimaryColor, borderRadius: BorderRadius.circular(16)),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

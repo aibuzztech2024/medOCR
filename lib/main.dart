@@ -1,7 +1,9 @@
 import 'package:avatar/core/themes/light/light_theme_data.dart';
-import 'package:avatar/views/endCustomer/help/chat/chat_screen.dart';
+import 'package:avatar/views/pharmacy_app/support/chat/chat_screen.dart';
 import 'package:avatar/views/endCustomer/home/profile_screen.dart';
+import 'package:avatar/views/pharmacy_app/purchase/purchase_page.dart';
 import 'package:avatar/views/home/home_page.dart';
+import 'package:avatar/views/pharmacy_app/share/share_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
       /// TODO: Check if user is Logged-In
       // If user is logged in, navigate to home page
       // If user is not logged in, navigate to select role page
-      //home: SelectRoleView(),
+      // home: HomePage(),
       home: HomePage(),
     );
   }

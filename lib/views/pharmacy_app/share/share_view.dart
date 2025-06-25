@@ -1,7 +1,8 @@
-import 'package:avatar/views/endCustomer/share/widgets/prescription_Card.dart';
+import 'package:avatar/views/pharmacy_app/share/widgets/prescription_Card.dart';
 import 'package:flutter/material.dart';
 
-import '../../../models/endCustomer/share/prescription_Modal.dart';
+import '../../../models/pharmacy_app/share/prescription_Modal.dart';
+
 
 class share_view extends StatelessWidget {
   const share_view({super.key});

@@ -1,11 +1,16 @@
-import 'package:avatar/views/endCustomer/purchase/widgets/dropdownfield.dart';
-import 'package:avatar/views/endCustomer/purchase/widgets/product_card.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
-import '../../../models/endCustomer/purchase/product_modal.dart';
-import '../../../viewModels/endCustomer/purchase/search_controller.dart';
+import 'package:avatar/core/constants/appColors.dart';
+import 'package:avatar/models/pharmacy_app/purchase/productModal.dart';
+import 'package:avatar/views/pharmacy_app/purchase/purchase_page.dart';
+import 'package:avatar/views/pharmacy_app/purchase/widgets/dropdownfield.dart';
+import 'package:avatar/views/pharmacy_app/purchase/widgets/product_card.dart';
+import 'package:avatar/viewModels/pharmacy_app/purchase/search_controller.dart';
+
+
 
 /// To DO CHANGE COLOR IN SCREEN
 
@@ -57,7 +62,7 @@ class searchTab_view extends StatelessWidget {
               ),
               Obx(
                 () => IconButton(
-                  icon: Icon(controller.sortByBookmark.value ? Icons.bookmark : Icons.bookmark_border, color: Colors.orange),
+                  icon: Icon(controller.sortByBookmark.value ? Icons.bookmark : Icons.bookmark_border, color: AppColors.pharmacy_PrimaryColor),
                   onPressed: () {
                     controller.sortByBookmark.toggle();
                     controller.search(); // Re-run search with updated sort
@@ -66,7 +71,7 @@ class searchTab_view extends StatelessWidget {
               ),
 
               ///---- TODO -- add a tap function of this icon-
-              Icon(Icons.av_timer_rounded, color: Colors.orange),
+              Icon(Icons.av_timer_rounded, color: AppColors.pharmacy_PrimaryColor),
             ],
           ),
 
@@ -116,7 +121,7 @@ class searchTab_view extends StatelessWidget {
               return Center(
                 child: ElevatedButton(
                   onPressed: controller.search,
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.orange, minimumSize: Size(screenWidth * 0.45, screenHeight * 0.06)),
+                  style: ElevatedButton.styleFrom(backgroundColor: AppColors.pharmacy_PrimaryColor, minimumSize: Size(screenWidth * 0.45, screenHeight * 0.06)),
                   child: const Text('Search', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                 ),
               );
@@ -126,14 +131,13 @@ class searchTab_view extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: Text(
                   "${controller.products.length} results",
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.orange),
+                  style:  TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: AppColors.pharmacy_PrimaryColor),
                 ),
               );
             }
           }),
 
           // const SizedBox(height: 8),
-
           /// ─── Product List ───
           Obx(() {
             if (controller.hasSearched.value && controller.products.isEmpty) {
@@ -141,13 +145,9 @@ class searchTab_view extends StatelessWidget {
             }
 
             final paged = controller.pagedProducts;
-            return MasonryGridView.count(
+            return ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              crossAxisCount: 2,
-              mainAxisSpacing: 12,
-              crossAxisSpacing: 12,
-              padding: const EdgeInsets.all(0),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: paged.length,
               itemBuilder: (context, index) {
                 final Product p = paged[index];
@@ -160,14 +160,10 @@ class searchTab_view extends StatelessWidget {
                     final idxGlobal = controller.products.indexOf(p);
                     controller.products[idxGlobal] = p;
                   },
-                  onAddToCart: (quantity) {
-                    Get.snackbar("Success", "$quantity Product added to Cart", snackPosition: SnackPosition.BOTTOM);
-                  },
                 );
               },
             );
           }),
-
           /// ─── Pagination Bar (Only if more than 1 page) ───
           Obx(() {
             final totalPages = controller.totalPages;
@@ -187,7 +183,7 @@ class searchTab_view extends StatelessWidget {
                   child: Container(
                     margin: const EdgeInsets.symmetric(horizontal: 4),
                     padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-                    decoration: BoxDecoration(color: isCurrent ? Colors.orange : Colors.grey[300], borderRadius: BorderRadius.circular(6)),
+                    decoration: BoxDecoration(color: isCurrent ? AppColors.pharmacy_PrimaryColor : Colors.grey[300], borderRadius: BorderRadius.circular(6)),
                     child: Text("$i", style: TextStyle(color: isCurrent ? Colors.white : Colors.black87, fontWeight: FontWeight.w600)),
                   ),
                 ),
