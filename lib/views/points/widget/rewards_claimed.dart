@@ -7,11 +7,12 @@ import 'package:avatar/models/points/claimed_reward_model.dart';
 class RewardsClaimed extends StatelessWidget {
   final ClaimedReward reward;
   final bool isPointsHistory;
+  final Color color;
 
   const RewardsClaimed({
     super.key,
     required this.reward,
-    this.isPointsHistory = false,
+    this.isPointsHistory = false, required this.color,
   });
 
   @override
@@ -39,7 +40,7 @@ class RewardsClaimed extends StatelessWidget {
                     child: Container(
                       width: 60,
                       height: isPointsHistory ? 60 : 80,
-                      color: LightThemeColors.advertisorColor,
+                      color: color,
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: Image.asset(reward.imageUrl, fit: BoxFit.cover),

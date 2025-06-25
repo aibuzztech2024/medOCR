@@ -28,7 +28,11 @@ class Allrewards extends StatelessWidget {
           ListView.builder(
             itemCount: featuredRewards.length,
             itemBuilder: (context, index) {
-              return RewardCardWidget(reward: featuredRewards[index]);
+              return RewardCardWidget(
+                reward: featuredRewards[index],
+                color: LightThemeColors.pharmacyColor,
+                colors: LightThemeColors.pharmacyColor15,
+              );
             },
           ),
 
@@ -39,6 +43,8 @@ class Allrewards extends StatelessWidget {
               return RewardCardWidget(
                 reward: popularCoupons[index],
                 isPopularcoupon: true,
+                color: LightThemeColors.pharmacyColor,
+                colors: LightThemeColors.pharmacyColor15,
               );
             },
           ),

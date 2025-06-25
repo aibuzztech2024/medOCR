@@ -1,3 +1,4 @@
+import 'package:avatar/core/themes/light/light_theme_colors.dart';
 import 'package:avatar/core/utils/methods/navigate_to.dart';
 import 'package:avatar/viewModels/points/controller/points_tabbar_controller.dart';
 import 'package:avatar/views/endcustomerhome/widget/upcoming_events_widget.dart';
@@ -67,6 +68,7 @@ class PointsTabbarContainer extends StatelessWidget {
         // Reactively rebuild if tabTitles changes
         return ReusableTabbar(
           // Pass the controller's tab titles and contents to the ReusableTabbar
+          color: LightThemeColors.pharmacyColor,
           tabTitles: controller.tabTitles.toList(),
           tabContents: controller.tabContents.toList(),
         );

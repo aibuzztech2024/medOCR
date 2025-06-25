@@ -10,18 +10,20 @@ class PointsOverviewCard extends StatelessWidget {
   final int totalPoints;
   final Map<String, int> pointsBreakdown;
   final bool showChart;
+  final Color color;
 
   const PointsOverviewCard({
     super.key,
     required this.totalPoints,
     required this.pointsBreakdown,
     this.showChart = true,
+    required this.color,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(18),
+      padding: const EdgeInsets.symmetric(horizontal: 18),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: context.theme.scaffoldBackgroundColor,
@@ -71,7 +73,7 @@ class PointsOverviewCard extends StatelessWidget {
     return SizedBox(
       height: 120,
       child: CustomPaint(
-        painter: LineChartPainter(),
+        painter: LineChartPainter(color),
         size: const Size(double.infinity, 120),
       ),
     );
@@ -95,7 +97,7 @@ class PointsOverviewCard extends StatelessWidget {
               children: [
                 AppText.caption(
                   'Total\nPoints',
-                  color: LightThemeColors.advertisorColor,
+                  color: color,
                   fontWeight: FontWeight.w600,
                 ),
                 AppText.body('$totalSum', fontWeight: FontWeight.w700),
@@ -125,7 +127,7 @@ class PointsOverviewCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text(title, style: TextStyle(fontSize: 10, color: Colors.grey[600])),
+          Text(title, style: TextStyle(fontSize: 10, color: color)),
           const SizedBox(height: 4),
           Text(
             '$points',

@@ -60,14 +60,14 @@ class AllrewardsTabbar extends StatelessWidget {
       child: Row(
         children: List.generate(
           tabTitles.length,
-          (index) => _buildTabItem(tabTitles[index], index),
+          (index) => _buildTabItem(tabTitles[index], index, LightThemeColors.pharmacyColor),
         ),
       ),
     );
   }
 
   /// Builds a single tab item (button)
-  Widget _buildTabItem(String title, int index) {
+  Widget _buildTabItem(String title, int index, Color color) {
     return Obx(() {
       final isActive = controller.activeIndex.value == index;
       return Expanded(
@@ -80,7 +80,7 @@ class AllrewardsTabbar extends StatelessWidget {
             decoration: BoxDecoration(
               color:
                   isActive
-                      ? (activeColor ?? LightThemeColors.advertisorColor)
+                      ? (activeColor ?? color)
                       : LightThemeColors.inputFill,
               borderRadius: BorderRadius.circular(8),
             ),
