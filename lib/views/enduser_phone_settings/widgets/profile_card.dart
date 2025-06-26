@@ -1,3 +1,4 @@
+import 'package:avatar/views/enduser_phone_settings/constants/settings_constants.dart';
 import 'package:avatar/views/enduser_phone_settings/edit_profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -129,7 +130,7 @@ class ProfileCardWidget extends StatelessWidget {
   Widget _buildEditButton(double screenHeight) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFFED8936),
+        color: SettingsConstants.primaryGreen,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(

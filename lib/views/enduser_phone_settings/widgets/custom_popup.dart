@@ -1,3 +1,4 @@
+import 'package:avatar/views/enduser_phone_settings/constants/settings_constants.dart';
 import 'package:flutter/material.dart';
 
 // Data model for sections
@@ -154,10 +155,7 @@ class ReusablePopupDialog extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color:
-            section.backgroundColor ??
-            sectionBackgroundColor ??
-            Colors.orange.shade50,
+        color: SettingsConstants.secondaryGreen,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(

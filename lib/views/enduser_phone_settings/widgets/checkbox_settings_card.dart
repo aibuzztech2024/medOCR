@@ -1,3 +1,4 @@
+import 'package:avatar/views/enduser_phone_settings/constants/settings_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -210,15 +211,10 @@ class CheckboxSettingsWidget extends StatelessWidget {
       width: 20.0,
       height: 20.0,
       decoration: BoxDecoration(
-        color:
-            isChecked
-                ? (checkboxActiveColor ?? const Color(0xFFFF8C00))
-                : Colors.transparent,
+        color: isChecked ? SettingsConstants.primaryGreen : Colors.transparent,
         border: Border.all(
           color:
-              isChecked
-                  ? (checkboxActiveColor ?? const Color(0xFFFF8C00))
-                  : Colors.grey.shade400,
+              isChecked ? SettingsConstants.primaryGreen : Colors.grey.shade400,
           width: 2.0,
         ),
         borderRadius: BorderRadius.circular(4.0),

@@ -1,5 +1,6 @@
 import 'package:avatar/core/widgets/app_button.dart';
 import 'package:avatar/core/widgets/app_text.dart';
+import 'package:avatar/views/enduser_phone_settings/constants/settings_constants.dart';
 import 'package:flutter/material.dart';
 // Import your AppButton widget
 // import 'package:avatar/core/widgets/app_button.dart';
@@ -77,7 +78,7 @@ class CustomNavBar extends StatelessWidget {
                 ),
               ),
               onPressed: onSubmit,
-              color: Color(0xFFF79E1B),
+              color: SettingsConstants.primaryGreen,
 
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               borderRadius: 8,

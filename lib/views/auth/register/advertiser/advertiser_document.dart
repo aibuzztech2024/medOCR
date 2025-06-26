@@ -71,7 +71,7 @@ class AdvertiserDocument extends StatelessWidget {
           ),
           trailingChild: AppUploadButton(
             onUpload: () {
-              advertiserDocumentController.uploadAdvertiserBrandImage();
+              advertiserDocumentController.uploadBrandImage();
             },
           ),
         ),

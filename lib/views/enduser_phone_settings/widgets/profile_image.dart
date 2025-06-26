@@ -1,3 +1,4 @@
+import 'package:avatar/views/enduser_phone_settings/constants/settings_constants.dart';
 import 'package:flutter/material.dart';
 
 // ProfileImageWidget (from your existing code)
@@ -8,7 +9,7 @@ class ProfileImageWidget extends StatefulWidget {
   final double size;
   final Color borderColor;
   final double borderWidth;
-  final Color editButtonColor;
+
   final IconData editIcon;
   final bool showEditButton;
   final bool enableClickEffect;
@@ -22,7 +23,6 @@ class ProfileImageWidget extends StatefulWidget {
     this.size = 134.0,
     this.borderColor = Colors.white,
     this.borderWidth = 1.5,
-    this.editButtonColor = const Color(0xFFFF8C00),
     this.editIcon = Icons.edit,
     this.showEditButton = true,
     this.enableClickEffect = false,
@@ -63,14 +63,16 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget> {
                 ? BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: const Color.fromRGBO(247, 158, 27, 1),
+                    color: SettingsConstants.primaryGreen,
                     width: 5,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color.fromRGBO(228, 182, 114, 1),
+                      color: SettingsConstants.primaryGreen.withValues(
+                        alpha: 0.5,
+                      ),
                       blurRadius: 12,
-                      spreadRadius: 0.01,
+                      spreadRadius: 0.001,
                       offset: const Offset(0, 6),
                     ),
                   ],
@@ -133,7 +135,7 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget> {
                     height: editButtonSize,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: widget.editButtonColor,
+                      color: SettingsConstants.primaryGreen,
                       border: Border.all(color: Colors.white, width: 2),
                       boxShadow: [
                         BoxShadow(

@@ -55,5 +55,8 @@ class SettingsConstants {
   // Colors
   static const Color primaryRed = Color(0xFFB0020A);
   static const Color primaryOrange = Color(0xFFFF9800);
+  static const Color primaryGreen = Color(0xFF3AAFA9);
+  static const Color secondaryGreen = Color(0xFFE4FFFE);
+
   static const Color sectionBackground = Color(0xFFFFF8E9);
 }
