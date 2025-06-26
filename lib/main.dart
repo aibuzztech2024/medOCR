@@ -1,11 +1,13 @@
 import 'package:avatar/core/constants/icons_paths.dart';
 import 'package:avatar/core/constants/image_paths.dart';
+import 'package:avatar/core/themes/light/light_theme_colors.dart';
 import 'package:avatar/core/themes/light/light_theme_data.dart';
 import 'package:avatar/core/widgets/app_text.dart';
 import 'package:avatar/models/navigation/segment_tab_model.dart';
 import 'package:avatar/viewModels/hospital/order_history_controller.dart';
 import 'package:avatar/viewModels/navigation/bottom_nav_controller.dart';
 import 'package:avatar/views/auth/login/login_view.dart';
+import 'package:avatar/views/hospital/Widgets/endcustomerhome/widgets/upcoming_events_widget.dart';
 import 'package:avatar/views/hospital/Widgets/donut_chart.dart';
 import 'package:avatar/views/hospital/Widgets/order_history_view.dart';
 import 'package:avatar/views/hospital/Widgets/prescription_view.dart';
@@ -13,8 +15,9 @@ import 'package:avatar/views/hospital/Widgets/faq_View.dart';
 import 'package:avatar/views/hospital/Widgets/hospital_place_list.dart';
 import 'package:avatar/views/hospital/Widgets/newticket.dart';
 import 'package:avatar/views/navigation/bottom_nav_bar.dart';
+import 'package:avatar/views/navigation/tab.dart';
 import 'package:avatar/widgets/cards/order_history_card.dart';
-import 'package:avatar/widgets/perfect_segment_toggle_widget.dart';
+import 'package:avatar/views/navigation/perfect_segment_toggle_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -45,20 +48,20 @@ class MyApp extends StatelessWidget {
       SegmentTabModel(
         label: 'Prescription',
         iconSvgPath: "assets/icons/medical-prescription_svgrepo.com.svg",
-        activeColor: Colors.orange,
+        activeColor: LightThemeColors.buttoncolors,
         child: NewTicketPage(),
       ),
       SegmentTabModel(
         label: 'Bills',
         iconSvgPath: "assets/icons/document-text_svgrepo.com.svg",
-        activeColor: Colors.orange,
+        activeColor: LightThemeColors.buttoncolors,
         child: OrderHistoryView(controller: f),
       ),
       SegmentTabModel(
         label: 'Medicine',
         iconSvgPath: "assets/icons/medicine-pills-tablets_svgrepo.com.svg",
-        activeColor: Colors.orange,
-        child: FAQView(),
+        activeColor: LightThemeColors.buttoncolors,
+        child:UpcomingEventsWidget(),
       ),
     ];
 
@@ -79,7 +82,7 @@ class MyApp extends StatelessWidget {
       BottomNavItemModel(
         icon: IconsPaths.upload,
         title: "Post",
-        screen: Center(child: FAQView()),
+        screen: PrescriptionView(),
       ),
       BottomNavItemModel(
         icon: IconsPaths.purchase,
@@ -110,7 +113,7 @@ class MyApp extends StatelessWidget {
       // If user is logged in, navigate to h,,,,,,,,,,ome page,
       // If user is not logged in, navigate to select role page
       //home: SelectRoleView(),
-      home: BottomNavBar(navItems: navItems),
+      home: PrescriptionView(),
     );
   }
 }

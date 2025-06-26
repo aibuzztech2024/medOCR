@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../../models/navigation/segment_tab_model.dart';
-import '../../viewModels/navigation/segment_controller.dart';
+import '../../../models/navigation/segment_tab_model.dart';
+import '../../../viewModels/navigation/segment_controller.dart';
 
 class PerfectSegmentToggleWidget extends StatelessWidget {
   final List<SegmentTabModel> tabs;
