@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
+import 'package:avatar/core/constants/image_paths.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../models/endCustomer/purchase/product_modal.dart';
 
@@ -12,132 +12,234 @@ import '../../../../models/endCustomer/purchase/product_modal.dart';
 
 ///  TODO  change color in  all
 
-class ProductCard extends StatelessWidget {
+class ProductCard extends StatefulWidget {
   final Product product;
   final VoidCallback? onBookmarkToggle;
+  final void Function(int quantity)? onAddToCart;
 
-  const ProductCard({super.key, required this.product, this.onBookmarkToggle});
+  const ProductCard({super.key, required this.product, this.onBookmarkToggle, this.onAddToCart});
+
+  @override
+  State<ProductCard> createState() => _ProductCardState();
+}
+
+class _ProductCardState extends State<ProductCard> {
+  bool isExpanded = false;
+  int quantity = 1;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 0,
-      color: context.theme.scaffoldBackgroundColor,
-      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: IntrinsicHeight(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              /// Product Image
-              Expanded(flex: 1, child: Center(child: Image.asset(product.imageUrl, width: 110, height: 110, fit: BoxFit.cover))),
-              const SizedBox(width: 52),
-              /// Product Details
-              Expanded(
-                flex: 2,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 18.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (!product.inCartMode) const Text("Prescription required", style: TextStyle(color: Colors.grey, fontSize: 12)),
-                      Text(product.name, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-                      Text(product.quantity, style: const TextStyle(fontSize: 12)),
-                      const SizedBox(height: 6),
-                      /// Tags (Type + Dosage)
-                      Row(children: [_tag(product.type), const SizedBox(width: 6), _tag(product.dosage)]),
-                      const SizedBox(height: 6),
-                      /// Price Section
-                      Row(
-                        children: [
-                          Column(
+      elevation: 2,
+      color: Color.fromRGBO(251, 253, 252, 1),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: widget.product.isRecommendation ? Colors.green : Colors.black54,
+              borderRadius: BorderRadius.only(topRight: Radius.circular(12), topLeft: Radius.circular(12)),
+            ),
+            child: Center(
+              child: Text(widget.product.isRecommendation ? "Our Recommendation" : "You Searched", style: TextStyle(color: Colors.white)),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Material(
+                  color: Colors.white,
+                  elevation: 1,
+                  borderRadius: BorderRadius.circular(12),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+                    decoration: BoxDecoration(
+                      // color: Colors.red,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Stack(
+                      children: [
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(18.0),
+                            child: Image.asset(widget.product.imageUrl, height: 110, fit: BoxFit.cover),
+                          ),
+                        ),
+
+                        /// Bookmark Icon
+                        Positioned(
+                          top: -5,
+                          right: -10,
+                          // alignment: Alignment.topRight,
+                          child: IconButton(
+                            onPressed: widget.onBookmarkToggle,
+                            icon: Icon(widget.product.isBookmarked ? Icons.bookmark : Icons.bookmark_border, color: Colors.orange),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Text(widget.product.name, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                const SizedBox(height: 8),
+
+                ///hidden details
+                AnimatedSize(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                  child:
+                      isExpanded
+                          ? Column(
+                            spacing: 4,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('₹${product.price}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-                              Text('MRP ₹${product.mrp}', style: const TextStyle(fontSize: 12, decoration: TextDecoration.lineThrough)),
+                              const SizedBox(height: 8),
+                              InfoRichRow(img: AppIcons.manufacture, title: "Manufacture", detail: widget.product.manufacturer),
+                              InfoRichRow(img: AppIcons.packaging, title: "Packaging", detail: widget.product.packaging),
+                              InfoRichRow(img: AppIcons.composition, title: "Salt Composition", detail: widget.product.saltComposition),
+                              const SizedBox(height: 8),
                             ],
+                          )
+                          : const SizedBox.shrink(),
+                ),
+
+                const SizedBox(height: 8),
+
+                /// Price Section
+                Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('₹${widget.product.price}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                        Text('MRP ₹${widget.product.mrp}', style: const TextStyle(fontSize: 12)),
+                      ],
+                    ),
+                    Spacer(),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), border: Border.all(width: 0.5)),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              if (quantity > 1) {
+                                setState(() {
+                                  quantity--;
+                                });
+                              }
+                            },
+                            child: Icon(Icons.remove, size: 22, color: Colors.black),
                           ),
-                          Spacer(),
-                          if (product.inCartMode)
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(4), border: Border.all(width: 0.5)),
-                              child: Row(
-                                children: [Icon(Icons.remove), const SizedBox(width: 4), const Text("1"), const SizedBox(width: 4), Icon(Icons.add)],
-                              ),
-                            ),
+                          const SizedBox(width: 6),
+                          Text('$quantity', style: const TextStyle(fontWeight: FontWeight.w500)),
+                          const SizedBox(width: 6),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                quantity++;
+                              });
+                            },
+                            child: Icon(Icons.add, size: 22, color: Colors.black),
+                          ),
                         ],
                       ),
-                      const SizedBox(height: 8),
-                      /// Prescription Status OR Add to Cart Button
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
 
-                      product.inCartMode
-                          ? Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-
-                              color: product.prescriptionReceived ? Colors.green.shade50 : Colors.orange.shade50,
-                            ),
-                            child: Row(
-                              spacing: 4,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Icon(
-                                  product.prescriptionReceived ? Icons.check_circle : Icons.cancel,
-                                  color: product.prescriptionReceived ? Colors.green : Colors.orange,
-                                  size: 18,
-                                ),
-                                const SizedBox(width: 4),
-                                Expanded(
-                                  child: Text(
-                                    product.prescriptionReceived ? "Prescription received" : "Prescription not received, Upload below",
-                                    style: TextStyle(fontSize: 12, color: product.prescriptionReceived ? Colors.green : Colors.orange),
-                                  ),
-                                ),
-                                if (product.prescriptionReceived) Icon(Icons.remove_red_eye_outlined, size: 16, color: Colors.black),
-                                if (product.prescriptionReceived) Icon(CupertinoIcons.delete, size: 16, color: Colors.red),
-                              ],
-                            ),
-                          )
-                          : Material(
-                            elevation: 0,
-                            borderRadius: BorderRadius.circular(8),
-                            child: InkWell(
-                              onTap: (){
-                                Get.snackbar("Success", "Product added to Cart" ,snackPosition: SnackPosition.BOTTOM ,);
-                              },
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                                decoration: BoxDecoration(color: Colors.orange, borderRadius: BorderRadius.circular(8)),
-                                child: Text("Add to Cart", style: const TextStyle(fontSize: 16, color: Colors.white)),
-                              ),
-                            ),
-                          ),
+                Container(
+                  color: Colors.green.shade50,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.check_circle, color: Colors.green, size: 18),
+                      const Text("  Prescription Recieved", style: TextStyle(color: Colors.green, fontSize: 12)),
                     ],
                   ),
                 ),
-              ),
+                const SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Expand/Collapse Button
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          isExpanded = !isExpanded;
+                        });
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
 
-              /// Bookmark Icon
-              if (!product.inCartMode)
-                IconButton(
-                  onPressed: onBookmarkToggle,
-                  icon: Icon(product.isBookmarked ? Icons.bookmark : Icons.bookmark_border, color: Colors.orange),
+                        children: [
+                          Text(isExpanded ? "Less" : "More"),
+                          Icon(isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down, color: Colors.black, size: 20),
+                        ],
+                      ),
+                    ),
+
+                    Material(
+                      elevation: 0,
+                      borderRadius: BorderRadius.circular(8),
+                      child: InkWell(
+                        onTap: () {
+                          if (widget.onAddToCart != null) {
+                            widget.onAddToCart!(quantity);
+                          }
+                        },
+
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                          decoration: BoxDecoration(color: Colors.orange, borderRadius: BorderRadius.circular(8)),
+                          child: Text("Add to Cart", style: const TextStyle(fontSize: 14, color: Colors.white)),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-            ],
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
+}
 
-  /// Builds a tag-style widget for type, dosage, etc.
-  Widget _tag(String label) => Container(
-    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-    decoration: BoxDecoration(color: Colors.orange[100], borderRadius: BorderRadius.circular(4)),
-    child: Text(label, style: const TextStyle(fontSize: 12, color: Colors.orange)),
-  );
+class InfoRichRow extends StatelessWidget {
+  final String img;
+  final String title;
+  final String detail;
+  final Color? iconColor;
+
+  const InfoRichRow({super.key, required this.img, required this.title, required this.detail, this.iconColor});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SvgPicture.asset(img, color: iconColor ?? Colors.black87, height: 20, width: 20),
+        const SizedBox(width: 8),
+        Expanded(
+          child: RichText(
+            text: TextSpan(
+              style: const TextStyle(fontSize: 14, color: Colors.black87),
+              children: [
+                TextSpan(text: "$title: ", style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14)),
+                TextSpan(text: detail, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black87)),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 }

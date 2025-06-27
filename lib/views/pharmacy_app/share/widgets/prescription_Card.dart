@@ -1,6 +1,11 @@
+import 'package:avatar/core/constants/image_paths.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../models/endCustomer/share/prescription_Modal.dart';
+
+import 'package:avatar/core/constants/appColors.dart';
+import 'package:flutter_svg/svg.dart';
+
+import '../../../../models/pharmacy_app/share/prescription_Modal.dart';
 
 
 /// TO-DO  change icons acc to figma designs
@@ -28,7 +33,7 @@ class PrescriptionCard extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(0, 6, 6, 6),
             child: Align(
               alignment: Alignment.centerRight,
-              child: GestureDetector(onTap: onEdit, child: Icon(Icons.edit_outlined, size: 24, color: Colors.orange)),
+              child: GestureDetector(onTap: onEdit, child: Icon(Icons.edit_outlined, size: 24, color: AppColors.pharmacy_PrimaryColor)),
             ),
           ),
 
@@ -40,9 +45,9 @@ class PrescriptionCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconTextRow(icon: Icons.person_outline_rounded, text: detail.patientName),
-                    IconTextRow(icon: Icons.apps_outage_outlined, text: "${detail.age} Yrs"),
-                    IconTextRow(icon: Icons.monitor_weight_outlined, text: "${detail.weight} Kg"),
+                    IconTextRow(icon: AppIcons.user_icon, text: detail.patientName ,iconSize: 16,),
+                    IconTextRow(icon: AppIcons.age_icon, text: "${detail.age} Yrs"),
+                    IconTextRow(icon: AppIcons.weight_icon, text: "${detail.weight} Kg"),
                   ],
                 ),
 
@@ -57,7 +62,7 @@ class PrescriptionCard extends StatelessWidget {
                         flex: 1,
                         child: Row(
                           children: [
-                            Icon(Icons.local_pharmacy, size: 20, color: grey),
+                            SvgPicture.asset(AppIcons.medicine_icon, height:  18),
                             const SizedBox(width: 6),
                             Expanded(
                               child: Column(
@@ -76,7 +81,8 @@ class PrescriptionCard extends StatelessWidget {
                         flex: 1,
                         child: Row(
                           children: [
-                            Icon(Icons.healing, size: 20, color: grey),
+                            SvgPicture.asset(AppIcons.stethoscope_icon, height:  22),
+
                             const SizedBox(width: 6),
                             Expanded(child: Text(detail.diagnosis, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16))),
                           ],
@@ -96,7 +102,7 @@ class PrescriptionCard extends StatelessWidget {
             alignment: Alignment.center,
             child: InkWell(
               onTap: () {},
-              child: Text('+ Add Another Prescription', style: TextStyle(color: Colors.orange, fontWeight: FontWeight.w600, fontSize: 16)),
+              child: Text('+ Add Another Prescription', style: TextStyle(color: AppColors.pharmacy_PrimaryColor, fontWeight: FontWeight.w600, fontSize: 16)),
             ),
           ),
           const SizedBox(height: 16),
@@ -107,7 +113,7 @@ class PrescriptionCard extends StatelessWidget {
 }
 
 class IconTextRow extends StatelessWidget {
-  final IconData icon;
+  final String icon;
   final String text;
   final Color? iconColor;
   final double? iconSize;
@@ -120,8 +126,8 @@ class IconTextRow extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     return Row(
       children: [
-        Icon(icon, color: iconColor ?? Colors.black, size: iconSize ?? 20),
-        const SizedBox(width: 4),
+        SvgPicture.asset(icon, color: iconColor ?? null, height: iconSize ?? 20),
+        const SizedBox(width: 6),
         ConstrainedBox(
           constraints: BoxConstraints(maxWidth: screenWidth * 0.24),
 
