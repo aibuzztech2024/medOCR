@@ -1,8 +1,8 @@
 import 'package:avatar/core/widgets/app_button.dart';
 import 'package:avatar/core/widgets/app_text.dart';
 import 'package:avatar/core/widgets/height_box.dart';
-import 'package:avatar/viewModels/auth/register/ngo/ngo_register_controller.dart';
 import 'package:avatar/viewModels/auth/register/register_controller.dart';
+import 'package:avatar/viewModels/auth/register/ngo/ngo_register_controller.dart';
 import 'package:avatar/views/auth/widget/app_country_picker.dart';
 import 'package:avatar/views/auth/widget/input_field.dart';
 import 'package:avatar/views/auth/widget/input_with_action.dart';
