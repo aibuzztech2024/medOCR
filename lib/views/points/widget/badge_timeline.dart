@@ -25,6 +25,7 @@ class BadgeTimeline extends StatelessWidget {
                 benefits: badge.benefits,
                 badgeColor: badge.color,
                 image: badge.image, // image
+                color: LightThemeColors.pharmacyColor,
 
                 isFirst: index == 0,
                 isLast: index == badgeLevels.length - 1,
@@ -42,6 +43,7 @@ class BadgeTimeline extends StatelessWidget {
     required Color badgeColor,
     required bool isFirst,
     required bool isLast,
+    required Color color
   }) {
     return TimelineTile(
       isFirst: isFirst,
@@ -77,7 +79,7 @@ class BadgeTimeline extends StatelessWidget {
             const SizedBox(height: 12),
             AppText.body(
               points,
-              color: LightThemeColors.advertisorColor,
+              color: color,
               fontWeight: FontWeight.w600,
             ),
           ],

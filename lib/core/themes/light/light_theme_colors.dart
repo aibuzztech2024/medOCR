@@ -33,7 +33,7 @@ class LightThemeColors {
   static const Color advertisorColor = Color(0xFFFF6F61);
 
   // advertisor color with 15% opacity
-  static const Color advertisorColor15 = Color(0x26FF6F61);
+  static Color advertisorColor15 = Color(0xFFFF6F61).withOpacity(0.15);
 
 
   static const Color orangeicon = Colors.orange;
@@ -46,4 +46,9 @@ class LightThemeColors {
 
   // Shadow
   static const Color shadowColor = Color(0x1F000000);
+  // pharmacy color
+  static const Color pharmacyColor = Color(0xFF3AAFA9);
+
+  // pharmacy color with 15% opacity
+  static Color pharmacyColor15 = Color(0xFF3AAFA9).withOpacity(0.15);
 }

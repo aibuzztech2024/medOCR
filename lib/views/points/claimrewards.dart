@@ -31,7 +31,7 @@ class Claimrewards extends StatelessWidget {
                 return ListView.builder(
                   itemCount: rewards.length,
                   itemBuilder: (context, index) {
-                    return RewardsClaimed(reward: rewards[index]);
+                    return RewardsClaimed(reward: rewards[index],color: LightThemeColors.pharmacyColor,);
                   },
                 );
               }),

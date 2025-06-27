@@ -11,10 +11,14 @@ import 'package:get/get.dart';
 class RewardCardWidget extends StatelessWidget {
   final Reward reward;
   final bool isPopularcoupon;
+  final Color color;
+  final Color colors;
   const RewardCardWidget({
     super.key,
     this.isPopularcoupon = false,
     required this.reward,
+    required this.color,
+    required this.colors,
   });
 
   @override
@@ -34,10 +38,7 @@ class RewardCardWidget extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
-              color:
-                  isPopularcoupon
-                      ? LightThemeColors.inputFill
-                      : LightThemeColors.advertisorColor15,
+              color: isPopularcoupon ? LightThemeColors.inputFill : colors,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -79,11 +80,13 @@ class RewardCardWidget extends StatelessWidget {
                             currentPoints: reward.currentPoints,
                             totalPoints: reward.totalPoints,
                             progress: progress,
+                            color: color,
                           ),
 
                           const SizedBox(height: 8),
                           CouponCodeBox(
                             couponCode: reward.couponCode,
+                            colors: color,
                             onCopy: () {
                               Clipboard.setData(
                                 ClipboardData(text: reward.couponCode),

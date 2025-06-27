@@ -36,6 +36,7 @@ class PointsHistory extends StatelessWidget {
                     return RewardsClaimed(
                       reward: pointsHistory[index],
                       isPointsHistory: true,
+                      color: LightThemeColors.pharmacyColor,
                     );
                   },
                 );

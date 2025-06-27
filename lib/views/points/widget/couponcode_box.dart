@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 class CouponCodeBox extends StatelessWidget {
   final String couponCode;
   final VoidCallback? onCopy;
-
-  const CouponCodeBox({super.key, required this.couponCode, this.onCopy});
+  final Color colors;
+  const CouponCodeBox({super.key, required this.couponCode, this.onCopy, required this.colors});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class CouponCodeBox extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5.5),
         height: 30,
         decoration: BoxDecoration(
-          color: LightThemeColors.advertisorColor,
+          color: colors,
           borderRadius: BorderRadius.circular(6),
         ),
         child: Row(
