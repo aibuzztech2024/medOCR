@@ -10,6 +10,12 @@
 		<key>NSLocationWhenInUseUsageDescription</key>
 		<string>App needs location access to determine heading</string>
 
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>This app needs access to photo library to select images and PDFs.</string>
+		
+		<key>NSDocumentsFolderUsageDescription</key>
+		<string>This app needs access to documents folder to select PDF files.</string>
+
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>

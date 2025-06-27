@@ -66,6 +66,8 @@ class LightThemeColors {
 
 
   static const Color orangeicon = Colors.orange;
+  static const Color buttoncolors=Color(0xFF3AAFA9);
+
 
   // Prescription View specific colors
   static const Color prescriptionBorder = Color(

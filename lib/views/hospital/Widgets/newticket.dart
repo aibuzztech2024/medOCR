@@ -3,12 +3,14 @@ import 'package:get/get.dart';
 import '../../../core/widgets/app_text.dart';
 import '../../../core/widgets/app_button.dart';
 import '../../../core/themes/light/light_theme_colors.dart';
-import '../../../views/auth/widget/input_field.dart';
+import '../../auth/widget/input_field.dart';
 import 'package:avatar/core/widgets/height_box.dart';
 import 'package:avatar/core/widgets/width_box.dart';
+import 'upload_issue_image.dart';
+import '../../../viewModels/hospital/upload_issue_image_controller.dart';
 
 class NewTicketPage extends StatefulWidget {
-  const NewTicketPage({Key? key}) : super(key: key);
+  const NewTicketPage({super.key});
 
   @override
   State<NewTicketPage> createState() => _NewTicketPageState();
@@ -29,6 +31,8 @@ class _NewTicketPageState extends State<NewTicketPage> {
     'Login Issue',
     'Other',
   ];
+
+  final UploadIssueImage _uploadController = Get.put(UploadIssueImage());
 
   void _pickFile() async {
     // TODO: Implement file picker
@@ -156,89 +160,9 @@ class _NewTicketPageState extends State<NewTicketPage> {
               HeightBox(18),
               AppText.heading('Upload File', fontSize: 15),
               HeightBox(8),
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                elevation: 1,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        children: [
-                          InkWell(
-                            onTap: _pickFile,
-                            borderRadius: BorderRadius.circular(8),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey.shade300),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              padding: EdgeInsets.all(8),
-                              child: Icon(
-                                Icons.add,
-                                color: LightThemeColors.orangeicon,
-                                size: 28,
-                              ),
-                            ),
-                          ),
-                          WidthBox(12),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              AppText.body(
-                                '+ Upload Issue Image',
-                                fontWeight: FontWeight.w600,
-                              ),
-                              HeightBox(2),
-                              AppText.caption(
-                                'Accepts: JPG, PNG, PDF ( Max 15MB )',
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      if (_uploadedFileName != null) ...[
-                        HeightBox(16),
-                        Container(
-                          padding: EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: LightThemeColors.inputFill,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.check_circle,
-                                color: LightThemeColors.orangeicon,
-                                size: 20,
-                              ),
-                              WidthBox(6),
-                              AppText.body(_uploadedFileName!),
-                            ],
-                          ),
-                        ),
-                      ],
-                      HeightBox(8),
-                      Row(
-                        children: [
-                          AppText.caption('Virus scan'),
-                          WidthBox(4),
-                          Icon(
-                            _virusScanned
-                                ? Icons.check_box
-                                : Icons.check_box_outline_blank,
-                            color: Colors.green,
-                            size: 18,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+              UploadIssueImageWidget(
+                addLabel: '+ Upload Issue Image',
+                controller: _uploadController,
               ),
               HeightBox(30),
               Center(

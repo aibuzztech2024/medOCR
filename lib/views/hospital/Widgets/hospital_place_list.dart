@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../models/hospital/hospital_place_model.dart';
-import '../../../viewModels/map/hospital_place_controller.dart';
+import '../../../viewModels/hospital/hospital_place_controller.dart';
 import 'package:avatar/core/widgets/app_button.dart';
 import 'package:avatar/core/widgets/app_text.dart';
 import 'package:avatar/core/widgets/height_box.dart';
