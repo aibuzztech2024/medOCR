@@ -93,5 +93,5 @@ final ThemeData lightThemeData = ThemeData(
   ),
 
   /// Default style for icons used across the app
-  iconTheme: IconThemeData(color: LightThemeColors.primary, size: 24),
+  iconTheme: IconThemeData(color: Colors.black87, size: 24),
 );
