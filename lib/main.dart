@@ -1,21 +1,18 @@
 import 'package:avatar/core/themes/light/light_theme_data.dart';
-import 'package:avatar/views/advertiser/donate/donation_home_page_view.dart';
-import 'package:avatar/views/advertiser/donate/donation_payment.dart';
-import 'package:avatar/views/auth/login/login_view.dart';
+import 'package:avatar/core/widgets/sample_page.dart';
+import 'package:avatar/viewModels/navigation/bottom_nav_controller.dart';
 import 'package:avatar/views/auth/select_role_view.dart';
-import 'package:avatar/views/enduser_phone_settings/edit_avatar_view.dart';
-import 'package:avatar/views/enduser_phone_settings/edit_profile_view.dart';
 import 'package:avatar/views/enduser_phone_settings/phone_settings_view.dart';
-import 'package:avatar/views/maps/location_selection_view.dart';
-import 'package:avatar/views/order_payment/order_payment_view.dart';
-import 'package:avatar/views/register_as_ngo/calendar_page.dart';
+import 'package:avatar/views/hospital/prescription_view.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get.dart';
 
 /// This is the starting point of the application
 void main() {
   // Ensure that the Flutter engine is initialized before running the app
   WidgetsFlutterBinding.ensureInitialized();
+  Get.put(BottomNavController());
+  // Initialize SegmentTabController
   // Run the application with the MyApp widget
   runApp(const MyApp());
 }
@@ -33,10 +30,10 @@ class MyApp extends StatelessWidget {
       title: 'Avatar',
       // Sets the theme of the application to [lightThemeData]
       theme: lightThemeData,
-      // TODO: Check if user is Logged-In
-      // If user is logged in, navigate to home page
+      // TODO: Check if user is Logged-In,
+      // If user is logged in, navigate to h,,,,,,,,,,ome page,
       // If user is not logged in, navigate to select role page
-      home: ProfileSettingsView(),
+      home: SamplePage(),
     );
   }
 }

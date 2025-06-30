@@ -1,6 +1,7 @@
 import 'package:avatar/core/widgets/app_button.dart';
 import 'package:avatar/core/widgets/app_text.dart';
 import 'package:avatar/core/widgets/height_box.dart';
+import 'package:avatar/viewModels/auth/register/ngo/ngo_register_controller.dart';
 import 'package:avatar/viewModels/auth/register/user/register_controller.dart';
 import 'package:avatar/views/auth/widget/app_country_picker.dart';
 import 'package:avatar/views/auth/widget/input_field.dart';
@@ -49,7 +50,12 @@ class BasicInfo extends StatelessWidget {
           width: double.infinity,
           type: ButtonType.filled,
           text: 'Send OTP',
-          onPressed: registerController.sendOtp,
+          onPressed: () {
+            final isValid = registerController.validateEmailAndPhone();
+            if (isValid) {
+              registerController.sendOtp();
+            }
+          },
         ),
         // Resend otp
         Row(
@@ -81,7 +87,12 @@ class BasicInfo extends StatelessWidget {
           width: double.infinity,
           type: ButtonType.filled,
           text: 'Continue',
-          onPressed: onContinue,
+          onPressed: () {
+            onContinue();
+            final ngoController = Get.find<NgoRegisterController>();
+            ngoController.phoneNumberController.text =
+                registerController.phoneNumberController.text;
+          },
         ),
         HeightBox(16),
       ],

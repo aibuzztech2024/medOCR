@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:get/get.dart';
-import '../services/location_service.dart';
-import '../views/maps/json_data_model.dart';
+import '../../services/location_service.dart';
+import 'json_data_model.dart';
 
 class LocationSearchController extends GetxController {
   final LocationService _locationService = LocationService();

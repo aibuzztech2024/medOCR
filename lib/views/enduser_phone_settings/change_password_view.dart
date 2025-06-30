@@ -98,7 +98,6 @@ class ChangePasswordView extends StatelessWidget {
               // Add some spacing before potential action buttons
               SizedBox(height: _getVerticalSpacing(Get.context!) * 2),
 
-              // Optional: Add a submit button with loading state
               // Uncomment the following lines if you want to add a submit button
               /*
               Obx(() => ElevatedButton(

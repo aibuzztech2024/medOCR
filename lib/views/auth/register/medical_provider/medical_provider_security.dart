@@ -11,7 +11,7 @@ class MedicalProviderSecurity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MedicalProviderController medicalSecurityController = Get.put(
+    final MedicalProviderController medicalController = Get.put(
       MedicalProviderController(),
     );
     return Column(
@@ -19,21 +19,23 @@ class MedicalProviderSecurity extends StatelessWidget {
       children: [
         InputField(
           hintText: 'Username',
-          controller: medicalSecurityController.usernameController,
+          controller: medicalController.usernameController,
         ),
         PasswordField(
           hintText: 'Password',
-          controller: medicalSecurityController.passwordController,
+          controller: medicalController.passwordController,
         ),
         PasswordField(
           hintText: 'Confirm Password',
-          controller: medicalSecurityController.confirmPasswordController,
+          controller: medicalController.confirmPasswordController,
         ),
         AppButton(
           type: ButtonType.filled,
           text: 'Register',
           width: double.infinity,
-          onPressed: onRegister,
+          onPressed: () {
+  medicalController.registerMedicalProvider(onSuccess: onRegister);
+          },
         ),
       ],
     );
