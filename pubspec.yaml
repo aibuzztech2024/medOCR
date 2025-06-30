@@ -27,7 +27,6 @@ dependencies:
   flutter_compass: ^0.8.1 # Compass sensor data
   font_awesome_flutter: ^10.4.0 # Font Awesome icons
   file_picker: ^10.2.0 # Pick files from device storage
-  qr_code_scanner: ^1.0.1
 
 
 dev_dependencies:
