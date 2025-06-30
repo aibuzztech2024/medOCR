@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import '../../../viewModels/hospital/image_prescription_controller.dart';
 
 class PrescriptionView extends StatelessWidget {
-  final PrescriptionController controller = Get.put(PrescriptionController());
+  final ImagePrescriptionController controller = Get.put(ImagePrescriptionController());
 
   PrescriptionView({super.key});
 

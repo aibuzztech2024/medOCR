@@ -85,14 +85,16 @@ class FAQView extends StatelessWidget {
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: controller.faqCategories.length,
-                          separatorBuilder: (context, index) => Divider(
-                            color: LightThemeColors.dividerColor,
-                            thickness: 1,
-                            height: 1,
-                          ),
-                          itemBuilder: (context, index) => FAQCategoryTile(
-                            category: controller.faqCategories[index],
-                          ),
+                          separatorBuilder:
+                              (context, index) => Divider(
+                                color: LightThemeColors.dividerColor,
+                                thickness: 1,
+                                height: 1,
+                              ),
+                          itemBuilder:
+                              (context, index) => FAQCategoryTile(
+                                category: controller.faqCategories[index],
+                              ),
                         ),
                       ],
                     );
@@ -106,7 +108,6 @@ class FAQView extends StatelessWidget {
     );
   }
 }
-
 
 class SupportShadowButton extends StatelessWidget {
   final IconData icon;

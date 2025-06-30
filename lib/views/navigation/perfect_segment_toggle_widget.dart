@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../models/navigation/segment_tab_model.dart';
 import '../../../viewModels/navigation/segment_controller.dart';
+import '../../../core/widgets/app_text.dart';
 
 class PerfectSegmentToggleWidget extends StatelessWidget {
   final List<SegmentTabModel> tabs;
@@ -57,7 +58,7 @@ class PerfectSegmentToggleWidget extends StatelessWidget {
                 ),
               const WidthBox(6),
               Flexible(
-                child: Text(
+                child: AppText(
                   tab.label,
                   style: TextStyle(
                     color: isSelected ? Colors.white : Colors.grey,

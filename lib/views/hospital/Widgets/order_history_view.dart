@@ -4,11 +4,11 @@ import 'package:get/get.dart';
 import '../../../viewModels/hospital/order_history_controller.dart';
 import '../../../widgets/cards/order_history_card.dart';
 
-
 class OrderHistoryView extends StatelessWidget {
   final OrderHistoryController controller;
 
-  const OrderHistoryView({Key? key, required this.controller}) : super(key: key);
+  const OrderHistoryView({Key? key, required this.controller})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../core/widgets/app_text.dart';
+
+
 class TabItem {
   final IconData icon;
   final String label;
@@ -56,7 +59,7 @@ class CustomTabSwitcher extends StatelessWidget {
                                 isSelected ? Colors.blue.shade900 : Colors.grey,
                           ),
                           const SizedBox(width: 8),
-                          Text(
+                          AppText(
                             tabs[index].label,
                             style: TextStyle(
                               fontWeight: FontWeight.w600,

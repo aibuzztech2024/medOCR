@@ -3,7 +3,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../models/hospital/image_prescription_model.dart';
 
-class PrescriptionController extends GetxController {
+class ImagePrescriptionController extends GetxController {
   RxList<PrescriptionModel> prescriptions = <PrescriptionModel>[].obs;
 
   final ImagePicker picker = ImagePicker();
