@@ -8,6 +8,7 @@ import 'package:avatar/views/enduser_phone_settings/widgets/confirmation_dialog.
 import 'package:avatar/views/enduser_phone_settings/widgets/account_deletion_dialog.dart';
 import 'package:avatar/views/enduser_phone_settings/services/settings_service.dart';
 import 'package:avatar/views/enduser_phone_settings/constants/settings_constants.dart';
+import 'package:avatar/views/hospital/prescription_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'menu_item_model.dart';
@@ -165,7 +166,7 @@ class ProfileSettingsController extends GetxController {
   }
 
   void _handleChangePassword() {
-    Get.to(() => const ChangePasswordView());
+    Get.to(() => PrescriptionView());
   }
 
   void _handleNotificationSettings() {

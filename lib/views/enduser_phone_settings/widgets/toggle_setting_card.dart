@@ -1,3 +1,4 @@
+import 'package:avatar/views/enduser_phone_settings/constants/settings_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -157,7 +158,7 @@ class _ToggleSettingCardState extends State<ToggleSettingCard> {
             padding: 3.0,
             showOnOff: false,
             onToggle: _handleToggle,
-            activeColor: widget.activeColor ?? const Color(0xFFFF8C00),
+            activeColor: SettingsConstants.primaryGreen,
             inactiveColor: widget.inactiveColor ?? Colors.grey.shade300,
             toggleColor: Colors.white,
           ),

@@ -1,4 +1,4 @@
-class AdvertiserModel {
+class AdvertiserRequestModel {
   String? email;
   String? phoneNumber1;
   String? companyName;
@@ -24,7 +24,7 @@ class AdvertiserModel {
   String? phoneNumber2;
   String? referral;
 
-  AdvertiserModel({
+  AdvertiserRequestModel({
     required this.email,
     required this.phoneNumber1,
     required this.companyName,

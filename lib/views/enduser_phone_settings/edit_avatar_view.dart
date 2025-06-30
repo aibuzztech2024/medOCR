@@ -26,13 +26,18 @@ class AvatarSelectionPage extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Color.fromRGBO(255, 218, 164, 1), // rgba(255, 218, 164, 1)
                     Color.fromRGBO(
-                      247,
-                      158,
-                      27,
-                      0.61,
-                    ), // rgba(247, 158, 27, 0.61)
+                      157,
+                      245,
+                      241,
+                      0.9,
+                    ), // rgba(157, 245, 241, 0.9)
+                    Color.fromRGBO(
+                      58,
+                      175,
+                      169,
+                      0.8,
+                    ), // rgba(58, 175, 169, 0.8)
                   ],
                 ),
               ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controllers/location_search_controller.dart';
+import 'location_search_controller.dart';
 
 class LocationSelectionViewModel extends GetxController {
   late final LocationSearchController locationSearchController;

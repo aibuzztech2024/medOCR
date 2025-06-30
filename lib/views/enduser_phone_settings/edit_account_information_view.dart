@@ -1,4 +1,4 @@
-import 'package:avatar/views/enduser_phone_settings/edit_account_information_viewmodel.dart.dart';
+import 'package:avatar/views/enduser_phone_settings/edit_account_information_viewmodel.dart';
 import 'package:avatar/views/enduser_phone_settings/user_detail_model.dart';
 import 'package:avatar/views/enduser_phone_settings/widgets/country_code_picker.dart';
 import 'package:avatar/views/enduser_phone_settings/widgets/labeled_drop_down_button.dart';

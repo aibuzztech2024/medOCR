@@ -1,9 +1,11 @@
 import 'package:avatar/core/themes/light/light_theme_data.dart';
+import 'package:avatar/core/widgets/sample_page.dart';
 import 'package:avatar/viewModels/navigation/bottom_nav_controller.dart';
 import 'package:avatar/views/auth/select_role_view.dart';
+import 'package:avatar/views/enduser_phone_settings/phone_settings_view.dart';
+import 'package:avatar/views/hospital/prescription_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 /// This is the starting point of the application
 void main() {
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
       // TODO: Check if user is Logged-In,
       // If user is logged in, navigate to h,,,,,,,,,,ome page,
       // If user is not logged in, navigate to select role page
-      home: SelectRoleView(),
+      home: SamplePage(),
     );
   }
 }
