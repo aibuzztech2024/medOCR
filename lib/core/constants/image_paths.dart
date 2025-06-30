@@ -52,6 +52,8 @@ class ImagePaths {
 }
 
 class AppIcons {
+  static const delete = "assets/icons/delete_icon.svg";
+  static const edit = "assets/icons/edit_icon.svg";
   static const setting = "assets/icons/settings_icon.svg";
   static const logout = "assets/icons/logout_icon.svg";
   static const donate = "assets/icons/donate_icon.svg";

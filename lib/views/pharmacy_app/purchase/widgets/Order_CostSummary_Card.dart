@@ -35,7 +35,7 @@ class _OrderCostSummaryCardState extends State<OrderCostSummaryCard> {
         // margin: EdgeInsets.all(16),
         // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -43,7 +43,7 @@ class _OrderCostSummaryCardState extends State<OrderCostSummaryCard> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Estimated medicine cost', style: TextStyle(fontSize: 14, color: Colors.grey[700])),
+                  Text('Estimated medicine cost', style: TextStyle(fontSize: 15, color: Colors.grey[700])),
                   Text('₹${controller.medicineCost.value.toStringAsFixed(2)}', style: TextStyle(fontSize: 14, color: Colors.black)),
                 ],
               ),
@@ -55,7 +55,7 @@ class _OrderCostSummaryCardState extends State<OrderCostSummaryCard> {
                 children: [
                   Text(
                     'GST on medicine (${controller.gstPercent.value.toStringAsFixed(0)}%)',
-                    style: TextStyle(fontSize: 14, color: Colors.grey[700]),
+                    style: TextStyle(fontSize: 15, color: Colors.grey[700]),
                   ),
                   Text('₹${controller.gstAmount.toStringAsFixed(2)}', style: TextStyle(fontSize: 14, color: Colors.black)),
                 ],
@@ -68,8 +68,8 @@ class _OrderCostSummaryCardState extends State<OrderCostSummaryCard> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Total estimated cost + GST', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
-                  Text('₹${controller.totalCost.toStringAsFixed(2)}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                  Text('Total estimated cost + GST', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18)),
+                  Text('₹${controller.totalCost.toStringAsFixed(2)}', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18)),
                 ],
               ),
               SizedBox(height: 16),
@@ -115,14 +115,14 @@ class _OrderCostSummaryCardState extends State<OrderCostSummaryCard> {
                       children: [
                         Text(
                           controller.updatedPointBalance.toInt().toString(),
-                          style: TextStyle(fontSize: 18, color:  LightThemeColors.main_pharmcay, fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: 20, color:  LightThemeColors.main_pharmcay, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(width: 8),
                         GestureDetector(
                           onTap: widget.onViewPointsHistoryPressed,
                           child: Text(
                             'View points history.',
-                            style: TextStyle(color: LightThemeColors.blue, fontSize: 13, decoration: TextDecoration.underline ,decorationColor: LightThemeColors.blue),
+                            style: TextStyle(color: LightThemeColors.blue, fontSize: 14, decoration: TextDecoration.underline ,decorationColor: LightThemeColors.blue),
                           ),
                         ),
                       ],
@@ -130,7 +130,7 @@ class _OrderCostSummaryCardState extends State<OrderCostSummaryCard> {
                     SizedBox(height: 8),
                     GestureDetector(
                       onTap: widget.onViewSummaryPressed,
-                      child: Text('View summary', style: TextStyle(color: Colors.blue, fontSize: 13, decoration: TextDecoration.underline ,decorationColor: LightThemeColors.blue)),
+                      child: Text('View summary', style: TextStyle(color: Colors.blue, fontSize: 14, decoration: TextDecoration.underline ,decorationColor: LightThemeColors.blue)),
                     ),
                   ],
                 ),

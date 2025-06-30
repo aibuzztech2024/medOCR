@@ -13,6 +13,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(18.0),
@@ -21,6 +22,9 @@ class HomePage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               spacing: 18,
               children: [
+
+                AddressSelector(),
+                Payment_Method_Selector_widget(),
                 OrderCostSummaryCard(
                   onViewPointsHistoryPressed: () {
                     print('View points history tapped');
@@ -32,40 +36,6 @@ class HomePage extends StatelessWidget {
                   creditPoints: 12.5,
                 ),
 
-                AddressSelector(),
-                Payment_Method_Selector_widget(),
-                ElevatedButton(onPressed: () => showDeleteProfileDialog(context), child: Text("Delete Profile")),
-
-                MyCart_ProductCard(
-                  product: Product(
-                    imageUrl: 'assets/images/tablet.png',
-                    name: 'Crocin Pain Relief Tablet',
-                    price: 220,
-                    mrp: 245,
-                    quantity: '60 Tablets',
-                    manufacturer: 'ABC Pharmaceuticals',
-                    prescriptionReceived: false,
-                    isBookmarked: false,
-                    packaging: 'Bottle',
-                    saltComposition: 'Paracetamol (650mg), Caffeine (50mg)',
-                    isRecommendation: true,
-                  ),
-                ),
-                MyCart_ProductCard(
-                  product: Product(
-                    imageUrl: 'assets/images/tablet.png',
-                    name: 'Crocin ',
-                    price: 120,
-                    mrp: 345,
-                    quantity: '60 Tablets',
-                    manufacturer: 'ABC Pharmaceuticals',
-                    prescriptionReceived: false,
-                    isBookmarked: false,
-                    packaging: 'Bottle',
-                    saltComposition: 'Paracetamol (650mg), Caffeine (50mg)',
-                    isRecommendation: true,
-                  ),
-                ),
               ],
             ),
           ),

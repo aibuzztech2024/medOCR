@@ -14,9 +14,9 @@ class Payment_Method_Selector_widget extends StatelessWidget {
       children: [
         Row(
           children: [
-            Text('Select Payment Method', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            Text('Select Payment Method', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             Spacer(),
-            IconButton(icon: Icon(Icons.add, size:24,color: AppColors.pharmacy_PrimaryColor), onPressed: () {}),
+            IconButton(icon: Icon(Icons.add, size:28,color: AppColors.pharmacy_PrimaryColor), onPressed: () {}),
           ],
         ),
 
@@ -26,9 +26,11 @@ class Payment_Method_Selector_widget extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Text('UPI', style: TextStyle( fontWeight: FontWeight.bold)),
+                  Text('UPI', style: TextStyle( fontWeight: FontWeight.bold ,fontSize: 17)),
                   Spacer(),
                   Radio<PaymentMethod>(
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+
                     value: PaymentMethod.upi,
                     groupValue: controller.selectedMethod.value,
                     onChanged: (value) {
@@ -40,10 +42,12 @@ class Payment_Method_Selector_widget extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Text('Credit or Debit Card', style: TextStyle(fontWeight: FontWeight.w600)),
+                  Text('Credit or Debit Card', style: TextStyle(fontWeight: FontWeight.w600,fontSize: 17)),
                   Spacer(),
                   Radio<PaymentMethod>(
                     value: PaymentMethod.card,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+
                     groupValue: controller.selectedMethod.value,
                     onChanged: (value) {
                       controller.selectMethod(value!);
@@ -54,10 +58,12 @@ class Payment_Method_Selector_widget extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Text('Cash On Delivery', style: TextStyle(fontWeight: FontWeight.w600)),
+                  Text('Cash On Delivery', style: TextStyle(fontWeight: FontWeight.w600,fontSize: 17)),
                   Spacer(),
                   Radio<PaymentMethod>(
                     value: PaymentMethod.cod,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+
                     groupValue: controller.selectedMethod.value,
                     onChanged: (value) {
                       controller.selectMethod(value!);

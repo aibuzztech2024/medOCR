@@ -1,5 +1,7 @@
+import 'package:avatar/core/constants/image_paths.dart';
 import 'package:avatar/core/themes/light/light_theme_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/constants/appColors.dart';
@@ -30,34 +32,40 @@ class AddressSelector extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text('Select Delivery Address', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              Text('Select Delivery Address', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
               Spacer(),
-              IconButton(icon: Icon(Icons.add, color: AppColors.pharmacy_PrimaryColor), onPressed: () => showBottomSheet(context)),
+              IconButton(icon: Icon(Icons.add, size: 28, color: AppColors.pharmacy_PrimaryColor), onPressed: () => showBottomSheet(context)),
             ],
           ),
           ...controller.addresses.map(
             (address) => Padding(
-              padding: const EdgeInsets.only( bottom: 16.0),
+              padding: const EdgeInsets.only(bottom: 16.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 spacing: 12,
                 children: [
                   Container(color: Color.fromRGBO(233, 238, 246, 1), padding: EdgeInsets.all(8), child: getIconForType(address.type)),
 
-                  Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [Text(address.label ,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 17),), Text(address.fullAddress ,style: TextStyle(fontSize: 14),)])),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(address.label, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17)),
+                        Text(address.fullAddress, style: TextStyle(fontSize: 14)),
+                      ],
+                    ),
+                  ),
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      IconButton(
-                        icon: Icon(Icons.edit, color: LightThemeColors.main_pharmcay),
-                        onPressed: () => showBottomSheet(context, address: address),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.delete, color: LightThemeColors.main_pharmcay),
-                        onPressed: () => controller.deleteAddress(address.id),
-                      ),
+                      InkWell(child: SvgPicture.asset(AppIcons.edit), onTap: () => showBottomSheet(context, address: address)),
+                      SizedBox(width: 8),
+                      InkWell(child: SvgPicture.asset(AppIcons.delete), onTap: () => controller.deleteAddress(address.id)),
+                      SizedBox(width: 6),
+
                       Radio<String>(
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+
                         activeColor: LightThemeColors.main_pharmcay,
                         value: address.id,
                         groupValue: controller.selectedAddressId.value,
@@ -111,7 +119,10 @@ class AddressSelector extends StatelessWidget {
 
                 Get.back();
               },
-              child: Text(address == null ? 'Add Address' : 'Update Address'),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0 ,vertical: 6),
+                child: Text(address == null ? 'Add Address' : 'Update Address'),
+              ),
             ),
           ],
         ),
