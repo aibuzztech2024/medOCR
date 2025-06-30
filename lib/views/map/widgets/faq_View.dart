@@ -1,11 +1,11 @@
 import 'package:avatar/core/utils/methods/navigate_to.dart';
+import 'package:avatar/viewModels/hospital/faq_controller.dart';
 import 'package:avatar/views/help/ticket_history_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../core/widgets/app_button.dart';
 import '../../../core/widgets/app_text.dart';
-import '../../../viewModels/map/faq_controller.dart';
 import '../../../widgets/faq_category_tile.dart';
 import '../../../widgets/cards/help_card_widget.dart';
 import '../../../core/themes/light/light_theme_colors.dart';

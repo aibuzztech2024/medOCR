@@ -1,6 +1,6 @@
 import 'package:avatar/core/constants/image_paths.dart';
 import 'package:avatar/views/map/widgets/reviews_widget.dart';
-import 'package:avatar/views/map/widgets/star_rating_widget.dart';
+import 'package:avatar/views/map/widgets/star_rating.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';

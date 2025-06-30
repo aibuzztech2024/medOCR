@@ -4,13 +4,12 @@ import 'package:avatar/models/navigation/bottom_nav_item_model.dart';
 import 'package:avatar/models/navigation/segment_tab_model.dart';
 import 'package:avatar/views/endcustomer/end_customer_homescreen.dart';
 import 'package:avatar/views/endcustomer/purchase/purchase_page.dart';
-import 'package:avatar/views/hospital/prescription_view.dart';
+import 'package:avatar/views/hospital/Widgets/hospital_place_list.dart';
+import 'package:avatar/views/hospital/Widgets/prescription_view.dart';
 import 'package:avatar/views/map/map_scree_view.dart';
-import 'package:avatar/views/map/widgets/hospital_place_list.dart';
 import 'package:avatar/views/navigation/bottom_nav_bar.dart';
 import 'package:avatar/views/points/points_tabbar_container.dart';
 import 'package:avatar/views/share/home.dart';
-import 'package:avatar/widgets/perfect_segment_toggle_widget.dart';
 import 'package:flutter/material.dart';
 
 // Bottombar for EndCustomer
