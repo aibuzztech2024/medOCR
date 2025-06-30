@@ -13,7 +13,7 @@ class SamplePage extends StatelessWidget {
           const SizedBox(height: 90),
           FeedbackRatingWidget(),
           const SizedBox(height: 20),
-          FeedbackWidget(),
+          FeedbackWidget(rating: 4, feedbackText: 'This is a test feedback'),
         ],
       ),
     );
