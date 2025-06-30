@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:avatar/views/donate/widgets/donate_campaign_card.dart';
 import 'package:avatar/views/donate/widgets/recent_donation_card.dart';
 import '../../../viewModels/donate/campaign_view_model.dart';
-import '../../../viewModels/donate/recent_donation_view_model.dart';
 
 class DonatePage extends StatelessWidget {
   DonatePage({super.key});
@@ -129,7 +128,8 @@ class DonatePage extends StatelessWidget {
                                   "Donate",
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontWeight: FontWeight.w600,
+                                    fontFamily: 'Nunito',
+                                    fontWeight: FontWeight.w800,
                                     fontSize: titleSize,
                                     letterSpacing: 1.2,
                                     shadows: [
@@ -259,7 +259,7 @@ class _SimpleHeader extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: width * 0.038,
-              color: Colors.orange,
+              color: const Color(0xFF3AAFA9),
             ),
           ),
         ),

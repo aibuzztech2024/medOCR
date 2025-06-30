@@ -4,8 +4,13 @@ import '../../../models/donate/campaign_model.dart';
 
 class DonateCampaignCard extends StatelessWidget {
   final CampaignModel campaign;
+  final bool showBookmark;
 
-  const DonateCampaignCard({Key? key, required this.campaign}) : super(key: key);
+  const DonateCampaignCard({
+    Key? key,
+    required this.campaign,
+    this.showBookmark = true,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +19,7 @@ class DonateCampaignCard extends StatelessWidget {
     final RxBool isBookmarked = false.obs;
 
     return Container(
-      margin: EdgeInsets.all(screenWidth * 0.04),
+      margin: EdgeInsets.all(screenWidth * 0.02),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(screenWidth * 0.04),
@@ -29,7 +34,6 @@ class DonateCampaignCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // --- Image with Bookmark Icon ---
           Stack(
             children: [
               ClipRRect(
@@ -44,33 +48,31 @@ class DonateCampaignCard extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              Obx(() => Positioned(
-                top: screenHeight * 0.015,
-                right: screenWidth * 0.03,
-                child: GestureDetector(
-                  onTap: () => isBookmarked.toggle(),
-                  child: Container(
-                    padding: EdgeInsets.all(screenWidth * 0.015),
-                    child: Icon(
-                      isBookmarked.value
-                          ? Icons.bookmark_rounded
-                          : Icons.bookmark_outline_rounded,
-                      color: Colors.white,
-                      size: screenWidth * 0.055,
+              if (showBookmark)
+                Obx(() => Positioned(
+                  top: screenHeight * 0.015,
+                  right: screenWidth * 0.03,
+                  child: GestureDetector(
+                    onTap: () => isBookmarked.toggle(),
+                    child: Container(
+                      padding: EdgeInsets.all(screenWidth * 0.015),
+                      child: Icon(
+                        isBookmarked.value
+                            ? Icons.bookmark_rounded
+                            : Icons.bookmark_outline_rounded,
+                        color: Colors.white,
+                        size: screenWidth * 0.055,
+                      ),
                     ),
                   ),
-                ),
-              )),
+                )),
             ],
           ),
-
-          // --- Text & Progress Content ---
           Padding(
             padding: EdgeInsets.all(screenWidth * 0.04),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // --- Title, Location, Amount, Days ---
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,7 +110,7 @@ class DonateCampaignCard extends StatelessWidget {
                               text:
                               '₹${campaign.amountCollected.toStringAsFixed(0)} ',
                               style: TextStyle(
-                                color: Colors.orange,
+                                color: const Color(0xFF3AAFA9),
                                 fontSize: screenWidth * 0.037,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -127,10 +129,7 @@ class DonateCampaignCard extends StatelessWidget {
                     ],
                   ),
                 ),
-
                 SizedBox(width: screenWidth * 0.02),
-
-                // --- Progress Circle ---
                 Column(
                   children: [
                     SizedBox(
@@ -142,7 +141,7 @@ class DonateCampaignCard extends StatelessWidget {
                           CircularProgressIndicator(
                             value: campaign.progressPercent / 100,
                             backgroundColor: Colors.grey.shade300,
-                            color: Colors.orange,
+                            color: const Color(0xFF3AAFA9),
                             strokeWidth: screenWidth * 0.015,
                           ),
                           Center(
@@ -162,8 +161,6 @@ class DonateCampaignCard extends StatelessWidget {
               ],
             ),
           ),
-
-          // --- Buttons: Read More | Donate Now ---
           Padding(
             padding: EdgeInsets.only(
               left: screenWidth * 0.04,
@@ -172,19 +169,17 @@ class DonateCampaignCard extends StatelessWidget {
             ),
             child: Row(
               children: [
-                // Read More Button
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () {
-                      // TODO: Handle Read More tap
-                    },
+                    onPressed: () {},
                     style: OutlinedButton.styleFrom(
                       padding:
                       EdgeInsets.symmetric(vertical: screenHeight * 0.015),
-                      backgroundColor: const Color(0xFFFFF8E9),
+                      backgroundColor: const Color(0xFFD2F3F2),
                       side: const BorderSide(color: Color(0xFFFF8E9)),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(screenWidth * 0.02),
+                        borderRadius:
+                        BorderRadius.circular(screenWidth * 0.02),
                       ),
                     ),
                     child: Text(
@@ -197,21 +192,17 @@ class DonateCampaignCard extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 SizedBox(width: screenWidth * 0.04),
-
-                // Donate Now Button
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {
-                      // TODO: Handle Donate Now tap
-                    },
+                    onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange,
+                      backgroundColor: const Color(0xFF3AAFA9),
                       padding:
                       EdgeInsets.symmetric(vertical: screenHeight * 0.015),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(screenWidth * 0.02),
+                        borderRadius:
+                        BorderRadius.circular(screenWidth * 0.02),
                       ),
                     ),
                     child: Text(
