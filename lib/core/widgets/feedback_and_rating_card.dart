@@ -179,7 +179,6 @@ class FeedbackRatingWidget extends StatelessWidget {
                                   onPressed: controller.submitFeedback,
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Color(0xFF3AAFA9),
-
                                     foregroundColor: Colors.white,
                                     elevation: 0,
                                     padding: EdgeInsets.symmetric(

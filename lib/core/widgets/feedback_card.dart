@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 
-class FeedbackController extends GetxController {
-  final RxInt selectedRating = 0.obs;
-  final RxString feedbackText = ''.obs;
-  final TextEditingController textController = TextEditingController();
+// Modified FeedbackWidget that accepts direct data parameters
+class FeedbackWidget extends StatelessWidget {
+  final int rating;
+  final String feedbackText;
+
+  const FeedbackWidget({
+    Key? key,
+    required this.rating,
+    required this.feedbackText,
+  }) : super(key: key);
 
   String get currentTime {
     final now = DateTime.now();
@@ -16,53 +21,8 @@ class FeedbackController extends GetxController {
     return '${displayHour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')} $period';
   }
 
-  void setRating(int rating) {
-    selectedRating.value = rating;
-  }
-
-  void updateFeedbackText(String text) {
-    feedbackText.value = text;
-  }
-
-  void submitFeedback() {
-    if (selectedRating.value > 0 || feedbackText.value.isNotEmpty) {
-      // Handle submission logic here
-      Get.snackbar(
-        'Success',
-        'Thank you for your feedback!',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: const Color(0xFF4ECDC4),
-        colorText: Colors.white,
-      );
-
-      // Reset form
-      selectedRating.value = 0;
-      feedbackText.value = '';
-      textController.clear();
-    } else {
-      Get.snackbar(
-        'Error',
-        'Please provide a rating or feedback',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
-    }
-  }
-
-  @override
-  void onClose() {
-    textController.dispose();
-    super.onClose();
-  }
-}
-
-class FeedbackWidget extends StatelessWidget {
-  const FeedbackWidget({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    final feedbackController = Get.put(FeedbackController());
     return LayoutBuilder(
       builder: (context, constraints) {
         // Calculate responsive dimensions
@@ -80,48 +40,83 @@ class FeedbackWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               border: Border.all(color: Color(0x4D3AAFA9), width: 1),
             ),
-            child: Column(
-              children: [
-                Text(
-                  'Your rating and feedback',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
-                ),
-                SizedBox(height: containerHeight * 0.02),
-                Center(
-                  child: Obx(
-                    () => Row(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: containerWidth * 0.04,
+                vertical: containerHeight * 0.02,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Text(
+                      'Your rating and feedback',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: containerHeight * 0.05),
+
+                  // Display star rating
+                  Center(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: List.generate(5, (index) {
                         final starIndex = index + 1;
-                        final isSelected =
-                            starIndex <=
-                            feedbackController.selectedRating.value;
+                        final isSelected = starIndex <= rating;
 
-                        return GestureDetector(
-                          onTap: () => feedbackController.setRating(starIndex),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: containerWidth * 0.015,
-                            ),
-                            child: SvgPicture.asset(
-                              isSelected
-                                  ? 'assets/icons/kid_star_filled.svg'
-                                  : 'assets/icons/kid_star_outline.svg',
-                              width: 20.02,
-                              height: 19,
-                            ),
+                        return Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: containerWidth * 0.015,
+                          ),
+                          child: SvgPicture.asset(
+                            isSelected
+                                ? 'assets/icons/kid_star_filled.svg'
+                                : 'assets/icons/kid_star_outline.svg',
+                            width: 20.02,
+                            height: 19,
                           ),
                         );
                       }),
                     ),
                   ),
-                ),
-                SizedBox(height: containerHeight * 0.02),
-                Text(
-                  feedbackController.feedbackText.value,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-                ),
-              ],
+
+                  SizedBox(height: containerHeight * 0.05),
+
+                  // Display feedback text if provided
+                  if (feedbackText.isNotEmpty)
+                    Expanded(
+                      child: Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.all(containerWidth * 0.03),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          feedbackText,
+                          style: TextStyle(
+                            fontSize: containerWidth * 0.035,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      ),
+                    ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: Text(
+                      currentTime,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey.shade500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );
