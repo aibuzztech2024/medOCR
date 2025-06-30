@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
-import '../widgets/medicine_screen.dart';
+import 'medicine_screen.dart';
 
 class SubmitRequestPage extends StatelessWidget {
   SubmitRequestPage({Key? key}) : super(key: key);
@@ -144,8 +144,7 @@ class SubmitRequestPage extends StatelessWidget {
             const SizedBox(height: 30),
 
             // Medicine List Section
-            MedicineListWidget(headerTitle: "Uploaded Medicines"),
-            MedicineListWidget(headerTitle: "Generic Medicines"),
+            MedicineListWidget(),
           ],
         ),
       ),

@@ -63,10 +63,9 @@ class MedicineViewModel extends GetxController {
 
 /// Medicine list widget without Scaffold, can be embedded anywhere
 class MedicineListWidget extends StatelessWidget {
-  final String headerTitle;
   final MedicineViewModel controller = Get.put(MedicineViewModel());
 
-  MedicineListWidget({super.key, required this.headerTitle});
+  MedicineListWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -83,15 +82,18 @@ class MedicineListWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  headerTitle,
+                  'Uploaded Medicines', // Replace with your desired title
                   style: const TextStyle(
                     fontFamily: 'Open Sans',
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: Color(0xFF484848),
                   ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
                 ),
               ),
+
               TextButton(
                 onPressed: () {},
                 style: TextButton.styleFrom(
