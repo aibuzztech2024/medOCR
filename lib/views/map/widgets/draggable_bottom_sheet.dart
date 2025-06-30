@@ -138,7 +138,7 @@ class DraggableBottomSheet extends StatelessWidget {
                           ),
                         );
                       } else {
-                        return Text('No data selected');
+                        return AppText('No data selected');
                       }
                     }),
                   ),
