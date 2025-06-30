@@ -2,6 +2,7 @@ import 'package:avatar/core/themes/light/light_theme_data.dart';
 import 'package:avatar/viewModels/auth/register/ngo/ngo_register_controller.dart';
 import 'package:avatar/views/auth/select_role_view.dart';
 import 'package:avatar/views/map/route_draggable/pharmacy/pharmacy_route_draggable.dart';
+import 'package:avatar/views/pharmacy_support/ticket_details.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -35,7 +36,8 @@ class MyApp extends StatelessWidget {
       // If user is logged in, navigate to home page
       // If user is not logged in, navigate to select role page
       // home: SelectRoleView(),
-      home: PharmacyRouteDraggable(),
+      // home: PharmacyRouteDraggable(),
+      home:TicketDetails() ,
     );
   }
 }
