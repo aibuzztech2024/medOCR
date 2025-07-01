@@ -30,8 +30,8 @@ class SingleTextFieldWidget extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final labelFontSize = width * 0.045; // Responsive font size for label
     final valueFontSize = width * 0.043; // Responsive font size for value
-    final dividerThickness = width * 0.002; // Responsive divider thickness
-    final verticalSpacing = height * 0.002;
+    final dividerThickness = width * 0.003; // Responsive divider thickness
+    final verticalSpacing = height * 0.0001;
     final iconSize = width * 0.055;
 
     return GestureDetector(

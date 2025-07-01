@@ -2,6 +2,7 @@ import 'package:avatar/viewModels/hospital/patient_prescription_controller.dart'
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../core/widgets/app_button.dart';
 import '../../../core/widgets/app_text.dart';
 import '../../../core/widgets/single_text_field_widget.dart';
 
@@ -64,6 +65,9 @@ class PatientPrescriptionView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+
+
+
             /// ---------------- Patient Info ----------------
             AppText.heading(
               'Patient Info',
@@ -225,6 +229,29 @@ class PatientPrescriptionView extends StatelessWidget {
                         dropdownOptions: controller.instructionsOptions,
                       ),
                     ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: AppButton(
+                    type: ButtonType.outlined,
+                    text: 'Cancel',
+                    onPressed: () => Get.back(),
+                  ),
+                ),
+                const SizedBox(width: 20),
+                Expanded(
+                  child: AppButton(
+                    type: ButtonType.filled,
+                    text: 'Save',
+                    onPressed: () {
+                      // Save logic here
+                    },
                   ),
                 ),
               ],

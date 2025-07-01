@@ -7,6 +7,9 @@ import 'package:avatar/models/navigation/segment_tab_model.dart';
 import 'package:avatar/viewModels/hospital/order_history_controller.dart';
 import 'package:avatar/viewModels/navigation/bottom_nav_controller.dart';
 import 'package:avatar/views/auth/login/login_view.dart';
+import 'package:avatar/views/enduserphone/share/bill.dart';
+import 'package:avatar/views/enduserphone/share/medicine.dart';
+import 'package:avatar/views/enduserphone/share/prescription.dart';
 import 'package:avatar/views/hospital/Widgets/chat_list_widget.dart';
 import 'package:avatar/views/hospital/Widgets/endcustomerhome/widgets/upcoming_events_widget.dart';
 import 'package:avatar/views/hospital/Widgets/donut_chart.dart';
@@ -52,19 +55,19 @@ class MyApp extends StatelessWidget {
         label: 'Prescription',
         iconSvgPath: "assets/icons/medical-prescription_svgrepo.com.svg",
         activeColor: LightThemeColors.buttoncolors,
-        child: NewTicketPage(),
+        child: Prescription(),
       ),
       SegmentTabModel(
         label: 'Bills',
         iconSvgPath: "assets/icons/document-text_svgrepo.com.svg",
         activeColor: LightThemeColors.buttoncolors,
-        child: OrderHistoryView(controller: f),
+        child: bill(),
       ),
       SegmentTabModel(
         label: 'Medicine',
         iconSvgPath: "assets/icons/medicine-pills-tablets_svgrepo.com.svg",
         activeColor: LightThemeColors.buttoncolors,
-        child: UpcomingEventsWidget(),
+        child: Medicine(),
       ),
     ];
 
@@ -85,12 +88,12 @@ class MyApp extends StatelessWidget {
       BottomNavItemModel(
         icon: IconsPaths.upload,
         title: "Post",
-        screen: PatientPrescriptionView(),
+        screen: NewTicketPage(),
       ),
       BottomNavItemModel(
         icon: IconsPaths.purchase,
         title: "Purchase",
-        screen: MedicineInfoView(),
+        screen: Text("purchase"),
       ),
       BottomNavItemModel(
         icon: IconsPaths.home,
@@ -117,7 +120,6 @@ class MyApp extends StatelessWidget {
       // If user is not logged in, navigate to select role page
       //home: SelectRoleView(),
       home: BottomNavBar(navItems: navItems),
-     
     );
   }
 }
