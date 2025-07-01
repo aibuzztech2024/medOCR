@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'bill_card.dart';
 
 /// Model for medicine search filter UI
 class MedicineSearchModel {
@@ -19,8 +20,7 @@ class MedicineSearchModel {
   });
 }
 
-
-/// Controller to manage medicine search data and state
+/// Controller to manage medicine search UI state
 class MedicineSearchController extends GetxController {
   final model = MedicineSearchModel(
     searchHint: 'Search by medicine name or categories',
@@ -31,98 +31,108 @@ class MedicineSearchController extends GetxController {
   ).obs;
 }
 
+/// Main UI widget for medicine search
 class MedicineSearchBar extends StatelessWidget {
   const MedicineSearchBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Initialize controller if not already registered
     final controller = Get.put(MedicineSearchController());
 
-    // Responsive units
+    // Screen dimensions
     final double screenWidth = Get.width;
     final double screenHeight = Get.height;
+
+    // Common paddings and sizes
     final double padding = screenWidth * 0.04;
     final double iconSize = screenWidth * 0.06;
     final double fontSize = screenWidth * 0.035;
     final double buttonSize = screenWidth * 0.13;
 
-    return Padding(
-      padding: EdgeInsets.all(padding),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: screenHeight * 0.04), // Top spacing
+    return Scaffold(
+      body: Padding(
+        padding: EdgeInsets.all(padding),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: screenHeight * 0.04),
 
-          /// Search bar container
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.grey.shade100,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            padding: EdgeInsets.symmetric(
-              horizontal: padding * 0.7,
-              vertical: screenHeight * 0.015,
-            ),
-            child: Row(
-              children: [
-                Icon(Icons.search, color: Colors.grey, size: iconSize),
-                SizedBox(width: screenWidth * 0.02),
+            /// Search bar section
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              padding: EdgeInsets.symmetric(
+                horizontal: padding * 0.7,
+                vertical: screenHeight * 0.015,
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.search, color: Colors.grey, size: iconSize),
+                  SizedBox(width: screenWidth * 0.02),
 
-                /// Search hint text
-                Expanded(
-                  child: Obx(() => Text(
-                    controller.model.value.searchHint,
+                  /// Search hint text
+                  Expanded(
+                    child: Obx(() => Text(
+                      controller.model.value.searchHint,
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: fontSize,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    )),
+                  ),
+                ],
+              ),
+            ),
+
+            SizedBox(height: screenHeight * 0.03),
+
+            /// View label + action buttons with equal horizontal padding
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: padding * 0.7),
+              child: Row(
+                children: [
+                  Obx(() => Text(
+                    controller.model.value.viewText,
                     style: TextStyle(
-                      color: Colors.grey,
                       fontSize: fontSize,
+                      color: Colors.black87,
                     ),
-                    overflow: TextOverflow.ellipsis,
                   )),
-                ),
-              ],
+                  Icon(controller.model.value.expandIcon, size: iconSize),
+                  const Spacer(),
+
+                  // Export button
+                  _roundedIconButton(
+                    icon: controller.model.value.exportIcon,
+                    size: buttonSize,
+                    iconSize: iconSize,
+                  ),
+                  SizedBox(width: screenWidth * 0.02),
+
+                  // Bookmark button
+                  _roundedIconButton(
+                    icon: controller.model.value.bookmarkIcon,
+                    size: buttonSize,
+                    iconSize: iconSize,
+                  ),
+                ],
+              ),
             ),
-          ),
 
-          SizedBox(height: screenHeight * 0.03),
+            SizedBox(height: screenHeight * 0.03),
 
-          /// View + icons row
-          Row(
-            children: [
-              Obx(() => Text(
-                controller.model.value.viewText,
-                style: TextStyle(
-                  fontSize: fontSize,
-                  color: Colors.black87,
-                ),
-              )),
-              Icon(controller.model.value.expandIcon, size: iconSize),
-
-              const Spacer(),
-
-              /// Export
-              _roundedIconButton(
-                icon: controller.model.value.exportIcon,
-                size: buttonSize,
-                iconSize: iconSize,
-              ),
-
-              SizedBox(width: screenWidth * 0.02),
-
-              /// Bookmark
-              _roundedIconButton(
-                icon: controller.model.value.bookmarkIcon,
-                size: buttonSize,
-                iconSize: iconSize,
-              ),
-            ],
-          ),
-        ],
+            /// --- Bill card UI below search ---
+             BillCardView(),
+          ],
+        ),
       ),
     );
   }
 
-  /// Reusable rounded icon button
+  /// Custom rounded icon box
   Widget _roundedIconButton({
     required IconData icon,
     required double size,

@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
       // If user is logged in, navigate to home page
       // If user is not logged in, navigate to select role page
       //home: SelectRoleView(),
-      home: MedicineSearchView(),
+      home: MedicineSearchBar(),
     );
   }
 }
