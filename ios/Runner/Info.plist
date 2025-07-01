@@ -9,6 +9,10 @@
 		<string>We need your location for navigation even when the app is open.</string>
 		<key>NSLocationWhenInUseUsageDescription</key>
 		<string>App needs location access to determine heading</string>
+		<key>NSPhotoLibraryUsageDescription</key>
+        <string>We need access to your photo library to upload images</string>
+        <key>NSCameraUsageDescription</key>
+        <string>We need access to your camera to take photos</string>
 
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
