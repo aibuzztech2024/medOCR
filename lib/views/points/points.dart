@@ -41,7 +41,7 @@ class Points extends StatelessWidget {
                 subtitle: 'invite & earn',
                 imagePath: ImagePaths.bestfriends,
                 color: LightThemeColors.pharmacyColor,
-                colors: LightThemeColors.pharmacyColor15,
+                colors: LightThemeColors.secondarypharmacyColor,
               ),
 
             //points overview card widget

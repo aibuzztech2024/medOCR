@@ -66,7 +66,7 @@ class AddressSelector extends StatelessWidget {
                       Radio<String>(
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
 
-                        activeColor: LightThemeColors.main_pharmcay,
+                        activeColor: LightThemeColors.mainpharmcay,
                         value: address.id,
                         groupValue: controller.selectedAddressId.value,
                         onChanged: (val) => controller.selectAddress(val!),

@@ -1,3 +1,6 @@
+import 'package:avatar/core/utils/methods/navigate_to.dart';
+import 'package:avatar/views/donate/Pages/donate_page.dart';
+import 'package:avatar/widgets/bottom_navbar_end_customer.dart';
 import 'package:flutter/material.dart';
 
 class DonationSuccessPage extends StatelessWidget {
@@ -7,9 +10,9 @@ class DonationSuccessPage extends StatelessWidget {
 
   const DonationSuccessPage({
     super.key,
-    this.amount = 500,         // Default donation amount
-    this.childrenFed = 10,     // Default children fed
-    this.pointsEarned = 2.8,   // Default reward points
+    this.amount = 500, // Default donation amount
+    this.childrenFed = 10, // Default children fed
+    this.pointsEarned = 2.8, // Default reward points
   });
 
   @override
@@ -26,10 +29,7 @@ class DonationSuccessPage extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.circular(12),
               border: const Border(
-                top: BorderSide(
-                  color: Color(0xFFE0E0E0),
-                  width: 1,
-                ),
+                top: BorderSide(color: Color(0xFFE0E0E0), width: 1),
               ),
               boxShadow: const [
                 BoxShadow(
@@ -82,9 +82,7 @@ class DonationSuccessPage extends StatelessWidget {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        const TextSpan(
-                          text: ' Points on the Platform Usage',
-                        ),
+                        const TextSpan(text: ' Points on the Platform Usage'),
                       ],
                     ),
                     textAlign: TextAlign.center,
@@ -99,11 +97,15 @@ class DonationSuccessPage extends StatelessWidget {
                       // Donate More Button
                       OutlinedButton(
                         onPressed: () {
+                          navigateTo(() => DonatePage());
                           // TODO: Add action
                         },
                         style: OutlinedButton.styleFrom(
                           backgroundColor: const Color(0xFFD2F3F2),
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 12,
+                          ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
@@ -122,11 +124,15 @@ class DonationSuccessPage extends StatelessWidget {
                       // Go to Home Button
                       ElevatedButton(
                         onPressed: () {
+                          navigateTo(() => BottomNavbarEndCustomer());
                           // TODO: Navigate home
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF3AAFA9),
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 12,
+                          ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),

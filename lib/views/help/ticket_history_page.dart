@@ -1,3 +1,5 @@
+import 'package:avatar/core/utils/methods/navigate_to.dart';
+import 'package:avatar/views/pharmacy_support/ticket_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -22,7 +24,9 @@ class TicketHistoryPage extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: false,
-        leading: const BackButton(color: Colors.black), // Back button in app bar
+        leading: const BackButton(
+          color: Colors.black,
+        ), // Back button in app bar
         title: const Text(
           'Ticket History', // Title of the page
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
@@ -88,8 +92,8 @@ class TicketHistoryPage extends StatelessWidget {
                 // ListView to display all filtered tickets
                 return ListView.separated(
                   itemCount: controller.filteredTickets.length,
-                  separatorBuilder: (_, __) =>
-                      SizedBox(height: screenHeight * 0.015),
+                  separatorBuilder:
+                      (_, __) => SizedBox(height: screenHeight * 0.015),
                   itemBuilder: (context, index) {
                     final ticket = controller.filteredTickets[index];
                     // Build individual ticket card widget
@@ -112,10 +116,7 @@ class TicketHistoryPage extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(
-          color: Colors.grey.shade400,
-          width: 1,
-        ),
+        border: Border.all(color: Colors.grey.shade400, width: 1),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.shade300.withOpacity(0.5),
@@ -147,8 +148,11 @@ class TicketHistoryPage extends StatelessWidget {
   Widget _buildTicketCard(TicketModel ticket, double width, double height) {
     // Decide badge and text colors based on ticket status
     final badgeColor =
-    ticket.status == "Resolved" ? Colors.green[100] : const Color(0xFFF4D2B3);
-    final textColor = ticket.status == "Resolved" ? Colors.green : Colors.orange;
+        ticket.status == "Resolved"
+            ? Colors.green[100]
+            : const Color(0xFFF4D2B3);
+    final textColor =
+        ticket.status == "Resolved" ? Colors.green : Colors.orange;
 
     return InkWell(
       borderRadius: BorderRadius.circular(16),
@@ -169,7 +173,7 @@ class TicketHistoryPage extends StatelessWidget {
               color: Color(0x11000000),
               blurRadius: 14,
               offset: Offset(0, 6),
-            )
+            ),
           ],
         ),
         child: Row(
@@ -189,18 +193,12 @@ class TicketHistoryPage extends StatelessWidget {
                   SizedBox(height: height * 0.005),
                   Text(
                     ticket.ticketId,
-                    style: const TextStyle(
-                      color: Colors.black54,
-                      fontSize: 13,
-                    ),
+                    style: const TextStyle(color: Colors.black54, fontSize: 13),
                   ),
                   SizedBox(height: height * 0.005),
                   Text(
                     ticket.date,
-                    style: const TextStyle(
-                      color: Colors.black38,
-                      fontSize: 13,
-                    ),
+                    style: const TextStyle(color: Colors.black38, fontSize: 13),
                   ),
                 ],
               ),
@@ -210,8 +208,10 @@ class TicketHistoryPage extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: badgeColor,
                     borderRadius: BorderRadius.circular(16),
@@ -226,10 +226,13 @@ class TicketHistoryPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(width: width * 0.02),
-                const Icon(
-                  Icons.arrow_forward_ios,
-                  size: 20,
-                  color: Colors.black87,
+                IconButton(
+                  onPressed: () => navigateTo(() => TicketDetails()),
+                  icon: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 20,
+                    color: Colors.black87,
+                  ),
                 ),
               ],
             ),

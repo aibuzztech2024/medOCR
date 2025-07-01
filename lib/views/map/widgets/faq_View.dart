@@ -1,6 +1,8 @@
 import 'package:avatar/core/utils/methods/navigate_to.dart';
 import 'package:avatar/viewModels/hospital/faq_controller.dart';
+import 'package:avatar/views/endCustomer/help/chat/chat_screen.dart';
 import 'package:avatar/views/help/ticket_history_page.dart';
+import 'package:avatar/views/hospital/Widgets/newticket.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -35,7 +37,7 @@ class FAQView extends StatelessWidget {
                       SupportShadowButton(
                         icon: Icons.error_outline,
                         label: 'Report an issue',
-                        onPressed: () {},
+                        onPressed: () => navigateTo(() => NewTicketPage()),
                       ),
                       WidthBox(12),
                       SupportShadowButton(
@@ -57,7 +59,9 @@ class FAQView extends StatelessWidget {
                       SupportShadowButton(
                         icon: Icons.chat_bubble_outline,
                         label: 'Chat Support',
-                        onPressed: () {},
+                        onPressed: () {
+                          navigateTo(() => ChatScreen());
+                        },
                       ),
                     ],
                   ),

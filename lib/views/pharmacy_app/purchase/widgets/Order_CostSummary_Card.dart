@@ -85,7 +85,7 @@ class _OrderCostSummaryCardState extends State<OrderCostSummaryCard> {
                       TextSpan(text: 'Congratulation! You will earn '),
                       TextSpan(
                         text: '${controller.earnedPoints.value.toStringAsFixed(1)} \n',
-                        style: TextStyle(color: LightThemeColors.main_pharmcay, fontWeight: FontWeight.bold ,fontSize: 18),
+                        style: TextStyle(color: LightThemeColors.mainpharmcay, fontWeight: FontWeight.bold ,fontSize: 18),
                       ),
                       TextSpan(text: 'Credit points on the order completion'),
                     ],
@@ -115,7 +115,7 @@ class _OrderCostSummaryCardState extends State<OrderCostSummaryCard> {
                       children: [
                         Text(
                           controller.updatedPointBalance.toInt().toString(),
-                          style: TextStyle(fontSize: 20, color:  LightThemeColors.main_pharmcay, fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: 20, color:  LightThemeColors.mainpharmcay, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(width: 8),
                         GestureDetector(

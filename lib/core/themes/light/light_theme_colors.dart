@@ -7,12 +7,12 @@ class LightThemeColors {
 
 
 
-  static const Color main_endCustomer = Color.fromRGBO(247, 158, 27, 1);
-  static const Color points_endCustomer = Color.fromRGBO(255, 111, 97, 1);
+  static const Color mainendCustomer = Color.fromRGBO(247, 158, 27, 1);
+  static const Color pointsendCustomer = Color.fromRGBO(255, 111, 97, 1);
 
 
 
-  static const Color main_pharmcay = Color.fromRGBO(58, 175, 169, 1);
+  static const Color mainpharmcay = Color.fromRGBO(58, 175, 169, 1);
 
 
 
@@ -80,5 +80,5 @@ class LightThemeColors {
   static const Color pharmacyColor = Color(0xFF3AAFA9);
 
   // pharmacy color with 15% opacity
-  static Color pharmacyColor15 = Color(0xFF3AAFA9).withOpacity(0.15);
+  static Color secondarypharmacyColor = Color(0xFF3AAFA9).withOpacity(0.15);
 }

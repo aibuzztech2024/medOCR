@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:avatar/core/utils/methods/navigate_to.dart';
+import 'package:avatar/views/donate/Pages/donation_success_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -63,7 +65,8 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
             SizedBox(height: screenHeight * 0.01),
 
             Obx(() {
-              final text = vm.inputText.value.isEmpty ? '0' : vm.inputText.value;
+              final text =
+                  vm.inputText.value.isEmpty ? '0' : vm.inputText.value;
 
               return Center(
                 child: GestureDetector(
@@ -87,7 +90,9 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
                           controller: vm.amountController,
                           focusNode: vm.amountFocusNode,
                           keyboardType: TextInputType.number,
-                          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
                           style: const TextStyle(
                             color: Colors.transparent,
                             fontSize: 0.1,
@@ -128,13 +133,19 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
             ),
             SizedBox(height: 12),
 
-            Obx(() => Column(
-              children: [
-                _buildPaymentTile("UPI Payment", 'assets/icons/upi.svg', 1),
-                SizedBox(height: 10),
-                _buildPaymentTile("Credit or Debit Card", 'assets/icons/credit_card.svg', 2),
-              ],
-            )),
+            Obx(
+              () => Column(
+                children: [
+                  _buildPaymentTile("UPI Payment", 'assets/icons/upi.svg', 1),
+                  SizedBox(height: 10),
+                  _buildPaymentTile(
+                    "Credit or Debit Card",
+                    'assets/icons/credit_card.svg',
+                    2,
+                  ),
+                ],
+              ),
+            ),
 
             SizedBox(height: screenHeight * 0.03),
 
@@ -174,35 +185,45 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(color: Colors.grey, width: 2),
                       ),
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 14,
+                      ),
                     ),
                   ),
                 ),
                 SizedBox(width: 10),
                 Expanded(
                   flex: 1,
-                  child: Obx(() => ElevatedButton(
-                    onPressed: () async {
-                      FilePickerResult? result = await FilePicker.platform.pickFiles(
-                        type: FileType.custom,
-                        allowedExtensions: ['pdf', 'jpg', 'jpeg', 'png'],
-                      );
-                      if (result != null) {
-                        vm.updatePanDocument(File(result.files.single.path!));
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: vm.panDocument.value == null
-                          ? Colors.grey.shade200
-                          : const Color(0xFF3AAFA9),
-                      padding: const EdgeInsets.symmetric(vertical: 12),
+                  child: Obx(
+                    () => ElevatedButton(
+                      onPressed: () async {
+                        FilePickerResult? result = await FilePicker.platform
+                            .pickFiles(
+                              type: FileType.custom,
+                              allowedExtensions: ['pdf', 'jpg', 'jpeg', 'png'],
+                            );
+                        if (result != null) {
+                          vm.updatePanDocument(File(result.files.single.path!));
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            vm.panDocument.value == null
+                                ? Colors.grey.shade200
+                                : const Color(0xFF3AAFA9),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                      ),
+                      child: SvgPicture.asset(
+                        'assets/icons/upload.svg',
+                        height: Get.width * 0.05,
+                        color:
+                            vm.panDocument.value == null
+                                ? Colors.grey
+                                : Colors.white,
+                      ),
                     ),
-                    child: SvgPicture.asset(
-                      'assets/icons/upload.svg',
-                      height: Get.width * 0.05,
-                      color: vm.panDocument.value == null ? Colors.grey : Colors.white,
-                    ),
-                  )),
+                  ),
                 ),
               ],
             ),
@@ -212,13 +233,20 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildBottomButton("Cancel", onPressed: () => Get.back()),
-                Obx(() => _buildBottomButton(
-                  "Pay",
-                  isPrimary: true,
-                  enabled: vm.isFormValid,
-                  onPressed: vm.isFormValid ? _showConfirmBottomSheet : null,
-                )),
+                _buildBottomButton(
+                  "Cancel",
+                  onPressed: () => navigateTo(() => DonationFailed()),
+                ),
+                Obx(
+                  () => _buildBottomButton(
+                    "Pay",
+                    isPrimary: true,
+                    enabled: vm.isFormValid,
+                    onPressed:
+                        () => vm.isFormValid ? _showConfirmBottomSheet : null,
+                    //  navigateTo(() => DonationSuccessPage()),
+                  ),
+                ),
               ],
             ),
           ],
@@ -238,7 +266,10 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
             color: selected ? const Color(0xFF3AAFA9) : Colors.black87,
             width: 1.5,
           ),
-          color: selected ? const Color(0xFF3AAFA9).withOpacity(0.1) : Colors.transparent,
+          color:
+              selected
+                  ? const Color(0xFF3AAFA9).withOpacity(0.1)
+                  : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
@@ -257,18 +288,19 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
                   width: 2,
                 ),
               ),
-              child: selected
-                  ? Center(
-                child: Container(
-                  width: Get.width * 0.025,
-                  height: Get.width * 0.025,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Color(0xFF3AAFA9),
-                  ),
-                ),
-              )
-                  : null,
+              child:
+                  selected
+                      ? Center(
+                        child: Container(
+                          width: Get.width * 0.025,
+                          height: Get.width * 0.025,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color(0xFF3AAFA9),
+                          ),
+                        ),
+                      )
+                      : null,
             ),
           ],
         ),
@@ -277,27 +309,29 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
   }
 
   Widget _buildBottomButton(
-      String label, {
-        VoidCallback? onPressed,
-        bool isPrimary = false,
-        bool enabled = true,
-      }) {
+    String label, {
+    VoidCallback? onPressed,
+    bool isPrimary = false,
+    bool enabled = true,
+  }) {
     return SizedBox(
       width: Get.width * 0.20,
       child: ElevatedButton(
         onPressed: enabled ? onPressed : null,
         style: ElevatedButton.styleFrom(
-          backgroundColor: isPrimary
-              ? (enabled ? const Color(0xFF3AAFA9) : const Color(0xFFFFF8E9))
-              : const Color(0xFFD2F3F2),
+          backgroundColor:
+              isPrimary
+                  ? (enabled
+                      ? const Color(0xFF3AAFA9)
+                      : const Color(0xFFFFF8E9))
+                  : const Color(0xFFD2F3F2),
 
-            foregroundColor: isPrimary
-              ? (enabled ? Colors.white : Colors.black54)
-              : Colors.black54,
+          foregroundColor:
+              isPrimary
+                  ? (enabled ? Colors.white : Colors.black54)
+                  : Colors.black54,
           padding: EdgeInsets.symmetric(vertical: Get.height * 0.012),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           elevation: 0,
         ),
         child: Row(
@@ -312,10 +346,7 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
             ),
             if (isPrimary) ...[
               const SizedBox(width: 6),
-              Icon(
-                Icons.arrow_forward,
-                size: Get.width * 0.04,
-              ),
+              Icon(Icons.arrow_forward, size: Get.width * 0.04),
             ],
           ],
         ),
@@ -344,7 +375,11 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
               _buildBreakdownRow("Platform Fee (2%)", platformFee),
               _buildBreakdownRow("GST on Platform Fee (18%)", gst),
               const SizedBox(height: 16),
-              _buildBreakdownRow("Total Amount Donor Pays", amount.toDouble(), isTotal: true),
+              _buildBreakdownRow(
+                "Total Amount Donor Pays",
+                amount.toDouble(),
+                isTotal: true,
+              ),
               const SizedBox(height: 24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -363,7 +398,6 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
                         transitionDuration: Duration.zero,
                         pageBuilder: (_, __, ___) => const DonationFailed(),
                       );
-
                     },
                   ),
                 ],
@@ -375,7 +409,11 @@ class _DonateCheckoutPageState extends State<DonateCheckoutPage> {
     );
   }
 
-  Widget _buildBreakdownRow(String label, double value, {bool isTotal = false}) {
+  Widget _buildBreakdownRow(
+    String label,
+    double value, {
+    bool isTotal = false,
+  }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(

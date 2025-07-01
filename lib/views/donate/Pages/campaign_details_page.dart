@@ -1,3 +1,5 @@
+import 'package:avatar/core/utils/methods/navigate_to.dart';
+import 'package:avatar/views/donate/Pages/donate_checkout_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../viewModels/donate/campaign_view_model.dart';
@@ -48,10 +50,7 @@ class CampaignDetailsPage extends StatelessWidget {
 
               Text(
                 campaign.description,
-                style: TextStyle(
-                  fontSize: width * 0.037,
-                  height: 1.5,
-                ),
+                style: TextStyle(fontSize: width * 0.037, height: 1.5),
               ),
 
               SizedBox(height: height * 0.04),
@@ -93,6 +92,8 @@ class CampaignDetailsPage extends StatelessWidget {
                     width: width * 0.3,
                     child: ElevatedButton(
                       onPressed: () {
+                        navigateTo(() => DonateCheckoutPage());
+
                         // TODO: Implement donation functionality
                       },
                       style: ElevatedButton.styleFrom(

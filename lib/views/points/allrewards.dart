@@ -31,7 +31,7 @@ class Allrewards extends StatelessWidget {
               return RewardCardWidget(
                 reward: featuredRewards[index],
                 color: LightThemeColors.pharmacyColor,
-                colors: LightThemeColors.pharmacyColor15,
+                colors: LightThemeColors.secondarypharmacyColor,
               );
             },
           ),
@@ -44,7 +44,7 @@ class Allrewards extends StatelessWidget {
                 reward: popularCoupons[index],
                 isPopularcoupon: true,
                 color: LightThemeColors.pharmacyColor,
-                colors: LightThemeColors.pharmacyColor15,
+                colors: LightThemeColors.secondarypharmacyColor,
               );
             },
           ),

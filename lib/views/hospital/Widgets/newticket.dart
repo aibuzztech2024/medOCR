@@ -44,8 +44,8 @@ class _NewTicketPageState extends State<NewTicketPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
+    return Scaffold(
+      body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10),
         child: Form(
           key: _formKey,

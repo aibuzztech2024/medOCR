@@ -1,4 +1,3 @@
-
 import 'package:get/get.dart';
 import '../../../models/chat/message_model.dart';
 
@@ -7,12 +6,13 @@ class ChatController extends GetxController {
   final messages = <MessageModel>[].obs;
 
   // List of suggestion strings
-  final suggestions = <String>[
-    'Is Cash on Delivery (COD) available?',
-    'How do I apply a coupon or discount code?',
-    'How do I get a refund if my order is cancelled?',
-    // TODO: Add more suggestions or load dynamically if needed
-  ].obs;
+  final suggestions =
+      <String>[
+        'Is Cash on Delivery (COD) available?',
+        'How do I apply a coupon or discount code?',
+        'How do I get a refund if my order is cancelled?',
+        // TODO: Add more suggestions or load dynamically if needed
+      ].obs;
 
   // Add a user message and simulate bot response
   void sendMessage(String text) {
@@ -36,12 +36,15 @@ class ChatController extends GetxController {
     // TODO: Replace this logic with actual response generation or static responses
     String responseText;
     // Simple static mapping for demo
-    if (userText.toLowerCase().contains('cod') || userText.toLowerCase().contains('cash on delivery')) {
+    if (userText.toLowerCase().contains('cod') ||
+        userText.toLowerCase().contains('cash on delivery')) {
       responseText = 'Yes, Cash on Delivery (COD) is available.';
     } else if (userText.toLowerCase().contains('coupon')) {
-      responseText = 'To apply a coupon, go to the cart and enter the code in the coupon field.';
+      responseText =
+          'To apply a coupon, go to the cart and enter the code in the coupon field.';
     } else if (userText.toLowerCase().contains('refund')) {
-      responseText = 'You will receive a refund within 5-7 business days after cancellation.';
+      responseText =
+          'You will receive a refund within 5-7 business days after cancellation.';
     } else {
       responseText = "I'm here to help! Could you please elaborate?";
     }
@@ -59,5 +62,3 @@ class ChatController extends GetxController {
     // Optionally, you may remove the suggestion from list or mark it used
   }
 }
-
-
