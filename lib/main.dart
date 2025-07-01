@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       // TODO: Check if user is Logged-In,
       // If user is logged in, navigate to h,,,,,,,,,,ome page,
       // If user is not logged in, navigate to select role page
-      home: SamplePage(),
+      home: ProfileSettingsView(),
     );
   }
 }

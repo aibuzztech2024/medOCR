@@ -36,10 +36,8 @@ class EditProfilePage extends StatelessWidget {
           ),
         ),
       ),
-      body: SafeArea(
-        child: LayoutBuilder(
-          builder: (context, constraints) => _buildResponsiveLayout(viewModel),
-        ),
+      body: LayoutBuilder(
+        builder: (context, constraints) => _buildResponsiveLayout(viewModel),
       ),
       bottomNavigationBar: CustomNavBar(
         cancelText: 'Cancel',
