@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../viewModels/endCustomer/purchase/search_controller.dart';
+import '../../purchase/widgets/submit_requests.dart';
 
 ///---- TO DO  change color all----------------
 class ProductPage extends StatefulWidget {
@@ -12,7 +13,8 @@ class ProductPage extends StatefulWidget {
   State<ProductPage> createState() => _ProductPageState();
 }
 
-class _ProductPageState extends State<ProductPage> with SingleTickerProviderStateMixin {
+class _ProductPageState extends State<ProductPage>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -37,8 +39,14 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
-            Text('Purchase', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
-            Text('Buy Better, Save More & Simplify Procurement', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
+            Text(
+              'Purchase',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+            ),
+            Text(
+              'Buy Better, Save More & Simplify Procurement',
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+            ),
           ],
         ),
       ),
@@ -57,10 +65,6 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
               Tab(text: "Search"),
               Tab(text: "Submit Request"),
               Tab(text: "Order Discussion"),
-              Tab(text: "Submit Request"),
-              Tab(text: "Order Discussion"),
-              Tab(text: "Submit Request"),
-              Tab(text: "Order Discussion"),
             ],
           ),
 
@@ -70,12 +74,8 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
 
               children: [
                 searchTab_view(),
-                Center(child: Text("Submit Request")),
-                Center(child: Text("Order Discussion")),
-                Center(child: Text("Submit Request")),
-                Center(child: Text("Order Discussion")),
-                Center(child: Text("Submit Request")),
-                Center(child: Text("Order Discussion")),
+                SubmitRequest(),
+                Text("order disscusion"),
               ],
             ),
           ),

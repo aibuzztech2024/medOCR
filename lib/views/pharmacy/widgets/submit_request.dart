@@ -16,8 +16,7 @@ class SubmitRequestPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = Get.width;
 
-    return Scaffold(
-      body: SingleChildScrollView(
+    return  SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -147,7 +146,7 @@ class SubmitRequestPage extends StatelessWidget {
             MedicineListWidget(),
           ],
         ),
-      ),
+
     );
   }
 }

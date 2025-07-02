@@ -2,7 +2,6 @@ import 'package:avatar/core/widgets/single_text_field_widget.dart';
 import 'package:avatar/viewModels/hospital/patient_prescription_controller.dart';
 import 'package:avatar/views/enduserphone/share/prescription_card.dart';
 import 'package:avatar/views/enduserphone/share/sharebilltextfield.dart';
-import 'package:avatar/views/hospital/Widgets/patient_prescription_view.dart';
 import 'package:avatar/views/hospital/Widgets/upload_issue_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,14 +11,14 @@ import '../../../models/hospital/prescription_card_model.dart';
 import '../../../viewModels/hospital/upload_issue_image_controller.dart';
 
 class bill extends StatelessWidget {
-  const bill({super.key});
+  bill({super.key});
+
+  final PatientPrescriptionController patientPrescriptionController = Get.put(
+    PatientPrescriptionController(),
+  );
 
   @override
   Widget build(BuildContext context) {
-    final PatientPrescriptionController patientPrescriptionController = Get.put(
-      PatientPrescriptionController(),
-    );
-
     final UploadIssueImage uploadIssueImage = Get.put(UploadIssueImage());
     return Scaffold(
       body: SafeArea(
@@ -32,15 +31,15 @@ class bill extends StatelessWidget {
                   label: "Doctor Name ",
                   value: patientPrescriptionController.doctorName,
                   textController:
-                  patientPrescriptionController.doctorNameController,
+                      patientPrescriptionController.doctorNameController,
                 ),
                 SingleTextFieldWidget(
                   label: "Patient Name",
                   value: patientPrescriptionController.patientName,
                   textController:
-                  patientPrescriptionController.patientNameController,
+                      patientPrescriptionController.patientNameController,
                 ),
-                SizedBox(height: 20,),
+                SizedBox(height: 20),
                 UploadIssueImageWidget(controller: uploadIssueImage),
 
                 PrescriptionCard(
@@ -70,7 +69,7 @@ class bill extends StatelessWidget {
                     // add another prescription…
                   },
                 ),
-                SizedBox(height: 40,),
+                SizedBox(height: 40),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
