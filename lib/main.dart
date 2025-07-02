@@ -5,6 +5,7 @@ import 'package:avatar/views/auth/select_role_view.dart';
 import 'package:avatar/views/enduser_phone_settings/phone_settings_view.dart';
 import 'package:avatar/views/hospital/prescription_view.dart';
 import 'package:avatar/views/pharmacy_app/purchase/order_discussion.dart';
+import 'package:avatar/views/pharmacy_app/purchase/purchase_details.dart';
 import 'package:avatar/widgets/bottom_navbar_end_customer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -166,7 +166,7 @@ class ProfileSettingsController extends GetxController {
   }
 
   void _handleChangePassword() {
-    Get.to(() => PrescriptionView());
+    Get.to(() => ChangePasswordView());
   }
 
   void _handleNotificationSettings() {

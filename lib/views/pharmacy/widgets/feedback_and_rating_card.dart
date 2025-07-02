@@ -1,7 +1,7 @@
 import 'package:avatar/views/pharmacy/widgets/feedback_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 
 class FeedbackController extends GetxController {
   final RxInt selectedRating = 0.obs;

@@ -19,7 +19,11 @@ class DeliveryController extends GetxController {
     scannedCode.value = code;
     if (code == deliveryData.value.otp) {
       isConfirmed.value = true;
-      Get.snackbar("Success", "Delivery Confirmed!", snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        "Success",
+        "Delivery Confirmed!",
+        snackPosition: SnackPosition.BOTTOM,
+      );
     } else {
       Get.snackbar("Error", "Invalid OTP", snackPosition: SnackPosition.BOTTOM);
     }
@@ -28,9 +32,17 @@ class DeliveryController extends GetxController {
   void verifyOtp(String inputOtp) {
     if (inputOtp == deliveryData.value.otp) {
       isConfirmed.value = true;
-      Get.snackbar("Success", "Delivery Confirmed!", snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        "Success",
+        "Delivery Confirmed!",
+        snackPosition: SnackPosition.BOTTOM,
+      );
     } else {
-      Get.snackbar("Error", "Incorrect OTP", snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        "Error",
+        "Incorrect OTP",
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }
   }
 }
@@ -109,33 +121,35 @@ class QRDeliveryComponent extends StatelessWidget {
           SizedBox(height: spacingMedium),
 
           /// OTP Display
-          Obx(() => RichText(
-            textAlign: TextAlign.center,
-            text: TextSpan(
-              text: controller.deliveryData.value.otp,
-              style: TextStyle(
-                fontFamily: 'OpenSans',
-                fontWeight: FontWeight.w700,
-                fontSize: screenWidth * 0.07,
-                height: 1.2,
-                letterSpacing: 0,
-                color: const Color(0xFF484848),
-              ),
-              children: [
-                TextSpan(
-                  text: " OTP",
-                  style: TextStyle(
-                    fontFamily: 'OpenSans',
-                    fontWeight: FontWeight.w400,
-                    fontSize: screenWidth * 0.06,
-                    height: 1.2,
-                    letterSpacing: 0,
-                    color: const Color(0xFF484848),
-                  ),
+          Obx(
+            () => RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                text: controller.deliveryData.value.otp,
+                style: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontWeight: FontWeight.w700,
+                  fontSize: screenWidth * 0.07,
+                  height: 1.2,
+                  letterSpacing: 0,
+                  color: const Color(0xFF484848),
                 ),
-              ],
+                children: [
+                  TextSpan(
+                    text: " OTP",
+                    style: TextStyle(
+                      fontFamily: 'OpenSans',
+                      fontWeight: FontWeight.w400,
+                      fontSize: screenWidth * 0.06,
+                      height: 1.2,
+                      letterSpacing: 0,
+                      color: const Color(0xFF484848),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          )),
+          ),
 
           SizedBox(height: spacingSmall),
 
