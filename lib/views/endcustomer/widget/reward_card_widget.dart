@@ -1,3 +1,4 @@
+import 'package:avatar/core/themes/light/light_theme_colors.dart';
 import 'package:avatar/core/widgets/app_text.dart';
 import 'package:avatar/models/endcustomer/rewards_model.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +67,7 @@ class RewardCard extends StatelessWidget {
                           'COUPON',
                           fontSize: 10,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFFF79E1B),
+                          color: LightThemeColors.pharmacyColor,
                         ),
                         const SizedBox(height: 8),
                         SizedBox(
@@ -89,7 +90,7 @@ class RewardCard extends StatelessWidget {
                         vertical: 8,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF79E1B),
+                        color: LightThemeColors.pharmacyColor,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Row(
