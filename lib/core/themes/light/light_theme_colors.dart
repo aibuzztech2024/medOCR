@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /// This class contains all color constants used in the LightThemeData.
 class LightThemeColors {
   // Primary action color (buttons, icons, focus borders)
-  static const Color primary = Color(0xFF1A4EAA);
+  static const Color primary = Color(0xFF3AAFA9);
 
 
 
@@ -66,9 +66,11 @@ class LightThemeColors {
 
 
   static const Color orangeicon = Colors.orange;
+  static const Color orangeicon = Color(0xFF3AAFA9);
   static const Color buttoncolors = Color(0xFF3AAFA9);
 
   // Prescription View specific colors
+  static final pharmacy_PrimaryColor =  Color.fromRGBO(58, 175, 169, 1);
   static const Color prescriptionBorder = Color(
     0xFFE0E0E0,
   ); // Light grey for borders
@@ -76,6 +78,9 @@ class LightThemeColors {
 
   // Shadow
   static const Color shadowColor = Color(0x1F000000);
+  //button color
+
+
   // pharmacy color
   static const Color pharmacyColor = Color(0xFF3AAFA9);
 

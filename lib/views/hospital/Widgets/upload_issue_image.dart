@@ -28,70 +28,89 @@ class UploadIssueImageWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Upload Button
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GestureDetector(
-                onTap: () async {
-                  // Open dialog to choose between PDF or image
-                  Get.bottomSheet(
-                    Container(
-                      color: Colors.white,
-                      padding: const EdgeInsets.all(16),
-                      child: Wrap(
-                        children: [
-                          ListTile(
-                            leading: const Icon(Icons.image),
-                            title: AppText.body('Upload Image'),
-                            onTap: () {
-                              controller.pickImageFromGallery();
-                              Get.back();
-                            },
-                          ),
-                          ListTile(
-                            leading: const Icon(Icons.picture_as_pdf),
-                            title: const Text('Upload PDF'),
-                            onTap: () {
-                              controller.pickPdfFromFilePicker();
-                              Get.back();
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.shade300),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  padding: const EdgeInsets.all(10),
-                  child: Icon(
-                    Icons.add,
-                    color: LightThemeColors.orangeicon,
-                    size: 28,
-                  ),
+          Container(
+            height: Get.height * 0.12,
+            decoration: BoxDecoration(
+              color: LightThemeColors.scaffoldBackground,
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.6),
+                  blurRadius: 6,
+                  offset: const Offset(0, 3),
                 ),
-              ),
-              WidthBox(12),
-              Column(
+              ],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 28.0, left: 14),
+              child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AppText.body(addLabel, fontWeight: FontWeight.w600),
-                  HeightBox(2),
-                  AppText.caption(
-                    'Accepts: JPG, PNG, PDF ( Max 1MB )',
-                    color: Colors.grey,
+                  GestureDetector(
+                    onTap: () async {
+                      // Open dialog to choose between PDF or image
+                      Get.bottomSheet(
+                        Container(
+                          color: LightThemeColors.scaffoldBackground,
+                          padding: const EdgeInsets.all(16),
+                          child: Wrap(
+                            children: [
+                              ListTile(
+                                leading: const Icon(Icons.image),
+                                title: AppText.body('Upload Image'),
+                                onTap: () {
+                                  controller.pickImageFromGallery();
+                                  Get.back();
+                                },
+                              ),
+                              ListTile(
+                                leading: const Icon(Icons.picture_as_pdf),
+                                title: const Text('Upload PDF'),
+                                onTap: () {
+                                  controller.pickPdfFromFilePicker();
+                                  Get.back();
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey.shade300),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+
+                      padding: const EdgeInsets.all(10),
+                      child: Icon(
+                        Icons.add,
+                        color: LightThemeColors.orangeicon,
+                        size: 28,
+                      ),
+                    ),
+                  ),
+                  WidthBox(15),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AppText.body(addLabel, fontWeight: FontWeight.w600),
+                      HeightBox(3),
+                      AppText.caption(
+                        'Accepts: JPG, PNG, PDF ( Max 1MB )',
+                        color: Colors.grey,
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
+            ),
           ),
 
           HeightBox(16),
 
           // Uploaded File List
+
           ...items.map((item) {
             final isPdf = controller.isPdf(item.filePath);
             final fileName = item.filePath.split('/').last;
@@ -100,13 +119,13 @@ class UploadIssueImageWidget extends StatelessWidget {
               margin: const EdgeInsets.only(bottom: 12),
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: LightThemeColors.scaffoldBackground,
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.15),
+                    color: Colors.grey.withOpacity(0.6),
                     blurRadius: 6,
-                    offset: const Offset(0, 2),
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),

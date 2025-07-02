@@ -31,4 +31,9 @@ class IconsPaths {
   static const share = "assets/icons/share_icon.svg";
   static const support = "assets/icons/support_icon.svg";
   static const referral = " ";
+  static const user_icon = "assets/icons/user_icon.svg";
+  static const age_icon = "assets/icons/age_icon.svg";
+  static const weight_icon = "assets/icons/weight_icon.svg";
+  static const stethoscope_icon = "assets/icons/stethoscope_icon.svg";
+  static const medicine_icon = "assets/icons/medicine_icon.svg";
 }

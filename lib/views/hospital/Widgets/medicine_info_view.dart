@@ -1,91 +1,74 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-
 import '../../../core/widgets/app_button.dart';
 import '../../../core/widgets/app_text.dart';
-import '../../../core/widgets/single_text_field_widget.dart';
-import '../../../viewModels/hospital/image_prescription_controller.dart';
-import '../../../viewModels/hospital/medicine_info_controller.dart';
+import '../../../models/hospital/medicine_info_model.dart';
 
 class MedicineInfoView extends StatelessWidget {
-  final MedicineInfoController controller = Get.put(MedicineInfoController());
-  final ImagePrescriptionController imageController = Get.put(
-    ImagePrescriptionController(),
-  );
+  final MedicineInfoModel initialModel;
+  final String? frontImagePath;
+  final String? backImagePath;
 
-  MedicineInfoView({super.key});
+  const MedicineInfoView({
+    Key? key,
+    required this.initialModel,
+    this.frontImagePath,
+    this.backImagePath,
+  }) : super(key: key);
 
-  Widget buildImagePicker({required String label, required int index}) {
-    return Obx(() {
-      final images = imageController.prescriptions;
-      final hasImage = images.length > index;
-      return Column(
-        children: [
-          Text(label, style: const TextStyle(fontWeight: FontWeight.w500)),
-          const SizedBox(height: 8),
-          GestureDetector(
-            onTap: imageController.pickImageFromGallery,
-            child: Container(
-              width: 90,
-              height: 90,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey.shade300),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child:
-                  hasImage
-                      ? ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Image.file(
-                          File(images[index].imagePath),
-                          fit: BoxFit.cover,
-                        ),
-                      )
-                      : Center(
-                        child: SvgPicture.asset(
-                          'assets/icons/add_svgrepo.com.svg',
-                          width: 32,
-                          height: 32,
-                        ),
-                      ),
-            ),
+  Widget buildImagePreview(String? imagePath, String label) {
+    return Column(
+      children: [
+        Text(label, style: const TextStyle(fontWeight: FontWeight.w500)),
+        const SizedBox(height: 8),
+        Container(
+          width: 90,
+          height: 90,
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey.shade300),
+            borderRadius: BorderRadius.circular(12),
           ),
-          const SizedBox(height: 6),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.check_circle, color: Colors.green, size: 18),
-              const SizedBox(width: 4),
-              Text(
-                'Virus scan Passed',
-                style: TextStyle(color: Colors.green, fontSize: 13),
-              ),
-            ],
-          ),
-          if (hasImage)
-            IconButton(
-              icon: Icon(Icons.close, size: 18),
-              onPressed: () => imageController.removePrescription(index),
+          child:
+              imagePath != null
+                  ? ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.file(File(imagePath), fit: BoxFit.cover),
+                  )
+                  : Center(child: Icon(Icons.image, size: 32)),
+        ),
+        const SizedBox(height: 6),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.check_circle, color: Colors.green, size: 18),
+            const SizedBox(width: 4),
+            Text(
+              'Virus scan Passed',
+              style: TextStyle(color: Colors.green, fontSize: 13),
             ),
-        ],
-      );
-    });
+          ],
+        ),
+      ],
+    );
   }
 
-  Widget buildField({
-    required String label,
-    required RxString value,
-    TextEditingController? textController,
-    TextInputType? keyboardType,
-  }) {
-    return SingleTextFieldWidget(
-      label: label,
-      value: value,
-      textController: textController,
-      keyboardType: keyboardType,
+  Widget buildReadOnlyField({required String label, required String value}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label, style: TextStyle(fontSize: 13, color: Colors.grey[700])),
+          const SizedBox(height: 2),
+          Text(
+            value,
+            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+          ),
+          const Divider(height: 16, thickness: 1),
+        ],
+      ),
     );
   }
 
@@ -100,8 +83,8 @@ class MedicineInfoView extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                buildImagePicker(label: 'Front Img', index: 0),
-                buildImagePicker(label: 'Back Img', index: 1),
+                buildImagePreview(frontImagePath, 'Front Img'),
+                buildImagePreview(backImagePath, 'Back Img'),
               ],
             ),
             const SizedBox(height: 18),
@@ -117,20 +100,17 @@ class MedicineInfoView extends StatelessWidget {
                 Expanded(
                   child: Column(
                     children: [
-                      buildField(
+                      buildReadOnlyField(
                         label: 'Medicine Name',
-                        value: controller.medicineName,
-                        textController: controller.medicineNameController,
+                        value: initialModel.medicineName,
                       ),
-                      buildField(
+                      buildReadOnlyField(
                         label: 'Manufacture',
-                        value: controller.manufacture,
-                        textController: controller.manufactureController,
+                        value: initialModel.manufacture,
                       ),
-                      buildField(
+                      buildReadOnlyField(
                         label: 'Manufacturing Date',
-                        value: controller.manufacturingDate,
-                        textController: controller.manufacturingDateController,
+                        value: initialModel.manufacturingDate,
                       ),
                     ],
                   ),
@@ -139,21 +119,17 @@ class MedicineInfoView extends StatelessWidget {
                 Expanded(
                   child: Column(
                     children: [
-                      buildField(
+                      buildReadOnlyField(
                         label: 'Product Price',
-                        value: controller.productPrice,
-                        textController: controller.productPriceController,
-                        keyboardType: TextInputType.number,
+                        value: '₹ ${initialModel.productPrice}',
                       ),
-                      buildField(
+                      buildReadOnlyField(
                         label: 'Batch No.',
-                        value: controller.batchNo,
-                        textController: controller.batchNoController,
+                        value: initialModel.batchNo,
                       ),
-                      buildField(
+                      buildReadOnlyField(
                         label: 'Expiry Date',
-                        value: controller.expiryDate,
-                        textController: controller.expiryDateController,
+                        value: initialModel.expiryDate,
                       ),
                     ],
                   ),
