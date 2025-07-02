@@ -41,7 +41,7 @@ class PrescriptionView extends StatelessWidget {
                         child: Container(
                           decoration: BoxDecoration(
                             border: Border.all(
-                              color: LightThemeColors.prescriptionBorder,
+                              color: LightThemeColors.prescriptionborder,
                             ),
                             borderRadius: BorderRadius.circular(10),
                             color: LightThemeColors.prescriptionBackground,

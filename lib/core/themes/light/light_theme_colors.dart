@@ -5,33 +5,20 @@ class LightThemeColors {
   // Primary action color (buttons, icons, focus borders)
   static const Color primary = Color(0xFF3AAFA9);
 
-
-
   static const Color mainendCustomer = Color.fromRGBO(247, 158, 27, 1);
   static const Color pointsendCustomer = Color.fromRGBO(255, 111, 97, 1);
 
-
-
   static const Color mainpharmcay = Color.fromRGBO(58, 175, 169, 1);
-
-
 
   static const Color blue = Color.fromRGBO(53, 134, 252, 1);
   static const Color green = Color.fromRGBO(40, 167, 69, 1);
   static const Color errorRed = Color.fromRGBO(176, 0, 32, 1);
-
-
-
 
   static const Color creamBg = Color.fromRGBO(255, 248, 233, 1);
   static const Color greenBg = Color.fromRGBO(199, 228, 206, 1);
   static const Color orangeBg = Color.fromRGBO(254, 242, 229, 1);
   static const Color blueBg = Color.fromRGBO(236, 255, 255, 1);
   static const Color yellowBg = Color.fromRGBO(247, 180, 27, 0.9);
-
-
-
-
 
   // Backgrounds
   static const Color scaffoldBackground = Colors.white;
@@ -64,14 +51,13 @@ class LightThemeColors {
   // advertisor color with 15% opacity
   static Color advertisorColor15 = Color(0xFFFF6F61).withOpacity(0.15);
 
-
-  static const Color orangeicon = Colors.orange;
   static const Color orangeicon = Color(0xFF3AAFA9);
   static const Color buttoncolors = Color(0xFF3AAFA9);
 
   // Prescription View specific colors
-  static final pharmacy_PrimaryColor =  Color.fromRGBO(58, 175, 169, 1);
-  static const Color prescriptionBorder = Color(
+  static final pharmacyprimarycolor = Color.fromRGBO(58, 175, 169, 1);
+
+  static const Color prescriptionborder = Color(
     0xFFE0E0E0,
   ); // Light grey for borders
   static const Color prescriptionBackground = Colors.white; // White background
@@ -79,7 +65,6 @@ class LightThemeColors {
   // Shadow
   static const Color shadowColor = Color(0x1F000000);
   //button color
-
 
   // pharmacy color
   static const Color pharmacyColor = Color(0xFF3AAFA9);

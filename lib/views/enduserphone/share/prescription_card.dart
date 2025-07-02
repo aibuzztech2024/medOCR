@@ -39,7 +39,7 @@ class PrescriptionCard extends StatelessWidget {
                 child: Icon(
                   Icons.edit_outlined,
                   size: 24,
-                  color: LightThemeColors.pharmacy_PrimaryColor,
+                  color: LightThemeColors.pharmacyprimarycolor,
                 ),
               ),
             ),
@@ -143,7 +143,7 @@ class PrescriptionCard extends StatelessWidget {
               child: Text(
                 '+ Add Another Prescription',
                 style: TextStyle(
-                  color: LightThemeColors.pharmacy_PrimaryColor,
+                  color: LightThemeColors.pharmacyprimarycolor,
                   fontWeight: FontWeight.w600,
                   fontSize: 16,
                 ),
