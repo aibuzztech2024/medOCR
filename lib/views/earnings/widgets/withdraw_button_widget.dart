@@ -1,3 +1,4 @@
+import 'package:avatar/core/themes/light/light_theme_colors.dart';
 import 'package:avatar/core/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,7 @@ class WithdrawButtonWidget extends StatelessWidget {
       // Button container styling
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       decoration: BoxDecoration(
-        border: Border.all(color: const Color(0xFFF79E1B), width: 1),
+        border: Border.all(color: LightThemeColors.pharmacyColor, width: 1),
         borderRadius: BorderRadius.circular(6),
       ),
       child: InkWell(
@@ -29,26 +30,30 @@ class WithdrawButtonWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             // Clock icon (symbolic of withdrawal time)
-            Icon(Icons.access_time, color: const Color(0xFFF79E1B), size: 16),
+            Icon(
+              Icons.access_time,
+              color: LightThemeColors.pharmacyColor,
+              size: 16,
+            ),
             const SizedBox(width: 8),
 
             // Loading indicator or "Withdraw" text
             isLoading
                 ? const SizedBox(
-                    width: 16,
-                    height: 16,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        Color(0xFFFF8C00),
-                      ),
+                  width: 16,
+                  height: 16,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      LightThemeColors.pharmacyColor,
                     ),
-                  )
-                : AppText.body(
-                    'Withdraw',
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xFFF79E1B),
                   ),
+                )
+                : AppText.body(
+                  'Withdraw',
+                  fontWeight: FontWeight.w400,
+                  color: LightThemeColors.pharmacyColor,
+                ),
           ],
         ),
       ),

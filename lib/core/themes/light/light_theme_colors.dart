@@ -55,7 +55,7 @@ class LightThemeColors {
   static const Color buttoncolors = Color(0xFF3AAFA9);
 
   // Prescription View specific colors
-  static final pharmacyprimarycolor = Color.fromRGBO(58, 175, 169, 1);
+  static const Color pharmacyprimarycolor = Color.fromRGBO(58, 175, 169, 1);
 
   static const Color prescriptionborder = Color(
     0xFFE0E0E0,
@@ -71,4 +71,8 @@ class LightThemeColors {
 
   // pharmacy color with 15% opacity
   static Color secondarypharmacyColor = Color(0xFF3AAFA9).withOpacity(0.15);
+
+  // pharmacy color for text third
+
+  static const Color thirdpharmacyColor = Color(0xFFE3F7F7);
 }

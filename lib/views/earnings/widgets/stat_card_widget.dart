@@ -1,3 +1,4 @@
+import 'package:avatar/core/themes/light/light_theme_colors.dart';
 import 'package:avatar/core/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 
@@ -6,24 +7,28 @@ import 'package:flutter/material.dart';
 class StatCardWidget extends StatelessWidget {
   final String title; // Label/title of the stat
   final String value; // Value to be shown
-  final Color backgroundColor; // Background color of the card
   final Color textColor; // Color of the value text
 
   const StatCardWidget({
     super.key,
     required this.title,
     required this.value,
-    this.backgroundColor = const Color(0xFFFFE4B5), // Default soft orange background
-    this.textColor = const Color(0xFFF79E1B),       // Default amber text for values
+    // Default soft orange background
+    this.textColor =
+        LightThemeColors.pharmacyColor, // Default amber text for values
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
-      padding: const EdgeInsets.all(18),
+      constraints: const BoxConstraints(
+        minHeight: 100,
+      ), // ensures minimum size, but expands if needed
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
       decoration: BoxDecoration(
-        color: backgroundColor,
+        color: LightThemeColors.pharmacyColor.withOpacity(
+          0.35,
+        ), // Soft orange background
         borderRadius: BorderRadius.circular(18),
         border: Border.all(color: Colors.white, width: 1),
         boxShadow: [
@@ -36,21 +41,32 @@ class StatCardWidget extends StatelessWidget {
         ],
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min, // prevents extra height
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Stat title (e.g., "Reward Points")
-          AppText.body(
-            title,
-            fontWeight: FontWeight.w400,
+          Flexible(
+            child: AppText.body(
+              title,
+              fontWeight: FontWeight.w400,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+            ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 6),
           // Stat value (e.g., "1400")
-          AppText.heading(
-            value,
-            fontSize: 24,
-            color: textColor,
-            fontWeight: FontWeight.w700,
+          Flexible(
+            child: AppText.heading(
+              value,
+              fontSize: 24,
+              color: textColor,
+              fontWeight: FontWeight.w700,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+            ),
           ),
         ],
       ),

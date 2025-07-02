@@ -1,5 +1,4 @@
 import 'package:avatar/viewModels/pharmacy_support/ticket_controller.dart';
-import 'package:avatar/views/pharmacy_support/widgets/bottom_button.dart';
 import 'package:avatar/views/pharmacy_support/widgets/bottom_chat.dart';
 import 'package:avatar/views/pharmacy_support/widgets/ticket_card.dart';
 import 'package:avatar/views/pharmacy_support/widgets/upload_issue.dart';
@@ -9,7 +8,9 @@ import 'package:get/get.dart';
 class TicketDetails extends StatelessWidget {
   TicketDetails({super.key});
 
-  final TicketController ticketController = Get.put(TicketController());
+  final TicketControllerpharmacy ticketController = Get.put(
+    TicketControllerpharmacy(),
+  );
 
   @override
   Widget build(BuildContext context) {

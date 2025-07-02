@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:avatar/models/support_pharmacy/ticket_model.dart';
 import 'package:avatar/models/support_pharmacy/dummy_data.dart';
 
-class TicketController extends GetxController {
+class TicketControllerpharmacy extends GetxController {
   var ticket = Rxn<Ticket>(); // Nullable, observable ticket
   var isLoading = true.obs;
 

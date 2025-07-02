@@ -14,157 +14,186 @@ class TripCompletionDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     // Initializes controller for trip completion
     final controller = Get.put(TripCompletionController());
+    final screenWidth = MediaQuery.of(context).size.width;
 
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Container(
+        width: screenWidth * 0.9,
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(6),
-          border: Border.all(color: Color(0xFF3586FC), width: 1),
+          border: Border.all(color: const Color(0xFF3586FC), width: 1),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.5),
-              offset: Offset(4, 4),
+              offset: const Offset(4, 4),
               blurRadius: 10,
               spreadRadius: 2,
             ),
           ],
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Image at the top
-            ClipRRect(
-              child:Image.asset(controller.tripImagePath),
-            ),
-
-            const SizedBox(height: 20),
-            // Header
-            AppText.heading(
-              'You have arrived at your location',
-              fontWeight: FontWeight.w700,
-              textAlign: TextAlign.center,
-            ),
-
-            const SizedBox(height: 16),
-            // Trip Details
-            Obx(
-              () => Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      AppText.body(
-                        'Trip Duration: ',
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFFF79E1B),
-                      ),
-                      AppText.body(
-                        '${controller.tripData.tripDuration} min',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      AppText.body(
-                        'Distance: ',
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFFF79E1B),
-                      ),
-                      AppText.body(
-                        '${controller.tripData.distance} km',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ],
-                  ),
-                ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Image at the top
+              ClipRRect(
+                child: Image.asset(controller.tripImagePath, fit: BoxFit.cover),
               ),
-            ),
-            const SizedBox(height: 20),
-            // Experience Feedback
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                AppText.caption(
-                  'How was your experience?',
-                  fontWeight: FontWeight.w400,
-                ),
-                Obx(
-                  () => FeedbackButtonsWidget(
-                    isLiked: controller.isLiked,
-                    isDisliked: controller.isDisliked,
-                    onLikePressed: controller.toggleLike,
-                    onDislikePressed: controller.toggleDislike,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 4),
 
-            // Rating Section
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                AppText.caption('Rate your route', fontWeight: FontWeight.w400),
-                Obx(
-                  () => StarRatingWidget(
-                    rating: controller.selectedRating,
-                    onRatingChanged: controller.setRating,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            // Credit Points
-            Obx(
-              () => RichText(
-                text: TextSpan(
-                  style: const TextStyle(
-                    fontSize: 10,
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w400,
-                  ),
+              const SizedBox(height: 20),
+              // Header
+              AppText.heading(
+                'You have arrived at your location',
+                fontWeight: FontWeight.w700,
+                textAlign: TextAlign.center,
+              ),
+
+              const SizedBox(height: 16),
+
+              // Trip Details
+              Obx(
+                () => Wrap(
+                  alignment: WrapAlignment.spaceBetween,
+                  runSpacing: 8,
                   children: [
-                    const TextSpan(text: 'Congratulations! '),
-                    TextSpan(
-                      text: '${controller.tripData.creditPoints}',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12,
-                        color: Color(0xFFF79E1B),
-                      ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        AppText.body(
+                          'Trip Duration: ',
+                          fontWeight: FontWeight.w500,
+                          color: const Color(0xFFF79E1B),
+                        ),
+                        Flexible(
+                          child: AppText.body(
+                            '${controller.tripData.tripDuration} min',
+                            fontWeight: FontWeight.w600,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
                     ),
-                    const TextSpan(text: ' Credit points have been credited'),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        AppText.body(
+                          'Distance: ',
+                          fontWeight: FontWeight.w500,
+                          color: const Color(0xFFF79E1B),
+                        ),
+                        Flexible(
+                          child: AppText.body(
+                            '${controller.tripData.distance} km',
+                            fontWeight: FontWeight.w600,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
-            ),
 
-            const SizedBox(height: 24),
-            // Done Button
-            SizedBox(
-              width: double.infinity,
-              height: 48,
-              child: ElevatedButton(
-                onPressed: controller.onDone,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orange,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+              const SizedBox(height: 20),
+
+              // Experience Feedback
+              Row(
+                children: [
+                  Expanded(
+                    child: AppText.caption(
+                      'How was your experience?',
+                      fontWeight: FontWeight.w400,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Obx(
+                    () => FeedbackButtonsWidget(
+                      isLiked: controller.isLiked,
+                      isDisliked: controller.isDisliked,
+                      onLikePressed: controller.toggleLike,
+                      onDislikePressed: controller.toggleDislike,
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 8),
+
+              // Rating Section
+              Row(
+                children: [
+                  Expanded(
+                    child: AppText.caption(
+                      'Rate your route',
+                      fontWeight: FontWeight.w400,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Obx(
+                    () => StarRatingWidget(
+                      rating: controller.selectedRating,
+                      onRatingChanged: controller.setRating,
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 20),
+
+              // Credit Points
+              Obx(
+                () => RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    style: const TextStyle(
+                      fontSize: 10,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    children: [
+                      const TextSpan(text: 'Congratulations! '),
+                      TextSpan(
+                        text: '${controller.tripData.creditPoints}',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                          color: Color(0xFFF79E1B),
+                        ),
+                      ),
+                      const TextSpan(text: ' Credit points have been credited'),
+                    ],
                   ),
                 ),
-                child: const Text(
-                  'Done',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              ),
+
+              const SizedBox(height: 24),
+
+              // Done Button
+              SizedBox(
+                width: double.infinity,
+                height: 48,
+                child: ElevatedButton(
+                  onPressed: controller.onDone,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.orange,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: const Text(
+                    'Done',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

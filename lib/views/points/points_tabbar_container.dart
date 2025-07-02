@@ -28,40 +28,30 @@ class PointsTabbarContainer extends StatelessWidget {
         ),
         backgroundColor: context.theme.scaffoldBackgroundColor,
 
-        //TODO Remove this iconButtons it is just for showing the different screen
-        // actions: [
-        //   IconButton(
-        //     icon: const Icon(
-        //       Icons.local_offer_outlined,
-        //       color: Color(0xFFF79E1B),
-        //     ),
-        //     onPressed: () {
-        //       navigateTo(() => TripCompletionDialog());
-        //     },
-        //   ),
-        //   IconButton(
-        //     icon: const Icon(
-        //       Icons.calendar_month_outlined,
-        //       color: Colors.green,
-        //     ),
-        //     onPressed: () {
-        //       navigateTo(() => UpcomingEventsWidget());
-        //     },
-        //   ),
-
-        //   IconButton(
-        //     icon: const Icon(Icons.paid_outlined, color: Color(0xFFF79E1B)),
-        //     onPressed: () {
-        //       navigateTo(() => EarningsScreen());
-        //     },
-        //   ),
-        //   IconButton(
-        //     icon: const Icon(Icons.receipt),
-        //     onPressed: () {
-        //       navigateTo(() => TransactionScreen());
-        //     },
-        //   ),
-        // ],
+        //  TODO Remove this iconButtons it is just for showing the different screen
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.local_offer_outlined,
+              color: Color(0xFFF79E1B),
+            ),
+            onPressed: () {
+              navigateTo(() => TripCompletionDialog());
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.paid_outlined, color: Color(0xFFF79E1B)),
+            onPressed: () {
+              navigateTo(() => EarningsScreen());
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.receipt),
+            onPressed: () {
+              navigateTo(() => TransactionScreen());
+            },
+          ),
+        ],
       ),
       body: Obx(() {
         // Reactively rebuild if tabTitles changes
