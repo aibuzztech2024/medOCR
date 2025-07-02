@@ -1,7 +1,7 @@
 import 'package:avatar/core/constants/appColors.dart';
+import 'package:avatar/views/pharmacy_app/purchase/order_discussion.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 import 'package:avatar/core/constants/appColors.dart';
 import 'package:avatar/models/pharmacy_app/purchase/productModal.dart';
@@ -19,7 +19,8 @@ class ProductPage extends StatefulWidget {
   State<ProductPage> createState() => _ProductPageState();
 }
 
-class _ProductPageState extends State<ProductPage> with SingleTickerProviderStateMixin {
+class _ProductPageState extends State<ProductPage>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -44,8 +45,14 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
-            Text('Purchase', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
-            Text('Buy Better, Save More & Simplify Procurement', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
+            Text(
+              'Purchase',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+            ),
+            Text(
+              'Buy Better, Save More & Simplify Procurement',
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+            ),
           ],
         ),
       ),
@@ -78,7 +85,7 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
               children: [
                 searchTab_view(),
                 Center(child: Text("Submit Request")),
-                Center(child: Text("Order Discussion")),
+                OrderDiscussionPage(),
                 Center(child: Text("Submit Request")),
                 Center(child: Text("Order Discussion")),
                 Center(child: Text("Submit Request")),
