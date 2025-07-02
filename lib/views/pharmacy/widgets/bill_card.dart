@@ -163,7 +163,7 @@ class BillCardView extends StatelessWidget {
 
   Widget _infoRow(String title, String value, {Color valueColor = Colors.black87}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 1),
+      padding: const EdgeInsets.symmetric(vertical: 0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
