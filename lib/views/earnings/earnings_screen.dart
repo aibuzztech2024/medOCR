@@ -5,7 +5,6 @@ import 'package:avatar/views/earnings/widgets/account_dropdown_widget.dart';
 import 'package:avatar/views/earnings/widgets/badge_card_widget.dart';
 import 'package:avatar/views/earnings/widgets/stat_card_widget.dart';
 import 'package:avatar/views/earnings/widgets/withdraw_button_widget.dart';
-import 'package:avatar/views/purchase/widgets/transaction_history.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -48,9 +47,8 @@ class EarningsScreen extends StatelessWidget {
                       ),
                       Obx(
                         () => WithdrawButtonWidget(
-                          onPressed:
-                              controller
-                                  .withdraw, // TODO: Backend API integration for withdrawal
+                          onPressed: controller.withdraw,
+                          // TODO: Backend API integration for withdrawal
                           isLoading: controller.isLoading,
                         ),
                       ),
@@ -155,7 +153,6 @@ class EarningsScreen extends StatelessWidget {
                     ),
                   ] else ...[
                     // === Transaction History Tab Content ===
-                    TransactionHistory(),
                   ],
                 ],
               ),

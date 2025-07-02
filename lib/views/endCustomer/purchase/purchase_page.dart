@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../viewModels/endCustomer/purchase/search_controller.dart';
+import '../../pharmacy/Pages/full_order_history.dart';
+import '../../pharmacy/Pages/order_discussions.dart';
 import '../../purchase/widgets/submit_requests.dart';
 
 ///---- TO DO  change color all----------------
@@ -65,6 +67,8 @@ class _ProductPageState extends State<ProductPage>
               Tab(text: "Search"),
               Tab(text: "Submit Request"),
               Tab(text: "Order Discussion"),
+              Tab(text: "Order History"),
+
             ],
           ),
 
@@ -75,7 +79,8 @@ class _ProductPageState extends State<ProductPage>
               children: [
                 searchTab_view(),
                 SubmitRequest(),
-                Text("order disscusion"),
+                OrderDiscussions(),
+                FullOrderHistory(),
               ],
             ),
           ),
