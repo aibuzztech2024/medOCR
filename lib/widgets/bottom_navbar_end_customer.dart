@@ -46,26 +46,7 @@ class BottomNavbarEndCustomer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Define segment tabs data with content widgets
-    final List<SegmentTabModel> tabs = [
-      SegmentTabModel(
-        label: 'Prescription',
-        iconSvgPath: "assets/icons/medical-prescription_svgrepo.com.svg",
-        activeColor: Colors.orange,
-        child: Prescription(),
-      ),
-      SegmentTabModel(
-        label: 'Bills',
-        iconSvgPath: "assets/icons/document-text_svgrepo.com.svg",
-        activeColor: Colors.orange,
-        child: bill(),
-      ),
-      SegmentTabModel(
-        label: 'Medicine',
-        iconSvgPath: "assets/icons/medicine-pills-tablets_svgrepo.com.svg",
-        activeColor: Colors.orange,
-        child: Medicine(),
-      ),
-    ];
+
 
     // Define navigation items for BottomNavBar
     final navItems = [

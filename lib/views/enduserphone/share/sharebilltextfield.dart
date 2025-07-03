@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../core/widgets/app_button.dart';
+import '../../../models/hospital/prescription_card_model.dart';
 
 /// Model class holding invoice data fields
 class InvoiceModel {
@@ -140,15 +141,53 @@ class InvoiceViewModel {
 
 /// Main Widget showing invoice form with text fields
 class ShareBillTextfield extends StatefulWidget {
-  const ShareBillTextfield({super.key});
+  final PrescriptionCardModel? initialModel;
+  const ShareBillTextfield({Key? key, this.initialModel}) : super(key: key);
 
   @override
   State<ShareBillTextfield> createState() => _InvoiceScreenState();
 }
 
 class _InvoiceScreenState extends State<ShareBillTextfield> {
-  // Create instance of ViewModel
-  final InvoiceViewModel viewModel = InvoiceViewModel();
+  late final InvoiceViewModel viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    viewModel = InvoiceViewModel();
+    // Prefill from initialModel if provided
+    if (widget.initialModel != null) {
+      final m = widget.initialModel!;
+      viewModel.controllers['Patient Name']?.text = m.patientName;
+      viewModel.controllers['Doctor Name']?.text = m.doctorName;
+      viewModel.controllers['Medicine Name']?.text = m.medicineName;
+      viewModel.controllers['Quantity']?.text = m.frequency;
+      viewModel.controllers['Unit Price']?.text = m.dosage;
+      // Add more mappings as needed
+    }
+  }
+
+  void _onSave() {
+    final updatedModel = PrescriptionCardModel(
+      patientName: viewModel.controllers['Patient Name']?.text ?? '',
+      gender: widget.initialModel?.gender ?? '',
+      age: widget.initialModel?.age ?? 0,
+      weight: widget.initialModel?.weight ?? 0,
+      prescriptionDate: widget.initialModel?.prescriptionDate ?? DateTime.now(),
+      diagnosis: widget.initialModel?.diagnosis ?? '',
+      doctorName: viewModel.controllers['Doctor Name']?.text ?? '',
+      speciality: widget.initialModel?.speciality ?? '',
+      regNo: widget.initialModel?.regNo ?? '',
+      contact: widget.initialModel?.contact ?? '',
+      medicineName: viewModel.controllers['Medicine Name']?.text ?? '',
+      frequency: viewModel.controllers['Quantity']?.text ?? '',
+      duration: widget.initialModel?.duration ?? '',
+      method: widget.initialModel?.method ?? '',
+      dosage: viewModel.controllers['Unit Price']?.text ?? '',
+      instructions: widget.initialModel?.instructions ?? '',
+    );
+    Get.back(result: updatedModel);
+  }
 
   /// Widget for section titles with spacing
   Widget sectionTitle(String title) {
@@ -233,7 +272,6 @@ class _InvoiceScreenState extends State<ShareBillTextfield> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             sectionTitle("Patient & Doctor Info"),
             rowFields("Patient Name", "Doctor Name"),
 
@@ -268,9 +306,7 @@ class _InvoiceScreenState extends State<ShareBillTextfield> {
                   child: AppButton(
                     type: ButtonType.filled,
                     text: 'Save',
-                    onPressed: () {
-                      // Save logic here
-                    },
+                    onPressed: _onSave,
                   ),
                 ),
               ],

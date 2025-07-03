@@ -64,13 +64,14 @@ class LightThemeColors {
 
   // Shadow
   static const Color shadowColor = Color(0x1F000000);
+
   //button color
 
   // pharmacy color
   static const Color pharmacyColor = Color(0xFF3AAFA9);
 
   // pharmacy color with 15% opacity
-  static Color secondarypharmacyColor = Color(0xFF3AAFA9).withOpacity(0.15);
+  static Color secondarypharmacyColor = Color(0xFF3AAFA9);
 
   // pharmacy color for text third
 
