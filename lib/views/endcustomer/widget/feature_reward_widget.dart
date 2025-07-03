@@ -1,3 +1,4 @@
+import 'package:avatar/core/themes/light/light_theme_colors.dart';
 import 'package:avatar/core/widgets/app_text.dart';
 import 'package:avatar/viewModels/endcustomer/controller/rewards_contoller.dart';
 import 'package:avatar/views/endcustomer/widget/reward_card_widget.dart';
@@ -37,12 +38,12 @@ class FeatureRewardsWidget extends StatelessWidget {
                     AppText.body(
                       'View All',
                       fontWeight: FontWeight.w600,
-                      color: const Color(0xFFF79E1B),
+                      color: LightThemeColors.pharmacyColor,
                     ),
                     const Icon(
                       Icons.arrow_forward_ios_rounded,
                       size: 18,
-                      color: Color(0xFFF79E1B),
+                      color: LightThemeColors.pharmacyColor,
                     ),
                   ],
                 ),

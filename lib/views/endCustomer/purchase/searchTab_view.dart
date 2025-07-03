@@ -1,6 +1,7 @@
 import 'package:avatar/views/endCustomer/purchase/widgets/dropdownfield.dart';
 import 'package:avatar/views/endCustomer/purchase/widgets/product_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
 import '../../../models/endCustomer/purchase/product_modal.dart';
@@ -140,9 +141,13 @@ class searchTab_view extends StatelessWidget {
             }
 
             final paged = controller.pagedProducts;
-            return ListView.builder(
+            return MasonryGridView.count(
               shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
+              physics: NeverScrollableScrollPhysics(),
+              crossAxisCount: 2,
+              mainAxisSpacing: 12,
+              crossAxisSpacing: 12,
+              padding: const EdgeInsets.all(0),
               itemCount: paged.length,
               itemBuilder: (context, index) {
                 final Product p = paged[index];
@@ -154,6 +159,9 @@ class searchTab_view extends StatelessWidget {
                     // (re‐assigning the same object into the RxList triggers UI update)
                     final idxGlobal = controller.products.indexOf(p);
                     controller.products[idxGlobal] = p;
+                  },
+                  onAddToCart: (quantity) {
+                    Get.snackbar("Success", "$quantity Product added to Cart", snackPosition: SnackPosition.BOTTOM);
                   },
                 );
               },

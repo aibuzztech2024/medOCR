@@ -1,14 +1,15 @@
 import 'dart:io';
 import 'package:avatar/core/themes/light/light_theme_colors.dart';
 import 'package:avatar/core/widgets/app_text.dart';
+import 'package:avatar/viewModels/hospital/image_prescription_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../../viewModels/hospital/image_prescription_controller.dart';
-
 class PrescriptionView extends StatelessWidget {
-  final PrescriptionController controller = Get.put(PrescriptionController());
+  final ImagePrescriptionController controller = Get.put(
+    ImagePrescriptionController(),
+  );
 
   PrescriptionView({super.key});
 
@@ -40,7 +41,7 @@ class PrescriptionView extends StatelessWidget {
                         child: Container(
                           decoration: BoxDecoration(
                             border: Border.all(
-                              color: LightThemeColors.prescriptionBorder,
+                              color: LightThemeColors.prescriptionborder,
                             ),
                             borderRadius: BorderRadius.circular(10),
                             color: LightThemeColors.prescriptionBackground,

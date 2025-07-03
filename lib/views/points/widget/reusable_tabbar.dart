@@ -6,13 +6,14 @@ import 'package:get/get.dart';
 
 // this is the custom reusable horizontally  scrollable tabbar to switch between pages
 class ReusableTabbar extends StatelessWidget {
+  final Color color;
   final List<String> tabTitles;
   final List<Widget> tabContents;
 
   ReusableTabbar({
     super.key,
     required this.tabTitles,
-    required this.tabContents,
+    required this.tabContents, required this.color,
   }) : assert(
          tabTitles.length == tabContents.length,
          'Tab titles and contents must have the same length',
@@ -65,7 +66,7 @@ class ReusableTabbar extends StatelessWidget {
             bottom: BorderSide(
               color:
                   isActive
-                      ? LightThemeColors.advertisorColor
+                      ? color
                       : Colors.transparent,
               width: 2,
             ),
@@ -77,7 +78,7 @@ class ReusableTabbar extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
             color:
-                isActive ? LightThemeColors.advertisorColor : Colors.grey[600],
+                isActive ? color : Colors.grey[600],
             fontSize: 16,
             fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
           ),

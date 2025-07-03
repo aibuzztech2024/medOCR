@@ -4,6 +4,9 @@ import 'package:avatar/viewModels/navigation/bottom_nav_controller.dart';
 import 'package:avatar/views/auth/select_role_view.dart';
 import 'package:avatar/views/enduser_phone_settings/phone_settings_view.dart';
 import 'package:avatar/views/hospital/prescription_view.dart';
+import 'package:avatar/views/pharmacy_app/purchase/order_discussion.dart';
+import 'package:avatar/views/pharmacy_app/purchase/purchase_details.dart';
+import 'package:avatar/widgets/bottom_navbar_end_customer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,7 +36,7 @@ class MyApp extends StatelessWidget {
       // TODO: Check if user is Logged-In,
       // If user is logged in, navigate to h,,,,,,,,,,ome page,
       // If user is not logged in, navigate to select role page
-      home: ProfileSettingsView(),
+      home: BottomNavbarEndCustomer(),
     );
   }
 }

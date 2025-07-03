@@ -9,13 +9,16 @@ class InviteFriendsCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final String imagePath;
+  final Color color;
+    final Color colors;
+  
 
   const InviteFriendsCard({
     super.key,
     required this.referralCode,
     required this.title,
     required this.subtitle,
-    required this.imagePath,
+    required this.imagePath, required this.color, required this.colors,
   });
 
   @override
@@ -47,13 +50,13 @@ class InviteFriendsCard extends StatelessWidget {
                         width: 40,
                         padding: const EdgeInsets.all(6),
                         decoration: BoxDecoration(
-                          color: LightThemeColors.advertisorColor15,
+                          color: colors,
                           borderRadius: BorderRadius.circular(30),
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.copy,
                           size: 24,
-                          color: LightThemeColors.advertisorColor,
+                          color: color,
                         ),
                       ),
                     ),
@@ -75,7 +78,7 @@ class InviteFriendsCard extends StatelessWidget {
                       AppText.body(
                         fontSize: 14,
                         subtitle,
-                        color: LightThemeColors.advertisorColor,
+                        color: color,
                         fontWeight: FontWeight.w400,
                       ),
 

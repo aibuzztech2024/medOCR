@@ -9,13 +9,14 @@ class DonateCheckoutViewModel extends GetxController {
   RxInt selectedPaymentMethod = 0.obs;
   RxString panNumber = ''.obs;
   Rx<File?> panDocument = Rx<File?>(null);
+  RxBool isLoading = false.obs;
 
   final TextEditingController amountController = TextEditingController();
 
-  // New: Track user input as string
+  // Track user input as string
   RxString inputText = ''.obs;
 
-  // New: FocusNode for custom amount input field
+  // FocusNode for custom amount input field
   final FocusNode amountFocusNode = FocusNode();
 
   // Initialize donation details
@@ -31,7 +32,7 @@ class DonateCheckoutViewModel extends GetxController {
 
   // Validate form completeness
   bool get isFormValid =>
-      enteredAmount.value >= 0 &&
+      enteredAmount.value >= 100 && // Ensure minimum ₹100
           selectedPaymentMethod.value != 0 &&
           panNumber.value.trim().isNotEmpty &&
           panDocument.value != null;
@@ -57,17 +58,26 @@ class DonateCheckoutViewModel extends GetxController {
     panDocument.value = file;
   }
 
-  // Handle form submission
-  void submitDonation() {
-    if (!isFormValid || donation.value == null) return;
+  // Async donation submission that returns a Future
+  Future<void> submitDonation() async {
+    if (!isFormValid || donation.value == null) {
+      throw Exception('Form is invalid or donation data missing');
+    }
 
     final campaign = donation.value!;
+
+    // Simulate network call or async work with delay
+    await Future.delayed(const Duration(seconds: 2));
+
+    // Actual submission logic here
     print('Donation Submitted');
     print('Campaign: ${campaign.title}');
     print('Amount: ₹${enteredAmount.value}');
     print('Payment Method: ${selectedPaymentMethod.value == 1 ? "UPI" : "Card"}');
     print('PAN: ${panNumber.value}');
     print('Document Path: ${panDocument.value?.path ?? "None"}');
+
+    // You can throw an error here if submission fails, to test catchError
   }
 
   @override

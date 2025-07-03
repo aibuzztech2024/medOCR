@@ -6,7 +6,7 @@ import 'package:avatar/views/auth/select_role_view.dart';
 import 'package:avatar/views/donate/Pages/donate_page.dart';
 import 'package:avatar/views/endcustomer/profile/widgets/profile_widgets.dart';
 import 'package:avatar/views/enduser_phone_settings/phone_settings_view.dart';
-import 'package:avatar/views/map/widgets/faq_View.dart';
+import 'package:avatar/views/hospital/Widgets/faq_View.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

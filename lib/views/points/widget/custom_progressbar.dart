@@ -8,13 +8,14 @@ class PointsProgressBar extends StatelessWidget {
   final int currentPoints;
   final int totalPoints;
   final double progress;
+  final Color color;
 
   const PointsProgressBar({
     super.key,
     required this.title,
     required this.currentPoints,
     required this.totalPoints,
-    required this.progress,
+    required this.progress, required this.color,
   });
 
   @override
@@ -37,7 +38,7 @@ class PointsProgressBar extends StatelessWidget {
         // indicator
         LinearProgressIndicator(
           value: progress,
-          color: LightThemeColors.advertisorColor,
+          color: color,
           backgroundColor: Colors.white,
         ),
       ],

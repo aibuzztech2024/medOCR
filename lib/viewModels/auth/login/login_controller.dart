@@ -57,7 +57,7 @@ class LoginController extends GetxController {
           final user = UserModel.fromJson(data['user']);
           Get.printInfo(info: 'Login successful: ${user.name}');
           Get.snackbar('Login successful', 'Welcome, ${user.name}!');
-          navigateTo(() => const BottomNavbarEndCustomer());
+          navigateTo(() => BottomNavbarEndCustomer());
           // TODO: Navigate to next screen or store user
         } else {
           Get.snackbar(

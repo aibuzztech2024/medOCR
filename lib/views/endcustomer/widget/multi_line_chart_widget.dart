@@ -1,3 +1,4 @@
+import 'package:avatar/core/themes/light/light_theme_colors.dart';
 import 'package:avatar/models/endcustomer/chart_data.dart';
 import 'package:avatar/viewModels/endcustomer/controller/chart_controller.dart';
 import 'package:avatar/views/endcustomer/widget/chart_legend_widget.dart';
@@ -36,7 +37,8 @@ class MultiLineChartWidget extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           // Light yellow-orange background with semi-transparency
-          color: const Color(0x0DF79E1B), // #F79E1B with ~5% opacity
+          color:
+              LightThemeColors.thirdpharmacyColor, // #F79E1B with ~5% opacity
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: const Color(0x40CB7E40),

@@ -1,8 +1,8 @@
-// lib/widgets/faq_category_tile.dart
 import 'package:flutter/material.dart';
 import '../core/widgets/app_text.dart';
 import '../models/map/faq_model.dart';
 import 'faq_item_widget.dart';
+
 
 class FAQCategoryTile extends StatelessWidget {
   final FAQCategory category;
@@ -12,15 +12,18 @@ class FAQCategoryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
-      shape: Border(),
-      title: AppText.heading(category.title),
-      initiallyExpanded: false,
-      children: [
-        Column(
-          children:
-              category.items.map((item) => FAQItemWidget(item: item)).toList(),
+      shape: const Border(), // Remove border if unnecessary
+      title: AppText(
+        category.title,
+        style: const TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
         ),
-      ],
+      ),
+      initiallyExpanded: false,
+      children:
+          category.items.map((item) => FAQItemWidget(item: item)).toList(),
     );
   }
 }

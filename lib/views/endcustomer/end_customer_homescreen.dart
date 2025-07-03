@@ -4,7 +4,7 @@ import 'package:avatar/core/widgets/endcustomer_appbar.dart';
 import 'package:avatar/views/endcustomer/widget/feature_reward_widget.dart';
 import 'package:avatar/views/endcustomer/widget/multi_line_chart_widget.dart';
 import 'package:avatar/views/endcustomer/widget/overview_widget.dart';
-import 'package:avatar/views/endcustomer/widget/upcoming_events_widget.dart';
+import 'package:avatar/views/hospital/Widgets/endcustomerhome/widgets/upcoming_events_widget.dart';
 import 'package:avatar/widgets/cards/referral_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

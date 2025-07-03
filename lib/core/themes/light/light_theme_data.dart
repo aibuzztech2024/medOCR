@@ -18,8 +18,11 @@ final ThemeData lightThemeData = ThemeData(
   /// Sets the hint color
   hintColor: LightThemeColors.hintColor,
 
-  /// Primary color used throughout the app (e.g. buttons, active elements)
-  primaryColor: LightThemeColors.primary,
+  /// Primary color for pharmacy used throughout the app
+  primaryColor: LightThemeColors.pharmacyColor,
+
+  /// Secondary color for pharmacy used throughout the app
+  secondaryHeaderColor: LightThemeColors.secondarypharmacyColor,
 
   /// Default background color for all scaffold widgets
   scaffoldBackgroundColor: LightThemeColors.scaffoldBackground,
@@ -95,5 +98,5 @@ final ThemeData lightThemeData = ThemeData(
   ),
 
   /// Default style for icons used across the app
-  iconTheme: IconThemeData(color: LightThemeColors.primary, size: 24),
+  iconTheme: IconThemeData(color: Colors.black87, size: 24),
 );

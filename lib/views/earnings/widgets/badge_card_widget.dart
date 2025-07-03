@@ -1,3 +1,4 @@
+import 'package:avatar/core/themes/light/light_theme_colors.dart';
 import 'package:avatar/core/widgets/app_text.dart';
 import 'package:avatar/models/earnings/badge_model.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class BadgeCardWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: const Color(0xFFF8F8EE),
+        color: LightThemeColors.thirdpharmacyColor,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
@@ -59,13 +60,10 @@ class BadgeCardWidget extends StatelessWidget {
                 AppText.heading(
                   badge.name,
                   fontWeight: FontWeight.w600,
-                  color: const Color(0xFFF79E1B),
+                  color: LightThemeColors.pharmacyColor,
                 ),
                 const SizedBox(height: 4),
-                AppText.body(
-                  badge.description,
-                  fontWeight: FontWeight.w400,
-                ),
+                AppText.body(badge.description, fontWeight: FontWeight.w400),
               ],
             ),
           ),
@@ -76,7 +74,7 @@ class BadgeCardWidget extends StatelessWidget {
           AppText.heading(
             badge.pointsRange,
             fontWeight: FontWeight.w400,
-            color: const Color(0xFFF79E1B),
+            color: LightThemeColors.pharmacyColor,
           ),
         ],
       ),

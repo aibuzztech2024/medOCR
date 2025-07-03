@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:avatar/core/themes/light/light_theme_colors.dart';
 import 'package:avatar/core/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 
@@ -19,8 +20,8 @@ class AccountDropdownWidget extends StatefulWidget {
 
 class _AccountDropdownWidgetState extends State<AccountDropdownWidget>
     with SingleTickerProviderStateMixin {
-  static const _borderColor = Color(0xFFF79E1B);
-  static const _upiColor = Color(0xFFF79E1B);
+  static const _borderColor = LightThemeColors.pharmacyColor;
+  static const _upiColor = LightThemeColors.pharmacyColor;
   static const _arrowSize = 24.0;
 
   bool _isExpanded = false;

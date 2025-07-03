@@ -1,16 +1,20 @@
 import 'dart:ui';
+import 'package:avatar/core/utils/methods/navigate_to.dart';
+import 'package:avatar/views/donate/Pages/need_to_help.dart';
+import 'package:avatar/views/enduser_phone_settings/phone_settings_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:avatar/views/donate/widgets/donate_campaign_card.dart';
 import 'package:avatar/views/donate/widgets/recent_donation_card.dart';
 import '../../../viewModels/donate/campaign_view_model.dart';
-import '../../../viewModels/donate/recent_donation_view_model.dart';
 
 class DonatePage extends StatelessWidget {
   DonatePage({super.key});
 
   final CampaignViewModel campaignController = Get.put(CampaignViewModel());
-  final RecentDonationViewModel recentDonationController = Get.put(RecentDonationViewModel());
+  final RecentDonationViewModel recentDonationController = Get.put(
+    RecentDonationViewModel(),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -34,18 +38,24 @@ class DonatePage extends StatelessWidget {
                 elevation: 0,
                 automaticallyImplyLeading: false,
                 shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(bottom: Radius.circular(30)),
+                  borderRadius: BorderRadius.vertical(
+                    bottom: Radius.circular(30),
+                  ),
                 ),
                 flexibleSpace: LayoutBuilder(
                   builder: (BuildContext context, BoxConstraints constraints) {
-                    double percent = ((constraints.maxHeight - kToolbarHeight) / (expandedHeight - kToolbarHeight))
+                    double percent = ((constraints.maxHeight - kToolbarHeight) /
+                            (expandedHeight - kToolbarHeight))
                         .clamp(0.0, 1.0);
                     double elevation = (1 - percent) * 4;
-                    double titleSize = lerpDouble(width * 0.06, width * 0.045, 1 - percent)!;
+                    double titleSize =
+                        lerpDouble(width * 0.06, width * 0.045, 1 - percent)!;
 
                     return Material(
                       elevation: elevation,
-                      borderRadius: const BorderRadius.vertical(bottom: Radius.circular(30)),
+                      borderRadius: const BorderRadius.vertical(
+                        bottom: Radius.circular(30),
+                      ),
                       clipBehavior: Clip.antiAlias,
                       child: Stack(
                         fit: StackFit.expand,
@@ -54,7 +64,9 @@ class DonatePage extends StatelessWidget {
                           Opacity(
                             opacity: percent,
                             child: ClipRRect(
-                              borderRadius: const BorderRadius.vertical(bottom: Radius.circular(30)),
+                              borderRadius: const BorderRadius.vertical(
+                                bottom: Radius.circular(30),
+                              ),
                               child: Image.asset(
                                 'assets/images/donate.jpg',
                                 fit: BoxFit.cover,
@@ -67,20 +79,29 @@ class DonatePage extends StatelessWidget {
                           Opacity(
                             opacity: 1 - percent,
                             child: ClipRRect(
-                              borderRadius: const BorderRadius.vertical(bottom: Radius.circular(30)),
+                              borderRadius: const BorderRadius.vertical(
+                                bottom: Radius.circular(30),
+                              ),
                               child: Stack(
                                 fit: StackFit.expand,
                                 children: [
                                   BackdropFilter(
-                                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                                    filter: ImageFilter.blur(
+                                      sigmaX: 10,
+                                      sigmaY: 10,
+                                    ),
                                     child: Container(color: Colors.transparent),
                                   ),
                                   Container(
                                     decoration: BoxDecoration(
                                       gradient: LinearGradient(
                                         colors: [
-                                          const Color(0xFFE1AFD1).withOpacity(0.85),
-                                          const Color(0xFF5293F2).withOpacity(0.85),
+                                          const Color(
+                                            0xFFE1AFD1,
+                                          ).withOpacity(0.85),
+                                          const Color(
+                                            0xFF5293F2,
+                                          ).withOpacity(0.85),
                                         ],
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
@@ -129,7 +150,8 @@ class DonatePage extends StatelessWidget {
                                   "Donate",
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontWeight: FontWeight.w600,
+                                    fontFamily: 'Nunito',
+                                    fontWeight: FontWeight.w800,
                                     fontSize: titleSize,
                                     letterSpacing: 1.2,
                                     shadows: [
@@ -174,29 +196,44 @@ class DonatePage extends StatelessWidget {
 
               // Content
               SliverPadding(
-                padding: EdgeInsets.symmetric(horizontal: width * 0.04, vertical: height * 0.015),
+                padding: EdgeInsets.symmetric(
+                  horizontal: width * 0.04,
+                  vertical: height * 0.015,
+                ),
                 sliver: SliverList(
                   delegate: SliverChildListDelegate([
                     _SimpleHeader(
                       text: "Need to help first !",
                       buttonText: "View All",
-                      onButtonPressed: () {},
+                      onButtonPressed: () {
+                        navigateTo(() => NeedToHelp());
+                      },
                       width: width,
                     ),
-                    Obx(() => DonateCampaignCard(campaign: campaignController.campaign.value)),
+                    Obx(
+                      () => DonateCampaignCard(
+                        campaign: campaignController.campaign.value,
+                      ),
+                    ),
                     SizedBox(height: height * 0.03),
                     _SimpleHeader(
                       text: "Recent Donations",
                       buttonText: "View All",
-                      onButtonPressed: () {},
+                      onButtonPressed: () {
+                        navigateTo(() => RecentDonationPage());
+                      },
                       width: width,
                     ),
                     Obx(() {
                       return Column(
-                        children: recentDonationController.donations
-                            .take(2)
-                            .map((donation) => RecentDonationCard(donation: donation))
-                            .toList(),
+                        children:
+                            recentDonationController.donations
+                                .take(2)
+                                .map(
+                                  (donation) =>
+                                      RecentDonationCard(donation: donation),
+                                )
+                                .toList(),
                       );
                     }),
                     SizedBox(height: height * 0.015),
@@ -259,7 +296,7 @@ class _SimpleHeader extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: width * 0.038,
-              color: Colors.orange,
+              color: const Color(0xFF3AAFA9),
             ),
           ),
         ),

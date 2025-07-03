@@ -35,7 +35,7 @@ class TicketSubmittedView extends StatelessWidget {
                   width: width * 0.18,
                   height: width * 0.18,
                   child: SvgPicture.asset(
-                    'assets/icons/ticket.svg',
+                    'assets/icons/ticket1.svg',
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -66,7 +66,7 @@ class TicketSubmittedView extends StatelessWidget {
                         width: width * 0.35,
                         padding: const EdgeInsets.symmetric(vertical: 14),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFFFFAEE),
+                          color: const Color(0xFFFFEDED),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Center(
@@ -91,7 +91,7 @@ class TicketSubmittedView extends StatelessWidget {
                         width: width * 0.35,
                         padding: const EdgeInsets.symmetric(vertical: 14),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFFFA726),
+                          color: const Color(0xFFFF6F61),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Center(

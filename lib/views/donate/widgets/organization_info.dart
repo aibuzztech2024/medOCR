@@ -65,7 +65,7 @@ class OrganizationInfoRow extends StatelessWidget {
           child: const Text(
             "Visit",
             style: TextStyle(
-              color: Colors.orange,
+              color: Color(0xFF3AAFA9),
               fontSize: 14,
             ),
           ),

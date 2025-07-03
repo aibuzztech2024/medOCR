@@ -40,6 +40,8 @@ class Points extends StatelessWidget {
                 title: 'Invite Friends to Earn Points',
                 subtitle: 'invite & earn',
                 imagePath: ImagePaths.bestfriends,
+                color: LightThemeColors.pharmacyColor,
+                colors: LightThemeColors.secondarypharmacyColor,
               ),
 
             //points overview card widget
@@ -47,6 +49,7 @@ class Points extends StatelessWidget {
               totalPoints: vm.totalPoints,
               pointsBreakdown: vm.pointsBreakdown,
               showChart: vm.showChart,
+              color: LightThemeColors.pharmacyColor,
             ),
 
             // hero earn widget
