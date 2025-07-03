@@ -9,6 +9,7 @@ import 'package:avatar/views/pharmacy_app/purchase/widgets/dropdownfield.dart';
 import 'package:avatar/views/pharmacy_app/purchase/widgets/product_card.dart';
 import 'package:avatar/viewModels/pharmacy_app/purchase/search_controller.dart';
 import 'package:avatar/viewModels/pharmacy_app/chat/chat_controller.dart';
+
 class ChatInputField extends StatefulWidget {
   const ChatInputField({super.key});
 
@@ -24,7 +25,7 @@ class _ChatInputFieldState extends State<ChatInputField> {
   }
 
   final TextEditingController _controller = TextEditingController();
-  final ChatController chatController = Get.find();
+  final ChatControllerpharmacy chatController = Get.find();
 
   void _send() {
     final text = _controller.text;
@@ -45,7 +46,10 @@ class _ChatInputFieldState extends State<ChatInputField> {
           Expanded(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              decoration: BoxDecoration(color: Colors.grey.shade100, borderRadius: BorderRadius.circular(12)),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(12),
+              ),
               child: Row(
                 children: [
                   // Text input
@@ -78,8 +82,14 @@ class _ChatInputFieldState extends State<ChatInputField> {
           Container(
             height: 44,
             width: 44,
-            decoration:  BoxDecoration(color: AppColors.pharmacy_PrimaryColor, shape: BoxShape.circle),
-            child: IconButton(onPressed: _send, icon: Icon(Icons.send, color: Colors.white)),
+            decoration: BoxDecoration(
+              color: AppColors.pharmacy_PrimaryColor,
+              shape: BoxShape.circle,
+            ),
+            child: IconButton(
+              onPressed: _send,
+              icon: Icon(Icons.send, color: Colors.white),
+            ),
           ),
         ],
       ),
@@ -94,4 +104,3 @@ class _ChatInputFieldState extends State<ChatInputField> {
     );
   }
 }
-

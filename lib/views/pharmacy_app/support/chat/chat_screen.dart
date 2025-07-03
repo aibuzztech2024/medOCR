@@ -17,7 +17,7 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final ChatController controller = Get.put(ChatController());
+  final ChatControllerpharmacy controller = Get.put(ChatControllerpharmacy());
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -29,7 +29,11 @@ class _ChatScreenState extends State<ChatScreen> {
   void _scrollToBottom() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_scrollController.hasClients) {
-        _scrollController.animateTo(_scrollController.position.maxScrollExtent, duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
       }
     });
   }
@@ -56,8 +60,15 @@ class _ChatScreenState extends State<ChatScreen> {
                     // Chat messages
                     ...controller.messages.map((msg) {
                       return Align(
-                        alignment: msg.sender == Sender.user ? Alignment.centerRight : Alignment.centerLeft,
-                        child: MessageBubble(text: msg.text, time: msg.time, isUser: msg.sender == Sender.user),
+                        alignment:
+                            msg.sender == Sender.user
+                                ? Alignment.centerRight
+                                : Alignment.centerLeft,
+                        child: MessageBubble(
+                          text: msg.text,
+                          time: msg.time,
+                          isUser: msg.sender == Sender.user,
+                        ),
                       );
                     }).toList(),
                     const SizedBox(height: 00), // Space for input field
@@ -86,17 +97,20 @@ class ChatIntroHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight= MediaQuery.of(context).size.height;
+    final screenHeight = MediaQuery.of(context).size.height;
     return SizedBox(
-      height: screenHeight*0.35, // Enough space for header + card overlap
+      height: screenHeight * 0.35, // Enough space for header + card overlap
       child: Stack(
         clipBehavior: Clip.none,
         children: [
           // Orange header
           Container(
-            height: screenHeight*0.18,
+            height: screenHeight * 0.18,
             width: double.infinity,
-            decoration: BoxDecoration(color: AppColors.pharmacy_PrimaryColor, borderRadius: BorderRadius.circular(16)),
+            decoration: BoxDecoration(
+              color: AppColors.pharmacy_PrimaryColor,
+              borderRadius: BorderRadius.circular(16),
+            ),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -105,11 +119,28 @@ class ChatIntroHeader extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
-                    Text('Hi there!', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+                    Text(
+                      'Hi there!',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     SizedBox(height: 4),
-                    Text('I am PharmaBot', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600)),
+                    Text(
+                      'I am PharmaBot',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                     SizedBox(height: 4),
-                    Text('How can I assist you?', style: TextStyle(color: Colors.white70, fontSize: 14)),
+                    Text(
+                      'How can I assist you?',
+                      style: TextStyle(color: Colors.white70, fontSize: 14),
+                    ),
                   ],
                 ),
                 const Icon(Icons.close, color: Colors.white),
@@ -118,7 +149,15 @@ class ChatIntroHeader extends StatelessWidget {
           ),
 
           // Suggestion Card
-          Positioned(bottom: -20, left: 0, right: 20, child: Align(alignment: Alignment.centerLeft, child: SuggestionCard())),
+          Positioned(
+            bottom: -20,
+            left: 0,
+            right: 20,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: SuggestionCard(),
+            ),
+          ),
         ],
       ),
     );

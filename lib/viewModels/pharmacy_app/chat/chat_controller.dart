@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import '../../../models/chat/message_model.dart';
 
-class ChatController extends GetxController {
+class ChatControllerpharmacy extends GetxController {
   // List of messages in chat
   final messages = <MessageModel>[].obs;
 
