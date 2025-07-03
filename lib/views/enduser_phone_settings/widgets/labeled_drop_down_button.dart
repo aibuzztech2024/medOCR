@@ -10,6 +10,7 @@ class LabeledDropdown<T> extends StatelessWidget {
   final bool enabled;
   final TextStyle? labelStyle;
   final TextStyle? textStyle;
+  final TextStyle? hintStyle;
   final Color? backgroundColor;
   final Color? borderColor;
   final double? borderRadius;
@@ -29,6 +30,7 @@ class LabeledDropdown<T> extends StatelessWidget {
     this.enabled = true,
     this.labelStyle,
     this.textStyle,
+    this.hintStyle,
     this.backgroundColor,
     this.borderColor,
     this.borderRadius = 6.0,
@@ -86,10 +88,12 @@ class LabeledDropdown<T> extends StatelessWidget {
                 hintText != null
                     ? Text(
                       hintText!,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: fontSize.clamp(14.0, 16.0),
-                      ),
+                      style:
+                          hintStyle ??
+                          TextStyle(
+                            color: Colors.black,
+                            fontSize: fontSize.clamp(14.0, 16.0),
+                          ),
                     )
                     : null,
             style:
@@ -105,10 +109,12 @@ class LabeledDropdown<T> extends StatelessWidget {
             ),
             decoration: InputDecoration(
               hintText: hintText,
-              hintStyle: TextStyle(
-                color: Colors.black,
-                fontSize: fontSize.clamp(14.0, 16.0),
-              ),
+              hintStyle:
+                  hintStyle ??
+                  TextStyle(
+                    color: Colors.black,
+                    fontSize: fontSize.clamp(14.0, 16.0),
+                  ),
               border: InputBorder.none,
               enabledBorder: InputBorder.none,
               focusedBorder: InputBorder.none,
