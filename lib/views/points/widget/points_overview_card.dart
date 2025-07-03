@@ -1,0 +1,144 @@
+import 'package:avatar/core/themes/light/light_theme_colors.dart';
+import 'package:avatar/core/widgets/app_text.dart';
+import 'package:avatar/views/points/widget/line_chart_painter.dart'
+    show LineChartPainter;
+import 'package:flutter/material.dart';
+import 'package:get/utils.dart';
+
+// this is the points calculator card in points screen below the graph
+class PointsOverviewCard extends StatelessWidget {
+  final int totalPoints;
+  final Map<String, int> pointsBreakdown;
+  final bool showChart;
+  final Color color;
+
+  const PointsOverviewCard({
+    super.key,
+    required this.totalPoints,
+    required this.pointsBreakdown,
+    this.showChart = true,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 18),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: context.theme.scaffoldBackgroundColor,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              AppText.heading('Points Overview', fontWeight: FontWeight.w700),
+              IconButton(
+                icon: const Icon(Icons.tune, color: Colors.black, size: 24),
+                onPressed: () {
+                  //TODO show info dialog or tooltip
+                },
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+
+          // container for total points and displaying the graph
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey[300]!),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(child: AppText.heading('Total Points : $totalPoints')),
+                if (showChart) ...[const SizedBox(height: 20), _buildChart()],
+              ],
+            ),
+          ),
+
+          const SizedBox(height: 20),
+          _buildPointsBreakdown(),
+        ],
+      ),
+    );
+  }
+
+  // displays the chart
+  Widget _buildChart() {
+    return SizedBox(
+      height: 120,
+      child: CustomPaint(
+        painter: LineChartPainter(color),
+        size: const Size(double.infinity, 120),
+      ),
+    );
+  }
+
+  Widget _buildPointsBreakdown() {
+    //TODO change to viewmodel
+    final totalSum = pointsBreakdown.values.fold(
+      0,
+      (sum, value) => sum + value,
+    );
+
+    return Column(
+      children: [
+        Container(
+          color: LightThemeColors.inputFill,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AppText.caption(
+                  'Total\nPoints',
+                  color: color,
+                  fontWeight: FontWeight.w600,
+                ),
+                AppText.body('$totalSum', fontWeight: FontWeight.w700),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children:
+              pointsBreakdown.entries
+                  .map((entry) => _buildPointCategory(entry.key, entry.value))
+                  .toList(),
+        ),
+      ],
+    );
+  }
+
+  //points continer
+  Widget _buildPointCategory(String title, int points) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: LightThemeColors.inputFill,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        children: [
+          Text(title, style: TextStyle(fontSize: 10, color: color)),
+          const SizedBox(height: 4),
+          Text(
+            '$points',
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

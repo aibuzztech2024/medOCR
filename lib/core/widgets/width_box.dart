@@ -6,6 +6,7 @@ class WidthBox extends StatelessWidget {
   final double width;
 
   /// It takes [width] as parameter and adds equivalent blank space
+
   const WidthBox(this.width, {super.key});
 
   @override

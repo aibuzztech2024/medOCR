@@ -2,8 +2,8 @@ import 'package:avatar/core/widgets/app_text.dart';
 import 'package:avatar/core/widgets/height_box.dart';
 import 'package:avatar/models/map/doctor_model.dart';
 import 'package:avatar/viewModels/map/mao_view_data_controller.dart';
-import 'package:avatar/views/map/widgets/category_card.dart';
-import 'package:avatar/views/map/widgets/selectable_chip.dart';
+import 'package:avatar/widgets/cards/category_card.dart';
+import 'package:avatar/views/hospital/Widgets/selectable_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -138,7 +138,7 @@ class DraggableBottomSheet extends StatelessWidget {
                           ),
                         );
                       } else {
-                        return Text('No data selected');
+                        return AppText('No data selected');
                       }
                     }),
                   ),

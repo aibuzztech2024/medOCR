@@ -1,6 +1,6 @@
 import 'package:avatar/core/utils/methods/navigate_to.dart';
 import 'package:avatar/models/auth/steps_model.dart';
-import 'package:avatar/viewModels/auth/register/register_controller.dart';
+import 'package:avatar/viewModels/auth/register/user/register_controller.dart';
 import 'package:avatar/views/auth/register/basic_info.dart';
 import 'package:avatar/views/auth/register/user/user_profile.dart';
 import 'package:avatar/views/auth/register/user/user_security.dart';
