@@ -1,4 +1,6 @@
 import 'package:avatar/core/utils/methods/navigate_to.dart';
+import 'package:avatar/views/help/create_ticket.dart';
+import 'package:avatar/views/help/email_support_view.dart';
 import 'package:avatar/views/help/ticket_history_page.dart';
 import 'package:avatar/views/hospital/Widgets/newticket.dart';
 import 'package:avatar/views/pharmacy_app/support/chat/chat_screen.dart';
@@ -46,7 +48,7 @@ class FAQView extends StatelessWidget {
                                   icon: Icons.error_outline,
                                   label: 'Report an issue',
                                   onPressed:
-                                      () => navigateTo(() => NewTicketPage()),
+                                      () => navigateTo(() => CreateTicket()),
                                 ),
                                 WidthBox(12),
                                 SupportShadowButton(
@@ -64,7 +66,9 @@ class FAQView extends StatelessWidget {
                                 SupportShadowButton(
                                   icon: Icons.email_outlined,
                                   label: 'Email Support',
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    () => navigateTo(() => EmailSupportView());
+                                  },
                                 ),
                                 WidthBox(12),
                                 SupportShadowButton(
