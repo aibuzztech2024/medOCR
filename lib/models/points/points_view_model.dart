@@ -38,7 +38,7 @@ class PointsViewModel {
              BadgeLevel(
                title: 'SILVER BADGE',
                points: '999 points',
-               image: 'assets/images/gpt_yellow.png',
+               image: 'assets/images/gpt_silver.png',
                benefits: [
                  'Free access to a highly beneficial system.',
                  'Heavy discount on all the purchases by Providers.',
@@ -49,7 +49,7 @@ class PointsViewModel {
              ),
              BadgeLevel(
                title: 'GOLD BADGE',
-               image: 'assets/images/gpt_yellow.png',
+               image: 'assets/images/gpt_silver.png',
                points: '1000 to 2499 points',
                benefits: [
                  'All Silver level benefits.',
@@ -61,7 +61,7 @@ class PointsViewModel {
              ),
              BadgeLevel(
                title: 'DIAMOND BADGE',
-               image: 'assets/images/gpt_yellow.png',
+               image: 'assets/images/gpt_blue.png',
                points: '+150 points per refill',
                benefits: [
                  'All Gold-level benefits',
