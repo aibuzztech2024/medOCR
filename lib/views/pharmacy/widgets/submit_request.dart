@@ -21,8 +21,6 @@ class SubmitRequestPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 40),
-
             // Doctor’s Name Input
             TextField(
               decoration: const InputDecoration(

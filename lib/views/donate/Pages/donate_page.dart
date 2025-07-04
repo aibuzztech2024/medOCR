@@ -175,7 +175,9 @@ class DonatePage extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(12),
                                     child: InkWell(
                                       borderRadius: BorderRadius.circular(12),
-                                      onTap: () {},
+                                      onTap: () {
+                                        Get.back();
+                                      },
                                       child: Icon(
                                         Icons.close,
                                         color: Colors.black,
