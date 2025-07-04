@@ -1,3 +1,4 @@
+import 'package:avatar/core/themes/light/light_theme_colors.dart';
 import 'package:avatar/views/endCustomer/purchase/searchTab_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -59,8 +60,8 @@ class _ProductPageState extends State<ProductPage>
             dividerHeight: 0.0,
             isScrollable: true,
             controller: _tabController,
-            labelColor: Colors.orange,
-            indicatorColor: Colors.orange,
+            labelColor: LightThemeColors.pharmacyColor,
+            indicatorColor: LightThemeColors.pharmacyColor,
 
             tabAlignment: TabAlignment.start,
             tabs: const [
@@ -68,7 +69,6 @@ class _ProductPageState extends State<ProductPage>
               Tab(text: "Submit Request"),
               Tab(text: "Order Discussion"),
               Tab(text: "Order History"),
-
             ],
           ),
 

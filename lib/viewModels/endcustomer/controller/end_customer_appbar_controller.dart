@@ -1,5 +1,6 @@
 import 'package:avatar/core/utils/methods/navigate_to.dart';
 import 'package:avatar/views/endcustomer/profile/profile_screen.dart';
+import 'package:avatar/views/pharmacy_app/share/my_cart_view.dart';
 import 'package:get/get.dart';
 
 /// Controller for managing the state of the custom app bar.
@@ -76,12 +77,18 @@ class EndCustomerAppbarController extends GetxController {
   /// Triggered when cart icon is tapped
   void onCartTapped() {
     // ✅ TODO: Navigate to Cart screen
+    navigateTo(() => MyCartView());
     print('Cart tapped');
   }
 
   /// Triggered when refresh (notification) icon is tapped
   void onNotificationTapped() {
     // ✅ TODO: Refresh notifications list or navigate to notifications screen
+    Get.snackbar(
+      'Notifications',
+      'Refreshing notifications...',
+      snackPosition: SnackPosition.TOP,
+    );
     print('Refresh tapped');
   }
 

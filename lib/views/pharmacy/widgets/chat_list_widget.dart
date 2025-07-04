@@ -11,7 +11,6 @@ class ChatModel {
 
 class ChatController extends GetxController {
   RxList<ChatModel> chatList = <ChatModel>[].obs;
-  RxString searchQuery = ''.obs;
 
   @override
   void onInit() {
@@ -20,7 +19,7 @@ class ChatController extends GetxController {
   }
 
   void fetchChatData() {
-    // Dummy data
+    // Simulate API Data
     chatList.value = List.generate(10, (index) {
       return ChatModel(
         title: 'Monika Singh',
@@ -28,19 +27,6 @@ class ChatController extends GetxController {
         time: '12:30 PM',
       );
     });
-  }
-
-  List<ChatModel> get filteredList {
-    if (searchQuery.value.isEmpty) return chatList;
-    return chatList
-        .where((chat) =>
-    chat.title.toLowerCase().contains(searchQuery.value.toLowerCase()) ||
-        chat.subtitle.toLowerCase().contains(searchQuery.value.toLowerCase()))
-        .toList();
-  }
-
-  void updateSearch(String query) {
-    searchQuery.value = query;
   }
 }
 
@@ -52,16 +38,15 @@ class ChatListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      final chats = controller.filteredList;
-
       return ListView.builder(
         shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: chats.length,
+        physics:
+            const NeverScrollableScrollPhysics(), // Prevent internal scrolling
+        itemCount: controller.chatList.length,
         itemBuilder: (context, index) {
-          ChatModel chat = chats[index];
+          ChatModel chat = controller.chatList[index];
           return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
