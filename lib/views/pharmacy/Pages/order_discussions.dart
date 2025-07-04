@@ -1,3 +1,6 @@
+import 'package:avatar/core/utils/methods/navigate_to.dart';
+import 'package:avatar/views/auth/select_role_view.dart';
+import 'package:avatar/views/pharmacy_app/share/my_cart_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -158,7 +161,10 @@ class OrderDiscussions extends StatelessWidget {
                     SizedBox(height: height * 0.02),
 
                     /// Chat List Widget (no scaffold inside)
-                    ChatListWidget(),
+                    InkWell(
+                      child: ChatListWidget(),
+                      onTap: () => navigateTo(() => MyCartView()),
+                    ),
                   ],
                 );
               }),

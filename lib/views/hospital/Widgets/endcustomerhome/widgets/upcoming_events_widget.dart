@@ -1,3 +1,4 @@
+import 'package:avatar/core/themes/light/light_theme_colors.dart';
 import 'package:avatar/core/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -40,7 +41,8 @@ class UpcomingEventsWidget extends StatelessWidget {
               end: Alignment.bottomCenter,
               colors: [
                 Color(0xFFFEFAF3), // Light creamy background
-                Color(0x26F79E1B), // Light orange overlay (10% opacity)
+                LightThemeColors
+                    .pharmacyColor, // Light orange overlay (10% opacity)
               ],
             ),
             border: const Border(

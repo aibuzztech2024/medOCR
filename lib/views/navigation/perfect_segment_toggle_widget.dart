@@ -1,3 +1,4 @@
+import 'package:avatar/core/widgets/common_appbar.dart';
 import 'package:avatar/core/widgets/width_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -79,8 +80,10 @@ class PerfectSegmentToggleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<SegmentController>();
-    return SafeArea(
-      child: Column(
+    return Scaffold(
+      appBar: CommonAppbar(title: 'Share', showNotification: true),
+
+      body: Column(
         children: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),

@@ -40,12 +40,13 @@ class ChatListWidget extends StatelessWidget {
     return Obx(() {
       return ListView.builder(
         shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(), // Prevent internal scrolling
+        physics:
+            const NeverScrollableScrollPhysics(), // Prevent internal scrolling
         itemCount: controller.chatList.length,
         itemBuilder: (context, index) {
           ChatModel chat = controller.chatList[index];
           return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
