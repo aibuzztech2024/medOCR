@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../widgets/chat_list_widget.dart'; // make sure this path is correct
+import '../widgets/chat_list_widget.dart'; // path to your ChatListWidget
 
 /// ----------------------------
-/// Model class for communication item
+/// Model for communication info
 class CommunicationModel {
   final String title;
   final int unreadCount;
@@ -19,14 +19,13 @@ class CommunicationModel {
 }
 
 /// ----------------------------
-/// ViewModel using GetX
+/// ViewModel for communication
 class CommunicationViewModel extends GetxController {
-  final Rx<CommunicationModel> communication =
-      CommunicationModel(
-        title: "Communications",
-        unreadCount: 4,
-        iconPath: "assets/icons/swap.svg", // Placeholder icon
-      ).obs;
+  final Rx<CommunicationModel> communication = CommunicationModel(
+    title: "Communications",
+    unreadCount: 4,
+    iconPath: "assets/icons/swap.svg",
+  ).obs;
 
   void markAllRead() {
     communication.value = CommunicationModel(
@@ -38,7 +37,7 @@ class CommunicationViewModel extends GetxController {
 }
 
 /// ----------------------------
-/// Main UI View
+/// Main Discussions Page
 class OrderDiscussions extends StatelessWidget {
   final CommunicationViewModel vm = Get.put(CommunicationViewModel());
 
@@ -59,6 +58,7 @@ class OrderDiscussions extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              /// ----------------------------
               /// Search Box
               Container(
                 constraints: const BoxConstraints(minHeight: 48),
@@ -82,6 +82,10 @@ class OrderDiscussions extends StatelessWidget {
                     const SizedBox(width: 10),
                     Expanded(
                       child: TextField(
+                        onChanged: (value) {
+                          // Connect search input to ChatController
+                          Get.find<ChatController>().updateSearch(value);
+                        },
                         decoration: const InputDecoration(
                           hintText: "Search by medicine name or categories",
                           border: InputBorder.none,
@@ -89,7 +93,7 @@ class OrderDiscussions extends StatelessWidget {
                           enabledBorder: InputBorder.none,
                           isDense: true,
                         ),
-                        style: TextStyle(fontSize: width * 0.035),
+                        style: TextStyle(fontSize: width * 0.032),
                       ),
                     ),
                   ],
@@ -98,9 +102,11 @@ class OrderDiscussions extends StatelessWidget {
 
               SizedBox(height: height * 0.03),
 
+              /// ----------------------------
               /// Communication Card + Chat List
               Obx(() {
                 final item = vm.communication.value;
+
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -118,7 +124,7 @@ class OrderDiscussions extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
-                            /// Left Text
+                            /// Left: Communication Title + Unread
                             Expanded(
                               child: Text(
                                 "${item.title} ${item.unreadCount > 0 ? "(${item.unreadCount} Unread)" : ""}",
@@ -130,7 +136,7 @@ class OrderDiscussions extends StatelessWidget {
                               ),
                             ),
 
-                            /// Right Icon
+                            /// Right: Icon
                             Container(
                               width: width * 0.09,
                               height: width * 0.09,
@@ -157,7 +163,8 @@ class OrderDiscussions extends StatelessWidget {
 
                     SizedBox(height: height * 0.02),
 
-                    /// Chat List Widget (no scaffold inside)
+                    /// ----------------------------
+                    /// Chat List (auto filtered)
                     ChatListWidget(),
                   ],
                 );
