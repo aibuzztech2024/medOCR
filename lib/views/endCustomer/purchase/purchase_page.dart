@@ -1,5 +1,6 @@
 import 'package:avatar/core/themes/light/light_theme_colors.dart';
 import 'package:avatar/views/endCustomer/purchase/searchTab_view.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,6 +8,8 @@ import '../../../viewModels/endCustomer/purchase/search_controller.dart';
 import '../../pharmacy/Pages/full_order_history.dart';
 import '../../pharmacy/Pages/order_discussions.dart';
 import '../../purchase/widgets/submit_requests.dart';
+
+
 
 ///---- TO DO  change color all----------------
 class ProductPage extends StatefulWidget {
@@ -69,6 +72,7 @@ class _ProductPageState extends State<ProductPage>
               Tab(text: "Submit Request"),
               Tab(text: "Order Discussion"),
               Tab(text: "Order History"),
+
             ],
           ),
 
@@ -81,6 +85,7 @@ class _ProductPageState extends State<ProductPage>
                 SubmitRequest(),
                 OrderDiscussions(),
                 FullOrderHistory(),
+
               ],
             ),
           ),
