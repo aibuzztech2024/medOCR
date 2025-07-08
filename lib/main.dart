@@ -8,6 +8,7 @@ import 'package:avatar/views/pharmacy/Pages/share_history.dart';
 import 'package:avatar/views/pharmacy_app/purchase/order_discussion.dart';
 import 'package:avatar/views/pharmacy_app/purchase/purchase_details.dart';
 import 'package:avatar/views/pharmacy_app/share/my_cart_view.dart';
+import 'package:avatar/views/register_as_advertisor/register_advisor_home.dart';
 import 'package:avatar/widgets/bottom_navbar_end_customer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
       // TODO: Check if user is Logged-In,
       // If user is logged in, navigate to h,,,,,,,,,,ome page,
       // If user is not logged in, navigate to select role page
-      home: BottomNavbarEndCustomer(),
+      home: RegisterAdvisorHome(),
     );
   }
 }
