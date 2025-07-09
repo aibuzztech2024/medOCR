@@ -1,14 +1,8 @@
 import 'package:avatar/core/themes/light/light_theme_data.dart';
 import 'package:avatar/core/widgets/sample_page.dart';
 import 'package:avatar/viewModels/navigation/bottom_nav_controller.dart';
-import 'package:avatar/views/auth/select_role_view.dart';
-import 'package:avatar/views/enduser_phone_settings/phone_settings_view.dart';
-import 'package:avatar/views/hospital/prescription_view.dart';
-import 'package:avatar/views/pharmacy/Pages/share_history.dart';
-import 'package:avatar/views/pharmacy_app/purchase/order_discussion.dart';
-import 'package:avatar/views/pharmacy_app/purchase/purchase_details.dart';
-import 'package:avatar/views/pharmacy_app/share/my_cart_view.dart';
-import 'package:avatar/widgets/bottom_navbar_end_customer.dart';
+import 'package:avatar/views/advertiser/coupon/Pages/coupon_payment.dart';
+import 'package:avatar/views/ngo/Pages/ngo_new_post.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -38,7 +32,7 @@ class MyApp extends StatelessWidget {
       // TODO: Check if user is Logged-In,
       // If user is logged in, navigate to h,,,,,,,,,,ome page,
       // If user is not logged in, navigate to select role page
-      home: BottomNavbarEndCustomer(),
+      home: NgoNewPost(),
     );
   }
 }
