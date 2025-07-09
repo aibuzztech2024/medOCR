@@ -66,9 +66,9 @@ class FAQView extends StatelessWidget {
                                 SupportShadowButton(
                                   icon: Icons.email_outlined,
                                   label: 'Email Support',
-                                  onPressed: () {
-                                    () => navigateTo(() => EmailSupportView());
-                                  },
+                                  onPressed:
+                                      () =>
+                                          navigateTo(() => EmailSupportView()),
                                 ),
                                 WidthBox(12),
                                 SupportShadowButton(

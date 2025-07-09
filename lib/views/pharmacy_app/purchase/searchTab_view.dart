@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -9,8 +8,6 @@ import 'package:avatar/views/pharmacy_app/purchase/purchase_page.dart';
 import 'package:avatar/views/pharmacy_app/purchase/widgets/dropdownfield.dart';
 import 'package:avatar/views/pharmacy_app/purchase/widgets/product_card.dart';
 import 'package:avatar/viewModels/pharmacy_app/purchase/search_controller.dart';
-
-
 
 /// To DO CHANGE COLOR IN SCREEN
 
@@ -34,13 +31,20 @@ class searchTab_view extends StatelessWidget {
             children: [
               Expanded(
                 child: Container(
-                  decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(8)),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: TextField(
                     decoration: InputDecoration(
                       isCollapsed: true,
 
                       hintText: 'Search by medicine name or categories',
-                      hintStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: Color.fromRGBO(146, 146, 146, 1)),
+                      hintStyle: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: Color.fromRGBO(146, 146, 146, 1),
+                      ),
                       prefixIcon: Icon(Icons.search),
                       border: InputBorder.none,
                       enabledBorder: InputBorder.none,
@@ -62,7 +66,12 @@ class searchTab_view extends StatelessWidget {
               ),
               Obx(
                 () => IconButton(
-                  icon: Icon(controller.sortByBookmark.value ? Icons.bookmark : Icons.bookmark_border, color: AppColors.pharmacy_PrimaryColor),
+                  icon: Icon(
+                    controller.sortByBookmark.value
+                        ? Icons.bookmark
+                        : Icons.bookmark_border,
+                    color: AppColors.pharmacy_PrimaryColor,
+                  ),
                   onPressed: () {
                     controller.sortByBookmark.toggle();
                     controller.search(); // Re-run search with updated sort
@@ -71,7 +80,10 @@ class searchTab_view extends StatelessWidget {
               ),
 
               ///---- TODO -- add a tap function of this icon-
-              Icon(Icons.av_timer_rounded, color: AppColors.pharmacy_PrimaryColor),
+              Icon(
+                Icons.av_timer_rounded,
+                color: AppColors.pharmacy_PrimaryColor,
+              ),
             ],
           ),
 
@@ -121,8 +133,17 @@ class searchTab_view extends StatelessWidget {
               return Center(
                 child: ElevatedButton(
                   onPressed: controller.search,
-                  style: ElevatedButton.styleFrom(backgroundColor: AppColors.pharmacy_PrimaryColor, minimumSize: Size(screenWidth * 0.45, screenHeight * 0.06)),
-                  child: const Text('Search', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.pharmacy_PrimaryColor,
+                    minimumSize: Size(screenWidth * 0.45, screenHeight * 0.06),
+                  ),
+                  child: const Text(
+                    'Search',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
                 ),
               );
             } else {
@@ -131,7 +152,11 @@ class searchTab_view extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: Text(
                   "${controller.products.length} results",
-                  style:  TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: AppColors.pharmacy_PrimaryColor),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: AppColors.pharmacy_PrimaryColor,
+                  ),
                 ),
               );
             }
@@ -164,6 +189,7 @@ class searchTab_view extends StatelessWidget {
               },
             );
           }),
+
           /// ─── Pagination Bar (Only if more than 1 page) ───
           Obx(() {
             final totalPages = controller.totalPages;
@@ -182,9 +208,24 @@ class searchTab_view extends StatelessWidget {
                   onTap: () => controller.goToPage(i),
                   child: Container(
                     margin: const EdgeInsets.symmetric(horizontal: 4),
-                    padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-                    decoration: BoxDecoration(color: isCurrent ? AppColors.pharmacy_PrimaryColor : Colors.grey[300], borderRadius: BorderRadius.circular(6)),
-                    child: Text("$i", style: TextStyle(color: isCurrent ? Colors.white : Colors.black87, fontWeight: FontWeight.w600)),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 6,
+                      horizontal: 12,
+                    ),
+                    decoration: BoxDecoration(
+                      color:
+                          isCurrent
+                              ? AppColors.pharmacy_PrimaryColor
+                              : Colors.grey[300],
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Text(
+                      "$i",
+                      style: TextStyle(
+                        color: isCurrent ? Colors.white : Colors.black87,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
                 ),
               );
@@ -200,7 +241,11 @@ class searchTab_view extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
                       "Previous",
-                      style: TextStyle(color: current > 1 ? Colors.black : Colors.grey, fontSize: 14, fontWeight: FontWeight.w400),
+                      style: TextStyle(
+                        color: current > 1 ? Colors.black : Colors.grey,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
                   ),
                 ),
@@ -215,7 +260,12 @@ class searchTab_view extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
                       "Next",
-                      style: TextStyle(color: current < totalPages ? Colors.black : Colors.grey, fontSize: 14, fontWeight: FontWeight.w400),
+                      style: TextStyle(
+                        color:
+                            current < totalPages ? Colors.black : Colors.grey,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
                   ),
                 ),
