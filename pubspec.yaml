@@ -70,6 +70,7 @@ flutter:
     - assets/icons/settings_section/notification_page/
     - assets/images/share/
     - assets/images/map/
+    - assets/images/settings/
 
 # Splash Screen
 flutter_native_splash:
