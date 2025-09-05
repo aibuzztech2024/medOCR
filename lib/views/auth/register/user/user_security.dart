@@ -1,8 +1,12 @@
 import 'package:avatar/core/widgets/app_button.dart';
 import 'package:avatar/core/widgets/height_box.dart';
+import 'package:avatar/viewModels/auth/register/user/register_controller.dart';
 import 'package:avatar/views/auth/widget/input_field.dart';
 import 'package:avatar/views/auth/widget/password_field.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 
 /// A widget that displays user credential fields (username, password, confirm password)
 /// as part of the registration process.
@@ -16,20 +20,25 @@ class UserSecurity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+      var registerController =
+      Get.isRegistered<RegisterController>()
+          ? Get.find<RegisterController>()
+          : Get.put(RegisterController());
     return Column(
       children: [
         // Input field for the username
         InputField(
           hintText: 'Username',
           controller:
-              TextEditingController(), // Consider using persistent controller if needed
+              registerController.usernameController, // Consider using persistent controller if needed
         ),
         HeightBox(16),
 
         // Input field for the password
         PasswordField(
           hintText: 'Password',
-          controller: TextEditingController(), // Can be obscured for better UX
+          controller: registerController.passwordController, // Can be obscured for better UX
         ),
         HeightBox(16),
 
@@ -37,7 +46,7 @@ class UserSecurity extends StatelessWidget {
         PasswordField(
           hintText: 'Confirm Password',
           controller:
-              TextEditingController(), // Should match the password field
+              registerController.confirmPasswordController, // Should match the password field
         ),
         HeightBox(16),
 
@@ -45,7 +54,18 @@ class UserSecurity extends StatelessWidget {
         AppButton(
           width: double.infinity,
           type: ButtonType.filled,
-          onPressed: onRegister, // Triggers the registration logic
+          onPressed: () {
+            if (registerController.isPasswordMatching()) {
+              onRegister();
+            } else {
+              Get.snackbar(
+                'Password Mismatch',
+                'Passwords do not match. Please try again.',
+                snackPosition: SnackPosition.BOTTOM,
+                backgroundColor: Colors.red.shade100,
+              );
+            }
+          }, // Triggers the registration logic
           text: 'Register',
         ),
       ],

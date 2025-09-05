@@ -1,0 +1,114 @@
+// lib/screens/profile_screen.dart
+import 'package:avatar/core/constants/icons_paths.dart';
+import 'package:avatar/core/constants/image_paths.dart';
+import 'package:avatar/core/utils/methods/navigate_to.dart';
+import 'package:avatar/views/auth/select_role_view.dart';
+import 'package:avatar/views/donate/Pages/donate_page.dart';
+import 'package:avatar/views/endcustomer/profile/widgets/profile_widgets.dart';
+import 'package:avatar/views/enduser_phone_settings/phone_settings_view.dart';
+import 'package:avatar/views/hospital/Widgets/faq_View.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const ProfileHeader(
+                  name: 'Monica',
+                  userType: 'End User',
+                  imageUrl: ImagePaths.userProfile, // sample image
+                ),
+                const SizedBox(height: 16),
+                const BadgeCard(),
+                const SizedBox(height: 16),
+                Card(
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      spacing: 8,
+                      children: [
+                        MenuItem(
+                          icon: Icons.bookmark_border_outlined,
+                          title: 'Saved Item',
+                          color: Colors.orange,
+                          onPressed:
+                              () => Get.snackbar(
+                                "",
+                                "saved items",
+                                snackPosition: SnackPosition.BOTTOM,
+                              ),
+                        ),
+                        MenuItem(
+                          icon: Icons.share_outlined,
+                          title: 'Referral',
+                          onPressed:
+                              () => Get.snackbar(
+                                "",
+                                "referral tapped",
+                                snackPosition: SnackPosition.BOTTOM,
+                              ),
+                        ),
+                        MenuItem(
+                          svgPath: IconsPaths.donate,
+                          title: 'Donate',
+                          onPressed: () => navigateTo(() => DonatePage()),
+                          // Get.snackbar(
+                          //   "",
+                          //   "Donate tapped",
+                          //   snackPosition: SnackPosition.BOTTOM,
+                          // ),
+                        ),
+                        MenuItem(
+                          svgPath: IconsPaths.setting,
+                          title: 'Settings',
+                          onPressed:
+                              () => navigateTo(() => ProfileSettingsView()),
+                          //  Get.snackbar(
+                          //   "",
+                          //   "Setting tapped",
+                          //   snackPosition: SnackPosition.BOTTOM,
+                          // ),
+                        ),
+                        MenuItem(
+                          svgPath: IconsPaths.support,
+                          title: 'Support',
+                          onPressed: () => navigateTo(() => FAQView()),
+                        ),
+                        MenuItem(
+                          svgPath: IconsPaths.logout,
+                          title: 'Logout',
+                          onPressed: () => navigateTo(() => SelectRoleView()),
+                          //TODO change this Logout handle it with using controller
+
+                          // Get.snackbar(
+                          //   "",
+                          //   "Logout tapped",
+                          //   snackPosition: SnackPosition.BOTTOM,
+                          // ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -1,5 +1,7 @@
 import 'package:avatar/core/utils/methods/navigate_to.dart';
 import 'package:avatar/models/auth/steps_model.dart';
+import 'package:avatar/viewModels/auth/register/contact_controller.dart';
+import 'package:avatar/viewModels/auth/register/user/register_controller.dart';
 import 'package:avatar/views/auth/register/advertiser/advertiser_document.dart';
 import 'package:avatar/views/auth/register/advertiser/advertiser_profile.dart';
 import 'package:avatar/views/auth/register/advertiser/advertiser_security.dart';
@@ -20,6 +22,9 @@ class AdvertiserRegisterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _ = Get.put(RegisterController(), permanent: false);
+    final _ = Get.put(ContactController(), permanent: false);
+
     /// List of registration steps with their titles and icons
     var steps = <StepModel>[
       StepModel(title: 'Basic Info', icon: Icon(Icons.info_outlined)),

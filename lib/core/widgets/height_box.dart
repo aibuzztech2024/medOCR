@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 class HeightBox extends StatelessWidget {
   final double height;
 
+
   /// It takes [height] as parameter and adds equivalent blank space
-  const HeightBox(this.height, {super.key});
+
+  const HeightBox(this.height, { super.key});
 
   @override
   Widget build(BuildContext context) {

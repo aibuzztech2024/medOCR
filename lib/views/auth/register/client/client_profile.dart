@@ -1,9 +1,11 @@
 import 'package:avatar/core/widgets/app_button.dart';
+import 'package:avatar/viewModels/auth/register/client/client_profile_controller.dart';
 import 'package:avatar/views/auth/widget/app_country_picker.dart';
 import 'package:avatar/views/auth/widget/input_field.dart';
 import 'package:avatar/views/auth/widget/input_with_action.dart';
 import 'package:avatar/views/auth/widget/policy_checkbox.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ClientProfile extends StatelessWidget {
   final VoidCallback onContinue;
@@ -11,43 +13,52 @@ class ClientProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ClientController clientProfileController = Get.put(
+      ClientController(),
+    );
     return Column(
       spacing: 16,
       children: [
         InputField(
           hintText: 'Business Name',
-          controller: TextEditingController(),
+          controller: clientProfileController.businessNameController,
         ),
         InputField(
           hintText: 'Company Type',
           trailingIcon: Icons.keyboard_arrow_down,
-          controller: TextEditingController(),
+          controller: clientProfileController.companyTypeController,
         ),
         InputField(
           hintText: 'Services Your Interested In',
           trailingIcon: Icons.keyboard_arrow_down,
-          controller: TextEditingController(),
+          controller: clientProfileController.servicesInterestedInController,
         ),
         InputField(
           hintText: 'Website URL',
-          controller: TextEditingController(),
+          controller: clientProfileController.websiteUrlController,
         ),
-        InputField(hintText: 'Address', controller: TextEditingController()),
+        InputField(
+          hintText: 'Address',
+          controller: clientProfileController.addressController,
+        ),
         InputField(
           hintText: 'City/Town/District',
-          controller: TextEditingController(),
+          controller: clientProfileController.cityController,
         ),
         InputWithAction(
           expandedChild: InputField(
             hintText: 'State',
-            controller: TextEditingController(),
+            controller: clientProfileController.stateController,
           ),
           trailingChild: AppCountryPicker(onSelect: (val) {}),
         ),
-        InputField(hintText: 'Pincode', controller: TextEditingController()),
+        InputField(
+          hintText: 'Pincode',
+          controller: clientProfileController.pincodeController,
+        ),
         InputField(
           hintText: 'Referral Code',
-          controller: TextEditingController(),
+          controller: clientProfileController.referralCodeController,
         ),
         PolicyCheckbox(onChange: (val) {}),
         AppButton(
